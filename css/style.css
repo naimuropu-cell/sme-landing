@@ -9292,3 +9292,510 @@ input, textarea, select {
     grid-template-columns: 1fr !important;
   }
 }
+
+
+/* ==========================================================================
+   GLOBAL MOBILE-FIRST RESPONSIVE FIXES & ZERO-OVERFLOW SAFEGUARDS
+   Targeting: Viewport 320px - 768px (Mobile & Small Tablets)
+   ========================================================================== */
+
+/* 1. Global Viewport Containment */
+html, body {
+  width: 100% !important;
+  max-width: 100vw !important;
+  overflow-x: clip !important;
+  overflow-x: hidden !important;
+  position: relative !important;
+}
+
+body.mobile-menu-active {
+  overflow: hidden !important;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box !important;
+}
+
+img, svg, video {
+  max-width: 100% !important;
+  height: auto;
+}
+
+.container {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+}
+
+/* 2. Topbar & Header Mobile Fixes */
+@media (max-width: 992px) {
+  .site-nav {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+    background: #ffffff !important;
+    border-bottom: 1px solid var(--border-light) !important;
+  }
+
+  .nav-inner {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    height: 64px !important;
+  }
+
+  .nav-links-list {
+    position: fixed !important;
+    top: 64px !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: calc(100vh - 64px) !important;
+    max-height: calc(100vh - 64px) !important;
+    background: #ffffff !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    display: none !important;
+    flex-direction: column !important;
+    padding: 1.25rem 1.25rem 3rem 1.25rem !important;
+    gap: 0.75rem !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
+    z-index: 1040 !important;
+  }
+
+  .nav-links-list.is-open,
+  .nav-links-list.is-mobile-open {
+    display: flex !important;
+  }
+
+  .mobile-hamburger-btn {
+    display: flex !important;
+    z-index: 1050 !important;
+  }
+
+  /* Defang the 580px and 360px desktop dropdowns on mobile */
+  .nav-dropdown-menu,
+  .nav-dropdown-megamenu,
+  .nav-dropdown-compact {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0.5rem 0 0.5rem 0.75rem !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    display: flex !important;
+    background: #f8fafc !important;
+    border-radius: 10px !important;
+    margin-top: 0.35rem !important;
+  }
+
+  .dropdown-megamenu-grid {
+    grid-template-columns: 1fr !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    gap: 0.35rem !important;
+  }
+
+  .dropdown-item-card {
+    padding: 0.45rem 0.5rem !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .brand-sub-label {
+    display: none !important;
+  }
+  .btn-nav-secondary {
+    display: none !important;
+  }
+  .brand-badge-pill {
+    font-size: 0.58rem !important;
+    padding: 0.1rem 0.35rem !important;
+  }
+  .brand-logo-mark svg {
+    width: 30px !important;
+    height: 30px !important;
+  }
+}
+
+/* 3. Hero Section Mobile Fixes */
+@media (max-width: 768px) {
+  .hero-section,
+  .hero-qashier-style {
+    overflow: hidden !important;
+    padding: 2.25rem 0 2rem 0 !important;
+  }
+
+  .hero-container-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2.25rem !important;
+  }
+
+  .hero-copy-col {
+    text-align: center !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+  }
+
+  .hero-h1 {
+    font-size: clamp(1.75rem, 6.8vw, 2.35rem) !important;
+    line-height: 1.25 !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .hero-sub {
+    font-size: 0.95rem !important;
+    line-height: 1.55 !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .hero-cta-group {
+    justify-content: center !important;
+    gap: 0.65rem !important;
+  }
+
+  .hero-cta-group .btn {
+    width: 100% !important;
+    max-width: 320px !important;
+    justify-content: center !important;
+  }
+
+  /* Defang huge 760px / 600px aura so it never overflows screen */
+  .chatbot-aura-wrap {
+    display: none !important;
+  }
+
+  .hero-ambient-glow {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    left: 0 !important;
+    transform: none !important;
+  }
+
+  .hero-visual-col,
+  .hero-chatbot-stage {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .chatbot-app-window {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 16px !important;
+  }
+
+  .hero-trust-bar-segmented {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    width: 100% !important;
+    border-radius: 12px !important;
+  }
+
+  .trust-segment {
+    padding: 0.5rem 0.6rem !important;
+    font-size: 0.75rem !important;
+  }
+}
+
+/* 4. Section 3: Retail Velocity Benchmarks Mobile Fixes */
+@media (max-width: 992px) {
+  .benchmarks-bento-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .benchmarks-bento-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+}
+
+/* 5. Section 4: 12 Modules Matrix Mobile Fixes */
+@media (max-width: 992px) {
+  .modules-matrix-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .modules-matrix-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  .quick-modules-buttons {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    justify-content: flex-start !important;
+    padding-bottom: 0.5rem !important;
+    gap: 0.45rem !important;
+  }
+  .quick-mod-btn {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+  }
+}
+
+/* 6. Section 5: Live Interactive Sandbox Mobile Fixes */
+@media (max-width: 768px) {
+  .live-sandbox-section {
+    overflow: hidden !important;
+  }
+  .dashboard-app-window {
+    border-radius: 14px !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .dashboard-viewport {
+    padding: 0.85rem 0.75rem !important;
+    min-height: auto !important;
+  }
+  .app-window-titlebar {
+    padding: 0.65rem 0.85rem !important;
+    gap: 0.5rem !important;
+  }
+  .titlebar-title {
+    font-size: 0.72rem !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    max-width: 160px !important;
+  }
+  .app-topbar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.65rem !important;
+    padding: 0.75rem !important;
+  }
+  .app-search-box {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  .app-topbar-actions {
+    justify-content: space-between !important;
+    width: 100% !important;
+  }
+  .pos-mockup-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  .mockup-tabs-bar {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    white-space: nowrap !important;
+  }
+  .mockup-tab-btn {
+    flex-shrink: 0 !important;
+  }
+}
+
+/* 7. Section 6: Industry Solutions Mobile Fixes */
+@media (max-width: 992px) {
+  .industry-pane-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  .industry-subgrid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .industry-subgrid {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem !important;
+  }
+  .industry-tabs-nav {
+    display: flex !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    justify-content: flex-start !important;
+    flex-wrap: nowrap !important;
+    padding-bottom: 0.5rem !important;
+  }
+  .industry-tab-btn {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+  }
+}
+
+/* 8. Section 7: Plan Advisor Mobile Fixes */
+@media (max-width: 992px) {
+  .advisor-main-card {
+    grid-template-columns: 1fr !important;
+    padding: 1.25rem !important;
+    gap: 1.5rem !important;
+  }
+  .advisor-counters-row {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.65rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .advisor-counters-row {
+    grid-template-columns: 1fr !important;
+  }
+  .advisor-options-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* 9. Section 9: Pricing Section Mobile Fixes */
+@media (max-width: 992px) {
+  .pricing-section {
+    overflow: hidden !important;
+  }
+  .pricing-section::before {
+    display: none !important; /* Defang 900px pseudo-element */
+  }
+  .pricing-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+    max-width: 440px !important;
+    margin: 0 auto !important;
+  }
+  .pricing-card.is-popular {
+    transform: none !important;
+  }
+}
+
+/* 10. Section 10: Comparison Table Mobile Fixes */
+@media (max-width: 768px) {
+  .comparison-section {
+    overflow: hidden !important;
+  }
+  .summary-plans-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem !important;
+  }
+  .table-wrapper {
+    border-radius: 12px !important;
+  }
+  .table-scroll {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    width: 100% !important;
+    position: relative !important;
+  }
+}
+
+/* 11. Section 11: Testimonials Mobile Fixes */
+@media (max-width: 992px) {
+  .story-card {
+    flex: 0 0 calc((100% - 1.5rem) / 2) !important;
+    width: calc((100% - 1.5rem) / 2) !important;
+    max-width: calc((100% - 1.5rem) / 2) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .story-card {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 1.35rem 1.15rem !important;
+  }
+  .testimonials-filter-bar {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    padding-bottom: 0.5rem !important;
+  }
+  .story-filter-btn {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+  }
+}
+
+/* 12. Section 12: Why Us Mobile Fixes */
+@media (max-width: 992px) {
+  .why-stats-row {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.85rem !important;
+  }
+  .why-bento-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .why-stats-row {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.55rem !important;
+  }
+  .why-stat-card {
+    padding: 1rem 0.75rem !important;
+  }
+  .why-stat-number {
+    font-size: 1.5rem !important;
+  }
+}
+
+/* 13. Section 14: Mobile POS Showcase Fixes */
+@media (max-width: 768px) {
+  .mobile-pos-section {
+    overflow: hidden !important;
+  }
+  .mobile-pos-banner.khatabook-layout {
+    grid-template-columns: 1fr !important;
+    padding: 2rem 1.15rem !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+  }
+  .khatabook-hand-mockup {
+    max-width: 310px !important;
+    margin: 0.5rem auto 0 auto !important;
+  }
+}
+
+/* 14. Section 15: Footer & Both Modals Mobile Fixes */
+@media (max-width: 768px) {
+  .site-footer {
+    overflow: hidden !important;
+  }
+  .footer-top-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  .footer-support-strip {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 1.25rem !important;
+    padding: 1.25rem 1rem !important;
+  }
+  .footer-bottom-row {
+    flex-direction: column !important;
+    gap: 1rem !important;
+    text-align: center !important;
+  }
+  .modal-card-box {
+    width: 94% !important;
+    max-width: 94% !important;
+    margin: 1rem auto !important;
+    border-radius: 16px !important;
+  }
+  .modal-body-content {
+    padding: 1rem !important;
+  }
+  .visit-grid-row {
+    grid-template-columns: 1fr !important;
+  }
+}
