@@ -15,6 +15,8 @@ const PRICING_DATA = {
     "email": "info@yesbangladesh.net",
     "supportEmail": "info@yesbangladesh.net",
     "website": "www.yesbangladesh.net",
+    "facebook": "https://www.facebook.com/share/1DnfFgoZxp/?mibextid=wwXIfr",
+    "linkedin": "https://www.linkedin.com/company/yes-bangladesh1/",
     "address": "House 43, Road 9, Nikunja 2, Khilkhet, Dhaka-1229, Bangladesh"
   },
   "packages": [
