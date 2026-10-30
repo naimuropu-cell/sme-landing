@@ -9799,3 +9799,393 @@ img, svg, video {
     grid-template-columns: 1fr !important;
   }
 }
+
+
+/* ==========================================================================
+   TARGETED FIXES FOR THE 3 REPORTED MOBILE SCREENSHOTS & OVERFLOW CULPRITS
+   ========================================================================== */
+
+/* 1. Global Safety: Enforce all containers and grids to fit 100% viewport width */
+.container,
+.site-main,
+section {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* 2. Fix Image 1: Section 4 - 12 Core Modules Tabs and Grid */
+@media (max-width: 768px) {
+  .modules-matrix-section {
+    padding: 3rem 0 !important;
+    overflow: hidden !important;
+  }
+  .modules-tabs-wrapper {
+    display: flex !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding: 0.35rem 0.25rem 0.75rem 0.25rem !important;
+    margin: 1.5rem 0 2rem 0 !important;
+    scrollbar-width: none !important;
+  }
+  .modules-tabs-wrapper::-webkit-scrollbar {
+    display: none !important;
+  }
+  .modules-tabs-nav {
+    display: inline-flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    width: max-content !important;
+    max-width: none !important;
+    padding: 5px !important;
+    gap: 6px !important;
+    border-radius: 999px !important;
+    background: #f1f5f9 !important;
+  }
+  .modules-tab-btn {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    padding: 0.55rem 0.95rem !important;
+    font-size: 0.8rem !important;
+    border-radius: 999px !important;
+  }
+  .modules-matrix-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .module-matrix-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 1.35rem 1.15rem !important;
+  }
+}
+
+/* 3. Fix Image 2: Section 9 - Pricing Cards & Enterprise Showcase Box */
+@media (max-width: 768px) {
+  .pricing-section {
+    padding: 3.5rem 0 !important;
+    overflow: hidden !important;
+  }
+  .pricing-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto 2.5rem auto !important;
+  }
+  .pricing-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 1.75rem 1.25rem !important;
+    transform: none !important;
+  }
+  .pricing-card.is-popular {
+    transform: none !important;
+    margin: 0 !important;
+  }
+  .pricing-card.is-popular:hover {
+    transform: none !important;
+  }
+  .enterprise-showcase-box {
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 1.6rem 1.15rem !important;
+    gap: 1.5rem !important;
+    overflow: hidden !important;
+    border-radius: 18px !important;
+  }
+  .enterprise-left {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .enterprise-left h3 {
+    font-size: 1.45rem !important;
+    line-height: 1.3 !important;
+  }
+  .enterprise-left p {
+    font-size: 0.9rem !important;
+    line-height: 1.55 !important;
+    margin-bottom: 1.25rem !important;
+  }
+  .enterprise-features-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.65rem !important;
+    width: 100% !important;
+    padding: 0 !important;
+  }
+  .enterprise-features-grid li {
+    font-size: 0.84rem !important;
+    line-height: 1.45 !important;
+    width: 100% !important;
+  }
+  .enterprise-right {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 1.35rem 1rem !important;
+    border-radius: 14px !important;
+  }
+  .enterprise-price-title {
+    font-size: 1.5rem !important;
+  }
+  .enterprise-price-sub {
+    font-size: 0.75rem !important;
+    margin-bottom: 1.15rem !important;
+  }
+  .enterprise-right .btn-white {
+    width: 100% !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+    text-align: center !important;
+    font-size: 0.92rem !important;
+    padding: 0.75rem 1rem !important;
+    box-sizing: border-box !important;
+    line-height: 1.35 !important;
+  }
+}
+
+/* 4. Fix Image 3: Section 15 - Footer Ecosystem Bar & Floating WhatsApp Widget */
+@media (max-width: 768px) {
+  .footer-ecosystem-bar {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 1.25rem 1rem !important;
+    border-radius: 12px !important;
+    margin-bottom: 2rem !important;
+    overflow: hidden !important;
+  }
+  .eco-title-group {
+    margin-bottom: 0.75rem !important;
+  }
+  .eco-kicker {
+    font-size: 0.72rem !important;
+    display: block !important;
+    line-height: 1.4 !important;
+  }
+  .eco-badges-flow {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.75rem !important;
+    width: 100% !important;
+  }
+  .eco-group {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 0.35rem !important;
+    width: 100% !important;
+  }
+  .eco-group-label {
+    font-size: 0.72rem !important;
+    width: 100% !important;
+    margin-bottom: 0.2rem !important;
+  }
+  .eco-pill {
+    font-size: 0.7rem !important;
+    padding: 0.2rem 0.55rem !important;
+  }
+  .eco-divider {
+    display: none !important;
+  }
+}
+
+/* Floating WhatsApp Widget (proper fixed circle badge) */
+.floating-whatsapp-widget {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: 50% !important;
+  background: #25d366 !important;
+  color: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 4px 18px rgba(37, 211, 102, 0.45) !important;
+  z-index: 1050 !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+  text-decoration: none !important;
+}
+
+.floating-whatsapp-widget:hover {
+  transform: scale(1.08) !important;
+  box-shadow: 0 6px 24px rgba(37, 211, 102, 0.6) !important;
+}
+
+.floating-whatsapp-widget svg {
+  width: 28px !important;
+  height: 28px !important;
+  fill: #ffffff !important;
+}
+
+@media (max-width: 480px) {
+  .floating-whatsapp-widget {
+    bottom: 16px !important;
+    right: 16px !important;
+    width: 46px !important;
+    height: 46px !important;
+  }
+  .floating-whatsapp-widget svg {
+    width: 24px !important;
+    height: 24px !important;
+  }
+}
+
+/* 5. Additional Section Tabs Containment: Section 5 & Section 6 */
+@media (max-width: 768px) {
+  /* Section 1 Hero Chatbot Window Header */
+  .chat-window-header {
+    padding: 0.65rem 0.85rem !important;
+    gap: 0.5rem !important;
+  }
+  .bot-header-left {
+    min-width: 0 !important;
+    flex: 1 !important;
+    overflow: hidden !important;
+  }
+  .bot-brand-name {
+    font-size: 0.82rem !important;
+  }
+  .bot-channel-status-row {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    max-width: 100% !important;
+  }
+  .bot-channel-text {
+    font-size: 0.65rem !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+  .bot-header-right {
+    flex-shrink: 0 !important;
+  }
+
+  /* Section 2 Marquee */
+  .marquee-wrapper {
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow: hidden !important;
+  }
+
+  /* Section 5 Live Sandbox POS Mockup Tabs */
+  .mockup-tabs-bar {
+    display: flex !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    white-space: nowrap !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-bottom: 0.35rem !important;
+    scrollbar-width: none !important;
+  }
+  .mockup-tabs-bar::-webkit-scrollbar {
+    display: none !important;
+  }
+  .mockup-tab-btn {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+  }
+
+  /* Section 6 Industry Tabs Bar */
+  .industry-tabs-nav {
+    display: flex !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    white-space: nowrap !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-bottom: 0.35rem !important;
+    scrollbar-width: none !important;
+  }
+  .industry-tabs-nav::-webkit-scrollbar {
+    display: none !important;
+  }
+  .industry-tab-btn {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+  }
+}
+
+
+/* ==========================================================================
+   FINAL MOBILE PERFECTION: Chatbot Header, Comparison Button & All Text Wrapping
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  /* Hero Chatbot Header Containment */
+  .bot-meta-info {
+    min-width: 0 !important;
+    overflow: hidden !important;
+    flex: 1 !important;
+    max-width: 180px !important;
+  }
+  .bot-brand-name {
+    font-size: 0.82rem !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  .bot-channel-status-row {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.25rem !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+    max-width: 100% !important;
+  }
+  .bot-channel-text {
+    font-size: 0.65rem !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    max-width: 120px !important;
+  }
+  .bot-live-status {
+    font-size: 0.68rem !important;
+    padding: 0.2rem 0.45rem !important;
+  }
+
+  /* Comparison Drawer Button Full Wrap */
+  .btn-expand-comparison {
+    width: 100% !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+    font-size: 0.88rem !important;
+    padding: 0.85rem 1rem !important;
+    box-sizing: border-box !important;
+    line-height: 1.35 !important;
+    flex-wrap: wrap !important;
+  }
+  .btn-toggle-text {
+    white-space: normal !important;
+    text-align: center !important;
+    flex: 1 1 100% !important;
+    display: block !important;
+  }
+
+  /* General Button Safety on Small Screens */
+  .btn-lg {
+    white-space: normal !important;
+    text-align: center !important;
+  }
+}
