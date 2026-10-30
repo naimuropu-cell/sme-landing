@@ -1,5 +1,6 @@
-# Temporary files
+# Temporary & Scratch files
 temp_docx/
+scratch/
 *.tmp
 *.log
 
