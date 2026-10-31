@@ -86,6 +86,15 @@ function initTranslations() {
       setLanguage(newLang);
     });
   }
+
+  const mobileToggleBtn = document.getElementById('mobileLangToggleBtn');
+  if (mobileToggleBtn) {
+    mobileToggleBtn.addEventListener('click', () => {
+      const newLang = STATE.currentLang === 'en' ? 'bn' : 'en';
+      setLanguage(newLang);
+    });
+  }
+
   setLanguage(STATE.currentLang);
 }
 
@@ -93,13 +102,19 @@ function setLanguage(lang) {
   STATE.currentLang = lang;
   localStorage.setItem('yes_sme_lang', lang);
 
-  // Set body language class
-  document.body.className = `lang-${lang}`;
+  // Set body language class safely without wiping other classes (like mobile-menu-active)
+  document.body.classList.remove('lang-en', 'lang-bn');
+  document.body.classList.add(`lang-${lang}`);
 
-  // Update button label
+  // Update button labels
   const labelSpan = document.getElementById('langToggleLabel');
   if (labelSpan) {
     labelSpan.textContent = lang === 'en' ? 'বাংলায় দেখুন' : 'View in English';
+  }
+
+  const mobileLabelSpan = document.getElementById('mobileLangToggleLabel');
+  if (mobileLabelSpan) {
+    mobileLabelSpan.textContent = lang === 'en' ? 'বাংলায় দেখুন' : 'View in English';
   }
 
   // Update all data-i18n elements
@@ -169,17 +184,20 @@ function initNavbarScroll() {
   const nav = document.getElementById('siteHeader');
   if (!nav) return;
 
-  window.addEventListener('scroll', () => {
+  const onScroll = () => {
     if (window.scrollY > 20) {
       nav.classList.add('is-scrolled');
     } else {
       nav.classList.remove('is-scrolled');
     }
-  }, { passive: true });
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 }
 
 /**
- * 4. PLAN ADVISOR CONTROLLER (Yearly Packages: 5k, 10k, 15k, 30k)
+ * 4. PLAN ADVISOR CONTROLLER (Monthly Packages & Setup Fees)
  */
 function initAdvisor() {
   const bizGroup = document.getElementById('advisorBizTypeGroup');
@@ -213,6 +231,7 @@ function initAdvisor() {
 function updateAdvisorResult() {
   const nameEl = document.getElementById('advisorPlanName');
   const priceEl = document.getElementById('advisorPlanPrice');
+  const periodEl = document.getElementById('advisorPricePeriod') || document.querySelector('.rec-price-period');
   const setupEl = document.getElementById('advisorSetupFee');
   const descEl = document.getElementById('advisorPlanDesc');
   const featuresListEl = document.getElementById('advisorFeaturesList');
@@ -230,12 +249,14 @@ function updateAdvisorResult() {
   let setupText = '';
   let descText = '';
   let isPopular = false;
+  let showPeriod = true;
   let features = [];
 
   if (bizType === 'enterprise' || outlets === '10') {
     planId = 'custom';
     planName = isBn ? 'কাস্টম এন্টারপ্রাইজ' : 'Custom Enterprise';
     priceHtml = isBn ? 'আলোচনা সাপেক্ষে' : 'Custom Quote';
+    showPeriod = false;
     setupText = isBn ? 'অন-ডিমান্ড প্রাইভেট ডেডিকেটেড ক্লাউড' : 'Dedicated Private Cloud Infrastructure';
     descText = isBn
       ? 'বড় রিটেল চেইন, একাধিক ওয়্যারহাউজ এবং নিজস্ব সার্ভার সিকিউরিটির জন্য সম্পূর্ণ কাস্টমাইজড ইআরপি।'
@@ -256,8 +277,8 @@ function updateAdvisorResult() {
   } else if (bizType === 'chain' || outlets === '5') {
     planId = 'high';
     planName = isBn ? 'হাই প্যাকেজ' : 'High Plan';
-    priceHtml = isBn ? '<span class="currency-taka">&#2547;</span>৩০,০০০ <span class="term">/বছর</span>' : '<span class="currency-taka">&#2547;</span>30,000 <span class="term">/year</span>';
-    setupText = isBn ? 'এককালীন সেটআপ ফি: <span class="currency-taka">&#2547;</span>১০,০০০' : 'One-time setup fee: <span class="currency-taka">&#2547;</span>10,000';
+    priceHtml = isBn ? '<span class="currency-taka">&#2547;</span>৩,০০০' : '<span class="currency-taka">&#2547;</span>3,000';
+    setupText = isBn ? 'এককালীন সেটআপ ফি: <span class="currency-taka">&#2547;</span>১৫,০০০' : 'One-time setup fee: <span class="currency-taka">&#2547;</span>15,000';
     descText = isBn
       ? '৫টি ব্রাঞ্চ পর্যন্ত সেন্ট্রাল ম্যানেজমেন্ট, আনলিমিটেড প্রোডাক্ট ও এআই বিজনেস অ্যানালিটিক্স।'
       : 'Includes up to 5 branch live sync, 500 products, branded mobile apps, and AI business intelligence.';
@@ -278,8 +299,8 @@ function updateAdvisorResult() {
     planId = 'medium';
     planName = isBn ? 'মিডিয়াম প্যাকেজ' : 'Medium Plan';
     isPopular = true;
-    priceHtml = isBn ? '<span class="currency-taka">&#2547;</span>১৫,০০০ <span class="term">/বছর</span>' : '<span class="currency-taka">&#2547;</span>15,000 <span class="term">/year</span>';
-    setupText = isBn ? 'এককালীন সেটআপ ফি: <span class="currency-taka">&#2547;</span>৬,০০০' : 'One-time setup fee: <span class="currency-taka">&#2547;</span>6,000';
+    priceHtml = isBn ? '<span class="currency-taka">&#2547;</span>২,০০০' : '<span class="currency-taka">&#2547;</span>2,000';
+    setupText = isBn ? 'এককালীন সেটআপ ফি: <span class="currency-taka">&#2547;</span>৮,০০০' : 'One-time setup fee: <span class="currency-taka">&#2547;</span>8,000';
     descText = isBn
       ? '২টি ব্রাঞ্চ, নিজস্ব ই-কমার্স ওয়েবসাইট, কাস্টম অ্যান্ড্রয়েড ও আইওএস মোবাইল অ্যাপ এবং সকল কুরিয়ার সাপোর্ট।'
       : 'Includes 2 branches, dedicated e-commerce storefront, custom branded iOS/Android apps, and multi-courier dispatch.';
@@ -300,8 +321,8 @@ function updateAdvisorResult() {
     // Single outlet
     planId = 'basic';
     planName = isBn ? 'বেসিক প্যাকেজ' : 'Basic Plan';
-    priceHtml = isBn ? '<span class="currency-taka">&#2547;</span>১০,০০০ <span class="term">/বছর</span>' : '<span class="currency-taka">&#2547;</span>10,000 <span class="term">/year</span>';
-    setupText = isBn ? 'এককালীন সেটআপ ফি: <span class="currency-taka">&#2547;</span>৪,০০০' : 'One-time setup fee: <span class="currency-taka">&#2547;</span>4,000';
+    priceHtml = isBn ? '<span class="currency-taka">&#2547;</span>১,০০০' : '<span class="currency-taka">&#2547;</span>1,000';
+    setupText = isBn ? 'এককালীন সেটআপ ফি: <span class="currency-taka">&#2547;</span>৫,০০০' : 'One-time setup fee: <span class="currency-taka">&#2547;</span>5,000';
     descText = isBn
       ? 'স্মার্ট অফলাইন পিওএস, স্বয়ংক্রিয় বারকোড প্রিন্টিং, ক্যাশবুক ও সিঙ্গেল কুরিয়ার ইন্টিগ্রেশন।'
       : 'Smart offline POS billing, automatic barcode generation, cashbook accounting, and courier integration.';
@@ -324,6 +345,15 @@ function updateAdvisorResult() {
   priceEl.innerHTML = priceHtml;
   setupEl.innerHTML = setupText;
   descEl.textContent = descText;
+
+  if (periodEl) {
+    if (showPeriod) {
+      periodEl.style.display = '';
+      periodEl.textContent = isBn ? '/ মাস' : '/ month';
+    } else {
+      periodEl.style.display = 'none';
+    }
+  }
 
   if (popularTag) {
     popularTag.style.display = isPopular ? 'inline-block' : 'none';
@@ -365,10 +395,28 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobilePosBanner();
   initMposAnimation();
 
-  // Footer Back To Top Button
-  const backToTopBtn = document.getElementById('footerBackToTopBtn');
-  if (backToTopBtn) {
-    backToTopBtn.addEventListener('click', (e) => {
+  // Floating & Footer Back To Top Buttons
+  const footerBackToTopBtn = document.getElementById('footerBackToTopBtn');
+  if (footerBackToTopBtn) {
+    footerBackToTopBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  const floatingBackToTop = document.getElementById('floatingBackToTopBtn');
+  if (floatingBackToTop) {
+    function toggleFloatingBackToTop() {
+      if (window.scrollY > 280) {
+        floatingBackToTop.classList.add('visible');
+      } else {
+        floatingBackToTop.classList.remove('visible');
+      }
+    }
+    window.addEventListener('scroll', toggleFloatingBackToTop, { passive: true });
+    toggleFloatingBackToTop();
+
+    floatingBackToTop.addEventListener('click', (e) => {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
@@ -1772,6 +1820,7 @@ function runRealisticTypingScenario(scenarioKey) {
   // 1. Initial Reset: smoothly fade out previous turn
   userRow.classList.remove('visible');
   botRow.classList.remove('visible');
+  typingRow.classList.remove('visible');
   typingRow.style.display = 'none';
   if (progressBar) progressBar.style.width = '0%';
 
@@ -1830,18 +1879,24 @@ function runRealisticTypingScenario(scenarioKey) {
 
           // 3. Show Bot Thinking Dots
           setTimeout(() => {
+            botRow.style.display = 'none';
             typingRow.style.display = 'flex';
+            requestAnimationFrame(() => typingRow.classList.add('visible'));
 
             // 4. Reveal Bot Response after 500ms thinking
             setTimeout(() => {
+              typingRow.classList.remove('visible');
               typingRow.style.display = 'none';
               replyLead.textContent = content.lead;
               dynamicCard.innerHTML = content.cardHtml;
-              botRow.classList.add('visible');
-              attachActionBtnHandler(content);
+              botRow.style.display = 'flex';
+              requestAnimationFrame(() => {
+                botRow.classList.add('visible');
+                attachActionBtnHandler(content);
 
-              // 5. Start Reading Timer & Progress Bar
-              startReadingCycle();
+                // 5. Start Reading Timer & Progress Bar
+                startReadingCycle();
+              });
             }, 500);
           }, 200);
         }, 320);

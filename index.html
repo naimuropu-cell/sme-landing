@@ -214,6 +214,17 @@
           <li class="nav-item">
             <a href="#faq" class="nav-link" data-i18n="nav.faq">FAQs</a>
           </li>
+
+          <!-- Mobile Only Action Cluster -->
+          <li class="nav-item nav-item-mobile-actions">
+            <button type="button" class="btn btn-primary btn-block open-plan-modal" data-plan-id="custom" data-i18n="nav.bookDemo">
+              Book Demo →
+            </button>
+            <button type="button" class="mobile-drawer-lang-btn" id="mobileLangToggleBtn">
+              <span class="flag-icon">🇧🇩</span>
+              <span id="mobileLangToggleLabel">বাংলায় দেখুন</span>
+            </button>
+          </li>
         </ul>
       </nav>
 
@@ -395,7 +406,7 @@
               <!-- Chat Stage Content -->
               <div class="chat-messages-stage" id="chatStage">
                 <!-- User Question Bubble (Appears on send) -->
-                <div class="chat-user-row" id="chatUserRow">
+                <div class="chat-user-row visible" id="chatUserRow">
                   <div class="chat-user-bubble">
                     <span class="user-bubble-text" id="chatUserQuestion">Check today's stock level for fast-moving items.</span>
                   </div>
@@ -412,16 +423,34 @@
                 </div>
 
                 <!-- Bot Response Container -->
-                <div class="chat-bot-row" id="chatBotResponse">
+                <div class="chat-bot-row visible" id="chatBotResponse">
                   <div class="chat-bot-avatar-mini">✨</div>
                   <div class="chat-bot-content-wrap">
                     <div class="bot-reply-text" id="chatReplyLead">
-                      Stock alert: 2 fast-moving items reached minimum reorder threshold:
+                      Stock alert: 2 high-velocity items reached minimum reorder threshold:
                     </div>
 
                     <!-- Dynamic Card Content Area -->
                     <div class="bot-dynamic-card" id="chatDynamicCard">
-                      <!-- Rendered by app.js -->
+                      <div class="bot-list-items">
+                        <div class="bot-item-row">
+                          <span class="bot-item-name">👔 Slim Cotton Shirt (Navy, L)</span>
+                          <span class="bot-tag-critical">Only 6 pcs left · Banani</span>
+                        </div>
+                        <div class="bot-item-row">
+                          <span class="bot-item-name">🖨️ Thermal Receipt Printer 80mm</span>
+                          <span class="bot-tag-critical">Only 2 units left · Uttara Hub</span>
+                        </div>
+                      </div>
+                      <div class="bot-action-box">
+                        <div class="bot-action-info">
+                          <span class="bot-action-kicker">⚡ Auto-Draft Purchase Requisition</span>
+                          <span class="bot-action-title">Draft PO #904 (50 pcs) for Bismillah Fabrics</span>
+                        </div>
+                        <button type="button" class="bot-action-btn" id="heroActionBtn">
+                          <span>Confirm Order</span>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -958,6 +987,10 @@
               <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m1B3">Offline local cache resilience</span></li>
               <li class="mpos-bullet-highlight"><svg viewBox="0 0 16 16" width="14" height="14" fill="#059669"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><strong data-i18n="matrix.m1B4" style="color:#059669;">Mobile POS (mPOS) with camera scanner (No PC needed)</strong></li>
             </ul>
+            <div class="module-card-footer">
+              <span class="module-plan-pill plan-tier-basic" data-i18n="matrix.m1Plan">✓ Basic+ (৳1,000/mo)</span>
+              <a href="#pricing" class="module-plan-link" data-i18n="matrix.viewPlan">View Plan →</a>
+            </div>
           </div>
 
           <!-- Module 2: Inventory -->
@@ -975,6 +1008,10 @@
               <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m2B2">Batch number &amp; expiry date tracking</span></li>
               <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m2B3">Automated low-stock reorder alerts</span></li>
             </ul>
+            <div class="module-card-footer">
+              <span class="module-plan-pill plan-tier-medium" data-i18n="matrix.m2Plan">★ Medium+ (৳2,000/mo)</span>
+              <a href="#pricing" class="module-plan-link" data-i18n="matrix.viewPlan">View Plan →</a>
+            </div>
           </div>
 
           <!-- Module 3: Barcode Designer -->
@@ -992,6 +1029,10 @@
               <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m3B2">Custom QR code generator</span></li>
               <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m3B3">Zebra, Epson &amp; Xprinter support</span></li>
             </ul>
+            <div class="module-card-footer">
+              <span class="module-plan-pill plan-tier-basic" data-i18n="matrix.m3Plan">✓ Basic+ (৳1,000/mo)</span>
+              <a href="#pricing" class="module-plan-link" data-i18n="matrix.viewPlan">View Plan →</a>
+            </div>
           </div>
 
           <!-- Module 4: Multi-Branch Management -->
@@ -1009,6 +1050,10 @@
               <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m4B2">Outlet-wise live sales comparison</span></li>
               <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m4B3">Central warehouse requisition</span></li>
             </ul>
+            <div class="module-card-footer">
+              <span class="module-plan-pill plan-tier-medium" data-i18n="matrix.m4Plan">★ Medium+ (৳2,000/mo)</span>
+              <a href="#pricing" class="module-plan-link" data-i18n="matrix.viewPlan">View Plan →</a>
+            </div>
           </div>
 
           <!-- Module 5: Double-Entry Accounting -->
@@ -1026,6 +1071,10 @@
               <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m5B2">Automated sales &amp; purchase journals</span></li>
               <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m5B3">Bank &amp; cash counter reconciliation</span></li>
             </ul>
+            <div class="module-card-footer">
+              <span class="module-plan-pill plan-tier-starter" data-i18n="matrix.m5Plan">● Starter+ (৳500/mo)</span>
+              <a href="#pricing" class="module-plan-link" data-i18n="matrix.viewPlan">View Plan →</a>
+            </div>
           </div>
 
           <!-- Module 6: Supplier & Purchase Ledger -->
@@ -1043,6 +1092,10 @@
               <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m6B2">Purchase order &amp; GRN tracking</span></li>
               <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m6B3">Due payment reminders &amp; statement</span></li>
             </ul>
+            <div class="module-card-footer">
+              <span class="module-plan-pill plan-tier-starter" data-i18n="matrix.m6Plan">● Starter+ (৳500/mo)</span>
+              <a href="#pricing" class="module-plan-link" data-i18n="matrix.viewPlan">View Plan →</a>
+            </div>
           </div>
 
           <!-- Module 7: NBR VAT Mushak 6.3 -->
@@ -1060,6 +1113,10 @@
               <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m7B2">NBR audit-ready tax calculations</span></li>
               <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m7B3">Monthly VAT return summary (9.1)</span></li>
             </ul>
+            <div class="module-card-footer">
+              <span class="module-plan-pill plan-tier-basic" data-i18n="matrix.m7Plan">✓ Basic+ (৳1,000/mo)</span>
+              <a href="#pricing" class="module-plan-link" data-i18n="matrix.viewPlan">View Plan →</a>
+            </div>
           </div>
 
           <!-- Module 8: HR & Payroll -->
@@ -1077,6 +1134,10 @@
               <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m8B2">Daily cashier check-in/out attendance</span></li>
               <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m8B3">Automated monthly salary slips</span></li>
             </ul>
+            <div class="module-card-footer">
+              <span class="module-plan-pill plan-tier-medium" data-i18n="matrix.m8Plan">★ Medium+ (৳2,000/mo)</span>
+              <a href="#pricing" class="module-plan-link" data-i18n="matrix.viewPlan">View Plan →</a>
+            </div>
           </div>
 
           <!-- Module 9: Courier Hub -->
@@ -1094,6 +1155,10 @@
               <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m9B2">Live tracking updates via webhook</span></li>
               <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m9B3">Automated COD payment reconciliation</span></li>
             </ul>
+            <div class="module-card-footer">
+              <span class="module-plan-pill plan-tier-basic" data-i18n="matrix.m9Plan">✓ Basic+ (৳1,000/mo)</span>
+              <a href="#pricing" class="module-plan-link" data-i18n="matrix.viewPlan">View Plan →</a>
+            </div>
           </div>
 
           <!-- Module 10: CRM & Customer Loyalty -->
@@ -1111,6 +1176,10 @@
               <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m10B2">Automated SMS invoice alerts</span></li>
               <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m10B3">Loyalty points &amp; membership tier</span></li>
             </ul>
+            <div class="module-card-footer">
+              <span class="module-plan-pill plan-tier-medium" data-i18n="matrix.m10Plan">★ Medium+ (৳2,000/mo)</span>
+              <a href="#pricing" class="module-plan-link" data-i18n="matrix.viewPlan">View Plan →</a>
+            </div>
           </div>
 
           <!-- Module 11: Connected E-Commerce & Meta -->
@@ -1128,6 +1197,10 @@
               <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m11B2">WooCommerce &amp; web order queue</span></li>
               <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m11B3">Shared real-time inventory pool</span></li>
             </ul>
+            <div class="module-card-footer">
+              <span class="module-plan-pill plan-tier-medium" data-i18n="matrix.m11Plan">★ Medium+ (৳2,000/mo)</span>
+              <a href="#pricing" class="module-plan-link" data-i18n="matrix.viewPlan">View Plan →</a>
+            </div>
           </div>
 
           <!-- Module 12: Bengali AI Advisor -->
@@ -1145,6 +1218,10 @@
               <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m12B2">Daily sales &amp; dead-stock alerts</span></li>
               <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m12B3">Actionable purchase recommendations</span></li>
             </ul>
+            <div class="module-card-footer">
+              <span class="module-plan-pill plan-tier-high" data-i18n="matrix.m12Plan">⚡ High Only (৳3,000/mo)</span>
+              <a href="#pricing" class="module-plan-link" data-i18n="matrix.viewPlan">View Plan →</a>
+            </div>
           </div>
 
         </div>
@@ -2316,12 +2393,10 @@
                 <div class="rec-plan-header">
                   <h3 class="rec-plan-name" id="advisorPlanName">Basic Plan</h3>
                   <div class="rec-price-box">
-                    <div class="rec-price-amount" id="advisorPlanPrice">
-                      <span class="currency-taka">&#2547;</span>1,000
-                    </div>
-                    <span class="rec-price-period">/ month</span>
+                    <div class="rec-price-amount" id="advisorPlanPrice"><span class="currency-taka">&#2547;</span>1,000</div>
+                    <span class="rec-price-period" id="advisorPricePeriod">/ month</span>
                   </div>
-                  <div class="rec-setup-note" id="advisorSetupFee">Setup fee: <span class="currency-taka">&#2547;</span>5,000 (one-time)</div>
+                  <div class="rec-setup-note" id="advisorSetupFee">One-time setup fee: <span class="currency-taka">&#2547;</span>5,000</div>
                 </div>
 
                 <p class="rec-plan-desc" id="advisorPlanDesc">
@@ -4064,8 +4139,15 @@
   </footer>
 
   <!-- ========================================================================
-       FLOATING WHATSAPP BUTTON (Emerald Green)
+       FLOATING WHATSAPP & BACK TO TOP WIDGETS
        ======================================================================== -->
+  <!-- Floating Back to Top Button -->
+  <button type="button" class="floating-back-to-top" id="floatingBackToTopBtn" aria-label="Scroll to top" title="Scroll to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true">
+      <path d="M18 15l-6-6-6 6"/>
+    </svg>
+  </button>
+
   <a href="https://wa.me/8801955345331?text=Hello%20YES%20SME,%20I%20would%20like%20to%20learn%20more%20about%20your%20software" target="_blank" rel="noopener noreferrer" class="floating-whatsapp-widget" title="Chat with us on WhatsApp" aria-label="WhatsApp Chat">
     <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32">
       <path d="M12.031 2C6.5 2 2 6.5 2 12.031c0 1.906.531 3.703 1.516 5.25L2 22l4.891-1.484c1.5 1 3.25 1.516 5.14 1.516 5.531 0 10.031-4.5 10.031-10.031S17.562 2 12.031 2zm0 18.281c-1.641 0-3.187-.453-4.516-1.266l-.328-.188-3.344 1.016 1.031-3.25-.203-.328c-.906-1.391-1.391-3-1.391-4.703 0-4.594 3.734-8.328 8.328-8.328 4.594 0 8.328 3.734 8.328 8.328 0 4.594-3.734 8.328-8.328 8.328zm4.563-6.234c-.25-.125-1.469-.734-1.703-.812-.234-.094-.406-.125-.578.125-.172.25-.656.812-.812.984-.156.172-.313.203-.563.078-.25-.125-1.047-.391-2-1.234-.734-.656-1.234-1.469-1.375-1.719-.156-.25-.016-.391.109-.516.109-.109.25-.281.375-.422.125-.141.172-.25.25-.406.078-.172.047-.313-.016-.438-.078-.125-.578-1.406-.812-1.922-.219-.516-.453-.438-.625-.453h-.531c-.188 0-.484.078-.734.344-.25.266-.969.953-.969 2.328 0 1.375 1 2.703 1.141 2.891.141.188 1.953 3.016 4.75 4.219.672.281 1.188.453 1.594.578.672.219 1.281.188 1.766.109.531-.078 1.469-.609 1.672-1.203.203-.594.203-1.094.141-1.203-.063-.094-.219-.156-.469-.281z"/>
