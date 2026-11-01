@@ -2721,126 +2721,155 @@
       <div class="container">
         <!-- Section Header -->
         <div class="section-header text-center">
-          <div class="section-badge-pill" data-i18n="advisor.badge">Smart Package Recommender</div>
-          <h2 class="section-title" data-i18n="advisor.title">Find the Perfect Package for Your Business in 10 Seconds</h2>
-          <p class="section-subtitle" data-i18n="advisor.subtitle">
-            Tell us about your retail scale and we will recommend the most cost-effective YES SME plan for your business.
+          <div class="section-badge-pill" data-i18n="roi.badge">⚡ Interactive Savings &amp; ROI Configurator</div>
+          <h2 class="section-title" data-i18n="roi.title">Calculate Exactly How Much Time and Money YES SME Saves You</h2>
+          <p class="section-subtitle" data-i18n="roi.subtitle">
+            Slide your daily transaction volume and outlet count below to watch your reclaimed hours, prevented leakage, and recommended plan calculate in real time.
           </p>
         </div>
 
         <div class="advisor-interactive-container">
           <div class="advisor-main-card">
-            <!-- Left Side: Interactive Step Questions -->
-            <div class="advisor-questions-col">
+            
+            <!-- Left Side: Interactive Sliders & Presets -->
+            <div class="advisor-questions-col roi-config-col">
               
-              <!-- Question 1: Business Type -->
-              <div class="advisor-question-block">
-                <div class="advisor-step-label">
-                  <span class="step-num-badge">1</span>
-                  <span data-i18n="advisor.q1Label">Select Your Business Model:</span>
+              <!-- Slider 1: Daily Customer Invoices -->
+              <div class="roi-slider-group">
+                <div class="roi-slider-header">
+                  <div class="roi-header-label">
+                    <span class="roi-badge-num">1</span>
+                    <strong data-i18n="roi.sliderInvoicesLabel">Daily Customer Invoices &amp; Memos:</strong>
+                  </div>
+                  <div class="roi-value-pill" id="roiInvoicesValPill">
+                    <span class="pill-number" id="roiInvoicesNum">150</span>
+                    <span class="pill-unit" data-i18n="roi.invoicesUnit">Bills / Day</span>
+                  </div>
                 </div>
-                <div class="advisor-options-grid" id="advisorBizTypeGroup">
-                  <button type="button" class="advisor-option-btn active" data-biz-type="single">
-                    <span class="advisor-radio-indicator"></span>
-                    <div class="advisor-opt-content">
-                      <strong data-i18n="advisor.q1Opt1">Retail Shop / Single Outlet</strong>
-                      <span data-i18n="advisor.q1Opt1Sub">Clothing, Grocery, Electronics, Pharmacy</span>
-                    </div>
-                  </button>
 
-                  <button type="button" class="advisor-option-btn" data-biz-type="ecommerce">
-                    <span class="advisor-radio-indicator"></span>
-                    <div class="advisor-opt-content">
-                      <strong data-i18n="advisor.q1Opt2">Retail Store + Online Brand</strong>
-                      <span data-i18n="advisor.q1Opt2Sub">Website, Facebook Shop, Courier Delivery</span>
-                    </div>
-                  </button>
+                <div class="roi-range-wrap">
+                  <input type="range" class="roi-custom-range" id="roiRangeInvoices" min="10" max="600" step="10" value="150" aria-label="Daily Invoices Slider">
+                  <div class="roi-range-track-fill" id="roiInvoicesTrackFill" style="width: 25%;"></div>
+                </div>
 
-                  <button type="button" class="advisor-option-btn" data-biz-type="chain">
-                    <span class="advisor-radio-indicator"></span>
-                    <div class="advisor-opt-content">
-                      <strong data-i18n="advisor.q1Opt3">Multi-Branch Retail Chain</strong>
-                      <span data-i18n="advisor.q1Opt3Sub">2 to 5 outlets with central warehouse</span>
-                    </div>
-                  </button>
+                <div class="roi-range-scale">
+                  <span>10 / Day</span>
+                  <span>150 (Busy Store)</span>
+                  <span>300 (High-Traffic)</span>
+                  <span>600+</span>
+                </div>
 
-                  <button type="button" class="advisor-option-btn" data-biz-type="enterprise">
-                    <span class="advisor-radio-indicator"></span>
-                    <div class="advisor-opt-content">
-                      <strong data-i18n="advisor.q1Opt4">Wholesale Gaddi / Large Enterprise</strong>
-                      <span data-i18n="advisor.q1Opt4Sub">Dedicated private cloud, custom ERP API</span>
-                    </div>
-                  </button>
+                <!-- Quick Presets -->
+                <div class="roi-presets-row" id="roiInvoicesPresets">
+                  <button type="button" class="roi-preset-btn" data-val="50" data-i18n="roi.presetSmall">50 (Small Shop)</button>
+                  <button type="button" class="roi-preset-btn active" data-val="150" data-i18n="roi.presetRetail">150 (Busy Retail)</button>
+                  <button type="button" class="roi-preset-btn" data-val="300" data-i18n="roi.presetHigh">300 (Superstore)</button>
+                  <button type="button" class="roi-preset-btn" data-val="500" data-i18n="roi.presetChain">500+ (Retail Chain)</button>
                 </div>
               </div>
 
-              <!-- Question 2: Number of Outlets / Billing Counters -->
-              <div class="advisor-question-block">
-                <div class="advisor-step-label">
-                  <span class="step-num-badge">2</span>
-                  <span data-i18n="advisor.q2Label">Number of Active Billing Counters / Stores:</span>
+              <!-- Slider 2: Number of Outlets & Billing Terminals -->
+              <div class="roi-slider-group" style="margin-top: 2rem;">
+                <div class="roi-slider-header">
+                  <div class="roi-header-label">
+                    <span class="roi-badge-num">2</span>
+                    <strong data-i18n="roi.sliderOutletsLabel">Number of Outlets &amp; Billing Terminals:</strong>
+                  </div>
+                  <div class="roi-value-pill" id="roiOutletsValPill">
+                    <span class="pill-number" id="roiOutletsNum">2</span>
+                    <span class="pill-unit" data-i18n="roi.outletsUnit">Branches / Outlets</span>
+                  </div>
                 </div>
-                <div class="advisor-counters-row" id="advisorOutletsGroup">
-                  <button type="button" class="advisor-counter-btn active" data-outlets="1">
-                    <span class="counter-num">1</span>
-                    <span class="counter-sub" data-i18n="advisor.q2C1">Counter</span>
-                  </button>
-                  <button type="button" class="advisor-counter-btn" data-outlets="2">
-                    <span class="counter-num">2</span>
-                    <span class="counter-sub" data-i18n="advisor.q2C2">Counters</span>
-                  </button>
-                  <button type="button" class="advisor-counter-btn" data-outlets="5">
-                    <span class="counter-num">3–5</span>
-                    <span class="counter-sub" data-i18n="advisor.q2C3">Outlets</span>
-                  </button>
-                  <button type="button" class="advisor-counter-btn" data-outlets="10">
-                    <span class="counter-num">5+</span>
-                    <span class="counter-sub" data-i18n="advisor.q2C4">Enterprise</span>
-                  </button>
+
+                <div class="roi-range-wrap">
+                  <input type="range" class="roi-custom-range" id="roiRangeOutlets" min="1" max="10" step="1" value="2" aria-label="Number of Outlets Slider">
+                  <div class="roi-range-track-fill" id="roiOutletsTrackFill" style="width: 11.1%;"></div>
+                </div>
+
+                <div class="roi-range-scale">
+                  <span>1 Branch</span>
+                  <span>2 Branches</span>
+                  <span>5 Outlets</span>
+                  <span>10+ Enterprise</span>
+                </div>
+
+                <!-- Quick Presets -->
+                <div class="roi-presets-row" id="roiOutletsPresets">
+                  <button type="button" class="roi-preset-btn" data-val="1">1 Outlet</button>
+                  <button type="button" class="roi-preset-btn active" data-val="2">2 Outlets</button>
+                  <button type="button" class="roi-preset-btn" data-val="3">3 Outlets</button>
+                  <button type="button" class="roi-preset-btn" data-val="5">5 Outlets</button>
+                  <button type="button" class="roi-preset-btn" data-val="10">10+ Enterprise</button>
                 </div>
               </div>
 
             </div>
 
-            <!-- Right Side: Dynamic Recommendation Card -->
-            <div class="advisor-recommendation-col">
-              <div class="advisor-result-card" id="advisorResultCard">
+            <!-- Right Side: Dynamic ROI Output & Recommended Plan -->
+            <div class="advisor-recommendation-col roi-output-col">
+              <div class="advisor-result-card roi-result-card" id="advisorResultCard">
+                
                 <div class="rec-card-top">
-                  <span class="rec-badge-pill" data-i18n="advisor.recBadge">🎯 Recommended Plan for You</span>
-                  <span class="rec-popular-flag" id="advisorPopularTag">Best Value</span>
+                  <span class="rec-badge-pill" data-i18n="roi.recTitle">🎯 Recommended Plan for Your Scale</span>
+                  <span class="rec-popular-flag" id="advisorPopularTag">⭐ Most Popular</span>
                 </div>
 
                 <div class="rec-plan-header">
-                  <h3 class="rec-plan-name" id="advisorPlanName">Basic Plan</h3>
+                  <h3 class="rec-plan-name" id="advisorPlanName">Medium Plan</h3>
                   <div class="rec-price-box">
-                    <div class="rec-price-amount" id="advisorPlanPrice"><span class="currency-taka">&#2547;</span>1,000</div>
+                    <div class="rec-price-amount" id="advisorPlanPrice"><span class="currency-taka">&#2547;</span>2,000</div>
                     <span class="rec-price-period" id="advisorPricePeriod">/ month</span>
                   </div>
-                  <div class="rec-setup-note" id="advisorSetupFee">One-time setup fee: <span class="currency-taka">&#2547;</span>5,000</div>
+                  <div class="rec-setup-note" id="advisorSetupFee">One-time setup fee: <span class="currency-taka">&#2547;</span>10,000</div>
+                </div>
+
+                <!-- The 2 Dynamic Savings Metrics Required by User Prompt -->
+                <div class="roi-metrics-dynamic-grid">
+                  
+                  <!-- Metric 1: Hours Saved per Month -->
+                  <div class="roi-metric-tile tile-hours">
+                    <div class="tile-icon-box">⏱️</div>
+                    <div class="tile-body">
+                      <div class="tile-val-row">
+                        <span class="tile-val" id="roiHoursSavedVal">48</span>
+                        <span class="tile-unit">Hours / Mo</span>
+                      </div>
+                      <div class="tile-label" data-i18n="roi.metricHours">Hours Saved / Month</div>
+                      <div class="tile-subtext" data-i18n="roi.metricHoursSub">Reclaimed from paper khatas, calculator math &amp; SMS reconciliation</div>
+                    </div>
+                  </div>
+
+                  <!-- Metric 2: Stock Leakage Prevented -->
+                  <div class="roi-metric-tile tile-money">
+                    <div class="tile-icon-box">💸</div>
+                    <div class="tile-body">
+                      <div class="tile-val-row">
+                        <span class="currency-taka">&#2547;</span>
+                        <span class="tile-val" id="roiLeakageVal">35,000</span>
+                        <span class="tile-unit">/ month</span>
+                      </div>
+                      <div class="tile-label" data-i18n="roi.metricLeakage">Stock Leakage Prevented</div>
+                      <div class="tile-subtext" data-i18n="roi.metricLeakageSub">Protected via real-time batch expiry warnings &amp; automated audits</div>
+                    </div>
+                  </div>
+
                 </div>
 
                 <p class="rec-plan-desc" id="advisorPlanDesc">
-                  Ideal for single retail shops needing smart offline POS billing, automatic barcode generation, and single courier dispatch.
+                  Perfect for retail businesses with 2 branches wanting centralized stock management, iOS &amp; Android apps, and 1-click courier booking.
                 </p>
 
-                <div class="rec-included-features">
-                  <strong data-i18n="advisor.includedTitle">Included with your recommendation:</strong>
-                  <ul class="rec-features-list" id="advisorFeaturesList">
-                    <li><span class="feature-check-icon">✓</span> <span>Smart Offline POS Billing &amp; Local Cache</span></li>
-                    <li><span class="feature-check-icon">✓</span> <span>Automated Barcode Label &amp; Price Sticker Print</span></li>
-                    <li><span class="feature-check-icon">✓</span> <span>Pathao or Steadfast 1-Click Courier Integration</span></li>
-                    <li><span class="feature-check-icon">✓</span> <span>Daily Cashbook &amp; Expense Ledger</span></li>
-                  </ul>
-                </div>
-
-                <button type="button" class="btn btn-lg btn-white open-plan-modal" id="advisorSelectBtn" data-plan-id="basic">
-                  <span data-i18n="advisor.btnChoose">Choose This Plan</span> →
+                <!-- High-Converting Instant 1-Click Free Trial CTA -->
+                <button type="button" class="btn btn-lg btn-white roi-trial-btn open-plan-modal" id="advisorSelectBtn" data-plan-id="medium">
+                  <span id="advisorBtnText" data-i18n="roi.trialBtn">Start 14-Day Free Trial</span>
+                  <span class="btn-arrow">→</span>
                 </button>
 
                 <div class="rec-consultant-line">
-                  <span>Questions? Call Dhaka Office:</span>
+                  <span data-i18n="roi.callLine">Questions about your scale? Dhaka HQ:</span>
                   <a href="tel:01955345331" class="advisor-phone-link">01955345331</a>
                 </div>
+
               </div>
             </div>
 

@@ -10,8 +10,13 @@ const STATE = {
   advisor: {
     bizType: 'single',
     outlets: '1'
+  },
+  roi: {
+    invoices: 150,
+    outlets: 2
   }
 };
+window.STATE = STATE;
 
 /**
  * ============================================================================
@@ -199,365 +204,221 @@ function initNavbarScroll() {
 /**
  * 4. PLAN ADVISOR CONTROLLER (Monthly Packages & Setup Fees)
  */
+/* ==========================================================================
+   4. CONCEPT D: INTERACTIVE SAVINGS & ROI CONFIGURATOR
+   Real-Time Range Sliders, Reclaimed Hours, Stock Leakage & Plan Matcher
+   ========================================================================== */
+
+function toBanglaDigits(num) {
+  const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+  return String(num).replace(/\d/g, d => bnDigits[d]);
+}
+
+function formatTaka(num, isBn) {
+  const formatted = Number(num).toLocaleString('en-IN');
+  return isBn ? toBanglaDigits(formatted) : formatted;
+}
+
 function initAdvisor() {
-  const bizGroup = document.getElementById('advisorBizTypeGroup');
-  const outletGroup = document.getElementById('advisorOutletsGroup');
+  const rangeInvoices = document.getElementById('roiRangeInvoices');
+  const rangeOutlets = document.getElementById('roiRangeOutlets');
+  const invoicesPresets = document.getElementById('roiInvoicesPresets');
+  const outletsPresets = document.getElementById('roiOutletsPresets');
 
-  if (bizGroup) {
-    bizGroup.querySelectorAll('.advisor-option-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        bizGroup.querySelectorAll('.advisor-option-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        STATE.advisor.bizType = btn.getAttribute('data-biz-type');
-        updateAdvisorResult();
+  // Track state
+  if (!window.STATE.roi) {
+    window.STATE.roi = {
+      invoices: 150,
+      outlets: 2
+    };
+  }
+
+  function updateSliderFill(rangeEl, fillId, min, max, val) {
+    const fillEl = document.getElementById(fillId);
+    if (!fillEl) return;
+    const pct = ((val - min) / (max - min)) * 100;
+    fillEl.style.width = Math.max(0, Math.min(100, pct)) + '%';
+  }
+
+  function syncRoiCalculator() {
+    const isBn = window.STATE.currentLang === 'bn';
+    const invoices = window.STATE.roi.invoices;
+    const outlets = window.STATE.roi.outlets;
+
+    // Update Pill Readouts
+    const invoicesNumEl = document.getElementById('roiInvoicesNum');
+    const outletsNumEl = document.getElementById('roiOutletsNum');
+    if (invoicesNumEl) {
+      invoicesNumEl.textContent = isBn ? toBanglaDigits(invoices) : invoices;
+    }
+    if (outletsNumEl) {
+      outletsNumEl.textContent = isBn ? toBanglaDigits(outlets) : outlets;
+    }
+
+    // Update Slider Positions & Fills
+    if (rangeInvoices) {
+      rangeInvoices.value = invoices;
+      updateSliderFill(rangeInvoices, 'roiInvoicesTrackFill', 10, 600, invoices);
+    }
+    if (rangeOutlets) {
+      rangeOutlets.value = outlets;
+      updateSliderFill(rangeOutlets, 'roiOutletsTrackFill', 1, 10, outlets);
+    }
+
+    // Update Active Preset Buttons
+    if (invoicesPresets) {
+      invoicesPresets.querySelectorAll('.roi-preset-btn').forEach(btn => {
+        const val = parseInt(btn.getAttribute('data-val'), 10);
+        btn.classList.toggle('active', val === invoices);
       });
-    });
-  }
-
-  if (outletGroup) {
-    outletGroup.querySelectorAll('.advisor-counter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        outletGroup.querySelectorAll('.advisor-counter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        STATE.advisor.outlets = btn.getAttribute('data-outlets');
-        updateAdvisorResult();
+    }
+    if (outletsPresets) {
+      outletsPresets.querySelectorAll('.roi-preset-btn').forEach(btn => {
+        const val = parseInt(btn.getAttribute('data-val'), 10);
+        btn.classList.toggle('active', val === outlets);
       });
-    });
-  }
+    }
 
-  updateAdvisorResult();
-}
+    // Calculate Dynamic Metrics (User Prompt Formulas)
+    // 1. Hours Saved per Month
+    // Base: 150 invoices + 2 outlets = 48 Hours
+    const hoursSaved = Math.round((invoices * 0.25) + (outlets * 5));
+    const hoursEl = document.getElementById('roiHoursSavedVal');
+    if (hoursEl) {
+      hoursEl.textContent = isBn ? toBanglaDigits(hoursSaved) : hoursSaved;
+    }
 
-function updateAdvisorResult() {
-  const nameEl = document.getElementById('advisorPlanName');
-  const priceEl = document.getElementById('advisorPlanPrice');
-  const periodEl = document.getElementById('advisorPricePeriod') || document.querySelector('.rec-price-period');
-  const setupEl = document.getElementById('advisorSetupFee');
-  const descEl = document.getElementById('advisorPlanDesc');
-  const featuresListEl = document.getElementById('advisorFeaturesList');
-  const popularTag = document.getElementById('advisorPopularTag');
-  const selectBtn = document.getElementById('advisorSelectBtn');
+    // 2. Stock Leakage Prevented (৳ / Month)
+    // Base: 150 invoices + 2 outlets = ৳35,000 / month
+    const leakagePrevented = Math.round(((invoices * 180) + (outlets * 4000)) / 1000) * 1000;
+    const leakageEl = document.getElementById('roiLeakageVal');
+    if (leakageEl) {
+      leakageEl.textContent = formatTaka(leakagePrevented, isBn);
+    }
 
-  if (!nameEl || !priceEl || !descEl || !selectBtn) return;
+    // Determine Recommended Plan
+    let planId = 'medium';
+    let planName = '';
+    let priceHtml = '';
+    let periodText = isBn ? '/ মাস' : '/ month';
+    let setupText = '';
+    let descText = '';
+    let popularFlag = '';
 
-  const isBn = STATE.currentLang === 'bn';
-  const { bizType, outlets } = STATE.advisor;
-
-  let planId = 'basic';
-  let planName = '';
-  let priceHtml = '';
-  let setupText = '';
-  let descText = '';
-  let isPopular = false;
-  let showPeriod = true;
-  let features = [];
-
-  if (bizType === 'enterprise' || outlets === '10') {
-    planId = 'custom';
-    planName = isBn ? 'কাস্টম এন্টারপ্রাইজ' : 'Custom Enterprise';
-    priceHtml = isBn ? 'আলোচনা সাপেক্ষে' : 'Custom Quote';
-    showPeriod = false;
-    setupText = isBn ? 'অন-ডিমান্ড প্রাইভেট ডেডিকেটেড ক্লাউড' : 'Dedicated Private Cloud Infrastructure';
-    descText = isBn
-      ? 'বড় রিটেল চেইন, একাধিক ওয়্যারহাউজ এবং নিজস্ব সার্ভার সিকিউরিটির জন্য সম্পূর্ণ কাস্টমাইজড ইআরপি।'
-      : 'Tailored for large multi-branch chains, dedicated private cloud infrastructure & custom ERP integrations.';
-    features = isBn ? [
-      'আনলিমিটেড প্রোডাক্ট ও আনলিমিটেড ব্রাঞ্চ',
-      'প্রাইভেট ক্লাউড ডেডিকেটেড ভিপিএস হোস্টিং',
-      'কাস্টম এপিআই ও ইআরপি ইন্টিগ্রেশন সাপোর্ট',
-      '২৪/৭ ডেডিকেটেড কী অ্যাকাউন্ট ম্যানেজার',
-      'অন-সাইট স্টাফ ট্রেনিং ও ডেডিকেটেড এসএলএ'
-    ] : [
-      'Unlimited Products & Unlimited Branches',
-      'Dedicated High-Performance Cloud VPS',
-      'Custom API & Enterprise ERP Integrations',
-      '24/7 Dedicated Key Account Manager',
-      'On-site Staff Training & Enterprise SLA'
-    ];
-  } else if (bizType === 'chain' || outlets === '5') {
-    planId = 'high';
-    planName = isBn ? 'হাই প্যাকেজ' : 'High Plan';
-    priceHtml = isBn ? '<span class="currency-taka">&#2547;</span>৩,০০০' : '<span class="currency-taka">&#2547;</span>3,000';
-    setupText = isBn ? 'এককালীন সেটআপ ফি: <span class="currency-taka">&#2547;</span>১৫,০০০' : 'One-time setup fee: <span class="currency-taka">&#2547;</span>15,000';
-    descText = isBn
-      ? '৫টি ব্রাঞ্চ পর্যন্ত সেন্ট্রাল ম্যানেজমেন্ট, আনলিমিটেড প্রোডাক্ট ও এআই বিজনেস অ্যানালিটিক্স।'
-      : 'Includes up to 5 branch live sync, 500 products, branded mobile apps, and AI business intelligence.';
-    features = isBn ? [
-      '৫০০ প্রোডাক্ট ও ৫টি আউটলেট সেন্ট্রাল কন্ট্রোল',
-      'কাস্টম অ্যান্ড্রয়েড ও আইওএস মোবাইল অ্যাপ',
-      'সকল কুরিয়ার অটো বুকিং ও পেমেন্ট রিকনসিলিয়েশন',
-      'অ্যাডভান্সড ডাবল-এন্ট্রি একাউন্টিং ও লাভ-ক্ষতি খাতা',
-      'স্বয়ংক্রিয় ক্লাউড ব্যাকআপ ও প্রায়োরিটি সাপোর্ট'
-    ] : [
-      '500 Products & 5 Outlets Central Control',
-      'Custom Branded Android & iOS Mobile Apps',
-      'All Courier Integrations & COD Reconciliation',
-      'Advanced Double-Entry Accounting & P&L',
-      'Automated Cloud Backup & VIP Priority Support'
-    ];
-  } else if (bizType === 'ecommerce' || outlets === '2') {
-    planId = 'medium';
-    planName = isBn ? 'মিডিয়াম প্যাকেজ' : 'Medium Plan';
-    isPopular = true;
-    priceHtml = isBn ? '<span class="currency-taka">&#2547;</span>২,০০০' : '<span class="currency-taka">&#2547;</span>2,000';
-    setupText = isBn ? 'এককালীন সেটআপ ফি: <span class="currency-taka">&#2547;</span>৮,০০০' : 'One-time setup fee: <span class="currency-taka">&#2547;</span>8,000';
-    descText = isBn
-      ? '২টি ব্রাঞ্চ, নিজস্ব ই-কমার্স ওয়েবসাইট, কাস্টম অ্যান্ড্রয়েড ও আইওএস মোবাইল অ্যাপ এবং সকল কুরিয়ার সাপোর্ট।'
-      : 'Includes 2 branches, dedicated e-commerce storefront, custom branded iOS/Android apps, and multi-courier dispatch.';
-    features = isBn ? [
-      '৩৫০ প্রোডাক্ট ও ২টি ব্রাঞ্চ লাইভ সিঙ্ক',
-      'ফ্রি ডেডিকেটেড ই-কমার্স ওয়েবসাইট',
-      'ডেডিকেটেড মোবাইল অ্যাপস (Android & iOS)',
-      'বিকাশ, নগদ ও এসএসএল পেমেন্ট গেটওয়ে',
-      'পাঠাও, স্টিডফাস্ট ও রেডএক্স কুরিয়ার ১-ক্লিকে বুকিং'
-    ] : [
-      '350 Products & 2 Branches Live Sync',
-      'Free Dedicated E-Commerce Web Storefront',
-      'Dedicated Mobile Apps (Android & iOS)',
-      'bKash, Nagad & SSL Payment Gateway',
-      'Pathao, Steadfast & REDX 1-Click Dispatch'
-    ];
-  } else {
-    // Single outlet
-    planId = 'basic';
-    planName = isBn ? 'বেসিক প্যাকেজ' : 'Basic Plan';
-    priceHtml = isBn ? '<span class="currency-taka">&#2547;</span>১,০০০' : '<span class="currency-taka">&#2547;</span>1,000';
-    setupText = isBn ? 'এককালীন সেটআপ ফি: <span class="currency-taka">&#2547;</span>৫,০০০' : 'One-time setup fee: <span class="currency-taka">&#2547;</span>5,000';
-    descText = isBn
-      ? 'স্মার্ট অফলাইন পিওএস, স্বয়ংক্রিয় বারকোড প্রিন্টিং, ক্যাশবুক ও সিঙ্গেল কুরিয়ার ইন্টিগ্রেশন।'
-      : 'Smart offline POS billing, automatic barcode generation, cashbook accounting, and courier integration.';
-    features = isBn ? [
-      '২৫০ প্রোডাক্ট ও ১টি স্টোর ফুল কন্ট্রোল',
-      'স্মার্ট পিওএস ও অফলাইন সিঙ্ক (নেট ছাড়াই বিলিং)',
-      'ফ্রি ওয়েবসাইট অন্তর্ভুক্ত',
-      '১টি কুরিয়ার ইন্টিগ্রেশন (পাঠাও অথবা স্টিডফাস্ট)',
-      'ক্যাশ বুক, ব্যাংক বুক ও এনবিআর মূসক ৬.৩ হিসাব'
-    ] : [
-      '250 Products & 1 Store Full Control',
-      'Smart POS & Offline Sync (Billing without net)',
-      'Free Website Included',
-      '1 Courier Integration (Pathao or Steadfast)',
-      'Cash Book, Bank Book & NBR Mushak 6.3 Tax'
-    ];
-  }
-
-  nameEl.textContent = planName;
-  priceEl.innerHTML = priceHtml;
-  setupEl.innerHTML = setupText;
-  descEl.textContent = descText;
-
-  if (periodEl) {
-    if (showPeriod) {
-      periodEl.style.display = '';
-      periodEl.textContent = isBn ? '/ মাস' : '/ month';
+    if (outlets >= 10) {
+      planId = 'custom';
+      planName = isBn ? 'কাস্টম এন্টারপ্রাইজ' : 'Custom Enterprise';
+      priceHtml = isBn ? 'আলোচনা সাপেক্ষে' : 'Custom Quote';
+      periodText = '';
+      setupText = isBn ? 'অন-ডিমান্ড ডেডিকেটেড ক্লাউড' : 'Dedicated Private Infrastructure';
+      descText = isBn
+        ? '১০+ আউটলেট ও বিশাল রিটেল চেইনের জন্য সম্পূর্ণ ডেডিকেটেড প্রাইভেট ক্লাউড ও কাস্টম ইআরপি এপিআই।'
+        : 'Engineered for 10+ retail outlets with dedicated private cloud infrastructure, custom ERP APIs, and SLA.';
+      popularFlag = isBn ? 'ভিআইপি স্কেল' : 'VIP Scale';
+    } else if (outlets >= 5) {
+      planId = 'high';
+      planName = isBn ? 'হাই প্যাকেজ' : 'High Plan';
+      priceHtml = isBn ? '<span class="currency-taka">&#2547;</span>৩,০০০' : '<span class="currency-taka">&#2547;</span>3,000';
+      setupText = isBn ? 'এককালীন সেটআপ ফি: ৳১৫,০০০' : 'One-time setup fee: ৳15,000';
+      descText = isBn
+        ? '৫টি ব্রাঞ্চ, কেন্দ্রীয় ওয়্যারহাউজ ও এনবিআর মূসক ৬.৩ চালানের সম্পূর্ণ এন্টারপ্রাইজ অটোমেশন।'
+        : 'Ideal for 5 outlets with centralized multi-warehouse stock management, FIFO batch expiry hub, and NBR VAT 6.3.';
+      popularFlag = isBn ? 'এন্টারপ্রাইজ চেইন' : 'Enterprise Chain';
+    } else if (outlets >= 2) {
+      planId = 'medium';
+      planName = isBn ? 'মিডিয়াম প্যাকেজ' : 'Medium Plan';
+      priceHtml = isBn ? '<span class="currency-taka">&#2547;</span>২,০০০' : '<span class="currency-taka">&#2547;</span>2,000';
+      setupText = isBn ? 'এককালীন সেটআপ ফি: ৳১০,০০০' : 'One-time setup fee: ৳10,000';
+      descText = isBn
+        ? '২টি শোরুম ও অনলাইন বিজনেসের জন্য সেরা! ডেডিকেটেড মোবাইল অ্যাপস এবং পাঠাও ও স্টিডফাস্ট ১-ক্লিক ইন্টিগ্রেশন।'
+        : 'Perfect for retail businesses with 2–4 branches wanting centralized stock management, iOS & Android apps, and 1-click courier booking.';
+      popularFlag = isBn ? '⭐ সর্বাধিক জনপ্রিয়' : '⭐ Most Popular';
+    } else if (invoices > 60) {
+      planId = 'basic';
+      planName = isBn ? 'বেসিক প্যাকেজ' : 'Basic Plan';
+      priceHtml = isBn ? '<span class="currency-taka">&#2547;</span>১,০০০' : '<span class="currency-taka">&#2547;</span>1,000';
+      setupText = isBn ? 'এককালীন সেটআপ ফি: ৳৫,০০০' : 'One-time setup fee: ৳5,000';
+      descText = isBn
+        ? 'ব্যস্ত ১টি দোকানের জন্য ১০০% অফলাইন পিওএস, বারকোড এবং ফ্রি ই-কমার্স অনলাইন স্টোর।'
+        : 'Ideal for busy single retail stores needing 100% offline POS billing, barcode printing, and a free e-commerce web store.';
+      popularFlag = isBn ? 'সেরা ভ্যালু' : 'Best Value';
     } else {
-      periodEl.style.display = 'none';
+      planId = 'starter';
+      planName = isBn ? 'স্টার্টার প্যাকেজ' : 'Starter Plan';
+      priceHtml = isBn ? '<span class="currency-taka">&#2547;</span>৫০০' : '<span class="currency-taka">&#2547;</span>500';
+      setupText = isBn ? 'এককালীন সেটআপ ফি: ৳৩,০০০' : 'One-time setup fee: ৳3,000';
+      descText = isBn
+        ? 'ছোট রিটেল দোকান বা নতুন ব্যবসার জন্য সহজ পিওএস বিলিং ও ডিজিটাল বাকি খাতা।'
+        : 'Great for small corner shops, boutiques, and single cashier counters starting their cloud journey.';
+      popularFlag = isBn ? 'শুরু করার জন্য' : 'Starter Pick';
+    }
+
+    // Update Output Card Elements
+    const nameEl = document.getElementById('advisorPlanName');
+    const priceEl = document.getElementById('advisorPlanPrice');
+    const periodEl = document.getElementById('advisorPricePeriod');
+    const setupEl = document.getElementById('advisorSetupFee');
+    const descEl = document.getElementById('advisorPlanDesc');
+    const popularTag = document.getElementById('advisorPopularTag');
+    const selectBtn = document.getElementById('advisorSelectBtn');
+    const btnTextEl = document.getElementById('advisorBtnText');
+
+    if (nameEl) nameEl.textContent = planName;
+    if (priceEl) priceEl.innerHTML = priceHtml;
+    if (periodEl) periodEl.textContent = periodText;
+    if (setupEl) setupEl.textContent = setupText;
+    if (descEl) descEl.textContent = descText;
+    if (popularTag) popularTag.textContent = popularFlag;
+    if (selectBtn) {
+      selectBtn.setAttribute('data-plan-id', planId);
+    }
+    if (btnTextEl) {
+      btnTextEl.textContent = isBn
+        ? `${planName}-এ ১৪ দিনের ফ্রি ট্রায়াল শুরু করুন`
+        : `Start 14-Day Free Trial on ${planName}`;
     }
   }
 
-  if (popularTag) {
-    popularTag.style.display = isPopular ? 'inline-block' : 'none';
+  // Range Slider Listeners
+  if (rangeInvoices) {
+    rangeInvoices.addEventListener('input', (e) => {
+      window.STATE.roi.invoices = parseInt(e.target.value, 10);
+      syncRoiCalculator();
+    });
   }
 
-  if (featuresListEl) {
-    featuresListEl.innerHTML = features.map(f => `
-      <li class="advisor-feat-item">
-        <span class="feat-check">✔</span>
-        <span>${f}</span>
-      </li>
-    `).join('');
+  if (rangeOutlets) {
+    rangeOutlets.addEventListener('input', (e) => {
+      window.STATE.roi.outlets = parseInt(e.target.value, 10);
+      syncRoiCalculator();
+    });
   }
 
-  selectBtn.setAttribute('data-plan-id', planId);
+  // Presets Listeners
+  if (invoicesPresets) {
+    invoicesPresets.querySelectorAll('.roi-preset-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        window.STATE.roi.invoices = parseInt(btn.getAttribute('data-val'), 10);
+        syncRoiCalculator();
+      });
+    });
+  }
+
+  if (outletsPresets) {
+    outletsPresets.querySelectorAll('.roi-preset-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        window.STATE.roi.outlets = parseInt(btn.getAttribute('data-val'), 10);
+        syncRoiCalculator();
+      });
+    });
+  }
+
+  // Attach global updater for language switcher
+  window.updateAdvisorResult = syncRoiCalculator;
+
+  // Run initial calculation
+  syncRoiCalculator();
 }
-
-
-document.addEventListener('DOMContentLoaded', () => {
-  initTranslations();
-  initDashboardTabs();
-  initAdvisor();
-  initPricingCards();
-  initEnterpriseCard();
-  initComparisonTable();
-  initComparisonDrawer();
-  initFaqAccordion();
-  initContactModal();
-  initOfficeVisitModal();
-  initMobileNav();
-  initRampInteractiveStage();
-  initTransformationSlider();
-  initTableSearch();
-  initNavbarScroll();
-  initModulesFilter();
-  initPosInteractiveSandbox();
-  initIndustryTabs();
-  initSpotlightConsole();
-  initHeroChatbot();
-  initTestimonialsSlider();
-  initMobilePosBanner();
-  initMposAnimation();
-
-  // Floating & Footer Back To Top Buttons
-  const footerBackToTopBtn = document.getElementById('footerBackToTopBtn');
-  if (footerBackToTopBtn) {
-    footerBackToTopBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
-
-  const floatingBackToTop = document.getElementById('floatingBackToTopBtn');
-  if (floatingBackToTop) {
-    function toggleFloatingBackToTop() {
-      if (window.scrollY > 280) {
-        floatingBackToTop.classList.add('visible');
-      } else {
-        floatingBackToTop.classList.remove('visible');
-      }
-    }
-    window.addEventListener('scroll', toggleFloatingBackToTop, { passive: true });
-    toggleFloatingBackToTop();
-
-    floatingBackToTop.addEventListener('click', (e) => {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
-
-});
-
-// SVG Icons helper
-const ICONS = {
-  checkCircle: `<span class="check-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor"><path d="M5 10.5L8.5 14L15 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`,
-  tableCheck: `<span class="val-check" title="Included" aria-label="Included"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor"><path d="M5 10.5L8.5 14L15 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`,
-  tableCross: `<span class="val-cross" title="Not Included" aria-label="Not Included">—</span>`,
-  infoCircle: `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="14" height="14"><circle cx="10" cy="10" r="8" stroke-width="1.8"/><path d="M10 9v5m0-8h.01" stroke-width="2" stroke-linecap="round"/></svg>`,
-  chevronDown: `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="16" height="16"><path d="M5 7.5L10 12.5L15 7.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-  server: `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor"><rect x="3" y="4" width="14" height="4" rx="1.5" stroke-width="1.7"/><rect x="3" y="12" width="14" height="4" rx="1.5" stroke-width="1.7"/><path d="M6 6h.01M6 14h.01" stroke-width="2" stroke-linecap="round"/></svg>`,
-  box: `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor"><path d="M10 2.5L17 6.5v7l-7 4-7-4v-7l7-4z" stroke-width="1.6"/><path d="M3 6.5l7 4 7-4M10 10.5v7" stroke-width="1.6"/></svg>`,
-  users: `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor"><circle cx="7.5" cy="6.5" r="3" stroke-width="1.7"/><path d="M2.5 16.5a5 5 0 0110 0" stroke-width="1.7"/><path d="M14 4.5a3 3 0 010 6m-1 6a4.5 4.5 0 004.5-4.5" stroke-width="1.7"/></svg>`,
-  activity: `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor"><path d="M3 10h3.5l2.5-6 3 12 2.5-6H17" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-  branch: `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor"><path d="M3 7l7-4 7 4v9a1 1 0 01-1 1H4a1 1 0 01-1-1V7z" stroke-width="1.6"/><path d="M7 17v-6h6v6" stroke-width="1.6"/></svg>`,
-  cloud: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-  globe: `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor"><circle cx="10" cy="10" r="7.5" stroke-width="1.7"/><path d="M2.5 10h15M10 2.5a12.5 12.5 0 010 15 12.5 12.5 0 010-15" stroke-width="1.6"/></svg>`
-};
-
-/**
- * 1. Render Pricing Cards (4-column layout)
- */
-
-// Current billing state: 'monthly' or 'annual'
-let currentBillingCycle = 'monthly';
-
-// Bilingual translations for Pricing Packages
-const BN_PACKAGE_META = {
-  starter: {
-    name: "স্টার্টার",
-    tagline: "ক্ষুদ্র দোকান ও স্টার্টআপদের ডিজিটাইজেশনের প্রাথমিক সমাধান।",
-    ctaText: "স্টার্টার বেছে নিন",
-    limits: {
-      products: "২০০ প্রোডাক্ট",
-      hosting: "শেয়ার্ড ক্লাউড",
-      storage: "১ জিবি স্টোরেজ",
-      store: "১টি স্টোর",
-      users: "২ জন অ্যাডমিন"
-    },
-    highlights: [
-      "সাপ্লায়ার ও পারচেজ ইনভেন্টরি ম্যানেজমেন্ট",
-      "ব্যাংক ও মোবাইল ব্যাংকিং (বিকাশ/নগদ) হিসাব",
-      "বেসিক স্টক ও ডেইলি সেলস সামারি",
-      "সহজ স্টক অ্যাডজাস্টমেন্ট ও ওপেনিং স্টক",
-      "স্বয়ংক্রিয় এআই সেলস রিপোর্টিং",
-      "গ্রাহকের বাকি আদায়ে অটো এসএমএস অ্যালার্ট",
-      "স্মার্টফোন ও পিসি রেসপনসিভ অ্যাডমিন প্যানেল"
-    ]
-  },
-  basic: {
-    name: "বেসিক",
-    tagline: "দ্রুত বর্ধনশীল একক রিটেল শপের অফলাইন পিওএস ও একাউন্টিং সমাধান।",
-    ctaText: "বেসিক বেছে নিন",
-    limits: {
-      products: "২৫০ প্রোডাক্ট",
-      hosting: "ভিপিএস ক্লাউড",
-      storage: "২ জিবি স্টোরেজ",
-      store: "১টি স্টোর",
-      users: "৫ জন অ্যাডমিন",
-      website: "ফ্রি ওয়েবসাইট"
-    },
-    highlights: [
-      "স্টার্টার প্যাকেজের সকল সুবিধা অন্তর্ভুক্ত",
-      "স্মার্ট পিওএস ও অফলাইন সিঙ্ক (নেট ছাড়াই বিলিং)",
-      "১টি কুরিয়ার ইন্টিগ্রেশন (পাঠাও অথবা স্টিডফাস্ট)",
-      "সেলস রিটার্ন ও এক্সচেঞ্জ প্রসেসিং",
-      "স্বয়ংক্রিয় বারকোড ও থার্মাল লেবেল প্রিন্টিং",
-      "ক্যাশ বুক, ব্যাংক বুক ও পেটি ক্যাশ খাতা",
-      "দৈনিক খরচ ট্র্যাকিং ও এনবিআর মূসক ৬.৩ হিসাব"
-    ]
-  },
-  medium: {
-    name: "মিডিয়াম",
-    tagline: "মাল্টি-ব্রাঞ্চ শোরুম, স্বয়ংক্রিয় একাউন্টিং ও কুরিয়ার লজিস্টিকসের সেরা প্যাকেজ।",
-    ctaText: "মিডিয়াম বেছে নিন",
-    limits: {
-      products: "৩৫০ প্রোডাক্ট",
-      hosting: "AWS এন্টারপ্রাইজ",
-      storage: "৪ জিবি স্টোরেজ",
-      branches: "২টি ব্রাঞ্চ",
-      users: "১০ জন অ্যাডমিন",
-      website: "ফ্রি ওয়েবসাইট"
-    },
-    highlights: [
-      "বেসিক প্যাকেজের সকল সুবিধা অন্তর্ভুক্ত",
-      "ফ্রি ডেডিকেটেড ই-কমার্স ওয়েবসাইট",
-      "ডেডিকেটেড মোবাইল অ্যাপস (অ্যান্ড্রয়েড ও আইওএস)",
-      "অনলাইন পেমেন্ট গেটওয়ে (বিকাশ, নগদ, এসএসএল)",
-      "পাঠাও, স্টিডফাস্ট ও রেডএক্স কুরিয়ার ১-ক্লিকে বুকিং",
-      "অ্যাডভান্সড ডাবল-এন্ট্রি একাউন্টিং ও লাভ-ক্ষতি খাতা",
-      "মাল্টি-ওয়্যারহাউজ স্টক ও ইন্টার-ব্রাঞ্চ চালান",
-      "সিআরএম, সেলস টিম ও কাস্টমার লয়ালটি পয়েন্টস"
-    ]
-  },
-  high: {
-    name: "হাই",
-    tagline: "বৃহৎ রিটেল চেইন, একাধিক আউটলেট ও সম্পূর্ণ স্বয়ংক্রিয় এন্টারপ্রাইজ অপারেশন।",
-    ctaText: "হাই বেছে নিন",
-    limits: {
-      products: "আনলিমিটেড প্রোডাক্ট",
-      hosting: "AWS ডেডিকেটেড",
-      storage: "১০ জিবি স্টোরেজ",
-      branches: "৫টি ব্রাঞ্চ",
-      users: "আনলিমিটেড ইউজার",
-      website: "ফ্রি ওয়েবসাইট"
-    },
-    highlights: [
-      "মিডিয়াম প্যাকেজের সকল সুবিধা অন্তর্ভুক্ত",
-      "ডেডিকেটেড মোবাইল অ্যাপস (অ্যান্ড্রয়েড ও আইওএস)",
-      "আনলিমিটেড প্রোডাক্ট ও ক্যাটালগ ধারণক্ষমতা",
-      "৫টি পর্যন্ত ব্রাঞ্চ ও সেন্ট্রাল গোডাউন কন্ট্রোল",
-      "এআই বিজনেস ইন্টেলিজেন্স (সেলস, স্টক ও একাউন্টস)",
-      "ই-কমার্সে এআই শপিং অ্যাসিস্ট্যান্ট ও বট",
-      "ফেসবুক ও ইনস্টাগ্রাম মার্কেটিং অটোমেশন",
-      "অ্যাডভান্সড রোল-বেসড পারমিশন ও কমপ্লায়েন্স অডিট"
-    ]
-  }
-};
-
-const BN_ENTERPRISE_META = {
-  badge: "কাস্টম এন্টারপ্রাইজ",
-  name: "লার্জ স্কেল রিটেল ও ডিস্ট্রিবিউশন হাব",
-  tagline: "আনলিমিটেড আউটলেট, ডেডিকেটেড এডব্লিউএস ক্লাউড ক্লাস্টার এবং কাস্টমাইজড ইআরপি আর্কিটেকচার প্রয়োজন এমন ব্র্যান্ডের জন্য।",
-  priceDisplay: "কাস্টম প্রাইসিং",
-  setupFeeDisplay: "প্রয়োজন ও আউটলেট অনুযায়ী আলোচনা সাপেক্ষে",
-  ctaText: "এন্টারপ্রাইজ সেলসের সাথে কথা বলুন",
-  highlights: [
-    "আনলিমিটেড ব্রাঞ্চ ও সেন্ট্রাল ওয়্যারহাউজ হাব",
-    "ডেডিকেটেড ক্লাউড ইনস্ট্যান্স (AWS / DigitalOcean)",
-    "এনবিআর মূসক ৬.৩ এর সকল কাস্টম ভ্যাট শিডিউল",
-    "কাস্টম এপিআই ইন্টিগ্রেশন (সাপ্লাই চেইন ও ইআরপি)",
-    "ডেডিকেটেড অ্যাকাউন্ট ম্যানেজার ও অন-সাইট ট্রেইনিং",
-    "২৪/৭ প্রায়োরিটি ফোন সাপোর্ট ও ৯৯.৯৯% এসএলএ গ্যারান্টি"
-  ]
-};
 
 function initPricingCards() {
   const container = document.getElementById('pricingCardsGrid');
