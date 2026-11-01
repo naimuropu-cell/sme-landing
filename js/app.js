@@ -420,6 +420,141 @@ function initAdvisor() {
   syncRoiCalculator();
 }
 
+// SVG Icons helper
+const ICONS = {
+  checkCircle: `<span class="check-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor"><path d="M5 10.5L8.5 14L15 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`,
+  tableCheck: `<span class="val-check" title="Included" aria-label="Included"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor"><path d="M5 10.5L8.5 14L15 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`,
+  tableCross: `<span class="val-cross" title="Not Included" aria-label="Not Included">—</span>`,
+  infoCircle: `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="14" height="14"><circle cx="10" cy="10" r="8" stroke-width="1.8"/><path d="M10 9v5m0-8h.01" stroke-width="2" stroke-linecap="round"/></svg>`,
+  chevronDown: `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="16" height="16"><path d="M5 7.5L10 12.5L15 7.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  server: `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor"><rect x="3" y="4" width="14" height="4" rx="1.5" stroke-width="1.7"/><rect x="3" y="12" width="14" height="4" rx="1.5" stroke-width="1.7"/><path d="M6 6h.01M6 14h.01" stroke-width="2" stroke-linecap="round"/></svg>`,
+  box: `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor"><path d="M10 2.5L17 6.5v7l-7 4-7-4v-7l7-4z" stroke-width="1.6"/><path d="M3 6.5l7 4 7-4M10 10.5v7" stroke-width="1.6"/></svg>`,
+  users: `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor"><circle cx="7.5" cy="6.5" r="3" stroke-width="1.7"/><path d="M2.5 16.5a5 5 0 0110 0" stroke-width="1.7"/><path d="M14 4.5a3 3 0 010 6m-1 6a4.5 4.5 0 004.5-4.5" stroke-width="1.7"/></svg>`,
+  activity: `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor"><path d="M3 10h3.5l2.5-6 3 12 2.5-6H17" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  branch: `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor"><path d="M3 7l7-4 7 4v9a1 1 0 01-1 1H4a1 1 0 01-1-1V7z" stroke-width="1.6"/><path d="M7 17v-6h6v6" stroke-width="1.6"/></svg>`,
+  cloud: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  globe: `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor"><circle cx="10" cy="10" r="7.5" stroke-width="1.7"/><path d="M2.5 10h15M10 2.5a12.5 12.5 0 010 15 12.5 12.5 0 010-15" stroke-width="1.6"/></svg>`
+};
+
+/**
+ * 1. Render Pricing Cards (4-column layout)
+ */
+
+// Current billing state: 'monthly' or 'annual'
+let currentBillingCycle = 'monthly';
+
+// Bilingual translations for Pricing Packages
+const BN_PACKAGE_META = {
+  starter: {
+    name: "স্টার্টার",
+    tagline: "ক্ষুদ্র দোকান ও স্টার্টআপদের ডিজিটাইজেশনের প্রাথমিক সমাধান।",
+    ctaText: "স্টার্টার বেছে নিন",
+    limits: {
+      products: "২০০ প্রোডাক্ট",
+      hosting: "শেয়ার্ড ক্লাউড",
+      storage: "১ জিবি স্টোরেজ",
+      store: "১টি স্টোর",
+      users: "২ জন অ্যাডমিন"
+    },
+    highlights: [
+      "সাপ্লায়ার ও পারচেজ ইনভেন্টরি ম্যানেজমেন্ট",
+      "ব্যাংক ও মোবাইল ব্যাংকিং (বিকাশ/নগদ) হিসাব",
+      "বেসিক স্টক ও ডেইলি সেলস সামারি",
+      "সহজ স্টক অ্যাডজাস্টমেন্ট ও ওপেনিং স্টক",
+      "স্বয়ংক্রিয় এআই সেলস রিপোর্টিং",
+      "গ্রাহকের বাকি আদায়ে অটো এসএমএস অ্যালার্ট",
+      "স্মার্টফোন ও পিসি রেসপনসিভ অ্যাডমিন প্যানেল"
+    ]
+  },
+  basic: {
+    name: "বেসিক",
+    tagline: "দ্রুত বর্ধনশীল একক রিটেল শপের অফলাইন পিওএস ও একাউন্টিং সমাধান।",
+    ctaText: "বেসিক বেছে নিন",
+    limits: {
+      products: "২৫০ প্রোডাক্ট",
+      hosting: "ভিপিএস ক্লাউড",
+      storage: "২ জিবি স্টোরেজ",
+      store: "১টি স্টোর",
+      users: "৫ জন অ্যাডমিন",
+      website: "ফ্রি ওয়েবসাইট"
+    },
+    highlights: [
+      "স্টার্টার প্যাকেজের সকল সুবিধা অন্তর্ভুক্ত",
+      "স্মার্ট পিওএস ও অফলাইন সিঙ্ক (নেট ছাড়াই বিলিং)",
+      "১টি কুরিয়ার ইন্টিগ্রেশন (পাঠাও অথবা স্টিডফাস্ট)",
+      "সেলস রিটার্ন ও এক্সচেঞ্জ প্রসেসিং",
+      "স্বয়ংক্রিয় বারকোড ও থার্মাল লেবেল প্রিন্টিং",
+      "ক্যাশ বুক, ব্যাংক বুক ও পেটি ক্যাশ খাতা",
+      "দৈনিক খরচ ট্র্যাকিং ও এনবিআর মূসক ৬.৩ হিসাব"
+    ]
+  },
+  medium: {
+    name: "মিডিয়াম",
+    tagline: "মাল্টি-ব্রাঞ্চ শোরুম, স্বয়ংক্রিয় একাউন্টিং ও কুরিয়ার লজিস্টিকসের সেরা প্যাকেজ।",
+    ctaText: "মিডিয়াম বেছে নিন",
+    limits: {
+      products: "৩৫০ প্রোডাক্ট",
+      hosting: "AWS এন্টারপ্রাইজ",
+      storage: "৪ জিবি স্টোরেজ",
+      branches: "২টি ব্রাঞ্চ",
+      users: "১০ জন অ্যাডমিন",
+      website: "ফ্রি ওয়েবসাইট"
+    },
+    highlights: [
+      "বেসিক প্যাকেজের সকল সুবিধা অন্তর্ভুক্ত",
+      "ফ্রি ডেডিকেটেড ই-কমার্স ওয়েবসাইট",
+      "ডেডিকেটেড মোবাইল অ্যাপস (অ্যান্ড্রয়েড ও আইওএস)",
+      "অনলাইন পেমেন্ট গেটওয়ে (বিকাশ, নগদ, এসএসএল)",
+      "পাঠাও, স্টিডফাস্ট ও রেডএক্স কুরিয়ার ১-ক্লিকে বুকিং",
+      "অ্যাডভান্সড ডাবল-এন্ট্রি একাউন্টিং ও লাভ-ক্ষতি খাতা",
+      "মাল্টি-ওয়্যারহাউজ স্টক ও ইন্টার-ব্রাঞ্চ চালান",
+      "সিআরএম, সেলস টিম ও কাস্টমার লয়ালটি পয়েন্টস"
+    ]
+  },
+  high: {
+    name: "হাই",
+    tagline: "বৃহৎ রিটেল চেইন, একাধিক আউটলেট ও সম্পূর্ণ স্বয়ংক্রিয় এন্টারপ্রাইজ অপারেশন।",
+    ctaText: "হাই বেছে নিন",
+    limits: {
+      products: "আনলিমিটেড প্রোডাক্ট",
+      hosting: "AWS ডেডিকেটেড",
+      storage: "১০ জিবি স্টোরেজ",
+      branches: "৫টি ব্রাঞ্চ",
+      users: "আনলিমিটেড ইউজার",
+      website: "ফ্রি ওয়েবসাইট"
+    },
+    highlights: [
+      "মিডিয়াম প্যাকেজের সকল সুবিধা অন্তর্ভুক্ত",
+      "ডেডিকেটেড মোবাইল অ্যাপস (অ্যান্ড্রয়েড ও আইওএস)",
+      "আনলিমিটেড প্রোডাক্ট ও ক্যাটালগ ধারণক্ষমতা",
+      "৫টি পর্যন্ত ব্রাঞ্চ ও সেন্ট্রাল গোডাউন কন্ট্রোল",
+      "এআই বিজনেস ইন্টেলিজেন্স (সেলস, স্টক ও একাউন্টস)",
+      "ই-কমার্সে এআই শপিং অ্যাসিস্ট্যান্ট ও বট",
+      "ফেসবুক ও ইনস্টাগ্রাম মার্কেটিং অটোমেশন",
+      "অ্যাডভান্সড রোল-বেসড পারমিশন ও কমপ্লায়েন্স অডিট"
+    ]
+  }
+};
+
+const BN_ENTERPRISE_META = {
+  badge: "কাস্টম এন্টারপ্রাইজ",
+  name: "লার্জ স্কেল রিটেল ও ডিস্ট্রিবিউশন হাব",
+  tagline: "আনলিমিটেড আউটলেট, ডেডিকেটেড এডব্লিউএস ক্লাউড ক্লাস্টার এবং কাস্টমাইজড ইআরপি আর্কিটেকচার প্রয়োজন এমন ব্র্যান্ডের জন্য।",
+  priceDisplay: "কাস্টম প্রাইসিং",
+  setupFeeDisplay: "প্রয়োজন ও আউটলেট অনুযায়ী আলোচনা সাপেক্ষে",
+  ctaText: "এন্টারপ্রাইজ সেলসের সাথে কথা বলুন",
+  highlights: [
+    "আনলিমিটেড ব্রাঞ্চ ও সেন্ট্রাল ওয়্যারহাউজ হাব",
+    "ডেডিকেটেড ক্লাউড ইনস্ট্যান্স (AWS / DigitalOcean)",
+    "এনবিআর মূসক ৬.৩ এর সকল কাস্টম ভ্যাট শিডিউল",
+    "কাস্টম এপিআই ইন্টিগ্রেশন (সাপ্লাই চেইন ও ইআরপি)",
+    "ডেডিকেটেড অ্যাকাউন্ট ম্যানেজার ও অন-সাইট ট্রেইনিং",
+    "২৪/৭ প্রায়োরিটি ফোন সাপোর্ট ও ৯৯.৯৯% এসএলএ গ্যারান্টি"
+  ]
+};
+
+
+
 function initPricingCards() {
   const container = document.getElementById('pricingCardsGrid');
   if (!container || !window.PRICING_DATA) return;
@@ -3203,4 +3338,82 @@ function initTransformationSlider() {
 
   // Initial setup at 50%
   setSplit(50, false);
+}
+
+/* ==========================================================================
+   MASTER APPLICATION INITIALIZATION
+   Runs all sub-systems, animations, timers, and interactive components.
+   ========================================================================== */
+function initApp() {
+  const tasks = [
+    { name: 'Translations', fn: initTranslations },
+    { name: 'NavbarScroll', fn: initNavbarScroll },
+    { name: 'ScrollSpy', fn: initScrollSpy },
+    { name: 'MobileNav', fn: initMobileNav },
+    { name: 'HeroChatbot', fn: initHeroChatbot },
+    { name: 'RampInteractiveStage', fn: initRampInteractiveStage },
+    { name: 'DashboardTabs', fn: initDashboardTabs },
+    { name: 'PosInteractiveSandbox', fn: initPosInteractiveSandbox },
+    { name: 'IndustryTabs', fn: initIndustryTabs },
+    { name: 'AdvisorROI', fn: initAdvisor },
+    { name: 'SpotlightConsole', fn: initSpotlightConsole },
+    { name: 'MobilePosBanner', fn: initMobilePosBanner },
+    { name: 'MposAnimation', fn: initMposAnimation },
+    { name: 'TransformationSlider', fn: initTransformationSlider },
+    { name: 'PricingCards', fn: initPricingCards },
+    { name: 'EnterpriseCard', fn: initEnterpriseCard },
+    { name: 'ComparisonTable', fn: initComparisonTable },
+    { name: 'ComparisonDrawer', fn: initComparisonDrawer },
+    { name: 'TableSearch', fn: initTableSearch },
+    { name: 'ModulesFilter', fn: initModulesFilter },
+    { name: 'TestimonialsSlider', fn: initTestimonialsSlider },
+    { name: 'FaqAccordion', fn: initFaqAccordion },
+    { name: 'ContactModal', fn: initContactModal },
+    { name: 'OfficeVisitModal', fn: initOfficeVisitModal }
+  ];
+
+  tasks.forEach(t => {
+    try {
+      if (typeof t.fn === 'function') {
+        t.fn();
+      }
+    } catch (err) {
+      console.warn('[YES SME] Init warning in ' + t.name + ':', err);
+    }
+  });
+
+  // Footer Back To Top Button
+  const footerBackToTopBtn = document.getElementById('footerBackToTopBtn');
+  if (footerBackToTopBtn) {
+    footerBackToTopBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // Floating Back To Top Button
+  const floatingBackToTop = document.getElementById('floatingBackToTopBtn');
+  if (floatingBackToTop) {
+    function toggleFloatingBackToTop() {
+      if (window.scrollY > 280) {
+        floatingBackToTop.classList.add('visible');
+      } else {
+        floatingBackToTop.classList.remove('visible');
+      }
+    }
+    window.addEventListener('scroll', toggleFloatingBackToTop, { passive: true });
+    toggleFloatingBackToTop();
+
+    floatingBackToTop.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+}
+
+// Ensure execution whether script runs before or after DOM readiness
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  initApp();
 }
