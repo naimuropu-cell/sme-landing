@@ -384,6 +384,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initContactModal();
   initOfficeVisitModal();
   initMobileNav();
+  initRampInteractiveStage();
   initTableSearch();
   initNavbarScroll();
   initModulesFilter();
@@ -2997,4 +2998,218 @@ function initMposAnimation() {
   // Launch initial animation flow & scrubber
   runFlow(0);
   startProgressScrubber();
+}
+
+
+/**
+ * CONCEPT A: RAMP-INSPIRED INTERACTIVE AUTOMATION STAGE
+ */
+function initRampInteractiveStage() {
+  const container = document.getElementById('rampInteractiveStage');
+  if (!container) return;
+
+  const pillarCards = container.querySelectorAll('.ramp-pillar-card');
+  const screens = container.querySelectorAll('.ramp-stage-screen');
+  const progressBars = [
+    document.getElementById('rampProgressBar1'),
+    document.getElementById('rampProgressBar2'),
+    document.getElementById('rampProgressBar3'),
+    document.getElementById('rampProgressBar4')
+  ];
+
+  let currentStage = 1;
+  const totalStages = 4;
+  const stageDuration = 6500; // 6.5s per stage
+  let stageStartTime = Date.now();
+  let timerRaf = null;
+  let isPaused = false;
+
+  function activateStage(stageIndex) {
+    currentStage = stageIndex;
+    stageStartTime = Date.now();
+
+    // Update pillar cards
+    pillarCards.forEach((card, idx) => {
+      const isCurrent = (idx + 1) === currentStage;
+      card.classList.toggle('active', isCurrent);
+      card.setAttribute('aria-selected', isCurrent ? 'true' : 'false');
+      
+      const bar = progressBars[idx];
+      if (bar) {
+        bar.style.width = (idx + 1 < currentStage) ? '100%' : '0%';
+      }
+    });
+
+    // Update screens
+    screens.forEach((screen, idx) => {
+      const isCurrent = (idx + 1) === currentStage;
+      screen.classList.toggle('active', isCurrent);
+    });
+  }
+
+  function tickProgress() {
+    if (!isPaused) {
+      const elapsed = Date.now() - stageStartTime;
+      const progress = Math.min(100, (elapsed / stageDuration) * 100);
+
+      const activeBar = progressBars[currentStage - 1];
+      if (activeBar) {
+        activeBar.style.width = `${progress}%`;
+      }
+
+      if (elapsed >= stageDuration) {
+        const nextStage = currentStage >= totalStages ? 1 : currentStage + 1;
+        activateStage(nextStage);
+      }
+    }
+    timerRaf = requestAnimationFrame(tickProgress);
+  }
+
+  // Click handler for pillar cards
+  pillarCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const stage = parseInt(card.getAttribute('data-stage'), 10);
+      if (stage && stage !== currentStage) {
+        activateStage(stage);
+      }
+    });
+  });
+
+  // Pause on hover
+  container.addEventListener('mouseenter', () => {
+    isPaused = true;
+  });
+  container.addEventListener('mouseleave', () => {
+    isPaused = false;
+    stageStartTime = Date.now(); // smooth resume
+  });
+
+  // Start loop
+  activateStage(1);
+  timerRaf = requestAnimationFrame(tickProgress);
+
+  // Interactive Micro-features inside the 4 Stage Screens:
+  
+  // Stage 1: POS Buttons
+  const btnPrint = document.getElementById('btnSimPrintReceipt');
+  const sim1Toast = document.getElementById('sim1Toast');
+  if (btnPrint && sim1Toast) {
+    btnPrint.addEventListener('click', (e) => {
+      e.stopPropagation();
+      sim1Toast.classList.add('show');
+      setTimeout(() => sim1Toast.classList.remove('show'), 3500);
+    });
+  }
+
+  const btnQr = document.getElementById('btnSimBkashQr');
+  if (btnQr && sim1Toast) {
+    btnQr.addEventListener('click', (e) => {
+      e.stopPropagation();
+      sim1Toast.innerHTML = '<span style="color:#E2136E;">✓ bKash Dynamic QR Ready · Scan to Pay ৳ 3,412.50</span>';
+      sim1Toast.classList.add('show');
+      setTimeout(() => sim1Toast.classList.remove('show'), 3500);
+    });
+  }
+
+  // Stage 2: Challan Transfer Simulation
+  const btnChallan = document.getElementById('btnSimChallan');
+  const uttaraMeter = document.getElementById('uttaraStockMeter');
+  const uttaraUnits = document.getElementById('uttaraStockUnits');
+  const sim2Toast = document.getElementById('sim2Toast');
+  if (btnChallan && uttaraMeter && uttaraUnits && sim2Toast) {
+    btnChallan.addEventListener('click', (e) => {
+      e.stopPropagation();
+      uttaraMeter.style.width = '68%';
+      uttaraMeter.className = 'stock-bar-fill fill-green';
+      uttaraUnits.textContent = '29 pcs (Restocked ✓)';
+      uttaraUnits.className = 'stock-units text-green';
+      sim2Toast.classList.add('show');
+      setTimeout(() => sim2Toast.classList.remove('show'), 4000);
+    });
+  }
+
+  // Stage 3: NBR Mushak Download
+  const btnMushak = document.getElementById('btnSimMushak');
+  if (btnMushak) {
+    btnMushak.addEventListener('click', (e) => {
+      e.stopPropagation();
+      btnMushak.textContent = '✓ Mushak 6.3 PDF Generated!';
+      setTimeout(() => {
+        btnMushak.innerHTML = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download Mushak 6.3 Invoice';
+      }, 3000);
+    });
+  }
+
+  // Stage 4: Pathao Dispatch & Bengali AI Chips
+  const btnPathao = document.getElementById('btnSimPathao');
+  const simPathaoLabel = document.getElementById('simPathaoLabel');
+  if (btnPathao && simPathaoLabel) {
+    btnPathao.addEventListener('click', (e) => {
+      e.stopPropagation();
+      simPathaoLabel.textContent = '✓ Tracking: PTH-99412 (Live)';
+      btnPathao.style.background = '#10B981';
+      setTimeout(() => {
+        simPathaoLabel.textContent = '1-Click Pathao Courier Dispatch';
+        btnPathao.style.background = '#E83232';
+      }, 4000);
+    });
+  }
+
+  // AI Prompt Chips
+  const aiChips = container.querySelectorAll('.ai-chip-btn');
+  const aiAnswer = document.getElementById('simAiAnswer');
+  const userBubble = container.querySelector('.user-bubble p');
+
+  const chipResponses = {
+    'today-sales': {
+      q: 'আজকের বিক্রয় কত?',
+      a: 'আজকের মোট বিক্রয়: ৳ ৪২,৮৫০ (৩৩টি ইনভয়েস)। ধানমন্ডি আউটলেটে ৬০% সেলস সম্পন্ন হয়েছে।'
+    },
+    'top-profit': {
+      q: 'কোন পণ্যে বেশি লাভ?',
+      a: 'প্রিমিয়াম কটন পাঞ্জাবিতে সর্বোচ্চ ৪২% নেট মার্জিন অর্জিত হয়েছে। মোট বিক্রয় ৳ ১,৮২,০০০।'
+    },
+    'dues': {
+      q: 'বাকি টাকার হিসাব দাও',
+      a: 'কাস্টমারদের মোট বাকি: ৳ ২৮,৩০০। মহাজন/সাপ্লায়ার পাওনা: ৳ ৪২,০০০। আগামী সপ্তাহে প্রদেয় ৳ ১৫,০০০।'
+    }
+  };
+
+  aiChips.forEach(chip => {
+    chip.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const queryType = chip.getAttribute('data-query');
+      if (chipResponses[queryType] && aiAnswer && userBubble) {
+        userBubble.textContent = chipResponses[queryType].q;
+        aiAnswer.textContent = chipResponses[queryType].a;
+        aiAnswer.style.opacity = '0';
+        requestAnimationFrame(() => {
+          aiAnswer.style.transition = 'opacity 0.25s ease';
+          aiAnswer.style.opacity = '1';
+        });
+      }
+    });
+  });
+
+  // 12 Modules Drawer Toggle
+  const toggleBtn = document.getElementById('btnToggleMatrixDrawer');
+  const matrixWrap = document.getElementById('fullModulesMatrixWrap');
+  if (toggleBtn && matrixWrap) {
+    toggleBtn.addEventListener('click', () => {
+      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      toggleBtn.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
+      toggleBtn.classList.toggle('is-open', !isExpanded);
+      
+      if (!isExpanded) {
+        matrixWrap.style.display = 'block';
+        matrixWrap.style.opacity = '0';
+        requestAnimationFrame(() => {
+          matrixWrap.style.transition = 'opacity 0.4s ease';
+          matrixWrap.style.opacity = '1';
+        });
+      } else {
+        matrixWrap.style.display = 'none';
+      }
+    });
+  }
 }

@@ -939,14 +939,433 @@
       <div class="container">
         <!-- Section Header -->
         <div class="section-header text-center">
-          <div class="section-badge-pill" data-i18n="matrix.badge">Unified Enterprise Architecture</div>
-          <h2 class="section-title" data-i18n="matrix.title">12 Core Modules in One Connected Cloud Platform</h2>
-          <p class="section-subtitle" data-i18n="matrix.subtitle">
-            Eliminate multiple disconnected tools. Everything is synchronized in real time from checkout counter to final balance sheet.
+          <div class="section-badge-pill" data-i18n="ramp.badge">Live Interactive Automation Showcase</div>
+          <h2 class="section-title" data-i18n="ramp.title">Experience 12 Enterprise Workflows Running on Autopilot</h2>
+          <p class="section-subtitle" data-i18n="ramp.subtitle">
+            Watch how YES SME eliminates disconnected spreadsheets, paper khatas, and manual calculations in real-time.
           </p>
         </div>
 
-        <!-- Categorized Tabs Navigation -->
+        <!-- Categoriz<div class="ramp-stage-container" id="rampInteractiveStage" aria-label="Interactive Software Automation Stage">
+          
+          <!-- Left Controller Rail (4 Workflows with Auto-Filling Progress Bars) -->
+          <div class="ramp-controller-rail" role="tablist">
+            
+            <!-- Pillar 1: POS & Rapid Barcode -->
+            <div class="ramp-pillar-card active" data-stage="1" role="tab" aria-selected="true" tabindex="0">
+              <div class="ramp-pillar-top">
+                <div class="ramp-pillar-icon bg-icon-green">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="22" height="22" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                </div>
+                <div class="ramp-pillar-meta">
+                  <span class="ramp-pillar-kicker" data-i18n="ramp.p1Kicker">⚡ 0.3s Checkout &amp; Offline</span>
+                  <h3 class="ramp-pillar-title" data-i18n="ramp.p1Title">Smart POS &amp; Rapid Barcode</h3>
+                </div>
+              </div>
+              <p class="ramp-pillar-desc" data-i18n="ramp.p1Desc">
+                Sub-second barcode scanning with local SQLite cache. Keep billing even when Wi-Fi drops, with automatic thermal receipt print.
+              </p>
+              <div class="ramp-progress-track">
+                <div class="ramp-progress-bar" id="rampProgressBar1"></div>
+              </div>
+            </div>
+
+            <!-- Pillar 2: Multi-Warehouse & Inventory -->
+            <div class="ramp-pillar-card" data-stage="2" role="tab" aria-selected="false" tabindex="0">
+              <div class="ramp-pillar-top">
+                <div class="ramp-pillar-icon bg-icon-orange">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="22" height="22" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                </div>
+                <div class="ramp-pillar-meta">
+                  <span class="ramp-pillar-kicker" data-i18n="ramp.p2Kicker">📦 Real-Time Multi-Outlet</span>
+                  <h3 class="ramp-pillar-title" data-i18n="ramp.p2Title">Multi-Warehouse &amp; Expiry Hub</h3>
+                </div>
+              </div>
+              <p class="ramp-pillar-desc" data-i18n="ramp.p2Desc">
+                Inter-branch challan requisitions, automated batch expiry warnings, and zero-loss stock transfers.
+              </p>
+              <div class="ramp-progress-track">
+                <div class="ramp-progress-bar" id="rampProgressBar2"></div>
+              </div>
+            </div>
+
+            <!-- Pillar 3: Double-Entry & Legal NBR VAT 6.3 -->
+            <div class="ramp-pillar-card" data-stage="3" role="tab" aria-selected="false" tabindex="0">
+              <div class="ramp-pillar-top">
+                <div class="ramp-pillar-icon bg-icon-blue">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="22" height="22" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+                </div>
+                <div class="ramp-pillar-meta">
+                  <span class="ramp-pillar-kicker" data-i18n="ramp.p3Kicker">📊 Zero-Math Accounting</span>
+                  <h3 class="ramp-pillar-title" data-i18n="ramp.p3Title">Double-Entry &amp; NBR VAT 6.3</h3>
+                </div>
+              </div>
+              <p class="ramp-pillar-desc" data-i18n="ramp.p3Desc">
+                Every sale automatically posts to debit/credit journals. Instant Mushak 6.3 invoices and monthly audit-ready P&amp;L reports.
+              </p>
+              <div class="ramp-progress-track">
+                <div class="ramp-progress-bar" id="rampProgressBar3"></div>
+              </div>
+            </div>
+
+            <!-- Pillar 4: Omnichannel & Bengali AI Copilot -->
+            <div class="ramp-pillar-card" data-stage="4" role="tab" aria-selected="false" tabindex="0">
+              <div class="ramp-pillar-top">
+                <div class="ramp-pillar-icon bg-icon-purple">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="22" height="22" stroke-width="2"><path d="M12 2a10 10 0 0 1 10 10c0 5.5-4.5 10-10 10a9.9 9.9 0 0 1-5-1.3L2 22l1.3-5A9.9 9.9 0 0 1 2 12a10 10 0 0 1 10-10z"/></svg>
+                </div>
+                <div class="ramp-pillar-meta">
+                  <span class="ramp-pillar-kicker" data-i18n="ramp.p4Kicker">🤖 Courier &amp; AI Autopilot</span>
+                  <h3 class="ramp-pillar-title" data-i18n="ramp.p4Title">Omnichannel &amp; Bengali AI</h3>
+                </div>
+              </div>
+              <p class="ramp-pillar-desc" data-i18n="ramp.p4Desc">
+                Facebook &amp; web orders queue straight into POS, 1-click Pathao/Steadfast dispatch, and instant Bengali AI business answers.
+              </p>
+              <div class="ramp-progress-track">
+                <div class="ramp-progress-bar" id="rampProgressBar4"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Right Dynamic Live Simulation Stage Viewport -->
+          <div class="ramp-stage-viewport">
+            
+            <!-- STAGE 1 SCREEN: SMART POS & LASER BARCODE SCAN -->
+            <div class="ramp-stage-screen active" id="stageScreen1">
+              <div class="stage-window-topbar">
+                <div class="topbar-dots">
+                  <span class="dot dot-red"></span>
+                  <span class="dot dot-yellow"></span>
+                  <span class="dot dot-green"></span>
+                </div>
+                <div class="topbar-title-wrap">
+                  <span class="stage-badge-live" data-i18n="ramp.sim1Outlet">Dhanmondi Flagship · Terminal #01</span>
+                </div>
+                <div class="topbar-right-info">
+                  <span class="pulse-indicator"></span>
+                  <span data-i18n="ramp.sim1Status">100% Offline SQLite Cache Active</span>
+                </div>
+              </div>
+
+              <div class="stage-screen-body">
+                <!-- Laser Barcode Scanner Simulator Strip -->
+                <div class="stage-scanner-strip">
+                  <div class="laser-beam-wrap">
+                    <div class="laser-line"></div>
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5v14M8 5v14M12 5v14M17 5v14M21 5v14"/></svg>
+                  </div>
+                  <div class="laser-result-meta">
+                    <span class="laser-scan-tag" data-i18n="ramp.sim1Laser">⚡ 0.3s Laser Scanned: Premium Cotton Panjabi (Navy / L)</span>
+                    <span class="laser-sku">SKU: YS-PANJ-884 · ৳ 1,850</span>
+                  </div>
+                </div>
+
+                <!-- Simulated POS Cart Grid -->
+                <div class="stage-cart-layout">
+                  <div class="stage-cart-table">
+                    <div class="cart-table-header">
+                      <span>Item</span>
+                      <span>Qty</span>
+                      <span>Price</span>
+                    </div>
+                    <div class="cart-item-row highlight-item">
+                      <div class="item-info">
+                        <strong data-i18n="ramp.sim1Item1">Premium Cotton Panjabi (L)</strong>
+                        <span class="item-sub">Navy Blue · Regular Fit</span>
+                      </div>
+                      <span class="item-qty">1</span>
+                      <span class="item-price">৳ 1,850</span>
+                    </div>
+                    <div class="cart-item-row">
+                      <div class="item-info">
+                        <strong data-i18n="ramp.sim1Item2">Slim Chino Trouser (Navy 32)</strong>
+                        <span class="item-sub">Khaki · Stretch Cotton</span>
+                      </div>
+                      <span class="item-qty">1</span>
+                      <span class="item-price">৳ 1,400</span>
+                    </div>
+                  </div>
+
+                  <!-- Checkout & Actions Column -->
+                  <div class="stage-checkout-panel">
+                    <div class="summary-line">
+                      <span data-i18n="ramp.sim1Subtotal">Subtotal</span>
+                      <strong>৳ 3,250.00</strong>
+                    </div>
+                    <div class="summary-line">
+                      <span data-i18n="ramp.sim1Vat">NBR VAT (5%)</span>
+                      <strong class="text-green">+৳ 162.50</strong>
+                    </div>
+                    <div class="summary-total-line">
+                      <span data-i18n="ramp.sim1Total">Grand Total</span>
+                      <span class="total-big">৳ 3,412.50</span>
+                    </div>
+
+                    <div class="stage-actions-group">
+                      <button type="button" class="btn-stage-action btn-bkash" id="btnSimBkashQr">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><rect width="8" height="8" x="2" y="2" rx="1"/><rect width="8" height="8" x="14" y="2" rx="1"/><rect width="8" height="8" x="2" y="14" rx="1"/></svg>
+                        <span data-i18n="ramp.sim1BtnQr">bKash Dynamic QR</span>
+                      </button>
+                      <button type="button" class="btn-stage-action btn-print-receipt" id="btnSimPrintReceipt">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                        <span data-i18n="ramp.sim1BtnPrint">Print 80mm Memo</span>
+                      </button>
+                    </div>
+
+                    <!-- Animated Receipt Confirmation Toast -->
+                    <div class="stage-confirmation-toast" id="sim1Toast">
+                      <svg viewBox="0 0 16 16" width="14" height="14" fill="#10B981"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>
+                      <span data-i18n="ramp.sim1ReceiptPrinted">✓ 80mm Cash Memo Printed (Token #42)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- STAGE 2 SCREEN: MULTI-WAREHOUSE & EXPIRY AUTOMATION -->
+            <div class="ramp-stage-screen" id="stageScreen2">
+              <div class="stage-window-topbar">
+                <div class="topbar-dots">
+                  <span class="dot dot-red"></span>
+                  <span class="dot dot-yellow"></span>
+                  <span class="dot dot-green"></span>
+                </div>
+                <div class="topbar-title-wrap">
+                  <span class="stage-badge-live" data-i18n="ramp.sim2Pool">Central Master Inventory Pool · 3 Outlets Synced</span>
+                </div>
+                <div class="topbar-right-info">
+                  <span class="pulse-indicator"></span>
+                  <span data-i18n="ramp.sim2Sync">Real-time Sync Active (80ms)</span>
+                </div>
+              </div>
+
+              <div class="stage-screen-body">
+                <div class="inventory-outlet-grid">
+                  <!-- Branch 1 -->
+                  <div class="outlet-stock-card status-optimal">
+                    <div class="outlet-card-top">
+                      <span class="outlet-name" data-i18n="ramp.sim2Branch1">Dhanmondi Flagship</span>
+                      <span class="badge-status-pill badge-green">Optimal</span>
+                    </div>
+                    <div class="stock-meter-wrap">
+                      <div class="stock-bar-fill fill-green" style="width: 85%;"></div>
+                    </div>
+                    <div class="stock-card-footer">
+                      <span class="stock-units" data-i18n="ramp.sim2Branch1Val">48 pcs (Optimal Stock)</span>
+                      <span class="stock-rate">94% velocity</span>
+                    </div>
+                  </div>
+
+                  <!-- Branch 2 -->
+                  <div class="outlet-stock-card status-low-stock">
+                    <div class="outlet-card-top">
+                      <span class="outlet-name" data-i18n="ramp.sim2Branch2">Uttara Branch</span>
+                      <span class="badge-status-pill badge-red">Low Stock ⚠️</span>
+                    </div>
+                    <div class="stock-meter-wrap">
+                      <div class="stock-bar-fill fill-red" id="uttaraStockMeter" style="width: 14%;"></div>
+                    </div>
+                    <div class="stock-card-footer">
+                      <span class="stock-units text-red" id="uttaraStockUnits" data-i18n="ramp.sim2Branch2Val">4 pcs (Low Stock Alert ⚠️)</span>
+                      <span class="stock-rate">Urgent restock</span>
+                    </div>
+                  </div>
+
+                  <!-- Central Warehouse -->
+                  <div class="outlet-stock-card status-central">
+                    <div class="outlet-card-top">
+                      <span class="outlet-name" data-i18n="ramp.sim2Branch3">Central Warehouse (Tejgaon)</span>
+                      <span class="badge-status-pill badge-blue">Central Hub</span>
+                    </div>
+                    <div class="stock-meter-wrap">
+                      <div class="stock-bar-fill fill-blue" style="width: 95%;"></div>
+                    </div>
+                    <div class="stock-card-footer">
+                      <span class="stock-units" data-i18n="ramp.sim2Branch3Val">450 pcs (Reserve Stock)</span>
+                      <span class="stock-rate">Master inventory</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Interactive Challan Requisition Bar -->
+                <div class="inter-branch-action-box">
+                  <div class="challan-info-left">
+                    <div class="batch-badge">
+                      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg>
+                      <span data-i18n="ramp.sim2Batch">Batch #B2409 · Expiry: Nov 2026 · FIFO Automated</span>
+                    </div>
+                  </div>
+                  <button type="button" class="btn-challan-trigger" id="btnSimChallan">
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+                    <span data-i18n="ramp.sim2BtnTransfer">1-Click Inter-Branch Challan: Transfer 25 Units to Uttara</span>
+                  </button>
+                </div>
+
+                <div class="stage-confirmation-toast" id="sim2Toast">
+                  <svg viewBox="0 0 16 16" width="14" height="14" fill="#10B981"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>
+                  <span data-i18n="ramp.sim2TransferSuccess">✓ Challan #CHL-9921 Dispatched! Uttara stock updated to 29 pcs.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- STAGE 3 SCREEN: DOUBLE-ENTRY & NBR VAT 6.3 -->
+            <div class="ramp-stage-screen" id="stageScreen3">
+              <div class="stage-window-topbar">
+                <div class="topbar-dots">
+                  <span class="dot dot-red"></span>
+                  <span class="dot dot-yellow"></span>
+                  <span class="dot dot-green"></span>
+                </div>
+                <div class="topbar-title-wrap">
+                  <span class="stage-badge-live" data-i18n="ramp.sim3Core">Automated General Ledger · Double-Entry Core</span>
+                </div>
+                <div class="topbar-right-info">
+                  <span class="badge-vat-verified" data-i18n="ramp.sim3VatTag">Verified NBR Mushak 6.3</span>
+                </div>
+              </div>
+
+              <div class="stage-screen-body">
+                <div class="journal-entry-card">
+                  <div class="journal-card-header">
+                    <span class="journal-invoice" data-i18n="ramp.sim3JournalTitle">Auto-Generated Journal Entry (Invoice #YS-9402)</span>
+                    <span class="journal-status" data-i18n="ramp.sim3Balanced">✓ Balanced: Debit ৳3,412.50 = Credit ৳3,412.50 (0 Math Errors)</span>
+                  </div>
+
+                  <div class="journal-table-grid">
+                    <div class="journal-row header-row">
+                      <span>Account</span>
+                      <span>Debit</span>
+                      <span>Credit</span>
+                    </div>
+                    <div class="journal-row debit-row">
+                      <div class="acc-meta">
+                        <span class="acc-code">1010</span>
+                        <span data-i18n="ramp.sim3Debit">DEBIT (1010 Cash &amp; bKash)</span>
+                      </div>
+                      <span class="val-debit">৳ 3,412.50</span>
+                      <span class="val-empty">—</span>
+                    </div>
+                    <div class="journal-row credit-row">
+                      <div class="acc-meta">
+                        <span class="acc-code">4010</span>
+                        <span data-i18n="ramp.sim3CreditRev">CREDIT (4010 Sales Revenue)</span>
+                      </div>
+                      <span class="val-empty">—</span>
+                      <span class="val-credit">৳ 3,250.00</span>
+                    </div>
+                    <div class="journal-row credit-row vat-row">
+                      <div class="acc-meta">
+                        <span class="acc-code">2020</span>
+                        <span data-i18n="ramp.sim3CreditVat">CREDIT (2020 NBR Output VAT)</span>
+                      </div>
+                      <span class="val-empty">—</span>
+                      <span class="val-credit text-green">৳ 162.50</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Instant P&L Snapshot -->
+                <div class="accounting-metrics-strip">
+                  <div class="metric-mini-tile">
+                    <span class="metric-mini-label" data-i18n="ramp.sim3GrossProfit">Today's Gross Profit</span>
+                    <span class="metric-mini-val">৳ 18,450</span>
+                  </div>
+                  <div class="metric-mini-tile">
+                    <span class="metric-mini-label" data-i18n="ramp.sim3Margin">38.2% Gross Margin</span>
+                    <span class="metric-mini-val text-green">+4.6% vs last week</span>
+                  </div>
+                  <button type="button" class="btn-download-mushak" id="btnSimMushak">
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    <span data-i18n="ramp.sim3BtnReport">Download Mushak 6.3 Invoice</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- STAGE 4 SCREEN: OMNICHANNEL & BENGALI AI COPILOT -->
+            <div class="ramp-stage-screen" id="stageScreen4">
+              <div class="stage-window-topbar">
+                <div class="topbar-dots">
+                  <span class="dot dot-red"></span>
+                  <span class="dot dot-yellow"></span>
+                  <span class="dot dot-green"></span>
+                </div>
+                <div class="topbar-title-wrap">
+                  <span class="stage-badge-live" data-i18n="ramp.sim4AiTitle">Bengali AI Merchant Copilot</span>
+                </div>
+                <div class="topbar-right-info">
+                  <span class="pulse-indicator"></span>
+                  <span>Meta &amp; Pathao Live Webhook</span>
+                </div>
+              </div>
+
+              <div class="stage-screen-body">
+                <!-- Top: Omnichannel Facebook Order to Pathao Dispatch -->
+                <div class="omnichannel-order-banner">
+                  <div class="order-source-left">
+                    <div class="social-order-badge">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                      <span data-i18n="ramp.sim4OrderTag">New Facebook Shop Order · Mirpur-2</span>
+                    </div>
+                    <span class="order-desc" data-i18n="ramp.sim4Customer">Customer: Farzana Kabir (Mirpur-2) · Jamdani Saree (৳4,250)</span>
+                  </div>
+                  <button type="button" class="btn-pathao-auto" id="btnSimPathao">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                    <span id="simPathaoLabel" data-i18n="ramp.sim4BtnPathao">1-Click Pathao Courier Dispatch</span>
+                  </button>
+                </div>
+
+                <!-- Bottom: Live Bengali AI Interactive Dialog -->
+                <div class="ai-copilot-interactive-box">
+                  <div class="ai-chat-bubble user-bubble">
+                    <span class="chat-sender">Merchant:</span>
+                    <p data-i18n="ramp.sim4AiQuery">গত সপ্তাহে কোন ব্রাঞ্চে সবচেয়ে বেশি লাভ হয়েছে?</p>
+                  </div>
+                  <div class="ai-chat-bubble ai-bubble">
+                    <div class="ai-avatar-tiny">
+                      <span>AI</span>
+                    </div>
+                    <div class="ai-reply-content">
+                      <span class="chat-sender text-green">YES SME AI Copilot:</span>
+                      <p id="simAiAnswer" data-i18n="ramp.sim4AiReply">ধানমন্ডি শাখায় ৪২% লাভ মার্জিন অর্জিত হয়েছে (মোট বিক্রি ৳২,১৫,০০০)। তবে উত্তরা শাখায় কটন পাঞ্জাবি লো-স্টক (মাত্র ৪ পিস বাকি), দ্রুত রিস্টক করুন!</p>
+                    </div>
+                  </div>
+
+                  <!-- Quick Prompts Chips -->
+                  <div class="ai-quick-chips">
+                    <button type="button" class="ai-chip-btn" data-query="today-sales" data-i18n="ramp.sim4Chip1">আজকের বিক্রয় কত?</button>
+                    <button type="button" class="ai-chip-btn" data-query="top-profit" data-i18n="ramp.sim4Chip2">কোন পণ্যে বেশি লাভ?</button>
+                    <button type="button" class="ai-chip-btn" data-query="dues" data-i18n="ramp.sim4Chip3">বাকি টাকার হিসাব দাও</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        
+
+        <!-- ======================================================================
+             COMPACT BROWSE DRAWER: ALL 12 ENTERPRISE MODULES IN DETAIL
+             ====================================================================== -->
+        <div class="modules-explore-strip">
+          <div class="explore-strip-text">
+            <h3 class="explore-strip-title" data-i18n="ramp.exploreToggle">Explore All 12 Enterprise Modules in Detail</h3>
+            <p class="explore-strip-sub" data-i18n="ramp.exploreSub">Click any tab to view full technical capability, hardware compatibility, and plan tiers.</p>
+          </div>
+          <button type="button" class="btn-toggle-matrix" id="btnToggleMatrixDrawer" aria-expanded="false" aria-controls="fullModulesMatrixWrap">
+            <span id="toggleMatrixLabel" data-i18n="matrix.tabAll">All 12 Modules (Bento View)</span>
+            <svg class="toggle-matrix-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" width="18" height="18">
+              <path d="M5 7.5L10 12.5L15 7.5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="modules-matrix-drawer-wrap" id="fullModulesMatrixWrap">
+ed Tabs Navigation -->
         <div class="modules-tabs-wrapper">
           <div class="modules-tabs-nav" role="tablist">
             <button class="modules-tab-btn active" data-tab="all" role="tab" aria-selected="true">
@@ -1224,6 +1643,7 @@
             </div>
           </div>
 
+        </div>
         </div>
       </div>
     </section>
