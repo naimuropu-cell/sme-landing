@@ -385,6 +385,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initOfficeVisitModal();
   initMobileNav();
   initRampInteractiveStage();
+  initTransformationSlider();
   initTableSearch();
   initNavbarScroll();
   initModulesFilter();
@@ -3212,4 +3213,133 @@ function initRampInteractiveStage() {
       }
     });
   }
+}
+
+
+/* ==========================================================================
+   CONCEPT B: THE "OLD WAY VS YES SME" INTERACTIVE TRANSFORMATION SLIDER
+   Interactive Dual-World Drag Handle & Pill Switcher
+   ========================================================================== */
+function initTransformationSlider() {
+  const stage = document.getElementById('transformStage');
+  const handle = document.getElementById('transformSplitHandle');
+  const layerCloud = document.getElementById('layerCloud');
+  const btnOld = document.getElementById('btnModeOld');
+  const btnSplit = document.getElementById('btnModeSplit');
+  const btnNew = document.getElementById('btnModeNew');
+
+  if (!stage || !handle || !layerCloud) return;
+
+  let currentPos = 50;
+  let isDragging = false;
+  let animTimer = null;
+
+  function updateActivePill(pos) {
+    [btnOld, btnSplit, btnNew].forEach(b => b && b.classList.remove('active'));
+    if (pos <= 18) {
+      if (btnOld) btnOld.classList.add('active');
+    } else if (pos >= 82) {
+      if (btnNew) btnNew.classList.add('active');
+    } else {
+      if (btnSplit) btnSplit.classList.add('active');
+    }
+  }
+
+  function setSplit(pos, isAnimated = false) {
+    currentPos = Math.max(3, Math.min(97, pos));
+    
+    if (isAnimated) {
+      layerCloud.classList.add('is-animating');
+      clearTimeout(animTimer);
+      animTimer = setTimeout(() => {
+        layerCloud.classList.remove('is-animating');
+      }, 500);
+    } else {
+      layerCloud.classList.remove('is-animating');
+    }
+
+    stage.style.setProperty('--split-pos', currentPos + '%');
+    handle.setAttribute('aria-valuenow', Math.round(currentPos));
+    updateActivePill(currentPos);
+  }
+
+  // Pointer / Mouse / Touch Dragging
+  function onPointerMove(e) {
+    if (!isDragging) return;
+    const rect = stage.getBoundingClientRect();
+    if (rect.width <= 0) return;
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const newPos = ((clientX - rect.left) / rect.width) * 100;
+    setSplit(newPos, false);
+  }
+
+  function stopDrag() {
+    if (isDragging) {
+      isDragging = false;
+      document.removeEventListener('pointermove', onPointerMove);
+      document.removeEventListener('pointerup', stopDrag);
+      document.removeEventListener('touchmove', onPointerMove);
+      document.removeEventListener('touchend', stopDrag);
+    }
+  }
+
+  function startDrag(e) {
+    isDragging = true;
+    document.addEventListener('pointermove', onPointerMove, { passive: true });
+    document.addEventListener('pointerup', stopDrag);
+    document.addEventListener('touchmove', onPointerMove, { passive: true });
+    document.addEventListener('touchend', stopDrag);
+    onPointerMove(e);
+  }
+
+  handle.addEventListener('pointerdown', (e) => {
+    e.preventDefault();
+    startDrag(e);
+  });
+
+  handle.addEventListener('touchstart', (e) => {
+    startDrag(e);
+  }, { passive: true });
+
+  // Clicking anywhere on stage sets position smoothly
+  stage.addEventListener('click', (e) => {
+    if (e.target.closest('#transformSplitHandle') || e.target.closest('button') || e.target.closest('a')) {
+      return;
+    }
+    const rect = stage.getBoundingClientRect();
+    if (rect.width <= 0) return;
+    const clickPos = ((e.clientX - rect.left) / rect.width) * 100;
+    setSplit(clickPos, true);
+  });
+
+  // Keyboard navigation on handle
+  handle.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      setSplit(currentPos - 5, true);
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      setSplit(currentPos + 5, true);
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      setSplit(5, true);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      setSplit(95, true);
+    }
+  });
+
+  // Pill Mode Buttons
+  if (btnOld) {
+    btnOld.addEventListener('click', () => setSplit(4, true));
+  }
+  if (btnSplit) {
+    btnSplit.addEventListener('click', () => setSplit(50, true));
+  }
+  if (btnNew) {
+    btnNew.addEventListener('click', () => setSplit(96, true));
+  }
+
+  // Initial setup at 50%
+  setSplit(50, false);
 }

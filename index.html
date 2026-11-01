@@ -3182,81 +3182,234 @@
       </div>
     </section>
 
-    <section class="section section-alt comparison-section" id="comparison">
+        <section class="section section-alt comparison-section" id="comparison">
       <div class="container">
-        <!-- Section Header -->
-        <div class="section-header text-center">
-          <div class="section-badge-pill" data-i18n="comparison.badge">12 Core Modules · 71 Features</div>
-          <h2 class="section-title" data-i18n="comparison.title">Detailed Feature-by-Feature Comparison</h2>
-          <p class="section-subtitle" data-i18n="comparison.subtitle">
-            Compare core differences across packages at a glance, or click to explore the complete 12-module feature matrix.
-          </p>
-        </div>
 
-        <!-- Option A: Sleek At-a-Glance Summary Card (~160px) -->
-        <div class="comparison-summary-card">
-          <div class="summary-card-header">
-            <span class="summary-badge">⚡ Quick Plan Decision Matrix</span>
-            <span class="summary-sub">All higher plans automatically inherit all features of lower plans</span>
+        <!-- ======================================================================
+             CONCEPT B: THE "OLD WAY VS YES SME" INTERACTIVE TRANSFORMATION SLIDER
+             Inspired by Ramp.com Before/After architecture
+             ====================================================================== -->
+        <div class="transform-showcase-wrap" id="transformShowcase">
+          <!-- Header -->
+          <div class="section-header text-center">
+            <div class="section-badge-pill" data-i18n="transform.badge">⚡ The Operational Transformation</div>
+            <h2 class="section-title" data-i18n="transform.title">Stop Running Your Business on 5 Disconnected Workarounds</h2>
+            <p class="section-subtitle" data-i18n="transform.subtitle">
+              You started a retail business to serve customers and scale profits — not to spend your evenings deciphering paper khatas, tracking down lost bKash SMS, and copy-pasting courier addresses.
+            </p>
+            <div class="transform-ramp-quote">
+              <span class="quote-sparkle">✨</span>
+              <p data-i18n="transform.quote">“This is what five separate manual systems look like... You had daily operational chaos. Now you have a modern, unified enterprise.”</p>
+            </div>
           </div>
 
-          <div class="summary-plans-grid">
-            <!-- Starter Summary Column -->
-            <div class="summary-plan-col">
-              <div class="plan-summary-top">
-                <span class="summary-plan-name">Starter</span>
-                <span class="summary-plan-price"><span class="currency-taka">&#2547;</span>500<small>/mo</small></span>
+          <!-- Interactive Control Switcher -->
+          <div class="transform-controller-bar">
+            <div class="transform-mode-pills" role="tablist">
+              <button type="button" class="transform-pill-btn" id="btnModeOld" role="tab" aria-selected="false">
+                <span class="pill-dot dot-red"></span>
+                <span data-i18n="transform.btnOld">❌ The Fragmented Old Way</span>
+              </button>
+              <button type="button" class="transform-pill-btn active" id="btnModeSplit" role="tab" aria-selected="true">
+                <span class="pill-dot dot-cyan"></span>
+                <span data-i18n="transform.btnSplit">⟷ Compare Split View</span>
+              </button>
+              <button type="button" class="transform-pill-btn" id="btnModeNew" role="tab" aria-selected="false">
+                <span class="pill-dot dot-green"></span>
+                <span data-i18n="transform.btnNew">⚡ The YES SME Cloud Way</span>
+              </button>
+            </div>
+            <div class="transform-drag-hint">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 16l-4-4m0 0l4-4m-4 4h18m-4 4l4-4m0 0l-4-4"/></svg>
+              <span data-i18n="transform.dragHelp">Drag slider or click tabs to compare transformation</span>
+            </div>
+          </div>
+
+          <!-- THE INTERACTIVE BEFORE / AFTER SPLIT STAGE -->
+          <div class="transform-stage-container" id="transformStage" style="--split-pos: 50%;">
+            
+            <!-- LAYER 1: THE CHAOS DESK (Before / Old Way) -->
+            <div class="transform-layer layer-chaos" aria-hidden="false">
+              <div class="layer-header-banner">
+                <div class="layer-tag tag-chaos">
+                  <span class="pulse-red"></span>
+                  <span data-i18n="transform.chaosTag">Daily Chaos Desk</span>
+                </div>
+                <span class="layer-status-text">5 Fragmented Apps · Paper Khatas · Unverified SMS</span>
               </div>
-              <ul class="summary-bullets">
-                <li><span class="chk">✓</span> <strong>1 Store</strong> · 2 Admin Users</li>
-                <li><span class="chk">✓</span> 200 Products · 1 GB Storage</li>
-                <li><span class="chk">✓</span> Basic POS &amp; MFS Bank Ledger</li>
-                <li><span class="chk">✓</span> SMS Due Reminders &amp; AI Sales</li>
-              </ul>
+
+              <div class="transform-cards-grid">
+                <!-- Dimension 1: Sales & POS -->
+                <div class="transform-dim-card chaos-card">
+                  <div class="dim-card-header">
+                    <span class="dim-icon-box icon-red">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    </span>
+                    <span class="dim-badge" data-i18n="transform.d1Badge">Sales &amp; Billing Counter</span>
+                  </div>
+                  <h4 class="dim-title" data-i18n="transform.d1OldTitle">Hand-Written Paper Cash Memo (বাকি খাতা)</h4>
+                  <p class="dim-desc" data-i18n="transform.d1OldDesc">Slow handwriting, illegible receipts, long customer queues, lost carbon copies, and zero real-time inventory updates.</p>
+                  <div class="dim-pain-chip" data-i18n="transform.d1OldPain">⚠️ 4-5 min per bill · High checkout dropouts</div>
+                </div>
+
+                <!-- Dimension 2: Payments -->
+                <div class="transform-dim-card chaos-card">
+                  <div class="dim-card-header">
+                    <span class="dim-icon-box icon-red">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                    </span>
+                    <span class="dim-badge" data-i18n="transform.d2Badge">Payment Collection</span>
+                  </div>
+                  <h4 class="dim-title" data-i18n="transform.d2OldTitle">3 Separate POS Terminals &amp; Lost MFS Slips</h4>
+                  <p class="dim-desc" data-i18n="transform.d2OldDesc">Cashiers using personal bKash/Nagad phones, fake customer payment screenshots, missing card slips, and untraceable cash drawer theft.</p>
+                  <div class="dim-pain-chip" data-i18n="transform.d2OldPain">⚠️ ৳15,000+ unverified monthly leakages &amp; disputes</div>
+                </div>
+
+                <!-- Dimension 3: Courier -->
+                <div class="transform-dim-card chaos-card">
+                  <div class="dim-card-header">
+                    <span class="dim-icon-box icon-red">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                    </span>
+                    <span class="dim-badge" data-i18n="transform.d3Badge">Logistics &amp; Delivery</span>
+                  </div>
+                  <h4 class="dim-title" data-i18n="transform.d3OldTitle">Copy-Pasting Addresses into Courier Apps</h4>
+                  <p class="dim-desc" data-i18n="transform.d3OldDesc">Typing recipient names, addresses, and phone numbers one by one into Pathao and Steadfast. Handwriting tracking numbers on polybags and lost returns.</p>
+                  <div class="dim-pain-chip" data-i18n="transform.d3OldPain">⚠️ 2.5 hours wasted daily on manual parcel booking</div>
+                </div>
+
+                <!-- Dimension 4: Accounting -->
+                <div class="transform-dim-card chaos-card">
+                  <div class="dim-card-header">
+                    <span class="dim-icon-box icon-red">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+                    </span>
+                    <span class="dim-badge" data-i18n="transform.d4Badge">Financials &amp; Tax</span>
+                  </div>
+                  <h4 class="dim-title" data-i18n="transform.d4OldTitle">Month-End Excel Headaches &amp; Missing Stock</h4>
+                  <p class="dim-desc" data-i18n="transform.d4OldDesc">Broken spreadsheet formulas, forgotten supplier dues, zero knowledge of true daily gross margin, and total panic during NBR tax audits.</p>
+                  <div class="dim-pain-chip" data-i18n="transform.d4OldPain">⚠️ 3 weeks to calculate profit · Audit vulnerability</div>
+                </div>
+              </div>
             </div>
 
-            <!-- Basic Summary Column -->
-            <div class="summary-plan-col">
-              <div class="plan-summary-top">
-                <span class="summary-plan-name">Basic</span>
-                <span class="summary-plan-price"><span class="currency-taka">&#2547;</span>1,000<small>/mo</small></span>
+            <!-- LAYER 2: THE CLOUD COMMAND (After / YES SME Way - Clipped dynamically) -->
+            <div class="transform-layer layer-cloud" id="layerCloud" aria-hidden="false">
+              <div class="layer-header-banner">
+                <div class="layer-tag tag-cloud">
+                  <span class="pulse-emerald"></span>
+                  <span data-i18n="transform.cloudTag">YES SME Cloud Command</span>
+                </div>
+                <span class="layer-status-text">Unified All-in-One Cloud · 0.3s Offline POS · NBR 6.3</span>
               </div>
-              <ul class="summary-bullets">
-                <li><span class="chk">✓</span> <strong>1 Store</strong> · 5 Admin Users</li>
-                <li><span class="chk">✓</span> 250 Products · 2 GB Storage</li>
-                <li><span class="chk">✓</span> <strong>100% Offline POS</strong> + Barcode</li>
-                <li><span class="chk">✓</span> <strong>Free E-Commerce Web Store</strong></li>
-              </ul>
+
+              <div class="transform-cards-grid">
+                <!-- Dimension 1: Sales & POS -->
+                <div class="transform-dim-card cloud-card">
+                  <div class="dim-card-header">
+                    <span class="dim-icon-box icon-green">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </span>
+                    <span class="dim-badge" data-i18n="transform.d1Badge">Sales &amp; Billing Counter</span>
+                  </div>
+                  <h4 class="dim-title" data-i18n="transform.d1NewTitle">0.3s Barcode Scan + Instant Thermal Bill</h4>
+                  <p class="dim-desc" data-i18n="transform.d1NewDesc">Sub-second laser barcode scanning, 100% offline SQLite resilience when Wi-Fi drops, automatic cashier shift reconciliation, and 80mm thermal receipt printing.</p>
+                  <div class="dim-gain-chip" data-i18n="transform.d1NewGain">⚡ 0.3s Checkout · 0 queue bottlenecks</div>
+                </div>
+
+                <!-- Dimension 2: Payments -->
+                <div class="transform-dim-card cloud-card">
+                  <div class="dim-card-header">
+                    <span class="dim-icon-box icon-green">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4z"/><path d="M14 14h2v2h-2zM18 14h2v2h-2zM14 18h2v2h-2zM18 18h2v2h-2z"/></svg>
+                    </span>
+                    <span class="dim-badge" data-i18n="transform.d2Badge">Payment Collection</span>
+                  </div>
+                  <h4 class="dim-title" data-i18n="transform.d2NewTitle">Instant Dynamic QR on Customer Screen</h4>
+                  <p class="dim-desc" data-i18n="transform.d2NewDesc">Bill amount automatically generates a verified bKash/Nagad dynamic QR on screen. Customer scans and pays in 2s with 100% direct ledger reconciliation.</p>
+                  <div class="dim-gain-chip" data-i18n="transform.d2NewGain">✓ Zero-Loss Reconciliation · Direct to Bank</div>
+                </div>
+
+                <!-- Dimension 3: Courier -->
+                <div class="transform-dim-card cloud-card">
+                  <div class="dim-card-header">
+                    <span class="dim-icon-box icon-green">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                    <span class="dim-badge" data-i18n="transform.d3Badge">Logistics &amp; Delivery</span>
+                  </div>
+                  <h4 class="dim-title" data-i18n="transform.d3NewTitle">1-Click Bulk Courier Dispatch &amp; Webhooks</h4>
+                  <p class="dim-desc" data-i18n="transform.d3NewDesc">1-click Pathao &amp; Steadfast dispatch directly from order card. Auto-prints barcode shipping labels and syncs real-time parcel delivery status to customer SMS.</p>
+                  <div class="dim-gain-chip" data-i18n="transform.d3NewGain">⚡ 1-Click Automated Dispatch · Real-time tracking</div>
+                </div>
+
+                <!-- Dimension 4: Accounting -->
+                <div class="transform-dim-card cloud-card">
+                  <div class="dim-card-header">
+                    <span class="dim-icon-box icon-green">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </span>
+                    <span class="dim-badge" data-i18n="transform.d4Badge">Financials &amp; Tax</span>
+                  </div>
+                  <h4 class="dim-title" data-i18n="transform.d4NewTitle">Real-Time Automated P&amp;L &amp; NBR Mushak 6.3</h4>
+                  <p class="dim-desc" data-i18n="transform.d4NewDesc">Every single sale posts automatically to double-entry general ledger. Live balance sheet, gross margin by product, and 1-click legal Mushak 6.3 invoices.</p>
+                  <div class="dim-gain-chip" data-i18n="transform.d4NewGain">🏛️ 100% NBR Audit-Ready · Live Profit Stream</div>
+                </div>
+              </div>
             </div>
 
-            <!-- Medium Summary Column (Most Popular) -->
-            <div class="summary-plan-col is-popular">
-              <div class="summary-popular-chip">⭐ Most Popular</div>
-              <div class="plan-summary-top">
-                <span class="summary-plan-name">Medium</span>
-                <span class="summary-plan-price"><span class="currency-taka">&#2547;</span>2,000<small>/mo</small></span>
+            <!-- INTERACTIVE SPLIT HANDLE DIVIDER -->
+            <div class="transform-split-handle" id="transformSplitHandle" role="slider" aria-label="Comparison Split Position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0">
+              <div class="handle-line"></div>
+              <div class="handle-thumb">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg>
               </div>
-              <ul class="summary-bullets">
-                <li><span class="chk">✓</span> <strong>2 Branches</strong> · 10 Admin Users</li>
-                <li><span class="chk">✓</span> 350 Products · 4 GB Storage (AWS)</li>
-                <li><span class="chk">✓</span> <strong>Dedicated Mobile Apps (iOS/Android)</strong></li>
-                <li><span class="chk">✓</span> <strong>Pathao, Steadfast &amp; REDX 1-Click</strong></li>
-              </ul>
             </div>
 
-            <!-- High Summary Column -->
-            <div class="summary-plan-col">
-              <div class="plan-summary-top">
-                <span class="summary-plan-name">High</span>
-                <span class="summary-plan-price"><span class="currency-taka">&#2547;</span>3,000<small>/mo</small></span>
-              </div>
-              <ul class="summary-bullets">
-                <li><span class="chk">✓</span> <strong>5 Branches</strong> · Unlimited Users</li>
-                <li><span class="chk">✓</span> <strong>Unlimited Products</strong> · 10 GB</li>
-                <li><span class="chk">✓</span> Full AI Intelligence &amp; Meta Ads</li>
-                <li><span class="chk">✓</span> Advanced Security &amp; Audit Logs</li>
-              </ul>
+          </div>
+
+          <!-- THE TRANSFORMATION ROI / KPI SUMMARY STRIP -->
+          <div class="transform-kpi-bar">
+            <div class="transform-kpi-item">
+              <div class="kpi-value text-green" data-i18n="transform.kpi1Val">18+ Hours</div>
+              <div class="kpi-label" data-i18n="transform.kpi1Label">Saved Every Week from Data Entry</div>
             </div>
+            <div class="transform-kpi-item">
+              <div class="kpi-value text-emerald" data-i18n="transform.kpi2Val">৳24,500+</div>
+              <div class="kpi-label" data-i18n="transform.kpi2Label">Monthly Revenue Protected from Leakage</div>
+            </div>
+            <div class="transform-kpi-item">
+              <div class="kpi-value text-cyan" data-i18n="transform.kpi3Val">7x Faster</div>
+              <div class="kpi-label" data-i18n="transform.kpi3Label">Customer Checkout &amp; Queue Speed</div>
+            </div>
+            <div class="transform-kpi-item">
+              <div class="kpi-value text-purple" data-i18n="transform.kpi4Val">100% Auto</div>
+              <div class="kpi-label" data-i18n="transform.kpi4Label">NBR Mushak 6.3 VAT &amp; Tax Readiness</div>
+            </div>
+          </div>
+
+          <!-- Quick CTA Banner -->
+          <div class="transform-cta-banner">
+            <div class="transform-cta-left">
+              <h4 class="transform-cta-title" data-i18n="transform.ctaTitle">Ready to trade manual headaches for enterprise autopilot?</h4>
+              <p class="transform-cta-desc" data-i18n="transform.ctaDesc">Join 1,200+ Bangladeshi retail stores who transformed their operations with YES SME.</p>
+            </div>
+            <a href="#contact" class="btn btn-primary transform-cta-btn" data-i18n="transform.ctaBtn">Book Free Live Transformation Demo →</a>
+          </div>
+
+          <!-- Sub-divider for Plan-by-Plan Comparison -->
+          <div class="transform-section-divider">
+            <span class="divider-line"></span>
+            <span class="divider-badge" data-i18n="comparison.badge">12 Core Modules · 71 Features</span>
+            <span class="divider-line"></span>
+          </div>
+
+          <!-- Section Sub-Header for Plan Comparison -->
+          <div class="section-header text-center" style="margin-top: 1.5rem; margin-bottom: 2rem;">
+            <h3 class="section-title" style="font-size: 1.85rem;" data-i18n="comparison.title">Detailed Feature-by-Feature Comparison</h3>
+            <p class="section-subtitle" data-i18n="comparison.subtitle">
+              Compare core differences across packages at a glance, or click to explore the complete 12-module feature matrix.
+            </p>
           </div>
         </div>
 
