@@ -4681,6 +4681,7 @@ function initApp() {
     { name: 'MobilePosBanner', fn: initMobilePosBanner },
     { name: 'MposAnimation', fn: initMposAnimation },
     { name: 'TransformationSlider', fn: initTransformationSlider },
+    { name: 'DayStoryShowcase', fn: initDayStoryShowcase },
     { name: 'PricingCards', fn: initPricingCards },
     { name: 'EnterpriseCard', fn: initEnterpriseCard },
     { name: 'ComparisonTable', fn: initComparisonTable },
@@ -4737,4 +4738,154 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initApp);
 } else {
   initApp();
+}
+
+
+/**
+ * CONCEPT B: A DAY IN THE LIFE OF A SMART SME OWNER (STYLE 1: SUN-CYCLE)
+ * Dynamic time-lapse scrubber, ambient phase shifts, auto-progress
+ */
+function initDayStoryShowcase() {
+  const container = document.getElementById('dayStoryShowcase');
+  if (!container) return;
+
+  const stage = document.getElementById('dayStoryStage');
+  const nodes = container.querySelectorAll('.sun-cycle-node');
+  const cards = container.querySelectorAll('.day-chapter-card');
+  const token = document.getElementById('sunScrubberToken');
+  const tokenIcon = document.getElementById('sunTokenIcon');
+  const btnPrev = document.getElementById('btnStoryPrev');
+  const btnNext = document.getElementById('btnStoryNext');
+  const btnAutoplay = document.getElementById('btnStoryAutoplay');
+  const playIcon = document.getElementById('storyPlayIcon');
+
+  const phases = [
+    { key: 'morning', icon: '☀️', class: 'time-morning' },
+    { key: 'noon', icon: '⚡', class: 'time-noon' },
+    { key: 'sunset', icon: '🚚', class: 'time-sunset' },
+    { key: 'night', icon: '🌙', class: 'time-night' }
+  ];
+
+  let currentIndex = 0;
+  let autoplayTimer = null;
+  let isPlaying = true;
+
+  function updateScrubberToken(targetNode) {
+    if (!token || !targetNode) return;
+    const track = targetNode.parentElement;
+    if (!track) return;
+    const trackRect = track.getBoundingClientRect();
+    const nodeRect = targetNode.getBoundingClientRect();
+    token.style.left = `${Math.max(4, nodeRect.left - trackRect.left)}px`;
+    token.style.width = `${nodeRect.width}px`;
+  }
+
+  function setPhase(index) {
+    if (index < 0) index = phases.length - 1;
+    if (index >= phases.length) index = 0;
+    currentIndex = index;
+
+    const currentPhase = phases[currentIndex];
+
+    // Update Stage Class
+    if (stage) {
+      stage.className = `day-story-stage ${currentPhase.class}`;
+    }
+
+    // Update Token Icon
+    if (tokenIcon) {
+      tokenIcon.textContent = currentPhase.icon;
+    }
+
+    // Update Nodes
+    nodes.forEach((n, idx) => {
+      const active = idx === currentIndex;
+      n.classList.toggle('active', active);
+      n.setAttribute('aria-selected', active ? 'true' : 'false');
+      if (active) updateScrubberToken(n);
+    });
+
+    // Update Chapter Cards
+    cards.forEach((c) => {
+      const match = c.getAttribute('data-chapter') === currentPhase.key;
+      c.classList.toggle('active', match);
+    });
+  }
+
+  // Click on Nodes
+  nodes.forEach((node, idx) => {
+    node.addEventListener('click', () => {
+      setPhase(idx);
+    });
+  });
+
+  // Prev / Next
+  if (btnPrev) {
+    btnPrev.addEventListener('click', () => {
+      setPhase(currentIndex - 1);
+    });
+  }
+
+  if (btnNext) {
+    btnNext.addEventListener('click', () => {
+      setPhase(currentIndex + 1);
+    });
+  }
+
+  // Auto-play timer
+  function startAutoplay() {
+    stopAutoplay();
+    autoplayTimer = setInterval(() => {
+      setPhase(currentIndex + 1);
+    }, 6000);
+    isPlaying = true;
+    if (playIcon) playIcon.textContent = '⏸️';
+  }
+
+  function stopAutoplay() {
+    if (autoplayTimer) {
+      clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+    isPlaying = false;
+    if (playIcon) playIcon.textContent = '▶️';
+  }
+
+  if (btnAutoplay) {
+    btnAutoplay.addEventListener('click', () => {
+      if (isPlaying) {
+        stopAutoplay();
+      } else {
+        startAutoplay();
+      }
+    });
+  }
+
+  // Pause on hover
+  container.addEventListener('mouseenter', () => {
+    if (isPlaying && autoplayTimer) {
+      clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+  });
+
+  container.addEventListener('mouseleave', () => {
+    if (isPlaying && !autoplayTimer) {
+      autoplayTimer = setInterval(() => {
+        setPhase(currentIndex + 1);
+      }, 6000);
+    }
+  });
+
+  // Initial position after render
+  setTimeout(() => {
+    setPhase(0);
+  }, 100);
+
+  // Resize handler for token position
+  window.addEventListener('resize', () => {
+    if (nodes[currentIndex]) {
+      updateScrubberToken(nodes[currentIndex]);
+    }
+  });
 }

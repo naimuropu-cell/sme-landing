@@ -1340,493 +1340,527 @@
              CONCEPT B: THE "OLD WAY VS YES SME" INTERACTIVE TRANSFORMATION SLIDER
              Upgraded with 3D Micro-Simulations, Cartoon Mascots & Odometer Stats
              ====================================================================== -->
-        <div class="transform-showcase-wrap" id="transformShowcase">
-          <!-- Header -->
+        <!-- ======================================================================
+             CONCEPT 1: THE 3D HOLOGRAPHIC RETAIL COCKPIT (Apple Pro / Linear Style)
+             Extreme Level UI/UX 3D Hardware & Cloud Ecosystem Showcase
+             ====================================================================== -->
+        <!-- ======================================================================
+             CONCEPT B: A DAY IN THE LIFE OF A SMART SME OWNER (STYLE 1: SUN-CYCLE)
+             Atmospheric Time-Lapse (Morning-to-Night Story)
+             ====================================================================== -->
+        <div class="day-story-wrap" id="dayStoryShowcase">
+          
+          <!-- Section Header -->
           <div class="section-header text-center">
-            <div class="section-badge-pill" data-i18n="transform.badge">⚡ The Operational Transformation</div>
-            <h2 class="section-title" data-i18n="transform.title">Stop Running Your Business on 5 Disconnected Workarounds</h2>
-            <p class="section-subtitle" data-i18n="transform.subtitle">
-              You started a retail business to serve customers and scale profits — not to spend your evenings deciphering paper khatas, tracking down lost bKash SMS, and copy-pasting courier addresses.
+            <div class="section-badge-pill day-badge-pill" data-i18n="dayStory.badge">☀️ 24-HOUR SME STORY</div>
+            <h2 class="section-title" data-i18n="dayStory.title">A Day in the Life of a Smart SME Owner</h2>
+            <p class="section-subtitle" data-i18n="dayStory.subtitle">
+              From morning stock-in to midnight closing, see how YES SME Cloud turns the 4 most critical hours of your retail day into automated speed, zero stress, and guaranteed profit.
             </p>
-            <div class="transform-ramp-quote luxury-glow-quote">
-              <span class="quote-sparkle-halo">✨</span>
-              <p data-i18n="transform.quote">“This is what five separate manual systems look like... You had daily operational chaos. Now you have a modern, unified enterprise.”</p>
+          </div>
+
+          <!-- Sun-Cycle Atmosphere Controller & Scrubber Track -->
+          <div class="sun-cycle-nav-container">
+            <div class="sun-cycle-track" role="tablist">
+              <!-- Glow Sun/Moon Scrubber Token that glides -->
+              <div class="sun-scrubber-token" id="sunScrubberToken" aria-hidden="true">
+                <span class="token-glow-pulse"></span>
+                <span class="token-icon" id="sunTokenIcon">☀️</span>
+              </div>
+
+              <!-- 4 Hour Nodes -->
+              <button type="button" class="sun-cycle-node active" data-hour="09:00" data-phase="morning" role="tab" aria-selected="true" id="nodeMorning">
+                <span class="node-time">09:00 AM</span>
+                <span class="node-name" data-i18n="dayStory.node1">Morning Stock-In</span>
+                <span class="node-phase-tag" data-i18n="dayStory.node1Tag">Opening Shutter</span>
+              </button>
+
+              <button type="button" class="sun-cycle-node" data-hour="14:00" data-phase="noon" role="tab" aria-selected="false" id="nodeNoon">
+                <span class="node-time">02:00 PM</span>
+                <span class="node-name" data-i18n="dayStory.node2">Peak Counter Rush</span>
+                <span class="node-phase-tag" data-i18n="dayStory.node2Tag">10+ Line Queue</span>
+              </button>
+
+              <button type="button" class="sun-cycle-node" data-hour="18:00" data-phase="sunset" role="tab" aria-selected="false" id="nodeSunset">
+                <span class="node-time">06:00 PM</span>
+                <span class="node-name" data-i18n="dayStory.node3">Courier Dispatch</span>
+                <span class="node-phase-tag" data-i18n="dayStory.node3Tag">120 E-Com Parcels</span>
+              </button>
+
+              <button type="button" class="sun-cycle-node" data-hour="22:00" data-phase="night" role="tab" aria-selected="false" id="nodeNight">
+                <span class="node-time">10:00 PM</span>
+                <span class="node-name" data-i18n="dayStory.node4">Peaceful Closing</span>
+                <span class="node-phase-tag" data-i18n="dayStory.node4Tag">Home Evening Tea</span>
+              </button>
+            </div>
+
+            <!-- Play/Pause & Step Controls -->
+            <div class="sun-cycle-controls">
+              <button type="button" class="cycle-ctrl-btn btn-prev" id="btnStoryPrev" title="Previous Story Milestone" aria-label="Previous Story Milestone">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="16" height="16"><path d="M12.5 15L7.5 10L12.5 5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button type="button" class="cycle-ctrl-btn btn-autoplay" id="btnStoryAutoplay" title="Pause or Play Auto Story" aria-label="Toggle Auto-Play">
+                <span class="ctrl-icon" id="storyPlayIcon">⏸️</span>
+                <span class="ctrl-text" data-i18n="dayStory.autoPlay">Auto Progress</span>
+              </button>
+              <button type="button" class="cycle-ctrl-btn btn-next" id="btnStoryNext" title="Next Story Milestone" aria-label="Next Story Milestone">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="16" height="16"><path d="M7.5 5L12.5 10L7.5 15" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
             </div>
           </div>
 
-          <!-- Interactive Control Switcher -->
-          <div class="transform-controller-bar">
-            <div class="transform-mode-pills" role="tablist">
-              <button type="button" class="transform-pill-btn" id="btnModeOld" role="tab" aria-selected="false">
-                <span class="pill-dot dot-red"></span>
-                <span data-i18n="transform.btnOld">❌ The Fragmented Old Way</span>
-              </button>
-              <button type="button" class="transform-pill-btn active" id="btnModeSplit" role="tab" aria-selected="true">
-                <span class="pill-dot dot-cyan"></span>
-                <span data-i18n="transform.btnSplit">⟷ Compare Split View</span>
-              </button>
-              <button type="button" class="transform-pill-btn" id="btnModeNew" role="tab" aria-selected="false">
-                <span class="pill-dot dot-green"></span>
-                <span data-i18n="transform.btnNew">⚡ The YES SME Cloud Way</span>
-              </button>
-            </div>
-            <div class="transform-drag-hint">
-              <span class="hint-arrow-anim">↔</span>
-              <span data-i18n="transform.dragHelp">Drag slider or click tabs to compare transformation</span>
-            </div>
-          </div>
-
-          <!-- THE INTERACTIVE BEFORE / AFTER SPLIT STAGE -->
-          <div class="transform-stage-container" id="transformStage" style="--split-pos: 50%;">
+          <!-- Dynamic Ambient Lighting Stage Canvas -->
+          <div class="day-story-stage time-morning" id="dayStoryStage">
             
-            <!-- ==================================================================
-                 LAYER 1: THE CHAOS DESK (Before / Old Way - Stressed Karim Bhai)
-                 ================================================================== -->
-            <div class="transform-layer layer-chaos" aria-hidden="false">
+            <!-- Background Atmosphere Ambient Glow -->
+            <div class="stage-ambient-sky" aria-hidden="true">
+              <div class="sky-sun-disk"></div>
+              <div class="sky-light-beams"></div>
+            </div>
+
+            <!-- Active Story Chapter Showcase (4 Dynamic Panels) -->
+            <div class="day-chapters-viewport">
               
-              <!-- Mascot Header Banner: Stressed Karim Bhai -->
-              <div class="layer-header-banner mascot-banner-chaos">
-                <div class="mascot-profile-cluster">
-                  <div class="mascot-avatar-frame avatar-chaos" title="ক্লান্ত দোকানদার করিম ভাই">
-                    <!-- SVG Cartoon Mascot: Stressed Karim Bhai with falling sweat -->
-                    <svg viewBox="0 0 100 100" class="mascot-svg-char" aria-hidden="true">
-                      <!-- Desk background -->
-                      <rect x="10" y="78" width="80" height="18" rx="3" fill="#3f2723"/>
-                      <!-- Crumpled papers on desk -->
-                      <polygon points="14,75 28,73 26,82 12,80" fill="#d7ccc8"/>
-                      <polygon points="72,74 88,71 85,82 69,79" fill="#cfd8dc"/>
-                      <!-- Body / Shirt -->
-                      <path d="M25,85 C25,62 35,55 50,55 C65,55 75,62 75,85 Z" fill="#b71c1c"/>
-                      <path d="M44,55 L50,68 L56,55 Z" fill="#ffffff"/>
-                      <!-- Neck -->
-                      <rect x="45" y="47" width="10" height="10" fill="#ffcc80"/>
-                      <!-- Head -->
-                      <circle cx="50" cy="36" r="18" fill="#ffcc80"/>
-                      <!-- Disheveled Hair -->
-                      <path d="M30,32 C30,20 38,15 50,15 C62,15 70,20 70,32 C68,22 60,18 50,18 C40,18 32,22 30,32 Z" fill="#212121"/>
-                      <path d="M28,28 Q24,20 34,22 Q38,14 48,16" stroke="#212121" stroke-width="3" fill="none"/>
-                      <!-- Eyebrows (worried / tilted up in center) -->
-                      <path d="M38,28 Q44,25 46,29" stroke="#212121" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-                      <path d="M62,28 Q56,25 54,29" stroke="#212121" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-                      <!-- Wide Stressed Eyes -->
-                      <ellipse cx="42" cy="34" rx="4.5" ry="5.5" fill="#ffffff"/>
-                      <ellipse cx="58" cy="34" rx="4.5" ry="5.5" fill="#ffffff"/>
-                      <circle cx="42" cy="34" r="2" fill="#212121"/>
-                      <circle cx="58" cy="34" r="2" fill="#212121"/>
-                      <!-- Mouth (curved down in worry) -->
-                      <path d="M43,46 Q50,40 57,46" stroke="#b71c1c" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-                      <!-- Stressed hand on forehead -->
-                      <path d="M64,48 C68,40 68,30 63,26 C60,24 57,28 60,33 Z" fill="#ffcc80" stroke="#d7ccc8" stroke-width="0.8"/>
-                      <!-- Animated Falling Sweat Drops -->
-                      <g class="anim-sweat-drop">
-                        <path d="M68,22 C68,20 71,18 71,18 C71,18 74,20 74,22 C74,23.6 72.6,25 71,25 C69.4,25 68,23.6 68,22 Z" fill="#29b6f6"/>
-                      </g>
-                    </svg>
-                  </div>
-                  <div>
-                    <div class="layer-tag tag-chaos">
-                      <span class="pulse-red"></span>
-                      <span data-i18n="transform.chaosTag">The Chaos Desk</span>
+              <!-- CHAPTER 1: 09:00 AM (Morning Stock-In) -->
+              <div class="day-chapter-card active" data-chapter="morning" id="chapterMorning">
+                <div class="chapter-content-grid">
+                  
+                  <!-- Story Left Narrative -->
+                  <div class="chapter-narrative-col">
+                    <div class="chapter-milestone-badge morning-badge">
+                      <span class="badge-icon">☀️</span>
+                      <span class="badge-time">09:00 AM</span>
+                      <span class="badge-sep">·</span>
+                      <span class="badge-sub" data-i18n="dayStory.c1Sub">Opening Shutter</span>
                     </div>
-                    <div class="mascot-quote-sub" data-i18n="transform.chaosMascot">“হিসাবের খাতা হারায়, কুরিয়ার কপি-পেস্টে রাত কাটে!”</div>
-                  </div>
-                </div>
-                <span class="layer-status-text">5 Fragmented Apps · Paper Khatas · Unverified SMS</span>
-              </div>
+                    
+                    <h3 class="chapter-title" data-i18n="dayStory.c1Title">Instant Multi-Branch Stock In</h3>
+                    
+                    <p class="chapter-story-text" data-i18n="dayStory.c1Story">
+                      Shutter opens at Dhanmondi Flagship. A supplier truck arrives with 350 fresh apparel units. Instead of calling multiple managers or jotting numbers in paper diaries, one barcode scan updates inventory across Dhanmondi, Banani, and Uttara in real time.
+                    </p>
 
-              <!-- 4 Chaos Cards with Micro-Simulations -->
-              <div class="transform-cards-grid">
-                
-                <!-- Dimension 1: Sales & POS (Chaos) -->
-                <div class="transform-dim-card chaos-card">
-                  <div class="dim-card-header">
-                    <span class="dim-icon-box icon-red">
-                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-                    </span>
-                    <span class="dim-badge" data-i18n="transform.d1Badge">Sales &amp; Billing Counter</span>
-                  </div>
+                    <!-- Old Way vs YES SME Micro-Contrast -->
+                    <div class="chapter-contrast-card">
+                      <div class="contrast-row old-way">
+                        <span class="contrast-tag old-tag">❌ OLD MANUAL WAY</span>
+                        <span class="contrast-desc" data-i18n="dayStory.c1Old">Calling 3 branch managers, manual ledger entry, frequent stockout errors</span>
+                      </div>
+                      <div class="contrast-row new-way">
+                        <span class="contrast-tag new-tag">✅ YES SME CLOUD</span>
+                        <span class="contrast-desc" data-i18n="dayStory.c1New">1-click PO barcode scan auto-allocates stock across all branches in 0.4 seconds</span>
+                      </div>
+                    </div>
 
-                  <!-- Animated Micro-Simulation: Crumpled Paper Slip & Slow Timer -->
-                  <div class="sim-display-box sim-chaos-memo">
-                    <div class="sim-crumpled-receipt">
-                      <div class="receipt-header-scrawl">
-                        <span>বাকি মেমো #৮৯</span>
-                        <span class="scrawl-delay">⏱️ ৪ মিনিট ৩০ সেকেন্ড</span>
+                    <!-- Chapter KPI Badges -->
+                    <div class="chapter-kpi-row">
+                      <div class="c-kpi-item">
+                        <span class="kpi-val">৳1,85,000</span>
+                        <span class="kpi-lbl" data-i18n="dayStory.c1Kpi1">Stock Value Synced</span>
                       </div>
-                      <div class="scrawl-lines">
-                        <span class="scrawl-line line-1"></span>
-                        <span class="scrawl-line line-2"></span>
-                        <span class="scrawl-line line-strike"></span>
-                      </div>
-                      <div class="receipt-footer-error">
-                        <span>হাতে লেখা ভুল হিসাব</span>
-                        <span class="stamp-lost">❌ কাটাকাটি</span>
+                      <div class="c-kpi-item">
+                        <span class="kpi-val">&lt; 0.4s</span>
+                        <span class="kpi-lbl" data-i18n="dayStory.c1Kpi2">Cloud DB Sync Latency</span>
                       </div>
                     </div>
                   </div>
 
-                  <h4 class="dim-title" data-i18n="transform.d1OldTitle">Hand-Written Paper Cash Memo (বাকি খাতা)</h4>
-                  <p class="dim-desc" data-i18n="transform.d1OldDesc">Slow handwriting, illegible receipts, long customer queues, lost carbon copies, and zero real-time inventory updates.</p>
-                  <div class="dim-pain-chip" data-i18n="transform.d1OldPain">⚠️ 4-5 min per bill · High checkout dropouts</div>
-                </div>
-
-                <!-- Dimension 2: Payments (Chaos) -->
-                <div class="transform-dim-card chaos-card">
-                  <div class="dim-card-header">
-                    <span class="dim-icon-box icon-red">
-                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-                    </span>
-                    <span class="dim-badge" data-i18n="transform.d2Badge">Payment Collection</span>
-                  </div>
-
-                  <!-- Animated Micro-Simulation: 3 Messy SMS Alerts & Fake Screenshot Risk -->
-                  <div class="sim-display-box sim-chaos-sms">
-                    <div class="sim-sms-stack">
-                      <div class="sms-bubble bubble-1">
-                        <span class="sms-icon">📱</span>
-                        <span>TrxID 9K2... ৳১,৫০০ (ব্যক্তিগত নম্বর?)</span>
+                  <!-- Interactive UI Simulation Right Side -->
+                  <div class="chapter-visual-col">
+                    <div class="glass-sim-card">
+                      <div class="sim-header">
+                        <div class="sim-meta-left">
+                          <span class="sim-dot green"></span>
+                          <span class="sim-title">SUPPLIER DELIVERY: PO-8821</span>
+                        </div>
+                        <span class="sim-status-pill">Dhaka Fabrics Ltd · 350 Units</span>
                       </div>
-                      <div class="sms-bubble bubble-2 anim-pulse-warn">
-                        <span class="sms-icon">⚠️</span>
-                        <span>ফেক স্ক্রিনশট যাচাই করতে ৫ মিনিট দেরি</span>
-                      </div>
-                    </div>
-                    <div class="sim-leakage-badge">
-                      <span>প্রতি মাসে ৳১৫,০০০+ লিকেজ ঝুঁকি</span>
-                    </div>
-                  </div>
 
-                  <h4 class="dim-title" data-i18n="transform.d2OldTitle">3 Separate POS Terminals &amp; Lost MFS Slips</h4>
-                  <p class="dim-desc" data-i18n="transform.d2OldDesc">Cashiers using personal bKash/Nagad phones, fake customer payment screenshots, missing card slips, and untraceable cash drawer theft.</p>
-                  <div class="dim-pain-chip" data-i18n="transform.d2OldPain">⚠️ ৳15,000+ unverified monthly leakages &amp; disputes</div>
-                </div>
+                      <div class="sim-body">
+                        <!-- Branch Allocation Bars -->
+                        <div class="sim-branch-list">
+                          <div class="sim-branch-item">
+                            <div class="sb-info">
+                              <span class="sb-name">📍 Dhanmondi Flagship</span>
+                              <span class="sb-pcs">+150 pcs (In Stock: 240)</span>
+                            </div>
+                            <div class="sb-progress"><div class="sb-fill" style="width: 85%;"></div></div>
+                          </div>
+                          <div class="sim-branch-item">
+                            <div class="sb-info">
+                              <span class="sb-name">📍 Banani Outlet</span>
+                              <span class="sb-pcs">+110 pcs (In Stock: 180)</span>
+                            </div>
+                            <div class="sb-progress"><div class="sb-fill" style="width: 70%;"></div></div>
+                          </div>
+                          <div class="sim-branch-item">
+                            <div class="sb-info">
+                              <span class="sb-name">📍 Uttara Outlet</span>
+                              <span class="sb-pcs">+90 pcs (In Stock: 130)</span>
+                            </div>
+                            <div class="sb-progress"><div class="sb-fill" style="width: 60%;"></div></div>
+                          </div>
+                        </div>
 
-                <!-- Dimension 3: Courier (Chaos) -->
-                <div class="transform-dim-card chaos-card">
-                  <div class="dim-card-header">
-                    <span class="dim-icon-box icon-red">
-                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-                    </span>
-                    <span class="dim-badge" data-i18n="transform.d3Badge">Logistics &amp; Delivery</span>
-                  </div>
-
-                  <!-- Animated Micro-Simulation: Manual Copy-Paste Error Book -->
-                  <div class="sim-display-box sim-chaos-courier">
-                    <div class="sim-courier-error-card">
-                      <div class="courier-scrawl-top">
-                        <span>ডায়েরিতে কুরিয়ার এন্ট্রি</span>
-                        <span class="tag-manual-slow">কপি-পেস্ট</span>
-                      </div>
-                      <div class="courier-error-line">
-                        <span>নাম: শফিক... ঠিকানা: বাড়ি নং... (ভুল ফোন নম্বর!)</span>
-                      </div>
-                      <div class="courier-warning-tag">
-                        <span>❌ দিনে ২.৫ ঘণ্টা সময় অপচয় + রিটার্ন পার্সেল</span>
+                        <!-- Simulation Footer Toast -->
+                        <div class="sim-live-toast">
+                          <span class="toast-icon">⚡</span>
+                          <div class="toast-text">
+                            <strong>Auto-Reorder Safeguard:</strong>
+                            <span>No stockout risk. Low-inventory SMS threshold updated across all branches.</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
 
-                  <h4 class="dim-title" data-i18n="transform.d3OldTitle">Copy-Pasting Addresses into Courier Apps</h4>
-                  <p class="dim-desc" data-i18n="transform.d3OldDesc">Typing recipient names, addresses, and phone numbers one by one into Pathao and Steadfast. Handwriting tracking numbers on polybags and lost returns.</p>
-                  <div class="dim-pain-chip" data-i18n="transform.d3OldPain">⚠️ 2.5 hours wasted daily on manual parcel booking</div>
-                </div>
-
-                <!-- Dimension 4: Accounting (Chaos) -->
-                <div class="transform-dim-card chaos-card">
-                  <div class="dim-card-header">
-                    <span class="dim-icon-box icon-red">
-                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
-                    </span>
-                    <span class="dim-badge" data-i18n="transform.d4Badge">Financials &amp; Tax</span>
-                  </div>
-
-                  <!-- Animated Micro-Simulation: Broken Excel Formula -->
-                  <div class="sim-display-box sim-chaos-excel">
-                    <div class="sim-broken-sheet">
-                      <div class="excel-row header-row">
-                        <span>A: পণ্য</span>
-                        <span>B: ক্রয়</span>
-                        <span>C: লাভ</span>
-                      </div>
-                      <div class="excel-row error-row anim-glitch-cell">
-                        <span>শাড়ি ব্যাচ-৪</span>
-                        <span>৳২,৪০০</span>
-                        <span class="excel-error-text">#REF! #VALUE!</span>
-                      </div>
-                      <div class="excel-panic-note">
-                        <span>⚠️ লাভ বের করতে ৩ সপ্তাহ দেরি · অডিট ঝুঁকি</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <h4 class="dim-title" data-i18n="transform.d4OldTitle">Month-End Excel Headaches &amp; Missing Stock</h4>
-                  <p class="dim-desc" data-i18n="transform.d4OldDesc">Broken spreadsheet formulas, forgotten supplier dues, zero knowledge of true daily gross margin, and total panic during NBR tax audits.</p>
-                  <div class="dim-pain-chip" data-i18n="transform.d4OldPain">⚠️ 3 weeks to calculate profit · Audit vulnerability</div>
                 </div>
               </div>
+
+              <!-- CHAPTER 2: 02:00 PM (Peak Counter Rush) -->
+              <div class="day-chapter-card" data-chapter="noon" id="chapterNoon">
+                <div class="chapter-content-grid">
+                  
+                  <!-- Story Left Narrative -->
+                  <div class="chapter-narrative-col">
+                    <div class="chapter-milestone-badge noon-badge">
+                      <span class="badge-icon">⚡</span>
+                      <span class="badge-time">02:00 PM</span>
+                      <span class="badge-sep">·</span>
+                      <span class="badge-sub" data-i18n="dayStory.c2Sub">Peak Counter Rush</span>
+                    </div>
+                    
+                    <h3 class="chapter-title" data-i18n="dayStory.c2Title">Zero-Queue Rapid POS & bKash Dynamic QR</h3>
+                    
+                    <p class="chapter-story-text" data-i18n="dayStory.c2Story">
+                      It is 2:00 PM and 10 shoppers are lined up at the cash counter with arms full of garments. The laser scanner beeps in 0.3s, customer taps their phone to scan the dynamic bKash QR, and the thermal printer auto-cuts the receipt in 0.2s. The entire 10-person queue clears in under 4 minutes.
+                    </p>
+
+                    <!-- Old Way vs YES SME Micro-Contrast -->
+                    <div class="chapter-contrast-card">
+                      <div class="contrast-row old-way">
+                        <span class="contrast-tag old-tag">❌ OLD MANUAL WAY</span>
+                        <span class="contrast-desc" data-i18n="dayStory.c2Old">Manual price punching on calculators, waiting for change, frustrated customer lines</span>
+                      </div>
+                      <div class="contrast-row new-way">
+                        <span class="contrast-tag new-tag">✅ YES SME CLOUD</span>
+                        <span class="contrast-desc" data-i18n="dayStory.c2New">0.3s barcode scans & dynamic bKash QR clear queues 4x faster with 0 change hassles</span>
+                      </div>
+                    </div>
+
+                    <!-- Chapter KPI Badges -->
+                    <div class="chapter-kpi-row">
+                      <div class="c-kpi-item">
+                        <span class="kpi-val">&lt; 4 Mins</span>
+                        <span class="kpi-lbl" data-i18n="dayStory.c2Kpi1">10-Person Queue Cleared</span>
+                      </div>
+                      <div class="c-kpi-item">
+                        <span class="kpi-val">48 Bills/Hr</span>
+                        <span class="kpi-lbl" data-i18n="dayStory.c2Kpi2">Peak Cashier Velocity</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Interactive UI Simulation Right Side -->
+                  <div class="chapter-visual-col">
+                    <div class="glass-sim-card">
+                      <div class="sim-header">
+                        <div class="sim-meta-left">
+                          <span class="sim-dot emerald"></span>
+                          <span class="sim-title">CHECKOUT #INV-9402 · CASHIER 01</span>
+                        </div>
+                        <span class="sim-status-pill speed">⚡ 0.3s Scan Active</span>
+                      </div>
+
+                      <div class="sim-body">
+                        <!-- POS Scanned Items -->
+                        <div class="sim-cart-stream">
+                          <div class="sim-cart-row">
+                            <span class="item-tag">👗 Royal Embroidered Panjabi (L)</span>
+                            <span class="item-calc">x1 = ৳2,450</span>
+                          </div>
+                          <div class="sim-cart-row">
+                            <span class="item-tag">🧣 Pure Cotton Pajama (34)</span>
+                            <span class="item-calc">x1 = ৳750</span>
+                          </div>
+                        </div>
+
+                        <!-- Dynamic QR Payment Split -->
+                        <div class="sim-qr-split">
+                          <div class="qr-box-mini">
+                            <div class="qr-sim-matrix">
+                              <div class="sq sq-tl"></div>
+                              <div class="sq sq-tr"></div>
+                              <div class="sq sq-bl"></div>
+                              <span class="bkash-badge">bKash</span>
+                            </div>
+                          </div>
+                          <div class="qr-meta-text">
+                            <div class="qr-amount-callout">৳3,360.00</div>
+                            <div class="qr-verified-tag">✓ Direct Merchant Bank Sync</div>
+                            <div class="qr-tax-tag">NBR Mushak 6.3 VAT (5%) Included</div>
+                          </div>
+                        </div>
+
+                        <!-- Simulation Footer Toast -->
+                        <div class="sim-live-toast success">
+                          <span class="toast-icon">🖨️</span>
+                          <div class="toast-text">
+                            <strong>Auto-Cutter Triggered:</strong>
+                            <span>80mm thermal tax voucher printed in 0.28s. Next customer ready.</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- CHAPTER 3: 06:00 PM (Bulk Courier Dispatch) -->
+              <div class="day-chapter-card" data-chapter="sunset" id="chapterSunset">
+                <div class="chapter-content-grid">
+                  
+                  <!-- Story Left Narrative -->
+                  <div class="chapter-narrative-col">
+                    <div class="chapter-milestone-badge sunset-badge">
+                      <span class="badge-icon">🚚</span>
+                      <span class="badge-time">06:00 PM</span>
+                      <span class="badge-sep">·</span>
+                      <span class="badge-sub" data-i18n="dayStory.c3Sub">Bulk Courier Dispatch</span>
+                    </div>
+                    
+                    <h3 class="chapter-title" data-i18n="dayStory.c3Title">120 Courier Parcels Printed in 30 Seconds</h3>
+                    
+                    <p class="chapter-story-text" data-i18n="dayStory.c3Story">
+                      At 6:00 PM, Steadfast and Pathao riders pull up outside the store for the daily parcel pickup. Rather than handwriting shipping receipts for hours, one click bulk-prints all 120 sticker waybills, generates courier consignment IDs, and sends SMS tracking links directly to customers.
+                    </p>
+
+                    <!-- Old Way vs YES SME Micro-Contrast -->
+                    <div class="chapter-contrast-card">
+                      <div class="contrast-row old-way">
+                        <span class="contrast-tag old-tag">❌ OLD MANUAL WAY</span>
+                        <span class="contrast-desc" data-i18n="dayStory.c3Old">Handwriting 120 courier paper slips with pens, missed courier cutoffs, wrong addresses</span>
+                      </div>
+                      <div class="contrast-row new-way">
+                        <span class="contrast-tag new-tag">✅ YES SME CLOUD</span>
+                        <span class="contrast-desc" data-i18n="dayStory.c3New">1-click bulk sticker printing + auto SMS with live Steadfast & Pathao tracking</span>
+                      </div>
+                    </div>
+
+                    <!-- Chapter KPI Badges -->
+                    <div class="chapter-kpi-row">
+                      <div class="c-kpi-item">
+                        <span class="kpi-val">120 Waybills</span>
+                        <span class="kpi-lbl" data-i18n="dayStory.c3Kpi1">Printed in 30 Seconds</span>
+                      </div>
+                      <div class="c-kpi-item">
+                        <span class="kpi-val">100% COD</span>
+                        <span class="kpi-lbl" data-i18n="dayStory.c3Kpi2">Auto Fraud & Ledger Tracked</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Interactive UI Simulation Right Side -->
+                  <div class="chapter-visual-col">
+                    <div class="glass-sim-card">
+                      <div class="sim-header">
+                        <div class="sim-meta-left">
+                          <span class="sim-dot amber"></span>
+                          <span class="sim-title">MULTI-COURIER BULK DISPATCH</span>
+                        </div>
+                        <span class="sim-status-pill sunset-pill">120 Ready to Handover</span>
+                      </div>
+
+                      <div class="sim-body">
+                        <!-- Courier Partner Splits -->
+                        <div class="courier-chips-grid">
+                          <div class="c-chip steadfast">
+                            <span class="c-logo">🚚 Steadfast</span>
+                            <span class="c-count">75 Parcels · Consigned</span>
+                          </div>
+                          <div class="c-chip pathao">
+                            <span class="c-logo">🛵 Pathao</span>
+                            <span class="c-count">45 Parcels · Consigned</span>
+                          </div>
+                        </div>
+
+                        <!-- Live Waybill Sticker Sample -->
+                        <div class="waybill-sample-sticker">
+                          <div class="wb-head">
+                            <span class="wb-brand">YES SME COURIER HUB</span>
+                            <span class="wb-track">TRK# ST-992140</span>
+                          </div>
+                          <div class="wb-body">
+                            <div class="wb-dest">Karim Ahmed · Nasirabad, Chittagong</div>
+                            <div class="wb-cod">COD: ৳3,850 · Cash On Delivery</div>
+                          </div>
+                          <div class="wb-barcode-sim">
+                            <span></span><span class="w"></span><span></span><span class="w"></span><span class="t"></span><span></span><span class="w"></span>
+                          </div>
+                        </div>
+
+                        <!-- Simulation Footer Toast -->
+                        <div class="sim-live-toast sunset-toast">
+                          <span class="toast-icon">📱</span>
+                          <div class="toast-text">
+                            <strong>Customer SMS Dispatched:</strong>
+                            <span>All 120 customers received SMS with live parcel tracking URL automatically.</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- CHAPTER 4: 10:00 PM (Peaceful Closing from Home) -->
+              <div class="day-chapter-card" data-chapter="night" id="chapterNight">
+                <div class="chapter-content-grid">
+                  
+                  <!-- Story Left Narrative -->
+                  <div class="chapter-narrative-col">
+                    <div class="chapter-milestone-badge night-badge">
+                      <span class="badge-icon">☕</span>
+                      <span class="badge-time">10:00 PM</span>
+                      <span class="badge-sep">·</span>
+                      <span class="badge-sub" data-i18n="dayStory.c4Sub">Peaceful Closing from Home</span>
+                    </div>
+                    
+                    <h3 class="chapter-title" data-i18n="dayStory.c4Title">Effortless Closing & 100% Cash Drawer Match</h3>
+                    
+                    <p class="chapter-story-text" data-i18n="dayStory.c4Story">
+                      All 3 store shutters are down. The owner is home having evening tea with their family. Instead of staying up until 1:00 AM counting crumpled notes, a gentle phone notification arrives: Total Sales: ৳2,48,500, Net Profit: ৳52,140, and physical cash matches cloud ledger with zero discrepancy.
+                    </p>
+
+                    <!-- Old Way vs YES SME Micro-Contrast -->
+                    <div class="chapter-contrast-card night-contrast">
+                      <div class="contrast-row old-way">
+                        <span class="contrast-tag old-tag">❌ OLD MANUAL WAY</span>
+                        <span class="contrast-desc" data-i18n="dayStory.c4Old">Sitting at shop till 1 AM counting crumpled notes, cash discrepancy, exhausted next day</span>
+                      </div>
+                      <div class="contrast-row new-way">
+                        <span class="contrast-tag new-tag">✅ YES SME CLOUD</span>
+                        <span class="contrast-desc" data-i18n="dayStory.c4New">Relax at home with family; phone alerts complete profit & cash drawer match instantly</span>
+                      </div>
+                    </div>
+
+                    <!-- Chapter KPI Badges -->
+                    <div class="chapter-kpi-row">
+                      <div class="c-kpi-item">
+                        <span class="kpi-val">৳52,140</span>
+                        <span class="kpi-lbl" data-i18n="dayStory.c4Kpi1">Today's Net Profit</span>
+                      </div>
+                      <div class="c-kpi-item">
+                        <span class="kpi-val">100% Matched</span>
+                        <span class="kpi-lbl" data-i18n="dayStory.c4Kpi2">Physical Cash vs Cloud Ledger</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Interactive UI Simulation Right Side -->
+                  <div class="chapter-visual-col">
+                    <div class="glass-sim-card night-card">
+                      <div class="sim-header">
+                        <div class="sim-meta-left">
+                          <span class="sim-dot moon-dot"></span>
+                          <span class="sim-title">CEO MOBILE PUSH NOTIFICATION</span>
+                        </div>
+                        <span class="sim-status-pill night-pill">🌙 All 3 Branches Closed</span>
+                      </div>
+
+                      <div class="sim-body">
+                        <!-- Mobile Phone App Notification View -->
+                        <div class="night-notification-box">
+                          <div class="notif-top">
+                            <span class="app-icon">💼</span>
+                            <span class="app-name">YES SME Cloud</span>
+                            <span class="app-time">Just now · 10:02 PM</span>
+                          </div>
+                          <div class="notif-heading">Daily Reconciliation Complete ✅</div>
+                          <div class="notif-numbers-grid">
+                            <div class="n-stat">
+                              <span class="n-lbl">Daily Revenue</span>
+                              <span class="n-val">৳2,48,500</span>
+                            </div>
+                            <div class="n-stat highlight">
+                              <span class="n-lbl">Net Clean Profit</span>
+                              <span class="n-val">৳52,140</span>
+                            </div>
+                            <div class="n-stat">
+                              <span class="n-lbl">Cash Drawer</span>
+                              <span class="n-val verified">৳84,200 (100% Match)</span>
+                            </div>
+                            <div class="n-stat">
+                              <span class="n-lbl">Total Orders</span>
+                              <span class="n-val">186 Invoices</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Simulation Footer Toast -->
+                        <div class="sim-live-toast night-toast">
+                          <span class="toast-icon">☕</span>
+                          <div class="toast-text">
+                            <strong>Zero Evening Headache:</strong>
+                            <span>Ledger balanced, tax records encrypted, and tomorrow's morning stock reserved.</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
             </div>
 
-            <!-- ==================================================================
-                 LAYER 2: THE CLOUD COMMAND (After / YES SME - Relaxed Rafiq Bhai)
-                 ================================================================== -->
-            <div class="transform-layer layer-cloud" id="layerCloud" aria-hidden="false">
-              
-              <!-- Mascot Header Banner: Relaxed Rafiq Bhai -->
-              <div class="layer-header-banner mascot-banner-cloud">
-                <div class="mascot-profile-cluster">
-                  <div class="mascot-avatar-frame avatar-cloud" title="স্মার্ট ব্যবসায়ী রফিক ভাই">
-                    <!-- SVG Cartoon Mascot: Relaxed Rafiq Bhai with hot coffee & tablet -->
-                    <svg viewBox="0 0 100 100" class="mascot-svg-char" aria-hidden="true">
-                      <!-- Chair back -->
-                      <rect x="22" y="35" width="56" height="52" rx="10" fill="#064e3b" stroke="#059669" stroke-width="1.5"/>
-                      <!-- Body / Modern Navy Blazer -->
-                      <path d="M26,85 C26,60 36,54 50,54 C64,54 74,60 74,85 Z" fill="#0f172a"/>
-                      <!-- Crisp Emerald Shirt Collar -->
-                      <path d="M44,54 L50,66 L56,54 Z" fill="#10b981"/>
-                      <path d="M47,54 L50,60 L53,54 Z" fill="#ffffff"/>
-                      <!-- Neck -->
-                      <rect x="45" y="46" width="10" height="9" fill="#fed7aa"/>
-                      <!-- Confident Head -->
-                      <circle cx="50" cy="35" r="17" fill="#fed7aa"/>
-                      <!-- Stylish Sleek Haircut -->
-                      <path d="M33,30 C33,18 42,14 50,14 C60,14 67,18 67,28 C64,21 57,17 50,17 C42,17 35,21 33,30 Z" fill="#1e293b"/>
-                      <!-- Confident Smile Eyebrows -->
-                      <path d="M38,27 Q43,24 47,26" stroke="#1e293b" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-                      <path d="M62,27 Q57,24 53,26" stroke="#1e293b" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-                      <!-- Modern Glasses -->
-                      <rect x="36" y="29" width="12" height="9" rx="2" fill="none" stroke="#065f46" stroke-width="2"/>
-                      <rect x="52" y="29" width="12" height="9" rx="2" fill="none" stroke="#065f46" stroke-width="2"/>
-                      <line x1="48" y1="33" x2="52" y2="33" stroke="#065f46" stroke-width="2"/>
-                      <!-- Happy Eyes Behind Glasses -->
-                      <circle cx="42" cy="33.5" r="2" fill="#0f172a"/>
-                      <circle cx="58" cy="33.5" r="2" fill="#0f172a"/>
-                      <!-- Wide Confident Smile -->
-                      <path d="M43,42 Q50,48 57,42" stroke="#065f46" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-                      <!-- Steaming Coffee Cup -->
-                      <g class="anim-coffee-cup" transform="translate(68, 62)">
-                        <rect x="0" y="4" width="14" height="15" rx="3" fill="#ffffff" stroke="#10b981" stroke-width="1"/>
-                        <path d="M14,7 C17,7 17,13 14,13" fill="none" stroke="#10b981" stroke-width="1.2"/>
-                        <!-- Animated rising steam lines -->
-                        <path class="steam-line steam-1" d="M3,2 Q5,-3 3,-6" stroke="#6ee7b7" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-                        <path class="steam-line steam-2" d="M7,2 Q9,-4 7,-8" stroke="#34d399" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-                        <path class="steam-line steam-3" d="M11,2 Q13,-3 11,-6" stroke="#6ee7b7" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-                      </g>
-                    </svg>
-                  </div>
-                  <div>
-                    <div class="layer-tag tag-cloud">
-                      <span class="pulse-emerald"></span>
-                      <span data-i18n="transform.cloudTag">YES SME Cloud Command</span>
-                    </div>
-                    <div class="mascot-quote-sub" data-i18n="transform.cloudMascot">“দোকান চলে সম্পূর্ণ অটোমেশনে, আমি ব্যবসার গ্রোথে ফোকাস করি!”</div>
-                  </div>
-                </div>
-                <span class="layer-status-text">Unified All-in-One Cloud · 0.3s Offline POS · NBR 6.3</span>
-              </div>
-
-              <!-- 4 Cloud Cards with Micro-Simulations -->
-              <div class="transform-cards-grid">
-                
-                <!-- Dimension 1: Sales & POS (Cloud) -->
-                <div class="transform-dim-card cloud-card">
-                  <div class="dim-card-header">
-                    <span class="dim-icon-box icon-green">
-                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-                    </span>
-                    <span class="dim-badge" data-i18n="transform.d1Badge">Sales &amp; Billing Counter</span>
-                  </div>
-
-                  <!-- Animated Micro-Simulation: Laser Scan Sweep & Instant 80mm Bill -->
-                  <div class="sim-display-box sim-cloud-pos">
-                    <div class="sim-barcode-scanner-area">
-                      <div class="sim-barcode-graphic">
-                        <span class="b-bar"></span><span class="b-bar wide"></span><span class="b-bar"></span>
-                        <span class="b-bar thin"></span><span class="b-bar wide"></span><span class="b-bar"></span>
-                        <span class="b-bar thin"></span><span class="b-bar"></span><span class="b-bar wide"></span>
-                        <!-- Animated Red Laser Sweep Line -->
-                        <div class="sim-laser-beam"></div>
-                      </div>
-                      <div class="sim-thermal-slip anim-slip-slide">
-                        <div class="slip-header">
-                          <span class="slip-brand">YES SME POS</span>
-                          <span class="slip-badge">০.৩ সেকেন্ড বিল ✓</span>
-                        </div>
-                        <div class="slip-items">
-                          <span>রয়েল পাঞ্জাবি (L) x১</span>
-                          <span class="slip-price">৳২,৪৫০</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <h4 class="dim-title" data-i18n="transform.d1NewTitle">0.3s Barcode Scan + Instant Thermal Bill</h4>
-                  <p class="dim-desc" data-i18n="transform.d1NewDesc">Sub-second laser barcode scanning, 100% offline SQLite resilience when Wi-Fi drops, automatic cashier shift reconciliation, and 80mm thermal receipt printing.</p>
-                  <div class="dim-gain-chip" data-i18n="transform.d1NewGain">⚡ 0.3s Checkout · 0 queue bottlenecks</div>
-                </div>
-
-                <!-- Dimension 2: Payments (Cloud) -->
-                <div class="transform-dim-card cloud-card">
-                  <div class="dim-card-header">
-                    <span class="dim-icon-box icon-green">
-                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4z"/><path d="M14 14h2v2h-2zM18 14h2v2h-2zM14 18h2v2h-2zM18 18h2v2h-2z"/></svg>
-                    </span>
-                    <span class="dim-badge" data-i18n="transform.d2Badge">Payment Collection</span>
-                  </div>
-
-                  <!-- Animated Micro-Simulation: Live bKash/Nagad Dynamic QR & Direct Ledger Pulse -->
-                  <div class="sim-display-box sim-cloud-qr">
-                    <div class="sim-qr-interactive-wrap">
-                      <div class="sim-mini-qr anim-radar-pulse">
-                        <div class="qr-pattern-grid">
-                          <span class="qr-finder tl"></span>
-                          <span class="qr-finder tr"></span>
-                          <span class="qr-finder bl"></span>
-                          <span class="qr-dot d1"></span><span class="qr-dot d2"></span><span class="qr-dot d3"></span>
-                        </div>
-                      </div>
-                      <div class="sim-payment-verified-pill">
-                        <div class="verified-top">
-                          <span class="mfs-logo bkash-text">bKash Merchant QR</span>
-                          <span class="live-check-icon">✓ VERIFIED</span>
-                        </div>
-                        <div class="verified-amount">৳২,৪৫০ ইনস্ট্যান্ট লেজারে জমা</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <h4 class="dim-title" data-i18n="transform.d2NewTitle">Instant Dynamic QR on Customer Screen</h4>
-                  <p class="dim-desc" data-i18n="transform.d2NewDesc">Bill amount automatically generates a verified bKash/Nagad dynamic QR on screen. Customer scans and pays in 2s with 100% direct ledger reconciliation.</p>
-                  <div class="dim-gain-chip" data-i18n="transform.d2NewGain">✓ Zero-Loss Reconciliation · Direct to Bank</div>
-                </div>
-
-                <!-- Dimension 3: Courier (Cloud) -->
-                <div class="transform-dim-card cloud-card">
-                  <div class="dim-card-header">
-                    <span class="dim-icon-box icon-green">
-                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-                    </span>
-                    <span class="dim-badge" data-i18n="transform.d3Badge">Logistics &amp; Delivery</span>
-                  </div>
-
-                  <!-- Animated Micro-Simulation: 1-Click Pathao/Steadfast Van Driving -->
-                  <div class="sim-display-box sim-cloud-courier">
-                    <div class="sim-courier-run-track">
-                      <div class="sim-van-container anim-van-drive">
-                        <span class="van-emoji">🚚</span>
-                        <div class="van-speed-lines">
-                          <span></span><span></span>
-                        </div>
-                      </div>
-                      <div class="sim-courier-pill">
-                        <div class="courier-name-tag">Pathao &amp; Steadfast Auto API</div>
-                        <div class="courier-status-live">১-ক্লিকে শিপিং লেবেল প্রিন্ট ও এসএমএস ট্র্যাকিং</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <h4 class="dim-title" data-i18n="transform.d3NewTitle">1-Click Bulk Courier Dispatch &amp; Webhooks</h4>
-                  <p class="dim-desc" data-i18n="transform.d3NewDesc">1-click Pathao &amp; Steadfast dispatch directly from order card. Auto-prints barcode shipping labels and syncs real-time parcel delivery status to customer SMS.</p>
-                  <div class="dim-gain-chip" data-i18n="transform.d3NewGain">⚡ 1-Click Automated Dispatch · Real-time tracking</div>
-                </div>
-
-                <!-- Dimension 4: Accounting (Cloud) -->
-                <div class="transform-dim-card cloud-card">
-                  <div class="dim-card-header">
-                    <span class="dim-icon-box icon-green">
-                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                    </span>
-                    <span class="dim-badge" data-i18n="transform.d4Badge">Financials &amp; Tax</span>
-                  </div>
-
-                  <!-- Animated Micro-Simulation: Animated P&L Sparkline & NBR 6.3 Seal -->
-                  <div class="sim-display-box sim-cloud-pnl">
-                    <div class="sim-sparkline-wrap">
-                      <div class="sim-live-chart">
-                        <svg viewBox="0 0 120 40" class="sparkline-svg">
-                          <path d="M0,32 Q30,28 50,18 T90,12 T120,4" fill="none" stroke="#10b981" stroke-width="2.5" class="anim-draw-chart"/>
-                          <circle cx="120" cy="4" r="3.5" fill="#34d399" class="chart-pulse-dot"/>
-                        </svg>
-                        <span class="chart-label">রিয়েল-টাইম গ্রস মার্জিন: +৩৪.২%</span>
-                      </div>
-                      <div class="sim-nbr-seal">
-                        <span class="seal-icon">🏛️</span>
-                        <span class="seal-text">এনবিআর মূসক ৬.৩ রেডি</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <h4 class="dim-title" data-i18n="transform.d4NewTitle">Real-Time Automated P&amp;L &amp; NBR Mushak 6.3</h4>
-                  <p class="dim-desc" data-i18n="transform.d4NewDesc">Every single sale posts automatically to double-entry general ledger. Live balance sheet, gross margin by product, and 1-click legal Mushak 6.3 invoices.</p>
-                  <div class="dim-gain-chip" data-i18n="transform.d4NewGain">🏛️ 100% NBR Audit-Ready · Live Profit Stream</div>
+            <!-- Bottom Daily Peace-of-Mind Strip (4 Guarantees) -->
+            <div class="day-guarantee-grid">
+              <div class="day-guarantee-card">
+                <span class="guarantee-icon">🌅</span>
+                <div class="guarantee-meta">
+                  <div class="guarantee-title" data-i18n="dayStory.g1Title">Zero Opening Delay</div>
+                  <div class="guarantee-desc" data-i18n="dayStory.g1Desc">1-click barcode stock-in auto updates all outlets simultaneously.</div>
                 </div>
               </div>
-            </div>
 
-            <!-- INTERACTIVE SPLIT HANDLE DIVIDER (Cyber Neon Laser) -->
-            <div class="transform-split-handle cyber-laser-handle" id="transformSplitHandle" role="slider" aria-label="Comparison Split Position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0">
-              <div class="handle-line laser-line"></div>
-              <div class="handle-thumb neon-thumb" title="ড্র্যাগ করে পরিবর্তন দেখুন">
-                <div class="thumb-inner-glow"></div>
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.8"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg>
+              <div class="day-guarantee-card">
+                <span class="guarantee-icon">⚡</span>
+                <div class="guarantee-meta">
+                  <div class="guarantee-title" data-i18n="dayStory.g2Title">4-Min Queue Clearance</div>
+                  <div class="guarantee-desc" data-i18n="dayStory.g2Desc">0.3s laser scanner and dynamic bKash QR eliminate counter congestion.</div>
+                </div>
+              </div>
+
+              <div class="day-guarantee-card">
+                <span class="guarantee-icon">🚚</span>
+                <div class="guarantee-meta">
+                  <div class="guarantee-title" data-i18n="dayStory.g3Title">30s Bulk Courier Dispatch</div>
+                  <div class="guarantee-desc" data-i18n="dayStory.g3Desc">Steadfast &amp; Pathao waybills bulk-printed with automated SMS tracking.</div>
+                </div>
+              </div>
+
+              <div class="day-guarantee-card">
+                <span class="guarantee-icon">☕</span>
+                <div class="guarantee-meta">
+                  <div class="guarantee-title" data-i18n="dayStory.g4Title">100% Cash-Match Peace</div>
+                  <div class="guarantee-desc" data-i18n="dayStory.g4Desc">Sleep peacefully at home knowing every single Taka matches the cloud ledger.</div>
+                </div>
               </div>
             </div>
 
           </div>
+        </div>
 
-          <!-- THE TRANSFORMATION ROI / KPI SUMMARY STRIP (Dark Luxury Glass with Odometer Counters) -->
-          <div class="transform-kpi-bar luxury-glass-kpis">
-            <div class="transform-kpi-item glass-kpi-card">
-              <div class="kpi-trend-badge badge-green" data-i18n="transform.kpi1Trend">↑ 94% Time Saved</div>
-              <div class="kpi-value text-green" data-counter-target="18" data-counter-suffix="+ ঘণ্টা" data-i18n="transform.kpi1Val">18+ Hours</div>
-              <div class="kpi-label" data-i18n="transform.kpi1Label">Saved Every Week from Data Entry</div>
-            </div>
-            <div class="transform-kpi-item glass-kpi-card">
-              <div class="kpi-trend-badge badge-emerald" data-i18n="transform.kpi2Trend">🛡️ Zero Leakage</div>
-              <div class="kpi-value text-emerald" data-counter-target="24500" data-counter-prefix="৳" data-counter-suffix="+" data-i18n="transform.kpi2Val">৳24,500+</div>
-              <div class="kpi-label" data-i18n="transform.kpi2Label">Monthly Revenue Protected from Leakage</div>
-            </div>
-            <div class="transform-kpi-item glass-kpi-card">
-              <div class="kpi-trend-badge badge-cyan" data-i18n="transform.kpi3Trend">⚡ Ultra-Fast</div>
-              <div class="kpi-value text-cyan" data-counter-target="7" data-counter-suffix=" গুণ দ্রুত" data-i18n="transform.kpi3Val">7x Faster</div>
-              <div class="kpi-label" data-i18n="transform.kpi3Label">Customer Checkout &amp; Queue Speed</div>
-            </div>
-            <div class="transform-kpi-item glass-kpi-card">
-              <div class="kpi-trend-badge badge-purple" data-i18n="transform.kpi4Trend">🏛️ NBR Approved</div>
-              <div class="kpi-value text-purple" data-counter-target="100" data-counter-suffix="% অটো" data-i18n="transform.kpi4Val">100% Auto</div>
-              <div class="kpi-label" data-i18n="transform.kpi4Label">NBR Mushak 6.3 VAT &amp; Tax Readiness</div>
-            </div>
-          </div>
-
-          <!-- Quick CTA Banner (High-Converting Dark Emerald Cyber Banner) -->
-          <div class="transform-cta-banner luxury-cyber-banner">
-            <div class="transform-cta-left">
-              <div class="cta-live-pill">
-                <span class="live-dot-pulse"></span>
-                <span data-i18n="transform.ctaLive">● Live Cloud Demo Active</span>
-              </div>
-              <h4 class="transform-cta-title" data-i18n="transform.ctaTitle">Ready to trade manual headaches for enterprise autopilot?</h4>
-              <p class="transform-cta-desc" data-i18n="transform.ctaDesc">Join 1,200+ Bangladeshi retail stores who transformed their operations with YES SME.</p>
-            </div>
-            <a href="#contact" class="btn btn-primary transform-cta-btn shimmer-cta" data-i18n="transform.ctaBtn">
-              <span>Book Free Live Transformation Demo →</span>
-            </a>
-          </div>
-
-          <!-- Sub-divider for Plan-by-Plan Comparison -->
-          <div class="transform-section-divider">
-            <span class="divider-line"></span>
-            <span class="divider-badge" data-i18n="comparison.badge">12 Core Modules · 71 Features</span>
-            <span class="divider-line"></span>
-          </div>
-
-          <!-- Section Sub-Header for Plan Comparison -->
+<!-- Section Sub-Header for Plan Comparison -->
           <div class="section-header text-center" style="margin-top: 1.5rem; margin-bottom: 2rem;">
             <h3 class="section-title" style="font-size: 1.85rem;" data-i18n="comparison.title">Detailed Feature-by-Feature Comparison</h3>
             <p class="section-subtitle" data-i18n="comparison.subtitle">
               Compare core differences across packages at a glance, or click to explore the complete 12-module feature matrix.
             </p>
           </div>
-        </div>
 
         <!-- Interactive Animated Trigger Button -->
         <div class="comparison-cta-box text-center">
