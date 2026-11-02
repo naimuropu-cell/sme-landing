@@ -1351,1529 +1351,290 @@
         <!-- ======================================================================
              COMPACT BROWSE DRAWER: ALL 12 ENTERPRISE MODULES IN DETAIL
              ====================================================================== -->
-        <div class="modules-explore-strip">
-          <div class="explore-strip-text">
-            <h3 class="explore-strip-title" data-i18n="ramp.exploreToggle">Explore All 12 Enterprise Modules in Detail</h3>
-            <p class="explore-strip-sub" data-i18n="ramp.exploreSub">Click any tab to view full technical capability, hardware compatibility, and plan tiers.</p>
-          </div>
-          <button type="button" class="btn-toggle-matrix" id="btnToggleMatrixDrawer" aria-expanded="false" aria-controls="fullModulesMatrixWrap">
-            <span id="toggleMatrixLabel" data-i18n="matrix.tabAll">All 12 Modules (Bento View)</span>
-            <svg class="toggle-matrix-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" width="18" height="18">
-              <path d="M5 7.5L10 12.5L15 7.5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-        </div>
-
-        <div class="modules-matrix-drawer-wrap" id="fullModulesMatrixWrap">
-          <!-- Categorized Tabs Navigation -->
-        <div class="modules-tabs-wrapper">
-          <div class="modules-tabs-nav" role="tablist">
-            <button class="modules-tab-btn active" data-tab="all" role="tab" aria-selected="true">
-              <span class="tab-label" data-i18n="matrix.tabAll">All Modules</span>
-              <span class="tab-badge">12</span>
-            </button>
-            <button class="modules-tab-btn" data-tab="pos-inventory" role="tab" aria-selected="false">
-              <span class="tab-label" data-i18n="matrix.tabPos">POS &amp; Inventory</span>
-              <span class="tab-badge">4</span>
-            </button>
-            <button class="modules-tab-btn" data-tab="accounts-tax" role="tab" aria-selected="false">
-              <span class="tab-label" data-i18n="matrix.tabAccounts">Accounts &amp; Tax</span>
-              <span class="tab-badge">4</span>
-            </button>
-            <button class="modules-tab-btn" data-tab="omnichannel-ai" role="tab" aria-selected="false">
-              <span class="tab-label" data-i18n="matrix.tabOmnichannel">Logistics, Meta &amp; AI</span>
-              <span class="tab-badge">4</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- 12 Modules Grid -->
-        <div class="modules-matrix-grid">
+        <!-- ======================================================================
+             ANZAAR-INSPIRED 3D INTERACTIVE STORYBOARD SHOWCASE
+             Replaces 1800px static grid with compact, elegant 3D card stack + storyboard index
+             ====================================================================== -->
+        <div class="storyboard-showcase-container" id="modulesStoryboardShowcase">
           
-          <!-- Module 1: POS -->
-          <div class="module-matrix-card" data-category="pos-inventory">
-            <div class="module-card-top">
-              <div class="matrix-card-icon-box bg-icon-green">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="22" height="22" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-              </div>
-              <span class="module-tag tag-green" data-i18n="matrix.m1Tag">⚡ 0.3s Checkout</span>
+          <!-- Top Control Header: Category Filter Pills & Live Counter -->
+          <div class="storyboard-filter-bar">
+            <div class="storyboard-filter-pills" role="tablist">
+              <button type="button" class="sb-filter-btn active" data-filter="all">
+                <span data-i18n="matrix.tabAll">All Modules</span>
+                <span class="sb-badge">12</span>
+              </button>
+              <button type="button" class="sb-filter-btn" data-filter="pos-inventory">
+                <span data-i18n="matrix.tabPos">POS &amp; Inventory</span>
+                <span class="sb-badge">4</span>
+              </button>
+              <button type="button" class="sb-filter-btn" data-filter="accounts-tax">
+                <span data-i18n="matrix.tabAccounts">Accounts &amp; Tax</span>
+                <span class="sb-badge">4</span>
+              </button>
+              <button type="button" class="sb-filter-btn" data-filter="omnichannel-ai">
+                <span data-i18n="matrix.tabOmnichannel">Logistics, Meta &amp; AI</span>
+                <span class="sb-badge">4</span>
+              </button>
             </div>
-            <h3 class="matrix-card-title" data-i18n="matrix.m1Title">Smart POS &amp; Rapid Barcode</h3>
-            <p class="matrix-card-desc" data-i18n="matrix.m1Desc">Sub-second barcode scanning, quick receipt printing, offline cache, and dual cashier shifts.</p>
-            <ul class="module-bullets-list">
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m1B1">Instant 80mm thermal receipt printing</span></li>
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m1B2">Dual cashier shift reconciliation</span></li>
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m1B3">Offline local cache resilience</span></li>
-              <li class="mpos-bullet-highlight"><svg viewBox="0 0 16 16" width="14" height="14" fill="#059669"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><strong data-i18n="matrix.m1B4" style="color:#059669;">Mobile POS (mPOS) with camera scanner (No PC needed)</strong></li>
-            </ul>
-            <div class="module-card-footer">
-              <span class="module-plan-pill plan-tier-basic" data-i18n="matrix.m1Plan">✓ Basic+ (৳1,000/mo)</span>
-              <a href="#pricing" class="module-plan-link" data-i18n="matrix.viewPlan">View Plan →</a>
-            </div>
-          </div>
-
-          <!-- Module 2: Inventory -->
-          <div class="module-matrix-card" data-category="pos-inventory">
-            <div class="module-card-top">
-              <div class="matrix-card-icon-box bg-icon-orange">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="22" height="22" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-              </div>
-              <span class="module-tag tag-orange" data-i18n="matrix.m2Tag">📦 Batch &amp; Expiry</span>
-            </div>
-            <h3 class="matrix-card-title" data-i18n="matrix.m2Title">Multi-Warehouse Inventory</h3>
-            <p class="matrix-card-desc" data-i18n="matrix.m2Desc">Inter-branch stock transfer challans, batch expiry dates, low-stock warnings, and reorder levels.</p>
-            <ul class="module-bullets-list">
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m2B1">Inter-branch stock transfer challans</span></li>
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m2B2">Batch number &amp; expiry date tracking</span></li>
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m2B3">Automated low-stock reorder alerts</span></li>
-            </ul>
-            <div class="module-card-footer">
-              <span class="module-plan-pill plan-tier-medium" data-i18n="matrix.m2Plan">★ Medium+ (৳2,000/mo)</span>
-              <a href="#pricing" class="module-plan-link" data-i18n="matrix.viewPlan">View Plan →</a>
-            </div>
-          </div>
-
-          <!-- Module 3: Barcode Designer -->
-          <div class="module-matrix-card" data-category="pos-inventory">
-            <div class="module-card-top">
-              <div class="matrix-card-icon-box bg-icon-blue">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="22" height="22" stroke-width="2"><path d="M3 5v14M8 5v14M12 5v14M17 5v14M21 5v14"/></svg>
-              </div>
-              <span class="module-tag tag-blue" data-i18n="matrix.m3Tag">🏷️ Custom Labels</span>
-            </div>
-            <h3 class="matrix-card-title" data-i18n="matrix.m3Title">Barcode &amp; Label Designer</h3>
-            <p class="matrix-card-desc" data-i18n="matrix.m3Desc">Generate custom barcode labels, price stickers, and QR codes for thermal &amp; sticker printers.</p>
-            <ul class="module-bullets-list">
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m3B1">Thermal sticker &amp; tag printing</span></li>
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m3B2">Custom QR code generator</span></li>
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m3B3">Zebra, Epson &amp; Xprinter support</span></li>
-            </ul>
-            <div class="module-card-footer">
-              <span class="module-plan-pill plan-tier-basic" data-i18n="matrix.m3Plan">✓ Basic+ (৳1,000/mo)</span>
-              <a href="#pricing" class="module-plan-link" data-i18n="matrix.viewPlan">View Plan →</a>
-            </div>
-          </div>
-
-          <!-- Module 4: Multi-Branch Management -->
-          <div class="module-matrix-card" data-category="pos-inventory">
-            <div class="module-card-top">
-              <div class="matrix-card-icon-box bg-icon-purple">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="22" height="22" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-              </div>
-              <span class="module-tag tag-purple" data-i18n="matrix.m4Tag">🏬 Multi-Store Hub</span>
-            </div>
-            <h3 class="matrix-card-title" data-i18n="matrix.m4Title">Multi-Branch Management</h3>
-            <p class="matrix-card-desc" data-i18n="matrix.m4Desc">Centrally manage 10+ branch stores, central warehouses, and franchises from one master view.</p>
-            <ul class="module-bullets-list">
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m4B1">Unified master catalog</span></li>
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m4B2">Outlet-wise live sales comparison</span></li>
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m4B3">Central warehouse requisition</span></li>
-            </ul>
-            <div class="module-card-footer">
-              <span class="module-plan-pill plan-tier-medium" data-i18n="matrix.m4Plan">★ Medium+ (৳2,000/mo)</span>
-              <a href="#pricing" class="module-plan-link" data-i18n="matrix.viewPlan">View Plan →</a>
-            </div>
-          </div>
-
-          <!-- Module 5: Double-Entry Accounting -->
-          <div class="module-matrix-card" data-category="accounts-tax">
-            <div class="module-card-top">
-              <div class="matrix-card-icon-box bg-icon-green">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="22" height="22" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-              </div>
-              <span class="module-tag tag-green" data-i18n="matrix.m5Tag">📊 Automated Ledger</span>
-            </div>
-            <h3 class="matrix-card-title" data-i18n="matrix.m5Title">Double-Entry Accounting</h3>
-            <p class="matrix-card-desc" data-i18n="matrix.m5Desc">Automated ledger postings from sales/purchases, cash &amp; bank registers, balance sheets, and P&amp;L.</p>
-            <ul class="module-bullets-list">
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m5B1">Instant Profit &amp; Loss (P&amp;L) statements</span></li>
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m5B2">Automated sales &amp; purchase journals</span></li>
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m5B3">Bank &amp; cash counter reconciliation</span></li>
-            </ul>
-            <div class="module-card-footer">
-              <span class="module-plan-pill plan-tier-starter" data-i18n="matrix.m5Plan">● Starter+ (৳500/mo)</span>
-              <a href="#pricing" class="module-plan-link" data-i18n="matrix.viewPlan">View Plan →</a>
-            </div>
-          </div>
-
-          <!-- Module 6: Supplier & Purchase Ledger -->
-          <div class="module-matrix-card" data-category="accounts-tax">
-            <div class="module-card-top">
-              <div class="matrix-card-icon-box bg-icon-orange">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="22" height="22" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-              </div>
-              <span class="module-tag tag-orange" data-i18n="matrix.m6Tag">📋 Vendor Dues</span>
-            </div>
-            <h3 class="matrix-card-title" data-i18n="matrix.m6Title">Purchases &amp; Supplier Dues</h3>
-            <p class="matrix-card-desc" data-i18n="matrix.m6Desc">Vendor bills, advance payments, purchase returns, and supplier payment history tracking.</p>
-            <ul class="module-bullets-list">
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m6B1">Supplier payment voucher generation</span></li>
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m6B2">Purchase order &amp; GRN tracking</span></li>
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m6B3">Due payment reminders &amp; statement</span></li>
-            </ul>
-            <div class="module-card-footer">
-              <span class="module-plan-pill plan-tier-starter" data-i18n="matrix.m6Plan">● Starter+ (৳500/mo)</span>
-              <a href="#pricing" class="module-plan-link" data-i18n="matrix.viewPlan">View Plan →</a>
-            </div>
-          </div>
-
-          <!-- Module 7: NBR VAT Mushak 6.3 -->
-          <div class="module-matrix-card" data-category="accounts-tax">
-            <div class="module-card-top">
-              <div class="matrix-card-icon-box bg-icon-green">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="22" height="22" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-              </div>
-              <span class="module-tag tag-green" data-i18n="matrix.m7Tag">🛡️ Legal VAT 6.3</span>
-            </div>
-            <h3 class="matrix-card-title" data-i18n="matrix.m7Title">VAT &amp; Financial Reports</h3>
-            <p class="matrix-card-desc" data-i18n="matrix.m7Desc">NBR-compliant VAT reports, daily Z-reports, gross margin analytics, and tax summaries.</p>
-            <ul class="module-bullets-list">
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m7B1">Official Mushak 6.3 invoice print</span></li>
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m7B2">NBR audit-ready tax calculations</span></li>
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m7B3">Monthly VAT return summary (9.1)</span></li>
-            </ul>
-            <div class="module-card-footer">
-              <span class="module-plan-pill plan-tier-basic" data-i18n="matrix.m7Plan">✓ Basic+ (৳1,000/mo)</span>
-              <a href="#pricing" class="module-plan-link" data-i18n="matrix.viewPlan">View Plan →</a>
-            </div>
-          </div>
-
-          <!-- Module 8: HR & Payroll -->
-          <div class="module-matrix-card" data-category="accounts-tax">
-            <div class="module-card-top">
-              <div class="matrix-card-icon-box bg-icon-rose">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="22" height="22" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              </div>
-              <span class="module-tag tag-rose" data-i18n="matrix.m8Tag">👥 Staff &amp; Payroll</span>
-            </div>
-            <h3 class="matrix-card-title" data-i18n="matrix.m8Title">HR, Attendance &amp; Payroll</h3>
-            <p class="matrix-card-desc" data-i18n="matrix.m8Desc">Staff check-in, overtime computation, monthly salary sheets, and sales commission calculations.</p>
-            <ul class="module-bullets-list">
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m8B1">Sales executive commission tracking</span></li>
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m8B2">Daily cashier check-in/out attendance</span></li>
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m8B3">Automated monthly salary slips</span></li>
-            </ul>
-            <div class="module-card-footer">
-              <span class="module-plan-pill plan-tier-medium" data-i18n="matrix.m8Plan">★ Medium+ (৳2,000/mo)</span>
-              <a href="#pricing" class="module-plan-link" data-i18n="matrix.viewPlan">View Plan →</a>
-            </div>
-          </div>
-
-          <!-- Module 9: Courier Hub -->
-          <div class="module-matrix-card" data-category="omnichannel-ai">
-            <div class="module-card-top">
-              <div class="matrix-card-icon-box bg-icon-orange">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="22" height="22" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-              </div>
-              <span class="module-tag tag-orange" data-i18n="matrix.m9Tag">🚚 1-Click Booking</span>
-            </div>
-            <h3 class="matrix-card-title" data-i18n="matrix.m9Title">Courier &amp; Delivery Hub</h3>
-            <p class="matrix-card-desc" data-i18n="matrix.m9Desc">Direct API auto-booking for Pathao, Steadfast, and REDX with live parcel tracking webhooks.</p>
-            <ul class="module-bullets-list">
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m9B1">1-click Pathao &amp; Steadfast dispatch</span></li>
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m9B2">Live tracking updates via webhook</span></li>
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m9B3">Automated COD payment reconciliation</span></li>
-            </ul>
-            <div class="module-card-footer">
-              <span class="module-plan-pill plan-tier-basic" data-i18n="matrix.m9Plan">✓ Basic+ (৳1,000/mo)</span>
-              <a href="#pricing" class="module-plan-link" data-i18n="matrix.viewPlan">View Plan →</a>
-            </div>
-          </div>
-
-          <!-- Module 10: CRM & Customer Loyalty -->
-          <div class="module-matrix-card" data-category="omnichannel-ai">
-            <div class="module-card-top">
-              <div class="matrix-card-icon-box bg-icon-amber">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="22" height="22" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-              </div>
-              <span class="module-tag tag-amber" data-i18n="matrix.m10Tag">⭐ Loyalty Points</span>
-            </div>
-            <h3 class="matrix-card-title" data-i18n="matrix.m10Title">CRM &amp; Customer Loyalty</h3>
-            <p class="matrix-card-desc" data-i18n="matrix.m10Desc">Customer purchase history, party credit limits, SMS alerts, and loyalty reward points.</p>
-            <ul class="module-bullets-list">
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m10B1">Customer purchase ledger &amp; dues</span></li>
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m10B2">Automated SMS invoice alerts</span></li>
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m10B3">Loyalty points &amp; membership tier</span></li>
-            </ul>
-            <div class="module-card-footer">
-              <span class="module-plan-pill plan-tier-medium" data-i18n="matrix.m10Plan">★ Medium+ (৳2,000/mo)</span>
-              <a href="#pricing" class="module-plan-link" data-i18n="matrix.viewPlan">View Plan →</a>
-            </div>
-          </div>
-
-          <!-- Module 11: Connected E-Commerce & Meta -->
-          <div class="module-matrix-card" data-category="omnichannel-ai">
-            <div class="module-card-top">
-              <div class="matrix-card-icon-box bg-icon-blue">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="22" height="22" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
-              </div>
-              <span class="module-tag tag-blue" data-i18n="matrix.m11Tag">🌐 Omnichannel Sync</span>
-            </div>
-            <h3 class="matrix-card-title" data-i18n="matrix.m11Title">Connected E-Commerce &amp; Meta</h3>
-            <p class="matrix-card-desc" data-i18n="matrix.m11Desc">Sync web orders directly into POS queue with unified real-time inventory control.</p>
-            <ul class="module-bullets-list">
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m11B1">Facebook &amp; Instagram catalog sync</span></li>
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m11B2">WooCommerce &amp; web order queue</span></li>
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m11B3">Shared real-time inventory pool</span></li>
-            </ul>
-            <div class="module-card-footer">
-              <span class="module-plan-pill plan-tier-medium" data-i18n="matrix.m11Plan">★ Medium+ (৳2,000/mo)</span>
-              <a href="#pricing" class="module-plan-link" data-i18n="matrix.viewPlan">View Plan →</a>
-            </div>
-          </div>
-
-          <!-- Module 12: Bengali AI Advisor -->
-          <div class="module-matrix-card" data-category="omnichannel-ai">
-            <div class="module-card-top">
-              <div class="matrix-card-icon-box bg-icon-green">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="22" height="22" stroke-width="2"><path d="M12 2a10 10 0 0 1 10 10c0 5.5-4.5 10-10 10a9.9 9.9 0 0 1-5-1.3L2 22l1.3-5A9.9 9.9 0 0 1 2 12a10 10 0 0 1 10-10z"/></svg>
-              </div>
-              <span class="module-tag tag-green" data-i18n="matrix.m12Tag">🤖 Bengali AI Copilot</span>
-            </div>
-            <h3 class="matrix-card-title" data-i18n="matrix.m12Title">Bengali AI Business Advisor</h3>
-            <p class="matrix-card-desc" data-i18n="matrix.m12Desc">Ask business questions in natural conversational Bengali to get instant profit and inventory insights.</p>
-            <ul class="module-bullets-list">
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m12B1">Conversational Bengali &amp; English chat</span></li>
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m12B2">Daily sales &amp; dead-stock alerts</span></li>
-              <li><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span data-i18n="matrix.m12B3">Actionable purchase recommendations</span></li>
-            </ul>
-            <div class="module-card-footer">
-              <span class="module-plan-pill plan-tier-high" data-i18n="matrix.m12Plan">⚡ High Only (৳3,000/mo)</span>
-              <a href="#pricing" class="module-plan-link" data-i18n="matrix.viewPlan">View Plan →</a>
-            </div>
-          </div>
-
-        </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================================================================
-         CENTERPIECE: LIVING INTERACTIVE SOFTWARE SANDBOX
-         Exact replica of user's uploaded dashboard with interactive tabs!
-         ====================================================================== -->
-    <section class="live-sandbox-section" id="live-demo">
-      <div class="container">
-        <!-- Section Header -->
-        <div class="section-header text-center">
-          <div class="section-badge-pill" data-i18n="sandbox.badge">Interactive Live Sandbox</div>
-          <h2 class="section-title" data-i18n="sandbox.title">Test-Drive the Live Cloud ERP Interface</h2>
-          <p class="section-subtitle" data-i18n="sandbox.subtitle">
-            Click through real modules below to experience how fast, intuitive, and solid YES SME feels in everyday retail operations.
-          </p>
-        </div>
-
-        <!-- Desktop Mockup Application Window -->
-        <div class="hero-mockup-wrapper">
-          <div class="dashboard-app-window">
-              <!-- Window Chrome / Titlebar -->
-              <div class="app-window-titlebar">
-                <div class="titlebar-dots">
-                  <span class="titlebar-dot dot-red"></span>
-                  <span class="titlebar-dot dot-yellow"></span>
-                  <span class="titlebar-dot dot-green"></span>
-                </div>
-                <div class="titlebar-title">
-                  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="14" height="14">
-                    <rect x="3" y="3" width="14" height="14" rx="2" stroke-width="1.6"/>
-                    <path d="M3 8h14" stroke-width="1.6"/>
-                  </svg>
-                  <span>YES SME Cloud ERP v2.4 (Live Server)</span>
-                </div>
-                <div class="titlebar-status-badge">
-                  <span class="badge-pulse-dot" style="width: 6px; height: 6px;"></span>
-                  <span data-i18n="mockup.outlet">Main Outlet (Banani)</span>
-                </div>
-              </div>
-
-              <!-- Interactive Tabs Bar -->
-              <div class="mockup-tabs-bar" role="tablist">
-                <button type="button" class="mockup-tab-btn active" data-tab-target="panel-overview" role="tab" aria-selected="true">
-                  <span>📊</span> <span data-i18n="mockup.tabOverview">Executive Overview</span>
-                </button>
-                <button type="button" class="mockup-tab-btn" data-tab-target="panel-pos" role="tab" aria-selected="false">
-                  <span>🛒</span> <span data-i18n="mockup.tabPos">Smart POS Counter</span>
-                </button>
-                <button type="button" class="mockup-tab-btn" data-tab-target="panel-stock" role="tab" aria-selected="false">
-                  <span>📦</span> <span data-i18n="mockup.tabStock">Multi-Warehouse Stock</span>
-                </button>
-                <button type="button" class="mockup-tab-btn" data-tab-target="panel-accounts" role="tab" aria-selected="false">
-                  <span>💳</span> <span data-i18n="mockup.tabAccounts">Double-Entry Accounts</span>
-                </button>
-                <button type="button" class="mockup-tab-btn" data-tab-target="panel-courier" role="tab" aria-selected="false">
-                  <span>🚚</span> <span data-i18n="mockup.tabCourier">Courier &amp; MFS Hub</span>
-                </button>
-                <button type="button" class="mockup-tab-btn" data-tab-target="panel-ai" role="tab" aria-selected="false">
-                  <span>🤖</span> <span data-i18n="mockup.tabAi">Bengali AI Insights</span>
-                </button>
-              </div>
-
-              <!-- Main Dashboard Viewport -->
-              <div class="dashboard-viewport">
-
-                <!-- 1. EXECUTIVE OVERVIEW PANEL -->
-                <div class="mockup-view-panel active" id="panel-overview">
-                  <!-- App Inner Topbar -->
-                  <div class="app-topbar">
-                    <div class="app-search-box">
-                      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="16" height="16">
-                        <circle cx="9" cy="9" r="6" stroke-width="1.8"/>
-                        <path d="M13.5 13.5L17.5 17.5" stroke-width="1.8" stroke-linecap="round"/>
-                      </svg>
-                      <span data-i18n="mockup.searchPlaceholder">Search orders, customers, SKUs, invoices...</span>
-                    </div>
-
-                    <div class="app-topbar-actions">
-                      <div class="app-outlet-badge">
-                        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="14" height="14">
-                          <path d="M3 7l7-4 7 4v9a1 1 0 01-1 1H4a1 1 0 01-1-1V7z" stroke-width="1.6"/>
-                        </svg>
-                        <span data-i18n="mockup.outlet">Main Outlet (Banani)</span>
-                      </div>
-
-                      <div class="app-user-pill">
-                        <div class="app-avatar">SA</div>
-                        <div style="font-size: 0.8125rem; font-weight: 700;">
-                          <div data-i18n="mockup.admin">Super Admin</div>
-                          <div style="font-size: 0.7rem; color: var(--text-muted); font-weight: 500;">Owner</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- AI Banner Card (Forest Green #0F5A38) -->
-                  <div class="dashboard-ai-banner">
-                    <div class="ai-banner-left">
-                      <div class="ai-bot-avatar">🤖</div>
-                      <div class="ai-banner-text">
-                        <h4 data-i18n="mockup.aiBannerTitle">Run Your Business Smarter with AI</h4>
-                        <p data-i18n="mockup.aiBannerDesc">Get instant insights, automate daily bookkeeping, and optimize retail inventory.</p>
-                      </div>
-                    </div>
-                    <button type="button" class="ai-banner-btn" data-tab-switch="panel-ai" data-i18n="mockup.aiBannerBtn">
-                      Talk to AI →
-                    </button>
-                  </div>
-
-                  <!-- 8 Metric Stat Cards (Taka formatted cleanly) -->
-                  <div class="metrics-stat-grid">
-                    <!-- Total Sales -->
-                    <div class="metric-stat-card">
-                      <div class="metric-card-top">
-                        <span class="metric-label" data-i18n="metric.totalSales">Total Sales</span>
-                        <span class="metric-icon-box icon-green">
-                          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="16" height="16">
-                            <path d="M3 13l4-4 4 4 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                          </svg>
-                        </span>
-                      </div>
-                      <div class="metric-value"><span class="currency-taka">&#2547;</span>243,690</div>
-                    </div>
-
-                    <!-- Total Orders -->
-                    <div class="metric-stat-card">
-                      <div class="metric-card-top">
-                        <span class="metric-label" data-i18n="metric.totalOrders">Total Orders</span>
-                        <span class="metric-icon-box icon-blue">
-                          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="16" height="16">
-                            <path d="M3 6l7-3 7 3-7 3-7-3z" stroke-width="1.7"/>
-                            <path d="M3 10l7 3 7-3" stroke-width="1.7"/>
-                            <path d="M3 14l7 3 7-3" stroke-width="1.7"/>
-                          </svg>
-                        </span>
-                      </div>
-                      <div class="metric-value">18</div>
-                    </div>
-
-                    <!-- Total Items Sold -->
-                    <div class="metric-stat-card">
-                      <div class="metric-card-top">
-                        <span class="metric-label" data-i18n="metric.itemsSold">Total Items Sold</span>
-                        <span class="metric-icon-box icon-green">
-                          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="16" height="16">
-                            <path d="M10 2.5L17 6.5v7l-7 4-7-4v-7l7-4z" stroke-width="1.6"/>
-                          </svg>
-                        </span>
-                      </div>
-                      <div class="metric-value">42</div>
-                    </div>
-
-                    <!-- Cost Total -->
-                    <div class="metric-stat-card">
-                      <div class="metric-card-top">
-                        <span class="metric-label" data-i18n="metric.costTotal">Cost Total</span>
-                        <span class="metric-icon-box icon-amber">
-                          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="16" height="16">
-                            <rect x="3" y="6" width="14" height="11" rx="2" stroke-width="1.7"/>
-                            <path d="M7 6V4a2 2 0 012-2h2a2 2 0 012 2v2" stroke-width="1.7"/>
-                          </svg>
-                        </span>
-                      </div>
-                      <div class="metric-value"><span class="currency-taka">&#2547;</span>169,190</div>
-                    </div>
-
-                    <!-- Gross Profit -->
-                    <div class="metric-stat-card">
-                      <div class="metric-card-top">
-                        <span class="metric-label" data-i18n="metric.grossProfit">Gross Profit</span>
-                        <span class="metric-icon-box icon-green">
-                          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="16" height="16">
-                            <path d="M10 3v14m-4-10h8a2 2 0 010 4H6a2 2 0 000 4h8" stroke-width="2" stroke-linecap="round"/>
-                          </svg>
-                        </span>
-                      </div>
-                      <div class="metric-value"><span class="currency-taka">&#2547;</span>74,500</div>
-                    </div>
-
-                    <!-- Profit Margin -->
-                    <div class="metric-stat-card" style="border: 1.5px solid var(--green-400);">
-                      <div class="metric-card-top">
-                        <span class="metric-label" data-i18n="metric.profitMargin">Profit Margin</span>
-                        <span class="metric-icon-box icon-green">
-                          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="16" height="16">
-                            <circle cx="6.5" cy="6.5" r="2.5" stroke-width="1.8"/>
-                            <circle cx="13.5" cy="13.5" r="2.5" stroke-width="1.8"/>
-                            <path d="M15 5L5 15" stroke-width="2" stroke-linecap="round"/>
-                          </svg>
-                        </span>
-                      </div>
-                      <div class="metric-value" style="color: var(--green-700);">30.6%</div>
-                    </div>
-
-                    <!-- Due Customers -->
-                    <div class="metric-stat-card">
-                      <div class="metric-card-top">
-                        <span class="metric-label" data-i18n="metric.dueCustomers">Due Customers</span>
-                        <span class="metric-icon-box icon-amber">
-                          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="16" height="16">
-                            <circle cx="8" cy="7" r="3" stroke-width="1.7"/>
-                            <path d="M3 16a5 5 0 0110 0" stroke-width="1.7"/>
-                          </svg>
-                        </span>
-                      </div>
-                      <div class="metric-value">2</div>
-                    </div>
-
-                    <!-- Total Due -->
-                    <div class="metric-stat-card">
-                      <div class="metric-card-top">
-                        <span class="metric-label" data-i18n="metric.totalDue">Total Due</span>
-                        <span class="metric-icon-box icon-red">
-                          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="16" height="16">
-                            <circle cx="10" cy="10" r="7.5" stroke-width="1.7"/>
-                            <path d="M10 6v4l2.5 2" stroke-width="1.7" stroke-linecap="round"/>
-                          </svg>
-                        </span>
-                      </div>
-                      <div class="metric-value val-red"><span class="currency-taka">&#2547;</span>243,690</div>
-                    </div>
-                  </div>
-
-                  <!-- Quick Modules Strip -->
-                  <div class="quick-modules-strip">
-                    <div class="quick-modules-header">
-                      <div class="quick-modules-title">
-                        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="18" height="18" style="color: var(--green-700);">
-                          <rect x="3" y="3" width="5" height="5" rx="1" stroke-width="1.7"/>
-                          <rect x="12" y="3" width="5" height="5" rx="1" stroke-width="1.7"/>
-                          <rect x="3" y="12" width="5" height="5" rx="1" stroke-width="1.7"/>
-                          <rect x="12" y="12" width="5" height="5" rx="1" stroke-width="1.7"/>
-                        </svg>
-                        <span data-i18n="metric.quickModules">Quick Modules</span>
-                      </div>
-                      <span class="quick-modules-badge" data-i18n="metric.shortcuts">15 One-Tap Shortcuts</span>
-                    </div>
-
-                    <div class="quick-modules-buttons">
-                      <button type="button" class="quick-module-btn" data-tab-switch="panel-pos">
-                        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="20" height="20"><rect x="3" y="4" width="14" height="12" rx="2" stroke-width="1.6"/><path d="M7 8h6M7 12h3" stroke-width="1.6"/></svg>
-                        <span data-i18n="metric.btnPos">POS (F2)</span>
-                      </button>
-                      <button type="button" class="quick-module-btn" data-tab-switch="panel-stock">
-                        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="20" height="20"><path d="M10 2.5L17 6.5v7l-7 4-7-4v-7l7-4z" stroke-width="1.6"/></svg>
-                        <span data-i18n="metric.btnInventory">Inventory</span>
-                      </button>
-                      <button type="button" class="quick-module-btn" data-tab-switch="panel-accounts">
-                        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="20" height="20"><rect x="4" y="3" width="12" height="14" rx="2" stroke-width="1.6"/><path d="M8 7h4M8 11h4" stroke-width="1.6"/></svg>
-                        <span data-i18n="metric.btnAccounting">Accounting</span>
-                      </button>
-                      <button type="button" class="quick-module-btn" data-tab-switch="panel-courier">
-                        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="20" height="20"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-                        <span data-i18n="metric.btnCourier">Courier Hub</span>
-                      </button>
-                      <button type="button" class="quick-module-btn" data-tab-switch="panel-ai">
-                        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="20" height="20"><path d="M12 2a10 10 0 0 1 10 10c0 5.5-4.5 10-10 10a9.9 9.9 0 0 1-5-1.3L2 22l1.3-5A9.9 9.9 0 0 1 2 12a10 10 0 0 1 10-10z"/></svg>
-                        <span data-i18n="metric.btnAi">Copilot AI</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 2. SMART POS COUNTER PANEL (Interactive Cart & Live Calculation) -->
-                <div class="mockup-view-panel" id="panel-pos">
-                  <div class="pos-mockup-grid">
-                    <!-- Left: Active Cart Table -->
-                    <div class="pos-cart-card">
-                      <div class="pos-mpos-banner-pill">
-                      <span class="mpos-icon">📱</span>
-                      <span class="mpos-text" data-i18n="sandbox.mposNote">No Computer Needed: Full Mobile POS (mPOS) support on any Android or iOS smartphone with camera barcode scanning!</span>
-                    </div>
-                    <div class="pos-cart-header">
-                        <div>
-                          <strong style="font-size: 1.05rem;" data-i18n="pos.activeBill">Counter #01 — Active Bill</strong>
-                          <div style="font-size: 0.75rem; color: var(--text-muted);" data-i18n="pos.cashierInfo">Customer: Walk-in Retail | Cashier: Tanvir</div>
-                        </div>
-                        <span class="offline-ready-badge" data-i18n="pos.offlineBadge">● ZERO DOWNTIME OFFLINE</span>
-                      </div>
-
-                      <div class="pos-interactive-hint">
-                        💡 <em>Tip: Click <strong>+</strong> or <strong>−</strong> to test real-time recalculation, or click Complete Sale below!</em>
-                      </div>
-
-                      <table class="pos-table">
-                        <thead>
-                          <tr>
-                            <th data-i18n="pos.thItem">Item &amp; Barcode</th>
-                            <th style="width: 100px; text-align: center;" data-i18n="pos.thQty">Qty</th>
-                            <th style="text-align: right;" data-i18n="pos.thPrice">Price</th>
-                            <th style="text-align: right;" data-i18n="pos.thTotal">Total</th>
-                          </tr>
-                        </thead>
-                        <tbody id="posCartBody">
-                          <!-- Row 1: Formal Shirt -->
-                          <tr class="pos-item-row" data-id="shirt" data-price="1850">
-                            <td>
-                              <strong data-i18n="pos.itemShirt">Premium Oxford Formal Shirt</strong>
-                              <div style="font-size: 0.72rem; color: var(--text-muted);">SKU: SHT-BLU-42 · Barcode: 8941100234</div>
-                            </td>
-                            <td style="text-align: center;">
-                              <div class="pos-qty-controls">
-                                <button type="button" class="pos-qty-btn pos-minus" aria-label="Decrease quantity">−</button>
-                                <span class="pos-qty-val">1</span>
-                                <button type="button" class="pos-qty-btn pos-plus" aria-label="Increase quantity">+</button>
-                              </div>
-                            </td>
-                            <td style="text-align: right;"><span class="currency-taka">&#2547;</span>1,850</td>
-                            <td style="text-align: right;" class="item-row-total"><strong><span class="currency-taka">&#2547;</span>1,850</strong></td>
-                          </tr>
-
-                          <!-- Row 2: Raw Denim -->
-                          <tr class="pos-item-row" data-id="denim" data-price="1950">
-                            <td>
-                              <strong data-i18n="pos.itemDenim">Slim Fit Raw Denim</strong>
-                              <div style="font-size: 0.72rem; color: var(--text-muted);">SKU: DNM-IND-32 · Barcode: 8941100882</div>
-                            </td>
-                            <td style="text-align: center;">
-                              <div class="pos-qty-controls">
-                                <button type="button" class="pos-qty-btn pos-minus" aria-label="Decrease quantity">−</button>
-                                <span class="pos-qty-val">1</span>
-                                <button type="button" class="pos-qty-btn pos-plus" aria-label="Increase quantity">+</button>
-                              </div>
-                            </td>
-                            <td style="text-align: right;"><span class="currency-taka">&#2547;</span>1,950</td>
-                            <td style="text-align: right;" class="item-row-total"><strong><span class="currency-taka">&#2547;</span>1,950</strong></td>
-                          </tr>
-
-                          <!-- Row 3: Polo Tee -->
-                          <tr class="pos-item-row" data-id="polo" data-price="950">
-                            <td>
-                              <strong data-i18n="pos.itemPolo">Pique Cotton Polo Tee</strong>
-                              <div style="font-size: 0.72rem; color: var(--text-muted);">SKU: POL-BLK-L · Barcode: 8941100911</div>
-                            </td>
-                            <td style="text-align: center;">
-                              <div class="pos-qty-controls">
-                                <button type="button" class="pos-qty-btn pos-minus" aria-label="Decrease quantity">−</button>
-                                <span class="pos-qty-val">1</span>
-                                <button type="button" class="pos-qty-btn pos-plus" aria-label="Increase quantity">+</button>
-                              </div>
-                            </td>
-                            <td style="text-align: right;"><span class="currency-taka">&#2547;</span>950</td>
-                            <td style="text-align: right;" class="item-row-total"><strong><span class="currency-taka">&#2547;</span>950</strong></td>
-                          </tr>
-                        </tbody>
-                      </table>
-
-                      <!-- Calculation Summary -->
-                      <div class="pos-summary-box">
-                        <div class="pos-summary-row">
-                          <span data-i18n="pos.subtotal">Subtotal:</span>
-                          <span id="posSubtotalDisplay"><span class="currency-taka">&#2547;</span>4,750.00</span>
-                        </div>
-                        <div class="pos-summary-row" style="color: var(--green-700);">
-                          <span data-i18n="pos.discount">Invoice Discount (10%):</span>
-                          <span id="posDiscountDisplay">-<span class="currency-taka">&#2547;</span>475.00</span>
-                        </div>
-                        <div class="pos-summary-row">
-                          <span data-i18n="pos.vat">NBR Mushak 6.3 VAT (5%):</span>
-                          <span id="posVatDisplay"><span class="currency-taka">&#2547;</span>213.75</span>
-                        </div>
-                        <div class="pos-total-row">
-                          <span data-i18n="pos.netPayable">Net Payable:</span>
-                          <span id="posGrandTotalDisplay"><span class="currency-taka">&#2547;</span>4,488.75</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- Right: Split Payment Card -->
-                    <div class="pos-payment-card">
-                      <h4 style="font-size: 1rem; font-weight: 800; margin-bottom: 0.75rem;" data-i18n="pos.splitMode">Payment Settlement</h4>
-                      
-                      <!-- Payment Method Pills -->
-                      <div class="pos-pay-methods-pills">
-                        <button type="button" class="pos-pay-pill active" data-pay-mode="split" data-i18n="pos.splitBtn">⚡ Split (Cash + bKash)</button>
-                        <button type="button" class="pos-pay-pill" data-pay-mode="cash" data-i18n="pos.allCashBtn">💵 All Cash</button>
-                        <button type="button" class="pos-pay-pill" data-pay-mode="bkash" data-i18n="pos.allBkashBtn">📱 All bKash</button>
-                      </div>
-
-                      <div class="pos-settlement-box">
-                        <div class="settle-line">
-                          <span data-i18n="pos.cashTenderedLabel">💵 Cash Tendered:</span>
-                          <strong id="posCashTendered"><span class="currency-taka">&#2547;</span>2,000.00</strong>
-                        </div>
-                        <div class="settle-line">
-                          <span data-i18n="pos.bkashTenderedLabel">📱 bKash Merchant (TxID: 9AK887):</span>
-                          <strong id="posBkashTendered"><span class="currency-taka">&#2547;</span>2,488.75</strong>
-                        </div>
-                        <div class="settle-line change-line">
-                          <span data-i18n="pos.changeDueLabel">Change Due:</span>
-                          <span><span class="currency-taka">&#2547;</span>0.00 (Exact)</span>
-                        </div>
-                      </div>
-
-                      <!-- Action Buttons -->
-                      <div class="pos-action-buttons">
-                        <button type="button" class="btn btn-sm btn-primary pos-trigger-print" id="posCompletePrintBtn" style="flex:1;">
-                          <span data-i18n="pos.btnPrint">🖨️ Complete &amp; Print Receipt</span>
-                        </button>
-                        <button type="button" class="btn btn-sm btn-secondary pos-trigger-sms" id="posSmsBtn" style="flex:1;">
-                          <span data-i18n="pos.btnSms">📱 SMS e-Memo</span>
-                        </button>
-                      </div>
-
-                      <div class="pos-offline-note" data-i18n="pos.offlineNote">
-                        ⚡ <strong>Offline Resilience:</strong> Even if shopping mall Wi-Fi drops, invoice #INV-9812 saves locally into IndexedDB and prints in 0.3s. Auto-cloud sync resumes instantly upon connection.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 3. MULTI-WAREHOUSE STOCK PANEL -->
-                <div class="mockup-view-panel" id="panel-stock">
-                  <div style="background-color: #ffffff; border: 1.5px solid var(--border-light); border-radius: 16px; padding: 1.5rem;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.75rem;">
-                      <div>
-                        <strong style="font-size: 1.1rem;" data-i18n="stock.title">Live Multi-Branch Stock Monitor</strong>
-                        <div style="font-size: 0.8rem; color: var(--text-muted);" data-i18n="stock.subtitle">Real-time inventory levels across Dhaka &amp; Regional Warehouses</div>
-                      </div>
-                      <button type="button" class="btn btn-sm btn-secondary" id="stockTransferChallanBtn">
-                        <span data-i18n="stock.btnChallan">+ Issue Stock Transfer Challan</span>
-                      </button>
-                    </div>
-
-                    <table class="pos-table">
-                      <thead>
-                        <tr>
-                          <th data-i18n="stock.thProduct">Product Name</th>
-                          <th data-i18n="stock.thBanani">Banani Outlet</th>
-                          <th data-i18n="stock.thUttara">Uttara Central Hub</th>
-                          <th data-i18n="stock.thCtg">Chittagong Depot</th>
-                          <th data-i18n="stock.thTotal">Total Stock</th>
-                          <th data-i18n="stock.thStatus">Status</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td><strong>Linen Casual Blazer (Navy)</strong></td>
-                          <td>14 pcs</td>
-                          <td>85 pcs</td>
-                          <td>22 pcs</td>
-                          <td><strong>121 pcs</strong></td>
-                          <td><span class="offline-ready-badge" style="background:#ecfdf5; color:#047857;">Healthy</span></td>
-                        </tr>
-                        <tr>
-                          <td><strong>Leather Loafer Shoes (Brown)</strong></td>
-                          <td>4 pcs</td>
-                          <td>12 pcs</td>
-                          <td>0 pcs</td>
-                          <td><strong>16 pcs</strong></td>
-                          <td><span class="offline-ready-badge" style="background:#fffbeb; color:#b45309; border-color:#fcd34d;">Low Stock Alert</span></td>
-                        </tr>
-                        <tr>
-                          <td><strong>Printed Silk Scarf</strong></td>
-                          <td>32 pcs</td>
-                          <td>140 pcs</td>
-                          <td>45 pcs</td>
-                          <td><strong>217 pcs</strong></td>
-                          <td><span class="offline-ready-badge" style="background:#ecfdf5; color:#047857;">Optimal</span></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-
-                <!-- 4. DOUBLE-ENTRY ACCOUNTS PANEL -->
-                <div class="mockup-view-panel" id="panel-accounts">
-                  <div style="background-color: #ffffff; border: 1.5px solid var(--border-light); border-radius: 16px; padding: 1.5rem;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.75rem;">
-                      <div>
-                        <strong style="font-size: 1.1rem;" data-i18n="accounts.title">Automated Journal Vouchers &amp; Financial Statements</strong>
-                        <div style="font-size: 0.8rem; color: var(--text-muted);" data-i18n="accounts.subtitle">Double-entry bookkeeping compliant with Bangladeshi GAAP &amp; NBR VAT</div>
-                      </div>
-                      <button type="button" class="btn btn-sm btn-secondary" id="accountsDownloadPdfBtn">
-                        <span data-i18n="accounts.btnPdf">📥 Download PDF P&amp;L</span>
-                      </button>
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1rem;">
-                      <div style="background:#f7faf8; padding: 1.15rem; border-radius: 12px; border: 1.5px solid var(--border-light);">
-                        <div style="font-size: 0.8rem; color: var(--text-muted);" data-i18n="accounts.kpiCash">Cash in Hand (Petty Cash)</div>
-                        <div style="font-size: 1.45rem; font-weight: 800; color: var(--text-title); margin-top: 0.35rem;"><span class="currency-taka">&#2547;</span>48,500</div>
-                      </div>
-                      <div style="background:#f7faf8; padding: 1.15rem; border-radius: 12px; border: 1.5px solid var(--border-light);">
-                        <div style="font-size: 0.8rem; color: var(--text-muted);" data-i18n="accounts.kpiBank">BRAC Bank Corporate A/C</div>
-                        <div style="font-size: 1.45rem; font-weight: 800; color: var(--green-700); margin-top: 0.35rem;"><span class="currency-taka">&#2547;</span>1,280,450</div>
-                      </div>
-                      <div style="background:#f7faf8; padding: 1.15rem; border-radius: 12px; border: 1.5px solid var(--border-light);">
-                        <div style="font-size: 0.8rem; color: var(--text-muted);" data-i18n="accounts.kpiProfit">Today's Net Profit</div>
-                        <div style="font-size: 1.45rem; font-weight: 800; color: var(--green-800); margin-top: 0.35rem;">+<span class="currency-taka">&#2547;</span>74,500</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 5. COURIER & MFS HUB PANEL -->
-                <div class="mockup-view-panel" id="panel-courier">
-                  <div style="background-color: #ffffff; border: 1.5px solid var(--border-light); border-radius: 16px; padding: 1.5rem;">
-                    <strong style="font-size: 1.1rem; display:block; margin-bottom: 1rem;" data-i18n="courier.title">Unified Courier &amp; MFS Dispatch Desk</strong>
-
-                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.15rem;">
-                      <div style="border: 1.5px solid var(--border-light); border-radius: 12px; padding: 1.15rem; background: #fafafa;">
-                        <div style="display:flex; justify-content:space-between; font-weight:700; margin-bottom: 0.4rem;">
-                          <span>Pathao Courier</span>
-                          <span style="color: #ef4444; font-weight: 800;">12 Shipped</span>
-                        </div>
-                        <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.4;">Auto-generated tracking cons: PTH-89218 • 100% API sync</p>
-                      </div>
-                      <div style="border: 1.5px solid var(--border-light); border-radius: 12px; padding: 1.15rem; background: #fafafa;">
-                        <div style="display:flex; justify-content:space-between; font-weight:700; margin-bottom: 0.4rem;">
-                          <span>Steadfast Courier</span>
-                          <span style="color: #2563eb; font-weight: 800;">24 Dispatched</span>
-                        </div>
-                        <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.4;">Next-day Dhaka &amp; Sub-Dhaka delivery tracking enabled</p>
-                      </div>
-                      <div style="border: 1.5px solid var(--border-light); border-radius: 12px; padding: 1.15rem; background: #fafafa;">
-                        <div style="display:flex; justify-content:space-between; font-weight:700; margin-bottom: 0.4rem;">
-                          <span>bKash Merchant Pay</span>
-                          <span style="color: #059669; font-weight: 800;"><span class="currency-taka">&#2547;</span>89,200 Settled</span>
-                        </div>
-                        <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.4;">Instant webhook reconciliation without manual transaction checking</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 6. BENGALI AI INSIGHTS PANEL -->
-                <div class="mockup-view-panel" id="panel-ai">
-                  <div style="background-color: #ffffff; border: 1.5px solid var(--border-light); border-radius: 16px; padding: 1.5rem;">
-                    <div style="display:flex; align-items:center; gap: 0.75rem; margin-bottom: 1.25rem;">
-                      <span style="font-size: 1.5rem;">🤖</span>
-                      <div>
-                        <strong data-i18n="ai.title">YES SME AI Business Advisor (Bangla &amp; English)</strong>
-                        <div style="font-size: 0.78rem; color: var(--text-muted);" data-i18n="ai.subtitle">Ask business questions in plain Bengali to get deep operational answers</div>
-                      </div>
-                    </div>
-
-                    <div style="display: flex; flex-direction: column; gap: 0.85rem; max-width: 680px;">
-                      <div style="background: #eef6f1; padding: 0.85rem 1.1rem; border-radius: 14px; font-size: 0.875rem; align-self: flex-end; color: var(--green-950); font-weight:600;">
-                        👤 "গত সপ্তাহের চেয়ে আজকের মোট বিক্রি কেমন এবং কোন আইটেমে মুনাফা বেশি?"
-                      </div>
-                      <div style="background: #f4f8f5; border: 1px solid var(--border-light); padding: 1rem 1.25rem; border-radius: 14px; font-size: 0.875rem; align-self: flex-start; color: var(--text-body); line-height: 1.6;">
-                        🤖 <strong>YES SME AI:</strong> "আজকের মোট বিক্রি <strong><span class="currency-taka">&#2547;</span>২,৪৩,৬৯০</strong>, যা গত সপ্তাহের একই দিনের চেয়ে <strong>১৮.৪% বেশি</strong>। সর্বোচ্চ মুনাফা হয়েছে <strong>'Premium Oxford Formal Shirt'</strong>-এ (গ্রস মার্জিন <strong>৪৩%</strong>)। তবে ধানমন্ডি আউটলেটে <strong>'Leather Loafer Shoes'</strong>-এর স্টক শেষ হওয়ার মুখে, এখনই উত্তরা সেন্ট্রাল ওয়্যারহাউজ থেকে ১২ জোড়া রিঅর্ডার করার পরামর্শ দেওয়া হচ্ছে।"
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              </div><!-- /dashboard-viewport -->
-          </div><!-- /dashboard-app-window -->
-        </div><!-- /hero-mockup-wrapper -->
-      </div><!-- /container -->
-    </section>
-
-    <!-- ======================================================================
-         SIMULATED 80MM THERMAL RECEIPT MODAL (Interactive POS Checkout Demo)
-         ====================================================================== -->
-    <div class="thermal-receipt-modal" id="posReceiptModal" role="dialog" aria-modal="true" aria-hidden="true">
-      <div class="thermal-receipt-backdrop" id="posReceiptBackdrop"></div>
-      <div class="thermal-receipt-dialog">
-        <!-- Close Button -->
-        <button type="button" class="receipt-close-btn" id="closeReceiptBtn" aria-label="Close receipt">✕</button>
-
-        <!-- Realistic 80mm Paper Slip -->
-        <div class="receipt-paper-80mm">
-          <div class="receipt-header text-center">
-            <h4 class="receipt-store-name">YES RETAIL BANANI FLAGSHIP</h4>
-            <div class="receipt-store-sub">YES SME Enterprise Cloud POS</div>
-            <div class="receipt-store-meta">Road 11, Block D, Banani, Dhaka-1213</div>
-            <div class="receipt-store-meta">Mushak 6.3 Approved Tax Invoice</div>
-            <div class="receipt-bin">BIN: 002918239-0101 · NBR VAT</div>
-          </div>
-
-          <div class="receipt-divider-dash">--------------------------------</div>
-
-          <div class="receipt-meta-grid">
-            <div><strong>Inv:</strong> #INV-9812-POS</div>
-            <div style="text-align: right;" id="receiptDateTime">2026-10-30 01:15</div>
-            <div><strong>Cashier:</strong> Tanvir (Shift #1)</div>
-            <div style="text-align: right;"><strong>Terminal:</strong> POS-01</div>
-            <div><strong>Customer:</strong> Walk-in Retail</div>
-            <div style="text-align: right;"><strong>Type:</strong> Offline Cached</div>
-          </div>
-
-          <div class="receipt-divider-dash">================================</div>
-
-          <!-- Itemised List -->
-          <div class="receipt-items-table" id="receiptItemsList">
-            <!-- Dynamic items rendered by JS -->
-          </div>
-
-          <div class="receipt-divider-dash">--------------------------------</div>
-
-          <!-- Total Calculation -->
-          <div class="receipt-calc-table">
-            <div class="receipt-calc-row">
-              <span>Subtotal:</span>
-              <strong id="receiptSubtotal"><span class="currency-taka">&#2547;</span>4,750.00</strong>
-            </div>
-            <div class="receipt-calc-row">
-              <span>Discount (10%):</span>
-              <span id="receiptDiscount">-<span class="currency-taka">&#2547;</span>475.00</span>
-            </div>
-            <div class="receipt-calc-row">
-              <span>Mushak 6.3 VAT (5%):</span>
-              <span id="receiptVat"><span class="currency-taka">&#2547;</span>213.75</span>
-            </div>
-            <div class="receipt-divider-dash">================================</div>
-            <div class="receipt-calc-row receipt-grand-total">
-              <span>NET PAYABLE:</span>
-              <strong id="receiptGrandTotal"><span class="currency-taka">&#2547;</span>4,488.75</strong>
-            </div>
-          </div>
-
-          <div class="receipt-divider-dash">--------------------------------</div>
-
-          <!-- Payment Breakdown -->
-          <div class="receipt-meta-grid">
-            <div><strong>Payment Mode:</strong></div>
-            <div style="text-align: right;" id="receiptPayMode">Split (Cash + bKash)</div>
-            <div>Cash Tendered:</div>
-            <div style="text-align: right;" id="receiptCashTendered"><span class="currency-taka">&#2547;</span>2,000.00</div>
-            <div>bKash Merchant:</div>
-            <div style="text-align: right;" id="receiptBkashTendered"><span class="currency-taka">&#2547;</span>2,488.75</div>
-            <div>bKash TrxID:</div>
-            <div style="text-align: right;">9AK887210B</div>
-          </div>
-
-          <div class="receipt-divider-dash">================================</div>
-
-          <div class="receipt-footer text-center">
-            <div class="receipt-barcode-box">
-              <div class="simulated-barcode">||||| | |||| ||| |||||| | ||||| |||| |</div>
-              <div class="simulated-barcode-num">* 89411002349812 *</div>
-            </div>
-            <p class="receipt-thankyou">*** THANK YOU FOR SHOPPING WITH US ***</p>
-            <p class="receipt-power">Powered by YES SME Cloud POS · yesbangladesh.net</p>
-          </div>
-
-          <!-- Sawtooth tear edge -->
-          <div class="receipt-tear-edge"></div>
-        </div>
-
-        <!-- Receipt Print Actions -->
-        <div class="receipt-dialog-actions">
-          <button type="button" class="btn btn-sm btn-primary" onclick="window.print()">
-            🖨️ Print Receipt
-          </button>
-          <button type="button" class="btn btn-sm btn-secondary" id="closeReceiptBtn2">
-            Close Preview
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Floating Live Toast Notification -->
-    <div class="pos-toast" id="posLiveToast" role="alert" aria-live="polite"></div>
-
-
-    <section class="section section-alt industry-solutions-section" id="solutions">
-      <div class="container">
-        <!-- Section Header -->
-        <div class="section-header text-center">
-          <div class="section-badge-pill" data-i18n="solutions.badge">Tailored Industry Solutions</div>
-          <h2 class="section-title" data-i18n="solutions.title">Engineered for Every Type of Bangladeshi Business</h2>
-          <p class="section-subtitle" data-i18n="solutions.subtitle">
-            Whether you run a fashion boutique, supermarket, wholesale gaddi, mobile gadget shop, or online D2C brand, YES SME adapts to your operational workflow.
-          </p>
-        </div>
-
-        <!-- Industry Horizontal Tabs Nav -->
-        <div class="industry-tabs-nav" role="tablist">
-          <button type="button" class="industry-tab-btn active" data-industry-tab="fashion" role="tab" aria-selected="true">
-            <span class="ind-tab-icon">👗</span>
-            <span data-i18n="ind.tabFashion">Fashion &amp; Lifestyle</span>
-          </button>
-          <button type="button" class="industry-tab-btn" data-industry-tab="grocery" role="tab" aria-selected="false">
-            <span class="ind-tab-icon">🛒</span>
-            <span data-i18n="ind.tabGrocery">Super Shops &amp; Groceries</span>
-          </button>
-          <button type="button" class="industry-tab-btn" data-industry-tab="wholesale" role="tab" aria-selected="false">
-            <span class="ind-tab-icon">🏢</span>
-            <span data-i18n="ind.tabWholesale">Wholesale &amp; Distribution</span>
-          </button>
-          <button type="button" class="industry-tab-btn" data-industry-tab="electronics" role="tab" aria-selected="false">
-            <span class="ind-tab-icon">📱</span>
-            <span data-i18n="ind.tabElectronics">Electronics &amp; Mobile</span>
-          </button>
-          <button type="button" class="industry-tab-btn" data-industry-tab="ecommerce" role="tab" aria-selected="false">
-            <span class="ind-tab-icon">🚚</span>
-            <span data-i18n="ind.tabEcommerce">E-Commerce &amp; D2C</span>
-          </button>
-        </div>
-
-        <!-- Industry Tab Panes Content -->
-        <div class="industry-panes-wrapper">
-
-          <!-- Pane 1: Fashion & Apparel -->
-          <div class="industry-tab-pane active" id="ind-pane-fashion" role="tabpanel">
-            <div class="industry-pane-grid">
-              <div class="industry-content-col">
-                <div class="industry-header-box">
-                  <span class="industry-mini-badge" data-i18n="ind.fashionBadge">Fashion &amp; Apparel Retailers</span>
-                  <h3 class="industry-pane-title" data-i18n="ind.fashionHeadline">Complete Matrix Variant Control for Clothing &amp; Footwear Brands</h3>
-                  <p class="industry-pane-desc" data-i18n="ind.fashionDesc">Manage complex size-color-fit combinations effortlessly. Eliminate stockouts of fast-moving sizes across showroom branches with automated inter-branch transfers.</p>
-                </div>
-                <div class="industry-subgrid">
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-green">📐</div>
-                    <div>
-                      <strong data-i18n="ind.f1Title">Size &amp; Color Matrix</strong>
-                      <p data-i18n="ind.f1Desc">Create single parent item with 50+ child SKU combinations in 10 seconds.</p>
-                    </div>
-                  </div>
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-orange">🏷️</div>
-                    <div>
-                      <strong data-i18n="ind.f2Title">Barcode Tag Printing</strong>
-                      <p data-i18n="ind.f2Desc">Print custom thermal hangtags with price, size, SKU, and VAT breakdown.</p>
-                    </div>
-                  </div>
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-blue">🔄</div>
-                    <div>
-                      <strong data-i18n="ind.f3Title">Multi-Branch Requisition</strong>
-                      <p data-i18n="ind.f3Desc">Transfer unsold sizes from slow branches to high-demand flagship outlets.</p>
-                    </div>
-                  </div>
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-purple">👗</div>
-                    <div>
-                      <strong data-i18n="ind.f4Title">Tailoring &amp; Alterations</strong>
-                      <p data-i18n="ind.f4Desc">Log customer measurement slips and alteration delivery dates with SMS alerts.</p>
-                    </div>
-                  </div>
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-rose">⭐</div>
-                    <div>
-                      <strong data-i18n="ind.f5Title">Seasonal Discount Engine</strong>
-                      <p data-i18n="ind.f5Desc">Auto-apply BOGO, festive Eid promo tiers, and VIP loyalty point redemptions.</p>
-                    </div>
-                  </div>
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-amber">↩️</div>
-                    <div>
-                      <strong data-i18n="ind.f6Title">Hassle-Free Exchange</strong>
-                      <p data-i18n="ind.f6Desc">Fast exchange within 7 days by phone number or receipt barcode lookup.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="industry-impact-col">
-                <div class="industry-impact-card">
-                  <div class="impact-metric-pill" data-i18n="ind.fashionMetricPill">Inventory Accuracy</div>
-                  <div class="impact-big-stat">99.4%</div>
-                  <div class="impact-stat-label" data-i18n="ind.fashionStatLabel">Stock Accuracy Across 1,400+ Size SKUs</div>
-                  <p class="impact-quote" data-i18n="ind.fashionQuote">
-                    "Before YES SME, our Banani showroom constantly ran out of popular M-size shirts while they sat unsold in our Dhanmondi outlet. Now inter-branch transfers happen in 1 click."
-                  </p>
-                  <div class="impact-author">
-                    <strong>Tanvir Ahmed</strong> — Artizan Menswear, Dhaka
-                  </div>
-                  <button type="button" class="btn btn-md btn-primary open-plan-modal" data-plan-id="medium" style="width: 100%; margin-top: 1.25rem;">
-                    Schedule Fashion Demo
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Pane 2: Supermarket & Grocery -->
-          <div class="industry-tab-pane" id="ind-pane-grocery" role="tabpanel">
-            <div class="industry-pane-grid">
-              <div class="industry-content-col">
-                <div class="industry-header-box">
-                  <span class="industry-mini-badge" data-i18n="ind.groceryBadge">Supermarkets &amp; FMCG</span>
-                  <h3 class="industry-pane-title" data-i18n="ind.groceryHeadline">High-Speed Billing &amp; Automated Expiry Control for Super Shops</h3>
-                  <p class="industry-pane-desc" data-i18n="ind.groceryDesc">Eliminate evening rush billing queues with sub-second barcode scans and electronic weighing scale integration. Stop financial losses with automated batch expiry warnings.</p>
-                </div>
-                <div class="industry-subgrid">
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-green">⚖️</div>
-                    <div>
-                      <strong data-i18n="ind.g1Title">Weight Scale Integration</strong>
-                      <p data-i18n="ind.g1Desc">Auto-read price-embedded barcodes for fruits, fish, meat, and vegetables.</p>
-                    </div>
-                  </div>
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-orange">⏳</div>
-                    <div>
-                      <strong data-i18n="ind.g2Title">Batch Expiry Management</strong>
-                      <p data-i18n="ind.g2Desc">Automated 30-day alerts for expiring dairy, packaged food, and medicine.</p>
-                    </div>
-                  </div>
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-blue">⚡</div>
-                    <div>
-                      <strong data-i18n="ind.g3Title">Zero Queue Speed Billing</strong>
-                      <p data-i18n="ind.g3Desc">Sub-second scan-to-print keeps counter queues moving during peak rush.</p>
-                    </div>
-                  </div>
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-purple">📦</div>
-                    <div>
-                      <strong data-i18n="ind.g4Title">Carton-to-Piece Breakup</strong>
-                      <p data-i18n="ind.g4Desc">Purchase by carton/case and auto-convert into loose units for retail sale.</p>
-                    </div>
-                  </div>
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-rose">📋</div>
-                    <div>
-                      <strong data-i18n="ind.g5Title">Supplier Return Tracking</strong>
-                      <p data-i18n="ind.g5Desc">Log damage or expired goods for supplier credit note adjustment.</p>
-                    </div>
-                  </div>
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-amber">👥</div>
-                    <div>
-                      <strong data-i18n="ind.g6Title">Dual Cashier Shift Handover</strong>
-                      <p data-i18n="ind.g6Desc">Automated drawer audit prevents cash discrepancies between shifts.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="industry-impact-col">
-                <div class="industry-impact-card">
-                  <div class="impact-metric-pill" data-i18n="ind.groceryMetricPill">Counter Velocity</div>
-                  <div class="impact-big-stat">3.2x</div>
-                  <div class="impact-stat-label" data-i18n="ind.groceryStatLabel">Faster Checkout During Peak Evening Hours</div>
-                  <p class="impact-quote" data-i18n="ind.groceryQuote">
-                    "The weight scale integration means cashiers don't type weights manually. Scan, weigh, and print receipt takes under 4 seconds."
-                  </p>
-                  <div class="impact-author">
-                    <strong>Mahmudul Hasan</strong> — Green Fresh Super Shop, Uttara
-                  </div>
-                  <button type="button" class="btn btn-md btn-primary open-plan-modal" data-plan-id="high" style="width: 100%; margin-top: 1.25rem;">
-                    Schedule Supermarket Demo
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Pane 3: Wholesale & Distribution -->
-          <div class="industry-tab-pane" id="ind-pane-wholesale" role="tabpanel">
-            <div class="industry-pane-grid">
-              <div class="industry-content-col">
-                <div class="industry-header-box">
-                  <span class="industry-mini-badge" data-i18n="ind.wholesaleBadge">Wholesale &amp; Distribution</span>
-                  <h3 class="industry-pane-title" data-i18n="ind.wholesaleHeadline">Party Credit Management, Multi-Tier Pricing &amp; Dispatch Challans</h3>
-                  <p class="industry-pane-desc" data-i18n="ind.wholesaleDesc">Engineered for Bangladeshi wholesale hubs (Moulvibazar, Chawkbazar, Khatunganj). Automate customer credit limits, multi-tier pricing, and payment collection tracking.</p>
-                </div>
-                <div class="industry-subgrid">
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-green">📊</div>
-                    <div>
-                      <strong data-i18n="ind.w1Title">Party Khata &amp; Credit Limits</strong>
-                      <p data-i18n="ind.w1Desc">Real-time ledger balance, automated credit caps, and overdue payment alerts.</p>
-                    </div>
-                  </div>
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-orange">📦</div>
-                    <div>
-                      <strong data-i18n="ind.w2Title">Bosta / Carton Tier Pricing</strong>
-                      <p data-i18n="ind.w2Desc">Set different rates for dealer, wholesaler, and retail walk-in buyers.</p>
-                    </div>
-                  </div>
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-blue">🚚</div>
-                    <div>
-                      <strong data-i18n="ind.w3Title">Delivery Challans &amp; Gate Pass</strong>
-                      <p data-i18n="ind.w3Desc">Generate official transport challans and warehouse gate passes in 1 click.</p>
-                    </div>
-                  </div>
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-purple">📱</div>
-                    <div>
-                      <strong data-i18n="ind.w4Title">Automated SMS Due Reminders</strong>
-                      <p data-i18n="ind.w4Desc">Send automated Bangla SMS reminders to party clients with pending balances.</p>
-                    </div>
-                  </div>
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-rose">💰</div>
-                    <div>
-                      <strong data-i18n="ind.w5Title">Cheque &amp; Bank Tracking</strong>
-                      <p data-i18n="ind.w5Desc">Track post-dated cheques (PDC), clearance dates, and dishonored entries.</p>
-                    </div>
-                  </div>
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-amber">🏬</div>
-                    <div>
-                      <strong data-i18n="ind.w6Title">Multi-Warehouse Inventory</strong>
-                      <p data-i18n="ind.w6Desc">Live stock reconciliation across main gaddi and regional godowns.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="industry-impact-col">
-                <div class="industry-impact-card">
-                  <div class="impact-metric-pill" data-i18n="ind.wholesaleMetricPill">Credit Tracking</div>
-                  <div class="impact-big-stat"><span class="currency-taka">&#2547;</span>45L+</div>
-                  <div class="impact-stat-label" data-i18n="ind.wholesaleStatLabel">Due Credit Tracked with Automated SMS Reminders</div>
-                  <p class="impact-quote" data-i18n="ind.wholesaleQuote">
-                    "In Moulvibazar wholesale market, tracking dues across 300+ retailers was a nightmare in paper khata. YES SME automated our party ledger."
-                  </p>
-                  <div class="impact-author">
-                    <strong>Al-Haj Rafiqul Islam</strong> — Bismillah Traders, Moulvibazar
-                  </div>
-                  <button type="button" class="btn btn-md btn-primary open-plan-modal" data-plan-id="high" style="width: 100%; margin-top: 1.25rem;">
-                    Schedule Wholesale Demo
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Pane 4: Electronics & Mobile Gadgets -->
-          <div class="industry-tab-pane" id="ind-pane-electronics" role="tabpanel">
-            <div class="industry-pane-grid">
-              <div class="industry-content-col">
-                <div class="industry-header-box">
-                  <span class="industry-mini-badge" data-i18n="ind.elecBadge">Mobile &amp; Gadget Showrooms</span>
-                  <h3 class="industry-pane-title" data-i18n="ind.elecHeadline">Unique IMEI Tracking, Warranty Certificates &amp; Repair Job Sheets</h3>
-                  <p class="industry-pane-desc" data-i18n="ind.elecDesc">Designed for gadget and smartphone retailers. Track every phone or laptop by unique IMEI/Serial number from supplier invoice to customer sale, with official warranty printouts.</p>
-                </div>
-                <div class="industry-subgrid">
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-green">🔢</div>
-                    <div>
-                      <strong data-i18n="ind.e1Title">Unique IMEI Tracking</strong>
-                      <p data-i18n="ind.e1Desc">Scan unique IMEI or serial number at inward, purchase, and checkout.</p>
-                    </div>
-                  </div>
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-orange">🛡️</div>
-                    <div>
-                      <strong data-i18n="ind.e2Title">Warranty Certificate Print</strong>
-                      <p data-i18n="ind.e2Desc">Print official warranty terms and serial numbers directly on thermal invoices.</p>
-                    </div>
-                  </div>
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-blue">🔧</div>
-                    <div>
-                      <strong data-i18n="ind.e3Title">Repair &amp; Servicing Log</strong>
-                      <p data-i18n="ind.e3Desc">Track servicing job sheets, technician status, and customer collection alerts.</p>
-                    </div>
-                  </div>
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-purple">🔄</div>
-                    <div>
-                      <strong data-i18n="ind.e4Title">Supplier RMA Replacements</strong>
-                      <p data-i18n="ind.e4Desc">Log defective serials for supplier replacement and vendor credit adjustments.</p>
-                    </div>
-                  </div>
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-rose">🔌</div>
-                    <div>
-                      <strong data-i18n="ind.e5Title">Accessory Bundling</strong>
-                      <p data-i18n="ind.e5Desc">Sell chargers, cases, and glass protectors as bundled kits with discounts.</p>
-                    </div>
-                  </div>
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-amber">💳</div>
-                    <div>
-                      <strong data-i18n="ind.e6Title">EMI &amp; Split Payment</strong>
-                      <p data-i18n="ind.e6Desc">Split payment across credit card installment, cash, and bKash.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="industry-impact-col">
-                <div class="industry-impact-card">
-                  <div class="impact-metric-pill" data-i18n="ind.elecMetricPill">Serial Traceability</div>
-                  <div class="impact-big-stat">100%</div>
-                  <div class="impact-stat-label" data-i18n="ind.elecStatLabel">IMEI Serial Traceability Across Stock</div>
-                  <p class="impact-quote" data-i18n="ind.elecQuote">
-                    "Whenever a customer brings in a phone for warranty repair, scanning the IMEI shows the exact purchase date, supplier invoice, and warranty status."
-                  </p>
-                  <div class="impact-author">
-                    <strong>Nayeem Chowdhury</strong> — SmartGadget BD, Bashundhara City
-                  </div>
-                  <button type="button" class="btn btn-md btn-primary open-plan-modal" data-plan-id="medium" style="width: 100%; margin-top: 1.25rem;">
-                    Schedule Gadget Demo
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Pane 5: E-Commerce & D2C -->
-          <div class="industry-tab-pane" id="ind-pane-ecommerce" role="tabpanel">
-            <div class="industry-pane-grid">
-              <div class="industry-content-col">
-                <div class="industry-header-box">
-                  <span class="industry-mini-badge" data-i18n="ind.ecomBadge">Omnichannel &amp; D2C Brands</span>
-                  <h3 class="industry-pane-title" data-i18n="ind.ecomHeadline">Omnichannel Inventory &amp; Automated Courier Dispatch for Online Brands</h3>
-                  <p class="industry-pane-desc" data-i18n="ind.ecomDesc">Automatically sync website and social media orders into POS dispatch. Generate Pathao/Steadfast consignment IDs in one click with live tracking.</p>
-                </div>
-                <div class="industry-subgrid">
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-green">🚚</div>
-                    <div>
-                      <strong data-i18n="ind.ec1Title">Pathao &amp; Steadfast API</strong>
-                      <p data-i18n="ind.ec1Desc">1-click bulk booking and thermal shipping label printing.</p>
-                    </div>
-                  </div>
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-orange">🔄</div>
-                    <div>
-                      <strong data-i18n="ind.ec2Title">Unified Live Stock</strong>
-                      <p data-i18n="ind.ec2Desc">When an item sells in-store, website stock deducts instantly.</p>
-                    </div>
-                  </div>
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-blue">💰</div>
-                    <div>
-                      <strong data-i18n="ind.ec3Title">bKash Merchant Sync</strong>
-                      <p data-i18n="ind.ec3Desc">Reconcile online transaction IDs directly with invoice orders.</p>
-                    </div>
-                  </div>
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-purple">📦</div>
-                    <div>
-                      <strong data-i18n="ind.ec4Title">Courier COD Audit</strong>
-                      <p data-i18n="ind.ec4Desc">Compare courier collected cash against remittance disbursements.</p>
-                    </div>
-                  </div>
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-rose">📱</div>
-                    <div>
-                      <strong data-i18n="ind.ec5Title">Automated SMS Updates</strong>
-                      <p data-i18n="ind.ec5Desc">Send tracking link SMS to customers when parcels are dispatched.</p>
-                    </div>
-                  </div>
-                  <div class="ind-subfeature-card">
-                    <div class="subfeature-icon bg-icon-amber">↩️</div>
-                    <div>
-                      <strong data-i18n="ind.ec6Title">Return Parcel Management</strong>
-                      <p data-i18n="ind.ec6Desc">Easily log returned parcels back into warehouse stock without data errors.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="industry-impact-col">
-                <div class="industry-impact-card">
-                  <div class="impact-metric-pill" data-i18n="ind.ecomMetricPill">Logistics Speed</div>
-                  <div class="impact-big-stat">3 Hrs</div>
-                  <div class="impact-stat-label" data-i18n="ind.ecomStatLabel">Saved Daily on Manual Parcel Booking</div>
-                  <p class="impact-quote" data-i18n="ind.ecomQuote">
-                    "Orders from our web store directly generate Pathao consignments. Our packing team never types addresses manually anymore."
-                  </p>
-                  <div class="impact-author">
-                    <strong>Farzana Akhter</strong> — Dhaka Organic Mart
-                  </div>
-                  <button type="button" class="btn btn-md btn-primary open-plan-modal" data-plan-id="basic" style="width: 100%; margin-top: 1.25rem;">
-                    Schedule E-Commerce Demo
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <section class="section advisor-section" id="advisor">
-      <div class="container">
-        <!-- Section Header -->
-        <div class="section-header text-center">
-          <div class="section-badge-pill" data-i18n="roi.badge">⚡ Interactive Savings &amp; ROI Configurator</div>
-          <h2 class="section-title" data-i18n="roi.title">Calculate Exactly How Much Time and Money YES SME Saves You</h2>
-          <p class="section-subtitle" data-i18n="roi.subtitle">
-            Slide your daily transaction volume and outlet count below to watch your reclaimed hours, prevented leakage, and recommended plan calculate in real time.
-          </p>
-        </div>
-
-        <div class="advisor-interactive-container">
-          <div class="advisor-main-card">
             
-            <!-- Left Side: Interactive Sliders & Presets -->
-            <div class="advisor-questions-col roi-config-col">
+            <div class="sb-counter-pill" id="sbCounterPill">
+              <span id="sbCurrentIndexText">01</span> / 12
+            </div>
+          </div>
+
+          <!-- Main 2-Column Showcase Area -->
+          <div class="storyboard-layout-grid">
+            
+            <!-- LEFT COLUMN: 3D Stacked Card Showcase (Swipeable & Touch Inertia) -->
+            <div class="storyboard-stage-col">
               
-              <!-- Slider 1: Daily Customer Invoices -->
-              <div class="roi-slider-group">
-                <div class="roi-slider-header">
-                  <div class="roi-header-label">
-                    <span class="roi-badge-num">1</span>
-                    <strong data-i18n="roi.sliderInvoicesLabel">Daily Customer Invoices &amp; Memos:</strong>
+              <div class="storyboard-deck-wrapper" id="sbDeckWrapper">
+                
+                <!-- Background Layer 2 (Deepest Card) -->
+                <div class="sb-ghost-card ghost-card-2" aria-hidden="true"></div>
+                <!-- Background Layer 1 (Middle Card) -->
+                <div class="sb-ghost-card ghost-card-1" aria-hidden="true"></div>
+
+                <!-- Active Foreground Interactive Card -->
+                <div class="sb-active-card" id="sbActiveCard">
+                  
+                  <!-- Card Header: Category & Plan Tier -->
+                  <div class="sb-card-header">
+                    <div class="sb-tag-box" id="sbCardTagBox">
+                      <span class="sb-card-tag" id="sbCardTag" data-i18n="matrix.m1Tag">⚡ 0.3s Checkout</span>
+                      <span class="sb-card-cat" id="sbCardCat">POS &amp; INVENTORY</span>
+                    </div>
+                    <span class="sb-card-plan" id="sbCardPlan" data-i18n="matrix.m1Plan">✓ Basic+ (৳1,000/mo)</span>
                   </div>
-                  <div class="roi-value-pill" id="roiInvoicesValPill">
-                    <span class="pill-number" id="roiInvoicesNum">150</span>
-                    <span class="pill-unit" data-i18n="roi.invoicesUnit">Bills / Day</span>
+
+                  <!-- Dynamic UI Simulation Micro-Screen -->
+                  <div class="sb-preview-stage" id="sbPreviewStage">
+                    <div class="sb-preview-mockup" id="sbPreviewContent">
+                      <!-- Rendered dynamically per module -->
+                    </div>
                   </div>
-                </div>
 
-                <div class="roi-range-wrap">
-                  <input type="range" class="roi-custom-range" id="roiRangeInvoices" min="10" max="600" step="10" value="150" aria-label="Daily Invoices Slider">
-                  <div class="roi-range-track-fill" id="roiInvoicesTrackFill" style="width: 25%;"></div>
-                </div>
+                  <!-- Card Meta: Title & Description -->
+                  <div class="sb-card-body">
+                    <h3 class="sb-card-title" id="sbCardTitle" data-i18n="matrix.m1Title">Smart POS &amp; Rapid Barcode</h3>
+                    <p class="sb-card-desc" id="sbCardDesc" data-i18n="matrix.m1Desc">
+                      Sub-second barcode scanning, quick receipt printing, offline cache, and dual cashier shifts.
+                    </p>
 
-                <div class="roi-range-scale">
-                  <span>10 / Day</span>
-                  <span>150 (Busy Store)</span>
-                  <span>300 (High-Traffic)</span>
-                  <span>600+</span>
-                </div>
+                    <!-- Key Feature Bullets -->
+                    <ul class="sb-card-bullets" id="sbCardBullets">
+                      <li><svg viewBox="0 0 16 16" width="14" height="14" fill="#10B981"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span id="sbBullet1" data-i18n="matrix.m1B1">Instant 80mm thermal receipt printing</span></li>
+                      <li><svg viewBox="0 0 16 16" width="14" height="14" fill="#10B981"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span id="sbBullet2" data-i18n="matrix.m1B2">Dual cashier shift reconciliation</span></li>
+                      <li><svg viewBox="0 0 16 16" width="14" height="14" fill="#10B981"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><span id="sbBullet3" data-i18n="matrix.m1B3">Offline local cache resilience</span></li>
+                      <li class="mpos-bullet-highlight"><svg viewBox="0 0 16 16" width="14" height="14" fill="#059669"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg><strong id="sbBullet4" data-i18n="matrix.m1B4" style="color:#059669;">Mobile POS (mPOS) with camera scanner (No PC needed)</strong></li>
+                    </ul>
 
-                <!-- Quick Presets -->
-                <div class="roi-presets-row" id="roiInvoicesPresets">
-                  <button type="button" class="roi-preset-btn" data-val="50" data-i18n="roi.presetSmall">50 (Small Shop)</button>
-                  <button type="button" class="roi-preset-btn active" data-val="150" data-i18n="roi.presetRetail">150 (Busy Retail)</button>
-                  <button type="button" class="roi-preset-btn" data-val="300" data-i18n="roi.presetHigh">300 (Superstore)</button>
-                  <button type="button" class="roi-preset-btn" data-val="500" data-i18n="roi.presetChain">500+ (Retail Chain)</button>
+                    <!-- Card Action Footer -->
+                    <div class="sb-card-footer">
+                      <a href="#live-demo" class="btn-sb-action" id="sbCardActionBtn">
+                        <span data-i18n="storyboard.viewDrop">Explore Module Demo</span>
+                        <svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor"><path d="M4 10h12M11 5l5 5-5 5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      </a>
+                      <a href="#pricing" class="sb-card-pricing-link" data-i18n="matrix.viewPlan">View Plan →</a>
+                    </div>
+                  </div>
+
                 </div>
               </div>
 
-              <!-- Slider 2: Number of Outlets & Billing Terminals -->
-              <div class="roi-slider-group" style="margin-top: 2rem;">
-                <div class="roi-slider-header">
-                  <div class="roi-header-label">
-                    <span class="roi-badge-num">2</span>
-                    <strong data-i18n="roi.sliderOutletsLabel">Number of Outlets &amp; Billing Terminals:</strong>
-                  </div>
-                  <div class="roi-value-pill" id="roiOutletsValPill">
-                    <span class="pill-number" id="roiOutletsNum">2</span>
-                    <span class="pill-unit" data-i18n="roi.outletsUnit">Branches / Outlets</span>
-                  </div>
+              <!-- Tactile Navigation Controls -->
+              <div class="storyboard-nav-controls">
+                <button type="button" class="sb-nav-arrow-btn" id="sbPrevBtn" aria-label="Previous Module">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                <div class="sb-nav-dots-track" id="sbDotsTrack">
+                  <!-- 12 micro dot indicators rendered dynamically -->
                 </div>
+                <button type="button" class="sb-nav-arrow-btn" id="sbNextBtn" aria-label="Next Module">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+              </div>
 
-                <div class="roi-range-wrap">
-                  <input type="range" class="roi-custom-range" id="roiRangeOutlets" min="1" max="10" step="1" value="2" aria-label="Number of Outlets Slider">
-                  <div class="roi-range-track-fill" id="roiOutletsTrackFill" style="width: 11.1%;"></div>
-                </div>
-
-                <div class="roi-range-scale">
-                  <span>1 Branch</span>
-                  <span>2 Branches</span>
-                  <span>5 Outlets</span>
-                  <span>10+ Enterprise</span>
-                </div>
-
-                <!-- Quick Presets -->
-                <div class="roi-presets-row" id="roiOutletsPresets">
-                  <button type="button" class="roi-preset-btn" data-val="1">1 Outlet</button>
-                  <button type="button" class="roi-preset-btn active" data-val="2">2 Outlets</button>
-                  <button type="button" class="roi-preset-btn" data-val="3">3 Outlets</button>
-                  <button type="button" class="roi-preset-btn" data-val="5">5 Outlets</button>
-                  <button type="button" class="roi-preset-btn" data-val="10">10+ Enterprise</button>
-                </div>
+              <!-- Mobile Quick Jump Bar (Visible only on mobile devices) -->
+              <div class="sb-mobile-jump-bar">
+                <button type="button" class="sb-mobile-drawer-toggle" id="sbMobileDrawerToggle" aria-expanded="false">
+                  <span data-i18n="storyboard.mobileJump">Browse All 12 Workflows (Tap to Jump) ▾</span>
+                </button>
               </div>
 
             </div>
 
-            <!-- Right Side: Dynamic ROI Output & Recommended Plan -->
-            <div class="advisor-recommendation-col roi-output-col">
-              <div class="advisor-result-card roi-result-card" id="advisorResultCard">
-                
-                <div class="rec-card-top">
-                  <span class="rec-badge-pill" data-i18n="roi.recTitle">🎯 Recommended Plan for Your Scale</span>
-                  <span class="rec-popular-flag" id="advisorPopularTag">⭐ Most Popular</span>
-                </div>
+            <!-- RIGHT COLUMN: Anzaar-Inspired "Current Storyboard" Index -->
+            <div class="storyboard-index-col" id="sbIndexCol">
+              <div class="sb-index-header">
+                <span class="sb-index-eyebrow" data-i18n="storyboard.title">CURRENT STORYBOARD</span>
+                <span class="sb-index-count-badge">12 Workflows</span>
+              </div>
 
-                <div class="rec-plan-header">
-                  <h3 class="rec-plan-name" id="advisorPlanName">Medium Plan</h3>
-                  <div class="rec-price-box">
-                    <div class="rec-price-amount" id="advisorPlanPrice"><span class="currency-taka">&#2547;</span>2,000</div>
-                    <span class="rec-price-period" id="advisorPricePeriod">/ month</span>
-                  </div>
-                  <div class="rec-setup-note" id="advisorSetupFee">One-time setup fee: <span class="currency-taka">&#2547;</span>10,000</div>
-                </div>
+              <div class="sb-items-list" id="sbItemsList" role="list">
 
-                <!-- The 2 Dynamic Savings Metrics Required by User Prompt -->
-                <div class="roi-metrics-dynamic-grid">
-                  
-                  <!-- Metric 1: Hours Saved per Month -->
-                  <div class="roi-metric-tile tile-hours">
-                    <div class="tile-icon-box">⏱️</div>
-                    <div class="tile-body">
-                      <div class="tile-val-row">
-                        <span class="tile-val" id="roiHoursSavedVal">48</span>
-                        <span class="tile-unit">Hours / Mo</span>
-                      </div>
-                      <div class="tile-label" data-i18n="roi.metricHours">Hours Saved / Month</div>
-                      <div class="tile-subtext" data-i18n="roi.metricHoursSub">Reclaimed from paper khatas, calculator math &amp; SMS reconciliation</div>
+                <div class="sb-item active" data-index="0" data-cat="pos-inventory" role="button" tabindex="0">
+                  <div class="sb-item-left">
+                    <span class="sb-item-num">01</span>
+                    <div class="sb-item-meta">
+                      <span class="sb-item-cat">POS & INVENTORY</span>
+                      <h4 class="sb-item-title" data-i18n="matrix.m1Title">Module 1</h4>
                     </div>
                   </div>
-
-                  <!-- Metric 2: Stock Leakage Prevented -->
-                  <div class="roi-metric-tile tile-money">
-                    <div class="tile-icon-box">💸</div>
-                    <div class="tile-body">
-                      <div class="tile-val-row">
-                        <span class="currency-taka">&#2547;</span>
-                        <span class="tile-val" id="roiLeakageVal">35,000</span>
-                        <span class="tile-unit">/ month</span>
-                      </div>
-                      <div class="tile-label" data-i18n="roi.metricLeakage">Stock Leakage Prevented</div>
-                      <div class="tile-subtext" data-i18n="roi.metricLeakageSub">Protected via real-time batch expiry warnings &amp; automated audits</div>
+                  <div class="sb-item-right">
+                    <span class="sb-item-plan">Basic+</span>
+                    <span class="sb-active-marker">●</span>
+                  </div>
+                </div>
+                <div class="sb-item " data-index="1" data-cat="pos-inventory" role="button" tabindex="0">
+                  <div class="sb-item-left">
+                    <span class="sb-item-num">02</span>
+                    <div class="sb-item-meta">
+                      <span class="sb-item-cat">POS & INVENTORY</span>
+                      <h4 class="sb-item-title" data-i18n="matrix.m2Title">Module 2</h4>
                     </div>
                   </div>
-
+                  <div class="sb-item-right">
+                    <span class="sb-item-plan">Medium+</span>
+                    <span class="sb-active-marker">●</span>
+                  </div>
                 </div>
-
-                <p class="rec-plan-desc" id="advisorPlanDesc">
-                  Perfect for retail businesses with 2 branches wanting centralized stock management, iOS &amp; Android apps, and 1-click courier booking.
-                </p>
-
-                <!-- High-Converting Instant 1-Click Free Trial CTA -->
-                <button type="button" class="btn btn-lg btn-white roi-trial-btn open-plan-modal" id="advisorSelectBtn" data-plan-id="medium">
-                  <span id="advisorBtnText" data-i18n="roi.trialBtn">Start 14-Day Free Trial</span>
-                  <span class="btn-arrow">→</span>
-                </button>
-
-                <div class="rec-consultant-line">
-                  <span data-i18n="roi.callLine">Questions about your scale? Dhaka HQ:</span>
-                  <a href="tel:01955345331" class="advisor-phone-link">01955345331</a>
+                <div class="sb-item " data-index="2" data-cat="pos-inventory" role="button" tabindex="0">
+                  <div class="sb-item-left">
+                    <span class="sb-item-num">03</span>
+                    <div class="sb-item-meta">
+                      <span class="sb-item-cat">POS & INVENTORY</span>
+                      <h4 class="sb-item-title" data-i18n="matrix.m3Title">Module 3</h4>
+                    </div>
+                  </div>
+                  <div class="sb-item-right">
+                    <span class="sb-item-plan">Basic+</span>
+                    <span class="sb-active-marker">●</span>
+                  </div>
                 </div>
-
+                <div class="sb-item " data-index="3" data-cat="pos-inventory" role="button" tabindex="0">
+                  <div class="sb-item-left">
+                    <span class="sb-item-num">04</span>
+                    <div class="sb-item-meta">
+                      <span class="sb-item-cat">POS & INVENTORY</span>
+                      <h4 class="sb-item-title" data-i18n="matrix.m4Title">Module 4</h4>
+                    </div>
+                  </div>
+                  <div class="sb-item-right">
+                    <span class="sb-item-plan">Medium+</span>
+                    <span class="sb-active-marker">●</span>
+                  </div>
+                </div>
+                <div class="sb-item " data-index="4" data-cat="accounts-tax" role="button" tabindex="0">
+                  <div class="sb-item-left">
+                    <span class="sb-item-num">05</span>
+                    <div class="sb-item-meta">
+                      <span class="sb-item-cat">ACCOUNTS & TAX</span>
+                      <h4 class="sb-item-title" data-i18n="matrix.m5Title">Module 5</h4>
+                    </div>
+                  </div>
+                  <div class="sb-item-right">
+                    <span class="sb-item-plan">Starter+</span>
+                    <span class="sb-active-marker">●</span>
+                  </div>
+                </div>
+                <div class="sb-item " data-index="5" data-cat="accounts-tax" role="button" tabindex="0">
+                  <div class="sb-item-left">
+                    <span class="sb-item-num">06</span>
+                    <div class="sb-item-meta">
+                      <span class="sb-item-cat">ACCOUNTS & TAX</span>
+                      <h4 class="sb-item-title" data-i18n="matrix.m6Title">Module 6</h4>
+                    </div>
+                  </div>
+                  <div class="sb-item-right">
+                    <span class="sb-item-plan">Starter+</span>
+                    <span class="sb-active-marker">●</span>
+                  </div>
+                </div>
+                <div class="sb-item " data-index="6" data-cat="accounts-tax" role="button" tabindex="0">
+                  <div class="sb-item-left">
+                    <span class="sb-item-num">07</span>
+                    <div class="sb-item-meta">
+                      <span class="sb-item-cat">ACCOUNTS & TAX</span>
+                      <h4 class="sb-item-title" data-i18n="matrix.m7Title">Module 7</h4>
+                    </div>
+                  </div>
+                  <div class="sb-item-right">
+                    <span class="sb-item-plan">Basic+</span>
+                    <span class="sb-active-marker">●</span>
+                  </div>
+                </div>
+                <div class="sb-item " data-index="7" data-cat="accounts-tax" role="button" tabindex="0">
+                  <div class="sb-item-left">
+                    <span class="sb-item-num">08</span>
+                    <div class="sb-item-meta">
+                      <span class="sb-item-cat">ACCOUNTS & TAX</span>
+                      <h4 class="sb-item-title" data-i18n="matrix.m8Title">Module 8</h4>
+                    </div>
+                  </div>
+                  <div class="sb-item-right">
+                    <span class="sb-item-plan">Medium+</span>
+                    <span class="sb-active-marker">●</span>
+                  </div>
+                </div>
+                <div class="sb-item " data-index="8" data-cat="omnichannel-ai" role="button" tabindex="0">
+                  <div class="sb-item-left">
+                    <span class="sb-item-num">09</span>
+                    <div class="sb-item-meta">
+                      <span class="sb-item-cat">LOGISTICS & AI</span>
+                      <h4 class="sb-item-title" data-i18n="matrix.m9Title">Module 9</h4>
+                    </div>
+                  </div>
+                  <div class="sb-item-right">
+                    <span class="sb-item-plan">Basic+</span>
+                    <span class="sb-active-marker">●</span>
+                  </div>
+                </div>
+                <div class="sb-item " data-index="9" data-cat="omnichannel-ai" role="button" tabindex="0">
+                  <div class="sb-item-left">
+                    <span class="sb-item-num">10</span>
+                    <div class="sb-item-meta">
+                      <span class="sb-item-cat">LOGISTICS & AI</span>
+                      <h4 class="sb-item-title" data-i18n="matrix.m10Title">Module 10</h4>
+                    </div>
+                  </div>
+                  <div class="sb-item-right">
+                    <span class="sb-item-plan">Medium+</span>
+                    <span class="sb-active-marker">●</span>
+                  </div>
+                </div>
+                <div class="sb-item " data-index="10" data-cat="omnichannel-ai" role="button" tabindex="0">
+                  <div class="sb-item-left">
+                    <span class="sb-item-num">11</span>
+                    <div class="sb-item-meta">
+                      <span class="sb-item-cat">LOGISTICS & AI</span>
+                      <h4 class="sb-item-title" data-i18n="matrix.m11Title">Module 11</h4>
+                    </div>
+                  </div>
+                  <div class="sb-item-right">
+                    <span class="sb-item-plan">Medium+</span>
+                    <span class="sb-active-marker">●</span>
+                  </div>
+                </div>
+                <div class="sb-item " data-index="11" data-cat="omnichannel-ai" role="button" tabindex="0">
+                  <div class="sb-item-left">
+                    <span class="sb-item-num">12</span>
+                    <div class="sb-item-meta">
+                      <span class="sb-item-cat">LOGISTICS & AI</span>
+                      <h4 class="sb-item-title" data-i18n="matrix.m12Title">Module 12</h4>
+                    </div>
+                  </div>
+                  <div class="sb-item-right">
+                    <span class="sb-item-plan">High</span>
+                    <span class="sb-active-marker">●</span>
+                  </div>
+                </div>
               </div>
             </div>
 
           </div>
+
         </div>
       </div>
     </section>

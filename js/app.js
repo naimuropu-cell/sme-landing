@@ -147,6 +147,7 @@ function setLanguage(lang) {
   if (typeof updateTestimonialsLanguage === 'function') updateTestimonialsLanguage(lang);
   if (typeof updateFaqLanguage === 'function') updateFaqLanguage(lang);
   if (typeof updateMposAnimationLanguage === 'function') updateMposAnimationLanguage(lang);
+  if (typeof updateStoryboardLanguage === 'function') updateStoryboardLanguage(lang);
 }
 
 /**
@@ -1945,43 +1946,883 @@ function updateHeroChatbotLanguage(lang) {
 
 
 /**
- * SECTION 4: 12 CORE MODULES TAB FILTERING
+ * SECTION 4: ANZAAR-INSPIRED 3D INTERACTIVE STORYBOARD SHOWCASE
+ * Compact, luxury 3D card deck replacing 12 static cards with touch-inertia swipe,
+ * live telemetry micro-simulations, and two-way dynamic storyboard index.
  */
-function initModulesFilter() {
-  const tabBtns = document.querySelectorAll('.modules-tab-btn');
-  const cards = document.querySelectorAll('.module-matrix-card');
 
-  if (!tabBtns.length || !cards.length) return;
+let sbCurrentIndex = 0;
+let sbIsAnimating = false;
 
-  tabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const selectedTab = btn.getAttribute('data-tab');
+const STORYBOARD_MODULES = [
+  {
+    index: 0,
+    number: '01',
+    category: 'pos-inventory',
+    catLabelEn: 'POS & INVENTORY',
+    catLabelBn: 'পয়েন্ট অফ সেলস ও ইনভেন্টরি',
+    tagKey: 'matrix.m1Tag',
+    tagFallback: '⚡ 0.3s Checkout',
+    planKey: 'matrix.m1Plan',
+    planFallback: '✓ Basic+ (৳1,000/mo)',
+    titleKey: 'matrix.m1Title',
+    titleFallback: 'Smart POS & Rapid Barcode',
+    descKey: 'matrix.m1Desc',
+    descFallback: 'Sub-second barcode scanning, quick receipt printing, offline cache, and dual cashier shifts.',
+    bullets: [
+      { key: 'matrix.m1B1', text: 'Instant 80mm thermal receipt printing' },
+      { key: 'matrix.m1B2', text: 'Dual cashier shift reconciliation' },
+      { key: 'matrix.m1B3', text: 'Offline local cache resilience' },
+      { key: 'matrix.m1B4', text: 'Mobile POS (mPOS) with camera scanner (No PC needed)', highlight: true }
+    ],
+    renderMockup: () => `
+      <div style="display:flex; flex-direction:column; justify-content:space-between; height:100%; font-family:monospace;">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:6px;">
+          <span style="color:#10b981; font-weight:800; font-size:0.8rem; display:flex; align-items:center; gap:6px;">
+            <span style="display:inline-block; width:8px; height:8px; background:#10b981; border-radius:50%; box-shadow:0 0 8px #10b981;"></span>
+            SCANNER ONLINE (0.3s)
+          </span>
+          <span style="color:#94a3b8; font-size:0.75rem;">SHIFT #2 - CASHIER 1</span>
+        </div>
+        <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.05); padding:8px 12px; border-radius:8px; border:1px solid rgba(255,255,255,0.08);">
+          <div>
+            <div style="color:#f8fafc; font-weight:700; font-size:0.88rem;">Panjabi Premium Silk (Navy)</div>
+            <div style="color:#64748b; font-size:0.75rem;">EAN: 894110023419 • Qty: 1</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="color:#34d399; font-weight:800; font-size:1.05rem;">৳2,450</div>
+            <div style="color:#94a3b8; font-size:0.7rem;">VAT 7.5% Incl.</div>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.75rem; color:#94a3b8; border-top:1px dashed rgba(255,255,255,0.15); padding-top:6px;">
+          <span>THERMAL PRINT: #INV-9821</span>
+          <span style="color:#10b981; font-weight:700;">PAID: bKash QR (Instant) ✓</span>
+        </div>
+      </div>
+    `
+  },
+  {
+    index: 1,
+    number: '02',
+    category: 'pos-inventory',
+    catLabelEn: 'POS & INVENTORY',
+    catLabelBn: 'পয়েন্ট অফ সেলস ও ইনভেন্টরি',
+    tagKey: 'matrix.m2Tag',
+    tagFallback: '📦 Real-Time Sync',
+    planKey: 'matrix.m2Plan',
+    planFallback: '✓ Medium+ (৳1,800/mo)',
+    titleKey: 'matrix.m2Title',
+    titleFallback: 'Multi-Warehouse Inventory',
+    descKey: 'matrix.m2Desc',
+    descFallback: 'Batch tracking, expiry warnings, automated low-stock alerts, and inter-branch transfers.',
+    bullets: [
+      { key: 'matrix.m2B1', text: 'Batch & expiry tracking with auto alerts' },
+      { key: 'matrix.m2B2', text: 'Inter-warehouse transfer challans' },
+      { key: 'matrix.m2B3', text: 'Minimum reorder level SMS triggers' },
+      { key: 'matrix.m2B4', text: 'Stock valuation: FIFO & Weighted Average' }
+    ],
+    renderMockup: () => `
+      <div style="display:flex; flex-direction:column; justify-content:space-between; height:100%; font-family:inherit;">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:6px;">
+          <span style="color:#38bdf8; font-weight:800; font-size:0.8rem;">CENTRAL WAREHOUSE TELEMETRY</span>
+          <span style="color:#34d399; font-size:0.75rem; font-weight:700;">AUTO-RECONCILED ✓</span>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;">
+          <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:8px; border-radius:8px;">
+            <div style="font-size:0.7rem; color:#94a3b8;">Banani Outlet</div>
+            <div style="font-size:1.05rem; font-weight:800; color:#ffffff;">84 pcs</div>
+            <div style="font-size:0.65rem; color:#10b981; font-weight:700;">● In Stock</div>
+          </div>
+          <div style="background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.3); padding:8px; border-radius:8px;">
+            <div style="font-size:0.7rem; color:#fca5a5;">Dhanmondi</div>
+            <div style="font-size:1.05rem; font-weight:800; color:#ef4444;">12 pcs</div>
+            <div style="font-size:0.65rem; color:#ef4444; font-weight:700;">⚠️ Low Stock</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:8px; border-radius:8px;">
+            <div style="font-size:0.7rem; color:#94a3b8;">Chittagong</div>
+            <div style="font-size:1.05rem; font-weight:800; color:#ffffff;">240 pcs</div>
+            <div style="font-size:0.65rem; color:#38bdf8; font-weight:700;">⇄ Ready</div>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.75rem; color:#cbd5e1;">
+          <span>Challan #CH-409: Dhanmondi Transfer</span>
+          <span style="color:#38bdf8; font-weight:700;">Dispatched 🚚</span>
+        </div>
+      </div>
+    `
+  },
+  {
+    index: 2,
+    number: '03',
+    category: 'pos-inventory',
+    catLabelEn: 'POS & INVENTORY',
+    catLabelBn: 'পয়েন্ট অফ সেলস ও ইনভেন্টরি',
+    tagKey: 'matrix.m3Tag',
+    tagFallback: '🏷️ Custom Thermal Labels',
+    planKey: 'matrix.m3Plan',
+    planFallback: '✓ Basic+ (৳1,000/mo)',
+    titleKey: 'matrix.m3Title',
+    titleFallback: 'Barcode Designer & Print',
+    descKey: 'matrix.m3Desc',
+    descFallback: 'Generate Code-128, EAN-13, and 2D QR stickers formatted for all standard thermal printers.',
+    bullets: [
+      { key: 'matrix.m3B1', text: 'Single & bulk sticker generation' },
+      { key: 'matrix.m3B2', text: 'Custom brand logo & price on labels' },
+      { key: 'matrix.m3B3', text: '50x30mm, 38x25mm thermal paper presets' },
+      { key: 'matrix.m3B4', text: 'Dynamic QR code embedding' }
+    ],
+    renderMockup: () => `
+      <div style="display:flex; align-items:center; justify-content:center; height:100%; gap:18px;">
+        <div style="background:#ffffff; color:#0f172a; padding:10px 14px; border-radius:8px; width:180px; box-shadow:0 8px 20px rgba(0,0,0,0.4); text-align:center; font-family:sans-serif;">
+          <div style="font-size:0.7rem; font-weight:900; letter-spacing:0.05em; color:#059669;">YES FASHION BD</div>
+          <div style="font-size:0.75rem; font-weight:800; margin:2px 0;">Men's Slim Chino</div>
+          <div style="font-family:monospace; letter-spacing:3px; font-size:0.85rem; font-weight:900; margin:4px 0; background:#f1f5f9; padding:2px; border-radius:4px;">
+            |||| || ||||| | ||
+          </div>
+          <div style="font-size:0.65rem; color:#64748b; font-family:monospace;">89411200192</div>
+          <div style="font-size:0.88rem; font-weight:900; color:#0f172a; margin-top:2px;">MRP: ৳1,850</div>
+        </div>
+        <div style="font-size:0.78rem; color:#94a3b8; display:flex; flex-direction:column; gap:6px;">
+          <div style="color:#10b981; font-weight:700;">✓ 50x30mm Preset</div>
+          <div>• ESC/POS & TSPL Ready</div>
+          <div>• High-Speed Thermal</div>
+          <div style="color:#e2e8f0; font-weight:600;">120 Labels / Min</div>
+        </div>
+      </div>
+    `
+  },
+  {
+    index: 3,
+    number: '04',
+    category: 'pos-inventory',
+    catLabelEn: 'POS & INVENTORY',
+    catLabelBn: 'পয়েন্ট অফ সেলস ও ইনভেন্টরি',
+    tagKey: 'matrix.m4Tag',
+    tagFallback: '🏢 Head Office Hub',
+    planKey: 'matrix.m4Plan',
+    planFallback: '✓ Medium+ (৳1,800/mo)',
+    titleKey: 'matrix.m4Title',
+    titleFallback: 'Multi-Branch Management',
+    descKey: 'matrix.m4Desc',
+    descFallback: 'Manage multiple retail outlets, centralize master product catalogs, and benchmark sales.',
+    bullets: [
+      { key: 'matrix.m4B1', text: 'Central catalog push to all branches' },
+      { key: 'matrix.m4B2', text: 'Branch-wise live sales leaderboards' },
+      { key: 'matrix.m4B3', text: 'Role-based outlet staff access' },
+      { key: 'matrix.m4B4', text: 'Consolidated owner dashboard' }
+    ],
+    renderMockup: () => `
+      <div style="display:flex; flex-direction:column; justify-content:space-between; height:100%;">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:6px;">
+          <span style="color:#a855f7; font-weight:800; font-size:0.8rem;">MULTI-OUTLET LIVE LEADERBOARD</span>
+          <span style="color:#f8fafc; font-weight:800; font-size:0.85rem;">TOTAL: ৳304,700</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:7px;">
+          <div>
+            <div style="display:flex; justify-content:space-between; font-size:0.75rem; margin-bottom:2px;">
+              <span style="color:#ffffff; font-weight:700;">1. Gulshan Flagship (100% Target)</span>
+              <span style="color:#34d399; font-weight:800;">৳142,500</span>
+            </div>
+            <div style="width:100%; height:6px; background:rgba(255,255,255,0.1); border-radius:3px; overflow:hidden;">
+              <div style="width:100%; height:100%; background:linear-gradient(90deg,#10b981,#34d399);"></div>
+            </div>
+          </div>
+          <div>
+            <div style="display:flex; justify-content:space-between; font-size:0.75rem; margin-bottom:2px;">
+              <span style="color:#ffffff; font-weight:700;">2. Uttara Outlet (85% Target)</span>
+              <span style="color:#fbbf24; font-weight:800;">৳98,200</span>
+            </div>
+            <div style="width:100%; height:6px; background:rgba(255,255,255,0.1); border-radius:3px; overflow:hidden;">
+              <div style="width:85%; height:100%; background:linear-gradient(90deg,#f59e0b,#fbbf24);"></div>
+            </div>
+          </div>
+          <div>
+            <div style="display:flex; justify-content:space-between; font-size:0.75rem; margin-bottom:2px;">
+              <span style="color:#ffffff; font-weight:700;">3. Sylhet Express (70% Target)</span>
+              <span style="color:#38bdf8; font-weight:800;">৳64,000</span>
+            </div>
+            <div style="width:100%; height:6px; background:rgba(255,255,255,0.1); border-radius:3px; overflow:hidden;">
+              <div style="width:70%; height:100%; background:linear-gradient(90deg,#0284c7,#38bdf8);"></div>
+            </div>
+          </div>
+        </div>
+        <div style="font-size:0.72rem; color:#94a3b8; text-align:right;">Auto-synced across 3 outlets 12s ago</div>
+      </div>
+    `
+  },
+  {
+    index: 4,
+    number: '05',
+    category: 'accounts-tax',
+    catLabelEn: 'ACCOUNTS & TAX',
+    catLabelBn: 'হিসাব ও কর ব্যবস্থাপনা',
+    tagKey: 'matrix.m5Tag',
+    tagFallback: '📊 Audit-Ready Ledgers',
+    planKey: 'matrix.m5Plan',
+    planFallback: '✓ Starter+ (৳600/mo)',
+    titleKey: 'matrix.m5Title',
+    titleFallback: 'Double-Entry Accounting',
+    descKey: 'matrix.m5Desc',
+    descFallback: 'Automated journal entries on every POS sale. Real-time Balance Sheet and Profit & Loss.',
+    bullets: [
+      { key: 'matrix.m5B1', text: 'Automatic debit/credit on checkout' },
+      { key: 'matrix.m5B2', text: 'Live Balance Sheet & Profit & Loss' },
+      { key: 'matrix.m5B3', text: 'Multi-bank & MFS ledger reconciliation' },
+      { key: 'matrix.m5B4', text: 'Chart of Accounts tailored for BD SMEs' }
+    ],
+    renderMockup: () => `
+      <div style="display:flex; flex-direction:column; justify-content:space-between; height:100%; font-family:monospace;">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:6px;">
+          <span style="color:#34d399; font-weight:800; font-size:0.8rem;">AUTO JOURNAL ENTRY #JV-7712</span>
+          <span style="color:#a7f3d0; font-size:0.75rem;">BALANCED ✓</span>
+        </div>
+        <div style="background:rgba(255,255,255,0.04); border-radius:8px; padding:8px 10px; font-size:0.78rem;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+            <span style="color:#f8fafc;">DR. Cash/bKash Collection</span>
+            <span style="color:#34d399; font-weight:800;">+৳12,400.00</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:4px; padding-left:14px; color:#cbd5e1;">
+            <span>CR. Sales Revenue A/C</span>
+            <span>৳11,534.88</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; padding-left:14px; color:#cbd5e1;">
+            <span>CR. VAT Output (7.5%)</span>
+            <span>৳865.12</span>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:#94a3b8;">
+          <span>Chart of Accounts: BD GAAP Compliant</span>
+          <span style="color:#6ee7b7;">Net Margin: 24.8%</span>
+        </div>
+      </div>
+    `
+  },
+  {
+    index: 5,
+    number: '06',
+    category: 'accounts-tax',
+    catLabelEn: 'ACCOUNTS & TAX',
+    catLabelBn: 'হিসাব ও কর ব্যবস্থাপনা',
+    tagKey: 'matrix.m6Tag',
+    tagFallback: '🤝 Payables & Dues',
+    planKey: 'matrix.m6Plan',
+    planFallback: '✓ Starter+ (৳600/mo)',
+    titleKey: 'matrix.m6Title',
+    titleFallback: 'Purchases & Supplier Dues',
+    descKey: 'matrix.m6Desc',
+    descFallback: 'Procurement orders, vendor bills, supplier credit ledgers, and automated payment reminders.',
+    bullets: [
+      { key: 'matrix.m6B1', text: 'Purchase orders to GRN automated flow' },
+      { key: 'matrix.m6B2', text: 'Supplier due aging reports & reminders' },
+      { key: 'matrix.m6B3', text: 'Partial payment & advance tracking' },
+      { key: 'matrix.m6B4', text: 'Vendor price history comparison' }
+    ],
+    renderMockup: () => `
+      <div style="display:flex; flex-direction:column; justify-content:space-between; height:100%;">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:6px;">
+          <span style="color:#fbbf24; font-weight:800; font-size:0.8rem;">PURCHASE VOUCHER #PO-441</span>
+          <span style="color:#f59e0b; font-size:0.72rem; background:rgba(245,158,11,0.15); padding:2px 8px; border-radius:9999px;">Due in 5 Days</span>
+        </div>
+        <div style="background:rgba(255,255,255,0.04); border-radius:8px; padding:10px; border:1px solid rgba(255,255,255,0.08);">
+          <div style="font-weight:700; color:#ffffff; font-size:0.88rem; margin-bottom:4px;">Meghna Textile Mills Ltd.</div>
+          <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:#cbd5e1; margin-bottom:4px;">
+            <span>Bill Total: ৳85,000</span>
+            <span style="color:#10b981;">Advance: ৳50,000</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:0.82rem; font-weight:800;">
+            <span style="color:#f87171;">Remaining Payable:</span>
+            <span style="color:#f87171;">৳35,000</span>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:#94a3b8;">
+          <span>GRN Status: Received at Banani</span>
+          <span style="color:#fbbf24; font-weight:700;">1-Click Pay via Bank →</span>
+        </div>
+      </div>
+    `
+  },
+  {
+    index: 6,
+    number: '07',
+    category: 'accounts-tax',
+    catLabelEn: 'ACCOUNTS & TAX',
+    catLabelBn: 'হিসাব ও কর ব্যবস্থাপনা',
+    tagKey: 'matrix.m7Tag',
+    tagFallback: '🏛️ 100% Tax Compliant',
+    planKey: 'matrix.m7Plan',
+    planFallback: '✓ Basic+ (৳1,000/mo)',
+    titleKey: 'matrix.m7Title',
+    titleFallback: 'NBR VAT & Mushak 6.3',
+    descKey: 'matrix.m7Desc',
+    descFallback: 'Auto-generate official Mushak 6.3 tax challans, 9.1 return summaries, and monthly VAT ledgers.',
+    bullets: [
+      { key: 'matrix.m7B1', text: '1-Click Mushak 6.3 tax invoice print' },
+      { key: 'matrix.m7B2', text: 'Monthly Mushak 9.1 return summaries' },
+      { key: 'matrix.m7B3', text: 'NBR-compliant purchase register 6.1' },
+      { key: 'matrix.m7B4', text: 'Exportable audit reports for tax officers' }
+    ],
+    renderMockup: () => `
+      <div style="display:flex; flex-direction:column; justify-content:space-between; height:100%; border:1px solid rgba(16,185,129,0.3); border-radius:10px; padding:10px; background:rgba(6,78,59,0.15);">
+        <div style="text-align:center; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:5px;">
+          <div style="font-size:0.68rem; color:#a7f3d0; font-weight:700;">গণপ্রজাতন্ত্রী বাংলাদেশ সরকার - জাতীয় রাজস্ব বোর্ড</div>
+          <div style="font-size:0.88rem; font-weight:900; color:#ffffff;">কর চালানপত্র (মূসক-৬.৩)</div>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:#cbd5e1;">
+          <div>
+            <div>চালান নং: <strong>BD-VAT-2026-0881</strong></div>
+            <div>নিবন্ধন / BIN: <strong>002918273-0101</strong></div>
+          </div>
+          <div style="text-align:right;">
+            <div style="color:#34d399; font-weight:800; font-size:0.9rem;">ভ্যাট হার: ৭.৫%</div>
+            <div style="color:#6ee7b7; font-size:0.68rem;">NBR VERIFIED SEAL ✓</div>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:#a7f3d0; border-top:1px dashed rgba(255,255,255,0.15); padding-top:4px;">
+          <span>মূসক ৯.১ মাসিক রিটার্ন রেডি</span>
+          <span>আইনসম্মত ও অডিট-প্রুফ</span>
+        </div>
+      </div>
+    `
+  },
+  {
+    index: 7,
+    number: '08',
+    category: 'accounts-tax',
+    catLabelEn: 'ACCOUNTS & TAX',
+    catLabelBn: 'হিসাব ও কর ব্যবস্থাপনা',
+    tagKey: 'matrix.m8Tag',
+    tagFallback: '👥 Staff & Commissions',
+    planKey: 'matrix.m8Plan',
+    planFallback: '✓ Medium+ (৳1,800/mo)',
+    titleKey: 'matrix.m8Title',
+    titleFallback: 'HR, Attendance & Payroll',
+    descKey: 'matrix.m8Desc',
+    descFallback: 'Cashier attendance, monthly salary generation, sales commission tracking, and pay slips.',
+    bullets: [
+      { key: 'matrix.m8B1', text: 'Biometric & mobile selfie attendance' },
+      { key: 'matrix.m8B2', text: 'Sales target commission calculator' },
+      { key: 'matrix.m8B3', text: 'Monthly salary slip generation (PDF)' },
+      { key: 'matrix.m8B4', text: 'Staff advance & deduction management' }
+    ],
+    renderMockup: () => `
+      <div style="display:flex; flex-direction:column; justify-content:space-between; height:100%;">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:6px;">
+          <span style="color:#a855f7; font-weight:800; font-size:0.8rem;">STAFF PAYROLL & ATTENDANCE</span>
+          <span style="color:#10b981; font-size:0.72rem; font-weight:700;">SHIFT ACTIVE 🟢</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:12px; background:rgba(255,255,255,0.04); padding:10px; border-radius:8px;">
+          <div style="width:38px; height:38px; border-radius:50%; background:#8b5cf6; display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff;">RA</div>
+          <div style="flex:1;">
+            <div style="font-weight:700; color:#ffffff; font-size:0.85rem;">Rahim Ahmed (Senior Cashier)</div>
+            <div style="font-size:0.72rem; color:#94a3b8;">Check-in: 09:54 AM • Target: 112%</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:0.85rem; font-weight:800; color:#34d399;">+৳3,450</div>
+            <div style="font-size:0.65rem; color:#cbd5e1;">Commission</div>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:#94a3b8;">
+          <span>Monthly Pay Slip: Auto-Generated (PDF)</span>
+          <span style="color:#c084fc;">bKash Bulk Disburse Ready</span>
+        </div>
+      </div>
+    `
+  },
+  {
+    index: 8,
+    number: '09',
+    category: 'omnichannel-ai',
+    catLabelEn: 'LOGISTICS & AI',
+    catLabelBn: 'লজিস্টিকস ও এআই',
+    tagKey: 'matrix.m9Tag',
+    tagFallback: '🚚 Steadfast & Pathao',
+    planKey: 'matrix.m9Plan',
+    planFallback: '✓ Basic+ (৳1,000/mo)',
+    titleKey: 'matrix.m9Title',
+    titleFallback: 'Courier Automation',
+    descKey: 'matrix.m9Desc',
+    descFallback: '1-Click parcel booking with Steadfast, Pathao & RedX. Automated consignment tracking & cash collection.',
+    bullets: [
+      { key: 'matrix.m9B1', text: '1-Click bulk courier consignment creation' },
+      { key: 'matrix.m9B2', text: 'Real-time parcel tracking via webhooks' },
+      { key: 'matrix.m9B3', text: 'COD cash collection reconciliation' },
+      { key: 'matrix.m9B4', text: 'Auto-update order status on delivery' }
+    ],
+    renderMockup: () => `
+      <div style="display:flex; flex-direction:column; justify-content:space-between; height:100%;">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:6px;">
+          <span style="color:#f97316; font-weight:800; font-size:0.8rem;">STEADFAST & PATHAO DISPATCH RADAR</span>
+          <span style="color:#fdba74; font-size:0.72rem;">API INTEGRATED ⚡</span>
+        </div>
+        <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:8px 12px; border-radius:8px;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="color:#ffffff; font-weight:800; font-size:0.85rem;">CID: #SF-88319</span>
+            <span style="background:rgba(249,115,22,0.2); color:#fb923c; font-weight:700; font-size:0.7rem; padding:2px 8px; border-radius:9999px;">Out for Delivery 🚀</span>
+          </div>
+          <div style="font-size:0.75rem; color:#94a3b8; margin:4px 0;">Customer: Tanvir Hasan (Mirpur DOHS, Dhaka)</div>
+          <div style="display:flex; justify-content:space-between; font-size:0.78rem; font-weight:700;">
+            <span style="color:#cbd5e1;">COD to Collect:</span>
+            <span style="color:#34d399;">৳1,950</span>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:#94a3b8;">
+          <span>1-Click Bulk Label Print</span>
+          <span style="color:#34d399;">Auto-Reconcile COD Cash</span>
+        </div>
+      </div>
+    `
+  },
+  {
+    index: 9,
+    number: '10',
+    category: 'omnichannel-ai',
+    catLabelEn: 'LOGISTICS & AI',
+    catLabelBn: 'লজিস্টিকস ও এআই',
+    tagKey: 'matrix.m10Tag',
+    tagFallback: '💬 Repeat Sales Engine',
+    planKey: 'matrix.m10Plan',
+    planFallback: '✓ Medium+ (৳1,800/mo)',
+    titleKey: 'matrix.m10Title',
+    titleFallback: 'CRM & SMS Marketing',
+    descKey: 'matrix.m10Desc',
+    descFallback: 'Customer lifetime value, reward loyalty points, and automated Bengali SMS for promotions.',
+    bullets: [
+      { key: 'matrix.m10B1', text: 'Tiered customer loyalty points' },
+      { key: 'matrix.m10B2', text: 'Branded sender ID SMS gateway (BD)' },
+      { key: 'matrix.m10B3', text: 'Automated birthday & anniversary offers' },
+      { key: 'matrix.m10B4', text: 'Due reminder SMS with payment link' }
+    ],
+    renderMockup: () => `
+      <div style="display:flex; flex-direction:column; justify-content:space-between; height:100%;">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:6px;">
+          <span style="color:#ec4899; font-weight:800; font-size:0.8rem;">BRANDED BD SMS GATEWAY</span>
+          <span style="color:#f472b6; font-size:0.72rem;">SENDER: YES_SME</span>
+        </div>
+        <div style="background:rgba(236,72,153,0.1); border:1px solid rgba(236,72,153,0.3); border-radius:10px; padding:10px;">
+          <div style="font-size:0.72rem; color:#f472b6; font-weight:700; margin-bottom:3px;">💬 Bengali Loyalty SMS:</div>
+          <div style="font-size:0.8rem; color:#ffffff; line-height:1.4;">
+            "প্রিয় শফিক ভাই, YES FASHION-এ আপনার ৫২০ লয়্যালটি পয়েন্ট আছে। এই সপ্তাহে কেনাকাটায় পান ১০% ছাড়!"
+          </div>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:#94a3b8;">
+          <span>Target Group: 1,420 Repeat Customers</span>
+          <span style="color:#34d399; font-weight:700;">Delivered 99.8%</span>
+        </div>
+      </div>
+    `
+  },
+  {
+    index: 10,
+    number: '11',
+    category: 'omnichannel-ai',
+    catLabelEn: 'LOGISTICS & AI',
+    catLabelBn: 'লজিস্টিকস ও এআই',
+    tagKey: 'matrix.m11Tag',
+    tagFallback: '🌐 Multi-Channel Selling',
+    planKey: 'matrix.m11Plan',
+    planFallback: '✓ Medium+ (৳1,800/mo)',
+    titleKey: 'matrix.m11Title',
+    titleFallback: 'E-Commerce & Social Shop',
+    descKey: 'matrix.m11Desc',
+    descFallback: 'Sync your store inventory with your online shop, Facebook Catalog, and Instagram Shop in real time.',
+    bullets: [
+      { key: 'matrix.m11B1', text: 'Unified product catalog for POS & Web' },
+      { key: 'matrix.m11B2', text: 'Facebook & Instagram Shop product feed' },
+      { key: 'matrix.m11B3', text: 'Real-time online order alerts on POS' },
+      { key: 'matrix.m11B4', text: 'bKash / Nagad / Card payment gateway' }
+    ],
+    renderMockup: () => `
+      <div style="display:flex; flex-direction:column; justify-content:space-between; height:100%;">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:6px;">
+          <span style="color:#06b6d4; font-weight:800; font-size:0.8rem;">OMNICHANNEL SYNC STREAM</span>
+          <span style="color:#67e8f9; font-size:0.72rem;">FB + WEB + POS</span>
+        </div>
+        <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:8px 12px; border-radius:8px;">
+          <div style="display:flex; justify-content:space-between; font-size:0.78rem;">
+            <span style="color:#38bdf8; font-weight:700;">Online Order #WEB-4109</span>
+            <span style="color:#10b981; font-weight:800;">Paid: ৳3,200 (bKash)</span>
+          </div>
+          <div style="font-size:0.74rem; color:#e2e8f0; margin-top:3px;">
+            Item: Royal Kurti Set (M)
+          </div>
+          <div style="font-size:0.68rem; color:#94a3b8; margin-top:2px;">
+            Store Stock Deducted Instantly: 10 ➔ 9 pcs
+          </div>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:#94a3b8;">
+          <span>Zero Overselling Guarantee</span>
+          <span style="color:#06b6d4; font-weight:700;">Meta Catalog Sync: Active</span>
+        </div>
+      </div>
+    `
+  },
+  {
+    index: 11,
+    number: '12',
+    category: 'omnichannel-ai',
+    catLabelEn: 'LOGISTICS & AI',
+    catLabelBn: 'লজিস্টিকস ও এআই',
+    tagKey: 'matrix.m12Tag',
+    tagFallback: '🤖 Bangla Voice & Chat AI',
+    planKey: 'matrix.m12Plan',
+    planFallback: '✓ High (৳3,500/mo)',
+    titleKey: 'matrix.m12Title',
+    titleFallback: 'Bengali AI Copilot',
+    descKey: 'matrix.m12Desc',
+    descFallback: 'Ask business questions in natural Bengali: \'আজকে কোন আইটেম বেশি বিক্রি হইছে?\' Get instant visual charts.',
+    bullets: [
+      { key: 'matrix.m12B1', text: 'Natural Bengali voice & text queries' },
+      { key: 'matrix.m12B2', text: 'Predictive stock demand forecasts' },
+      { key: 'matrix.m12B3', text: 'Fraud & unusual cash discrepancy detection' },
+      { key: 'matrix.m12B4', text: 'Daily executive audio briefing' }
+    ],
+    renderMockup: () => `
+      <div style="display:flex; flex-direction:column; justify-content:space-between; height:100%;">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:6px;">
+          <span style="color:#10b981; font-weight:800; font-size:0.8rem;">BENGALI SME AI ADVISOR</span>
+          <span style="color:#6ee7b7; font-size:0.72rem;">VOICE & CHAT 🎙️</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <div style="align-self:flex-end; background:#1e293b; color:#f1f5f9; padding:5px 10px; border-radius:12px 12px 2px 12px; font-size:0.76rem; max-width:85%;">
+            "আজকে ধানমন্ডি ব্রাঞ্চে মোট কত বিক্রি হইছে?"
+          </div>
+          <div style="align-self:flex-start; background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.3); color:#ffffff; padding:6px 10px; border-radius:12px 12px 12px 2px; font-size:0.76rem; max-width:90%;">
+            "মোট <strong>৳৪৭,৩০০</strong> বিক্রি হয়েছে। গত রবিবারের চেয়ে ১৮% বেশি!"
+          </div>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:#94a3b8;">
+          <span>Executive Audio Briefing Available</span>
+          <span style="color:#10b981; font-weight:700;">Instant Answers 24/7</span>
+        </div>
+      </div>
+    `
+  }
+];
 
-      // Update active button state
-      tabBtns.forEach(b => {
-        b.classList.remove('active');
-        b.setAttribute('aria-selected', 'false');
+function renderActiveStoryboardCard(index) {
+  const mod = STORYBOARD_MODULES[index];
+  if (!mod) return;
+  const lang = window.STATE ? window.STATE.currentLang : 'en';
+  const dict = window.TRANSLATIONS ? window.TRANSLATIONS[lang] : null;
+
+  // Counter
+  const counterText = document.getElementById('sbCurrentIndexText');
+  if (counterText) counterText.textContent = mod.number;
+
+  // Tag & Category & Plan
+  const tagEl = document.getElementById('sbCardTag');
+  if (tagEl) {
+    tagEl.setAttribute('data-i18n', mod.tagKey);
+    tagEl.textContent = (dict && dict[mod.tagKey]) || mod.tagFallback;
+  }
+
+  const catEl = document.getElementById('sbCardCat');
+  if (catEl) {
+    catEl.textContent = lang === 'bn' ? mod.catLabelBn : mod.catLabelEn;
+  }
+
+  const planEl = document.getElementById('sbCardPlan');
+  if (planEl) {
+    planEl.setAttribute('data-i18n', mod.planKey);
+    planEl.textContent = (dict && dict[mod.planKey]) || mod.planFallback;
+  }
+
+  // Title & Desc
+  const titleEl = document.getElementById('sbCardTitle');
+  if (titleEl) {
+    titleEl.setAttribute('data-i18n', mod.titleKey);
+    titleEl.textContent = (dict && dict[mod.titleKey]) || mod.titleFallback;
+  }
+
+  const descEl = document.getElementById('sbCardDesc');
+  if (descEl) {
+    descEl.setAttribute('data-i18n', mod.descKey);
+    descEl.textContent = (dict && dict[mod.descKey]) || mod.descFallback;
+  }
+
+  // Preview Mockup
+  const previewContent = document.getElementById('sbPreviewContent');
+  if (previewContent && typeof mod.renderMockup === 'function') {
+    previewContent.innerHTML = mod.renderMockup();
+  }
+
+  // Bullets
+  const bulletsEl = document.getElementById('sbCardBullets');
+  if (bulletsEl) {
+    bulletsEl.innerHTML = mod.bullets.map(b => {
+      const text = (dict && dict[b.key]) || b.text;
+      const highlight = b.highlight ? 'class="mpos-bullet-highlight"' : '';
+      const color = b.highlight ? '#059669' : '#10B981';
+      const textStyle = b.highlight ? 'style="color:#059669; font-weight:800;"' : '';
+      return `<li ${highlight}>
+        <svg viewBox="0 0 16 16" width="14" height="14" fill="${color}">
+          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+        </svg>
+        <span data-i18n="${b.key}" ${textStyle}>${text}</span>
+      </li>`;
+    }).join('');
+  }
+
+  // Navigation Dots
+  const dots = document.querySelectorAll('.sb-nav-dot');
+  dots.forEach((dot, i) => {
+    dot.classList.toggle('active', i === index);
+  });
+
+  // Storyboard Index Items
+  const items = document.querySelectorAll('.sb-item');
+  items.forEach((item, i) => {
+    const isActive = i === index;
+    item.classList.toggle('active', isActive);
+    if (isActive) {
+      item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  });
+}
+
+function switchStoryboardModule(newIndex, direction = 'next') {
+  if (sbIsAnimating || newIndex === sbCurrentIndex) return;
+  if (newIndex < 0) newIndex = STORYBOARD_MODULES.length - 1;
+  if (newIndex >= STORYBOARD_MODULES.length) newIndex = 0;
+
+  sbIsAnimating = true;
+  const card = document.getElementById('sbActiveCard');
+
+  if (card) {
+    const outClass = direction === 'next' ? 'anim-slide-out-left' : 'anim-slide-out-right';
+    card.classList.add(outClass);
+
+    setTimeout(() => {
+      sbCurrentIndex = newIndex;
+      renderActiveStoryboardCard(sbCurrentIndex);
+      card.classList.remove(outClass);
+      card.classList.add('anim-slide-in');
+
+      setTimeout(() => {
+        card.classList.remove('anim-slide-in');
+        sbIsAnimating = false;
+      }, 420);
+    }, 180);
+  } else {
+    sbCurrentIndex = newIndex;
+    renderActiveStoryboardCard(sbCurrentIndex);
+    sbIsAnimating = false;
+  }
+}
+
+function updateStoryboardLanguage(lang) {
+  renderActiveStoryboardCard(sbCurrentIndex);
+}
+
+function initStoryboardShowcase() {
+  const container = document.getElementById('modulesStoryboardShowcase');
+  if (!container) return;
+
+  const card = document.getElementById('sbActiveCard');
+  const deckWrapper = document.getElementById('sbDeckWrapper');
+  const prevBtn = document.getElementById('sbPrevBtn');
+  const nextBtn = document.getElementById('sbNextBtn');
+  const dotsTrack = document.getElementById('sbDotsTrack');
+  const filterBtns = document.querySelectorAll('.sb-filter-btn');
+  const items = document.querySelectorAll('.sb-item');
+  const drawerToggle = document.getElementById('sbMobileDrawerToggle');
+  const indexCol = document.getElementById('sbIndexCol');
+
+  // 1. Generate Navigation Dots
+  if (dotsTrack) {
+    dotsTrack.innerHTML = '';
+    STORYBOARD_MODULES.forEach((mod, idx) => {
+      const dot = document.createElement('span');
+      dot.className = 'sb-nav-dot' + (idx === 0 ? ' active' : '');
+      dot.setAttribute('data-index', idx);
+      dot.setAttribute('aria-label', 'Go to module ' + mod.number);
+      dot.addEventListener('click', () => {
+        const dir = idx > sbCurrentIndex ? 'next' : 'prev';
+        switchStoryboardModule(idx, dir);
       });
-      btn.classList.add('active');
-      btn.setAttribute('aria-selected', 'true');
+      dotsTrack.appendChild(dot);
+    });
+  }
 
-      // Filter cards with smooth fade/scale
-      cards.forEach(card => {
-        const category = card.getAttribute('data-category');
-        if (selectedTab === 'all' || category === selectedTab) {
-          card.style.display = 'flex';
-          card.style.opacity = '0';
-          card.style.transform = 'scale(0.96)';
-          requestAnimationFrame(() => {
-            card.style.transition = 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
-            card.style.opacity = '1';
-            card.style.transform = 'scale(1)';
-          });
-        } else {
-          card.style.display = 'none';
+  // 2. Initial Render
+  renderActiveStoryboardCard(0);
+
+  // 3. Arrow Buttons
+  if (prevBtn) {
+    prevBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      switchStoryboardModule(sbCurrentIndex - 1, 'prev');
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      switchStoryboardModule(sbCurrentIndex + 1, 'next');
+    });
+  }
+
+  // 4. Storyboard Index Clicks
+  items.forEach((item, idx) => {
+    item.addEventListener('click', () => {
+      const dir = idx > sbCurrentIndex ? 'next' : 'prev';
+      switchStoryboardModule(idx, dir);
+    });
+  });
+
+  // 5. Category Filter Buttons
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-filter');
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      let firstMatch = -1;
+      items.forEach((item, i) => {
+        const cat = item.getAttribute('data-cat');
+        const matches = filter === 'all' || cat === filter;
+        item.style.display = matches ? 'flex' : 'none';
+        if (matches && firstMatch === -1) {
+          firstMatch = i;
+        }
+      });
+
+      // Jump to first module if current module is not in filter
+      const curMod = STORYBOARD_MODULES[sbCurrentIndex];
+      if (filter !== 'all' && curMod && curMod.category !== filter && firstMatch !== -1) {
+        switchStoryboardModule(firstMatch, 'next');
+      }
+    });
+  });
+
+  // 6. Touch-Swipe & Mouse Drag Mechanics (Non-intrusive to vertical scrolling)
+  if (card && deckWrapper) {
+    let startX = 0;
+    let startY = 0;
+    let currentX = 0;
+    let isDragging = false;
+    let isHorizontalGesture = false;
+    let gestureDecided = false;
+
+    const onPointerDown = (e) => {
+      if (sbIsAnimating) return;
+      if (e.target.closest('button, a')) return;
+
+      isDragging = true;
+      gestureDecided = false;
+      isHorizontalGesture = false;
+      startX = e.clientX;
+      startY = e.clientY;
+      currentX = startX;
+    };
+
+    const onPointerMove = (e) => {
+      if (!isDragging) return;
+      currentX = e.clientX;
+      const diffX = currentX - startX;
+      const diffY = e.clientY - startY;
+
+      if (!gestureDecided) {
+        if (Math.abs(diffX) > 8 || Math.abs(diffY) > 8) {
+          gestureDecided = true;
+          if (Math.abs(diffX) > Math.abs(diffY)) {
+            isHorizontalGesture = true;
+            card.classList.add('is-swiping');
+          } else {
+            isDragging = false;
+            return;
+          }
+        }
+      }
+
+      if (isHorizontalGesture) {
+        if (e.cancelable) e.preventDefault();
+        const rot = diffX * 0.035;
+        card.style.transform = `translateX(${diffX}px) rotate(${rot}deg)`;
+      }
+    };
+
+    const onPointerEnd = (e) => {
+      if (!isDragging) return;
+      isDragging = false;
+      card.classList.remove('is-swiping');
+
+      if (isHorizontalGesture) {
+        const diffX = currentX - startX;
+        card.style.transform = '';
+
+        if (diffX < -55) {
+          switchStoryboardModule(sbCurrentIndex + 1, 'next');
+        } else if (diffX > 55) {
+          switchStoryboardModule(sbCurrentIndex - 1, 'prev');
+        }
+      }
+      isHorizontalGesture = false;
+      gestureDecided = false;
+    };
+
+    card.addEventListener('pointerdown', onPointerDown, { passive: true });
+    window.addEventListener('pointermove', onPointerMove, { passive: false });
+    window.addEventListener('pointerup', onPointerEnd, { passive: true });
+    window.addEventListener('pointercancel', onPointerEnd, { passive: true });
+  }
+
+  // 7. Mobile Drawer Sheet Toggle
+  if (drawerToggle && indexCol) {
+    let backdrop = document.getElementById('sbDrawerBackdrop');
+
+    function closeDrawer() {
+      indexCol.classList.remove('is-drawer-open');
+      drawerToggle.setAttribute('aria-expanded', 'false');
+      if (backdrop) backdrop.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    function openDrawer() {
+      indexCol.classList.add('is-drawer-open');
+      drawerToggle.setAttribute('aria-expanded', 'true');
+      if (!backdrop) {
+        backdrop = document.createElement('div');
+        backdrop.id = 'sbDrawerBackdrop';
+        backdrop.style.position = 'fixed';
+        backdrop.style.inset = '0';
+        backdrop.style.background = 'rgba(15, 23, 42, 0.6)';
+        backdrop.style.zIndex = '9998';
+        backdrop.style.backdropFilter = 'blur(3px)';
+        backdrop.addEventListener('click', closeDrawer);
+        document.body.appendChild(backdrop);
+      }
+      backdrop.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+
+    drawerToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isOpen = indexCol.classList.contains('is-drawer-open');
+      if (isOpen) closeDrawer();
+      else openDrawer();
+    });
+
+    items.forEach(item => {
+      item.addEventListener('click', () => {
+        if (window.innerWidth <= 992) {
+          closeDrawer();
         }
       });
     });
+  }
+
+  // 8. Keyboard Arrow Navigation Support
+  window.addEventListener('keydown', (e) => {
+    const rect = container.getBoundingClientRect();
+    const inView = rect.top < window.innerHeight && rect.bottom > 0;
+    if (!inView) return;
+
+    if (e.key === 'ArrowLeft') {
+      switchStoryboardModule(sbCurrentIndex - 1, 'prev');
+    } else if (e.key === 'ArrowRight') {
+      switchStoryboardModule(sbCurrentIndex + 1, 'next');
+    }
   });
 }
 
@@ -3365,7 +4206,7 @@ function initApp() {
     { name: 'ComparisonTable', fn: initComparisonTable },
     { name: 'ComparisonDrawer', fn: initComparisonDrawer },
     { name: 'TableSearch', fn: initTableSearch },
-    { name: 'ModulesFilter', fn: initModulesFilter },
+    { name: 'StoryboardShowcase', fn: initStoryboardShowcase },
     { name: 'TestimonialsSlider', fn: initTestimonialsSlider },
     { name: 'FaqAccordion', fn: initFaqAccordion },
     { name: 'ContactModal', fn: initContactModal },
