@@ -13242,29 +13242,66 @@ section {
 }
 
 .sb-item {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 1.15rem;
+  min-height: 54px;
+  flex-shrink: 0;
   border-radius: 14px;
   border: 1.5px solid transparent;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  background: #ffffff;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  background: rgba(255, 255, 255, 0.45);
+  opacity: 0.38;
+  overflow: hidden;
 }
 
 .sb-item:hover {
+  opacity: 0.85;
+  background: #ffffff;
   border-color: #cbd5e1;
   transform: translateX(3px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
 .sb-item.active {
-  background: #ffffff;
-  border-color: #10b981;
-  border-left: 4px solid #10b981;
-  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.12);
-  transform: translateX(5px);
+  opacity: 1 !important;
+  background: #ffffff !important;
+  border-color: #10b981 !important;
+  border-left: 4px solid #10b981 !important;
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.14), 0 2px 6px rgba(0, 0, 0, 0.03) !important;
+  transform: translateX(6px) !important;
+}
+
+.sb-item.active:hover {
+  opacity: 1 !important;
+  transform: translateX(6px) !important;
+}
+
+/* Micro Progress Bar inside the Active Storyboard Item */
+.sb-item-progress-track {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2.5px;
+  background: rgba(16, 185, 129, 0.12);
+  display: none;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.sb-item.active .sb-item-progress-track {
+  display: block;
+}
+
+.sb-item-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #10b981, #34d399);
+  border-radius: 0 2px 2px 0;
 }
 
 .sb-item-left {

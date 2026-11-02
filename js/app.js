@@ -1953,6 +1953,120 @@ function updateHeroChatbotLanguage(lang) {
 
 let sbCurrentIndex = 0;
 let sbIsAnimating = false;
+const SB_AUTOPLAY_DURATION = 4800; // 4.8 seconds per workflow card
+let sbElapsedMs = 0;
+let sbRafId = null;
+let sbIsHovered = false;
+let sbIsInViewport = false;
+let sbActiveFilter = 'all';
+
+function getNextFilteredIndex(direction = 'next') {
+  const total = STORYBOARD_MODULES.length;
+  for (let step = 1; step <= total; step++) {
+    const candidate = direction === 'next'
+      ? (sbCurrentIndex + step) % total
+      : (sbCurrentIndex - step + total) % total;
+    const mod = STORYBOARD_MODULES[candidate];
+    if (sbActiveFilter === 'all' || mod.category === sbActiveFilter) {
+      return candidate;
+    }
+  }
+  return (sbCurrentIndex + 1) % total;
+}
+
+function updateStoryboardProgressBar(progress) {
+  const activeItem = document.querySelector('.sb-item.active');
+  if (!activeItem) return;
+  const bar = activeItem.querySelector('.sb-item-progress-bar');
+  if (bar) {
+    bar.style.width = (progress * 100) + '%';
+  }
+}
+
+function resetAllStoryboardProgressBars() {
+  const bars = document.querySelectorAll('.sb-item-progress-bar');
+  bars.forEach(b => b.style.width = '0%');
+}
+
+function startStoryboardAutoPlay() {
+  stopStoryboardAutoPlay();
+  resetAllStoryboardProgressBars();
+  sbElapsedMs = 0;
+
+  if (sbIsHovered || !sbIsInViewport) return;
+
+  let lastTime = performance.now();
+
+  function loop(now) {
+    if (sbIsHovered || !sbIsInViewport) return;
+
+    const delta = now - lastTime;
+    lastTime = now;
+    sbElapsedMs += delta;
+
+    const progress = Math.min(sbElapsedMs / SB_AUTOPLAY_DURATION, 1);
+    updateStoryboardProgressBar(progress);
+
+    if (progress >= 1) {
+      sbElapsedMs = 0;
+      resetAllStoryboardProgressBars();
+      const nextIdx = getNextFilteredIndex('next');
+      switchStoryboardModule(nextIdx, 'next', false); // false = auto-triggered
+    } else {
+      sbRafId = requestAnimationFrame(loop);
+    }
+  }
+
+  sbRafId = requestAnimationFrame((now) => {
+    lastTime = now;
+    sbRafId = requestAnimationFrame(loop);
+  });
+}
+
+function stopStoryboardAutoPlay() {
+  if (sbRafId) {
+    cancelAnimationFrame(sbRafId);
+    sbRafId = null;
+  }
+}
+
+function pauseStoryboardAutoPlay() {
+  sbIsHovered = true;
+  stopStoryboardAutoPlay();
+}
+
+function resumeStoryboardAutoPlay() {
+  sbIsHovered = false;
+  if (!sbIsInViewport) return;
+
+  stopStoryboardAutoPlay();
+  let lastTime = performance.now();
+
+  function loop(now) {
+    if (sbIsHovered || !sbIsInViewport) return;
+
+    const delta = now - lastTime;
+    lastTime = now;
+    sbElapsedMs += delta;
+
+    const progress = Math.min(sbElapsedMs / SB_AUTOPLAY_DURATION, 1);
+    updateStoryboardProgressBar(progress);
+
+    if (progress >= 1) {
+      sbElapsedMs = 0;
+      resetAllStoryboardProgressBars();
+      const nextIdx = getNextFilteredIndex('next');
+      switchStoryboardModule(nextIdx, 'next', false);
+    } else {
+      sbRafId = requestAnimationFrame(loop);
+    }
+  }
+
+  sbRafId = requestAnimationFrame((now) => {
+    lastTime = now;
+    sbRafId = requestAnimationFrame(loop);
+  });
+}
 
 const STORYBOARD_MODULES = [
   {
@@ -2580,7 +2694,7 @@ function renderActiveStoryboardCard(index) {
   });
 }
 
-function switchStoryboardModule(newIndex, direction = 'next') {
+function switchStoryboardModule(newIndex, direction = 'next', isManual = true) {
   if (sbIsAnimating || newIndex === sbCurrentIndex) return;
   if (newIndex < 0) newIndex = STORYBOARD_MODULES.length - 1;
   if (newIndex >= STORYBOARD_MODULES.length) newIndex = 0;
@@ -2601,12 +2715,15 @@ function switchStoryboardModule(newIndex, direction = 'next') {
       setTimeout(() => {
         card.classList.remove('anim-slide-in');
         sbIsAnimating = false;
+        // Start or restart auto-play timer after transition completes
+        startStoryboardAutoPlay();
       }, 420);
     }, 180);
   } else {
     sbCurrentIndex = newIndex;
     renderActiveStoryboardCard(sbCurrentIndex);
     sbIsAnimating = false;
+    startStoryboardAutoPlay();
   }
 }
 
@@ -2812,7 +2929,60 @@ function initStoryboardShowcase() {
     });
   }
 
-  // 8. Keyboard Arrow Navigation Support
+  // 8. Ensure all storyboard items have progress tracks
+  items.forEach(item => {
+    if (!item.querySelector('.sb-item-progress-track')) {
+      const track = document.createElement('div');
+      track.className = 'sb-item-progress-track';
+      track.innerHTML = '<div class="sb-item-progress-bar"></div>';
+      item.appendChild(track);
+    }
+  });
+
+  // 9. Pause Auto-Play on Hover (Desktop)
+  container.addEventListener('mouseenter', () => {
+    pauseStoryboardAutoPlay();
+  });
+
+  container.addEventListener('mouseleave', () => {
+    resumeStoryboardAutoPlay();
+  });
+
+  // 10. Pause on Mobile Touch & Resume on End
+  if (card) {
+    card.addEventListener('pointerdown', () => {
+      pauseStoryboardAutoPlay();
+    }, { passive: true });
+
+    window.addEventListener('pointerup', () => {
+      if (!container.matches(':hover')) {
+        resumeStoryboardAutoPlay();
+      }
+    }, { passive: true });
+  }
+
+  // 11. Intersection Observer (Only run when visible in viewport)
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        sbIsInViewport = entry.isIntersecting;
+        if (sbIsInViewport) {
+          if (!sbIsHovered) {
+            startStoryboardAutoPlay();
+          }
+        } else {
+          stopStoryboardAutoPlay();
+        }
+      });
+    }, { threshold: 0.15 });
+
+    observer.observe(container);
+  } else {
+    sbIsInViewport = true;
+    startStoryboardAutoPlay();
+  }
+
+  // 12. Keyboard Arrow Navigation Support
   window.addEventListener('keydown', (e) => {
     const rect = container.getBoundingClientRect();
     const inView = rect.top < window.innerHeight && rect.bottom > 0;
