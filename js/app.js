@@ -578,36 +578,41 @@ function initPricingCards() {
     }
   }
 
+  const catTags = isBn ? {
+    starter: 'বুটিক ও একক দোকান',
+    basic: 'একক রিটেল কাউন্টার',
+    medium: 'মাল্টি-ব্রাঞ্চ ও লজিস্টিকস',
+    high: 'এন্টারপ্রাইজ রিটেল চেইন'
+  } : {
+    starter: 'Boutique & Single Shop',
+    basic: 'Single Retail Counter',
+    medium: 'Multi-Branch & Logistics',
+    high: 'Enterprise Retail Chain'
+  };
+
   const html = PRICING_DATA.packages.map((pkg, index) => {
     const isPopular = pkg.isPopular;
     const ribbonHtml = isPopular 
-      ? `<div class="popular-badge-ribbon"><span>⭐</span> ${isBn ? 'সেরা পছন্দ (মোস্ট পপুলার)' : 'Most Popular Choice'}</div>` 
+      ? `<div class="popular-badge-ribbon"><span class="pulse-dot"></span><span>⭐</span> ${isBn ? 'সেরা পছন্দ · ৭৮% রিটেইলার চয়েস' : 'Most Popular · 78% Choice'}</div>` 
       : '';
 
     const bnPkg = isBn && BN_PACKAGE_META[pkg.id] ? BN_PACKAGE_META[pkg.id] : null;
     const displayName = bnPkg ? bnPkg.name : pkg.name;
     const displayTagline = bnPkg ? bnPkg.tagline : pkg.tagline;
     const displayCta = bnPkg ? bnPkg.ctaText : (pkg.ctaText || 'Get Started');
-    const highlights = bnPkg ? bnPkg.highlights : pkg.highlights;
+    const rawHighlights = bnPkg ? bnPkg.highlights : pkg.highlights;
+    // Top 5 core highlights for compact 1-display scannability
+    const highlights = rawHighlights.slice(0, 5);
+    const planCatPill = catTags[pkg.id] || (isBn ? 'স্ট্যান্ডার্ড প্যাকেজ' : 'Standard Plan');
 
-    // Capacity items
-    const capacityItems = [];
+    // 2x2 Bento Capacity Specs
+    const bentoSpecs = [];
     const prodVal = bnPkg && bnPkg.limits.products ? bnPkg.limits.products : pkg.limits.products;
     if (prodVal) {
-      capacityItems.push(`
-        <div class="capacity-line">
-          ${ICONS.box}
-          <span>${isBn ? 'প্রোডাক্ট লিমিট' : 'Products'}: <strong>${prodVal}</strong></span>
-        </div>
-      `);
-    }
-
-    const hostVal = bnPkg && bnPkg.limits.hosting ? bnPkg.limits.hosting : pkg.limits.hosting;
-    if (hostVal) {
-      capacityItems.push(`
-        <div class="capacity-line">
-          ${ICONS.cloud}
-          <span>${isBn ? 'ক্লাউড হোস্টিং' : 'Hosting'}: <strong>${hostVal}</strong></span>
+      bentoSpecs.push(`
+        <div class="bento-spec-item">
+          <span class="bento-spec-label">${ICONS.box} ${isBn ? 'প্রোডাক্ট' : 'Products'}</span>
+          <span class="bento-spec-val">${prodVal}</span>
         </div>
       `);
     }
@@ -615,45 +620,45 @@ function initPricingCards() {
     const branchVal = bnPkg && bnPkg.limits.branches ? bnPkg.limits.branches : pkg.limits.branches;
     const storeVal = bnPkg && bnPkg.limits.store ? bnPkg.limits.store : pkg.limits.store;
     if (branchVal) {
-      capacityItems.push(`
-        <div class="capacity-line">
-          ${ICONS.branch}
-          <span>${isBn ? 'আউটলেট / ব্রাঞ্চ' : 'Branches'}: <strong>${branchVal}</strong></span>
+      bentoSpecs.push(`
+        <div class="bento-spec-item">
+          <span class="bento-spec-label">${ICONS.branch} ${isBn ? 'ব্রাঞ্চ' : 'Branches'}</span>
+          <span class="bento-spec-val">${branchVal}</span>
         </div>
       `);
     } else if (storeVal) {
-      capacityItems.push(`
-        <div class="capacity-line">
-          ${ICONS.branch}
-          <span>${isBn ? 'স্টোর' : 'Store'}: <strong>${storeVal}</strong></span>
+      bentoSpecs.push(`
+        <div class="bento-spec-item">
+          <span class="bento-spec-label">${ICONS.branch} ${isBn ? 'স্টোর' : 'Store'}</span>
+          <span class="bento-spec-val">${storeVal}</span>
         </div>
       `);
     }
 
-    const storageVal = bnPkg && bnPkg.limits.storage ? bnPkg.limits.storage : pkg.limits.storage;
-    if (storageVal) {
-      capacityItems.push(`
-        <div class="capacity-line">
-          ${ICONS.server}
-          <span>${isBn ? 'স্টোরেজ' : 'Storage'}: <strong>${storageVal}</strong></span>
+    const hostVal = bnPkg && bnPkg.limits.hosting ? bnPkg.limits.hosting : pkg.limits.hosting;
+    if (hostVal) {
+      bentoSpecs.push(`
+        <div class="bento-spec-item">
+          <span class="bento-spec-label">${ICONS.cloud} ${isBn ? 'হোস্টিং' : 'Hosting'}</span>
+          <span class="bento-spec-val">${hostVal}</span>
         </div>
       `);
     }
 
     const userVal = bnPkg && bnPkg.limits.users ? bnPkg.limits.users : pkg.limits.users;
     if (userVal) {
-      capacityItems.push(`
-        <div class="capacity-line">
-          ${ICONS.users}
-          <span>${isBn ? 'অ্যাডমিন ইউজার' : 'Admin Users'}: <strong>${userVal}</strong></span>
+      bentoSpecs.push(`
+        <div class="bento-spec-item">
+          <span class="bento-spec-label">${ICONS.users} ${isBn ? 'অ্যাডমিন ইউজার' : 'Admin Users'}</span>
+          <span class="bento-spec-val">${userVal}</span>
         </div>
       `);
     }
 
-    // Highlights list
+    // Highlights list with Bento Emerald Checkmarks
     const highlightsHtml = highlights.map(item => `
       <li>
-        <span class="check-icon">${ICONS.checkCircle}</span>
+        <span class="bento-check">✓</span>
         <span>${item}</span>
       </li>
     `).join('');
@@ -675,18 +680,21 @@ function initPricingCards() {
 
     const billingNoteHtml = isAnnual
       ? `<div class="plan-annual-savings-note">
-           <span>🎁</span> ${isBn ? `এককালীন ১ বছরের সম্পূর্ণ বিলিং · সাশ্রয় <span class="currency-taka">&#2547;</span>${formattedSavings} (২ মাস ফ্রি!)` : `Full 1-Year Upfront · Save <span class="currency-taka">&#2547;</span>${formattedSavings} (2 Mos Free!)`}
+           <span>🎁</span> ${isBn ? `এককালীন বিলিং · সাশ্রয় <span class="currency-taka">&#2547;</span>${formattedSavings} (২ মাস ফ্রি!)` : `Annual Full · Save <span class="currency-taka">&#2547;</span>${formattedSavings} (2 Mos Free!)`}
          </div>`
       : `<div class="plan-billing-mode-note">
-           <span>✓</span> ${isBn ? 'নমনীয় মাসিক সাবস্ক্রিপশন · যেকোনো সময় পরিবর্তনযোগ্য' : 'Flexible monthly billing · Cancel anytime'}
+           <span>✓</span> ${isBn ? 'নমনীয় মাসিক বিলিং · যেকোনো সময় পরিবর্তনযোগ্য' : 'Flexible monthly billing · Cancel anytime'}
          </div>`;
 
     return `
-      <div class="pricing-card ${isPopular ? 'is-popular' : ''}" id="card-${pkg.id}" data-plan-index="${index}" role="group" aria-label="${displayName}">
+      <div class="pricing-slide-card ${isPopular ? 'is-popular' : ''}" id="card-${pkg.id}" data-plan-index="${index}" role="group" aria-label="${displayName}">
         ${ribbonHtml}
 
         <div class="plan-header">
-          <h3 class="plan-name">${displayName}</h3>
+          <div class="plan-name-wrap">
+            <h3 class="plan-name">${displayName}</h3>
+            <span class="plan-category-pill">${planCatPill}</span>
+          </div>
           <p class="plan-tagline">${displayTagline}</p>
         </div>
 
@@ -696,23 +704,23 @@ function initPricingCards() {
             <span class="price-period">${periodLabel}</span>
           </div>
           <div class="plan-setup-fee">
-            ${isBn ? 'এককালীন সেটআপ ফি' : 'One-time setup fee'}: <span class="currency-taka">&#2547;</span>${formattedSetup}
+            <span>⚡</span> ${isBn ? 'এককালীন সেটআপ ফি' : 'One-time setup fee'}: <span class="currency-taka">&#2547;</span>${formattedSetup}
           </div>
           ${billingNoteHtml}
         </div>
 
-        <div class="plan-capacity-box">
-          ${capacityItems.join('')}
+        <div class="plan-capacity-bento">
+          ${bentoSpecs.join('')}
         </div>
 
         <ul class="plan-features-list">
           ${highlightsHtml}
         </ul>
 
-        <button type="button" class="btn btn-md ${isPopular ? 'btn-primary' : 'btn-secondary'} btn-block open-plan-modal" data-plan-id="${pkg.id}">
+        <button type="button" class="btn-bento-cta ${isPopular ? 'btn-primary-bento' : 'btn-secondary-bento'} open-plan-modal" data-plan-id="${pkg.id}">
           <span>${displayCta}</span>
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" width="14" height="14">
-            <path d="M3.33 8h9.34m-4-4l4 4-4 4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" width="15" height="15">
+            <path d="M3.33 8h9.34m-4-4l4 4-4 4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
       </div>
@@ -721,8 +729,8 @@ function initPricingCards() {
 
   container.innerHTML = html;
 
-  // Initialize and bind 3D Coverflow positioning
-  setupPricingCoverflow();
+  // Initialize and bind Single-Display Slider Deck Engine
+  setupPricingSliderDeck();
 
   // Bind monthly / annual switcher buttons
   const btnMonthly = document.getElementById('btnBillingMonthly');
@@ -749,15 +757,16 @@ function initPricingCards() {
 }
 
 /**
- * 3D Magnified Coverflow Engine (Anzaar 'Style in Motion' Pattern)
- * Displays 4 packages in 1 horizontal row with center card magnified.
- * Left/Right flanking cards tilted in 3D perspective with peeking preview.
+ * Mobile-First Single-Display Slider Deck Engine
+ * - Smooth hardware-accelerated 2D glide (scale 1.0 active, scale 0.88 left/right peeking)
+ * - Multi-input: Touch swipe, top pill bar, flanking card tap, chevron buttons, dots, keyboard
+ * - Zero 3D distortion, 100% crisp typography, fits in 1 screen height
  */
-function setupPricingCoverflow() {
+function setupPricingSliderDeck() {
   const container = document.getElementById('pricingCardsTrack');
   if (!container) return;
 
-  const cards = Array.from(container.querySelectorAll('.pricing-card'));
+  const cards = Array.from(container.querySelectorAll('.pricing-slide-card'));
   const totalCards = cards.length;
   if (totalCards === 0) return;
 
@@ -767,9 +776,10 @@ function setupPricingCoverflow() {
   const dots = dotsContainer ? Array.from(dotsContainer.querySelectorAll('.pricing-dot')) : [];
   const prevBtn = document.getElementById('pricingPrevBtn');
   const nextBtn = document.getElementById('pricingNextBtn');
-  const stage = document.getElementById('pricingCoverflowStage');
+  const stage = document.getElementById('pricingSliderStage');
+  const wrapper = document.getElementById('pricingDeckWrapper');
 
-  function updatePositions(targetIdx) {
+  function updateDeckPositions(targetIdx) {
     // Clamp targetIdx
     currentPricingActiveIndex = Math.max(0, Math.min(totalCards - 1, targetIdx));
 
@@ -807,141 +817,107 @@ function setupPricingCoverflow() {
 
     // Update Pills
     pills.forEach((pill, idx) => {
-      if (idx === currentPricingActiveIndex) {
-        pill.classList.add('active');
-        pill.setAttribute('aria-selected', 'true');
-      } else {
-        pill.classList.remove('active');
-        pill.setAttribute('aria-selected', 'false');
-      }
+      const isActive = idx === currentPricingActiveIndex;
+      pill.classList.toggle('active', isActive);
+      pill.setAttribute('aria-selected', isActive ? 'true' : 'false');
     });
 
     // Update Dots
     dots.forEach((dot, idx) => {
-      if (idx === currentPricingActiveIndex) {
-        dot.classList.add('active');
-      } else {
-        dot.classList.remove('active');
-      }
+      dot.classList.toggle('active', idx === currentPricingActiveIndex);
     });
 
     // Update Chevrons disabled states
     if (prevBtn) {
-      if (currentPricingActiveIndex === 0) {
-        prevBtn.classList.add('is-disabled');
-        prevBtn.disabled = true;
-      } else {
-        prevBtn.classList.remove('is-disabled');
-        prevBtn.disabled = false;
-      }
+      const isFirst = currentPricingActiveIndex === 0;
+      prevBtn.disabled = isFirst;
+      prevBtn.classList.toggle('is-disabled', isFirst);
     }
-
     if (nextBtn) {
-      if (currentPricingActiveIndex === totalCards - 1) {
-        nextBtn.classList.add('is-disabled');
-        nextBtn.disabled = true;
-      } else {
-        nextBtn.classList.remove('is-disabled');
-        nextBtn.disabled = false;
-      }
+      const isLast = currentPricingActiveIndex === totalCards - 1;
+      nextBtn.disabled = isLast;
+      nextBtn.classList.toggle('is-disabled', isLast);
     }
   }
 
-  // Bind click on flanking cards to bring them to center
+  // 1. Click on flanking peek card to glide to center
   cards.forEach((card, idx) => {
     card.onclick = (e) => {
       if (idx !== currentPricingActiveIndex) {
         e.preventDefault();
         e.stopPropagation();
-        updatePositions(idx);
+        updateDeckPositions(idx);
       }
     };
   });
 
-  // Bind Pills click
+  // 2. Click on Quick Switcher Pills
   pills.forEach((pill, idx) => {
-    pill.onclick = () => updatePositions(idx);
+    pill.onclick = () => updateDeckPositions(idx);
   });
 
-  // Bind Dots click
+  // 3. Click on Pagination Dots
   dots.forEach((dot, idx) => {
-    dot.onclick = () => updatePositions(idx);
+    dot.onclick = () => updateDeckPositions(idx);
   });
 
-  // Bind Chevron Arrows
+  // 4. Click on Arrow Chevrons
   if (prevBtn) {
-    prevBtn.onclick = () => updatePositions(currentPricingActiveIndex - 1);
+    prevBtn.onclick = () => updateDeckPositions(currentPricingActiveIndex - 1);
   }
   if (nextBtn) {
-    nextBtn.onclick = () => updatePositions(currentPricingActiveIndex + 1);
+    nextBtn.onclick = () => updateDeckPositions(currentPricingActiveIndex + 1);
   }
 
-  // Keyboard navigation on stage
-  if (stage && !stage._hasKeyHandler) {
-    stage._hasKeyHandler = true;
+  // 5. Keyboard Navigation (ArrowLeft / ArrowRight)
+  if (stage && !stage._hasKeyNav) {
+    stage._hasKeyNav = true;
     stage.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowLeft') {
-        updatePositions(currentPricingActiveIndex - 1);
+        updateDeckPositions(currentPricingActiveIndex - 1);
       } else if (e.key === 'ArrowRight') {
-        updatePositions(currentPricingActiveIndex + 1);
+        updateDeckPositions(currentPricingActiveIndex + 1);
       }
     });
   }
 
-  // Mobile Touch Swipe Handling with Directional Lock
-  if (stage && !stage._hasTouchHandler) {
-    stage._hasTouchHandler = true;
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let touchEndX = 0;
-    let touchEndY = 0;
-    let isHorizontalGesture = false;
+  // 6. Mobile Touch Gesture Swiping (Smooth, Directional Lock)
+  const swipeTarget = stage || wrapper;
+  if (swipeTarget && !swipeTarget._hasTouchSwipe) {
+    swipeTarget._hasTouchSwipe = true;
+    let startX = 0;
+    let startY = 0;
+    let startTime = 0;
 
-    stage.addEventListener('touchstart', (e) => {
-      if (!e.touches.length) return;
-      const touch = e.touches[0];
-      touchStartX = touch.clientX;
-      touchStartY = touch.clientY;
-      touchEndX = touchStartX;
-      touchEndY = touchStartY;
-      isHorizontalGesture = false;
-    }, { passive: true });
-
-    stage.addEventListener('touchmove', (e) => {
-      if (!e.touches.length) return;
-      const touch = e.touches[0];
-      touchEndX = touch.clientX;
-      touchEndY = touch.clientY;
-
-      const deltaX = touchEndX - touchStartX;
-      const deltaY = touchEndY - touchStartY;
-
-      if (!isHorizontalGesture && Math.abs(deltaX) > 10) {
-        if (Math.abs(deltaX) > Math.abs(deltaY) * 1.2) {
-          isHorizontalGesture = true;
-        }
+    swipeTarget.addEventListener('touchstart', (e) => {
+      if (e.touches && e.touches[0]) {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        startTime = Date.now();
       }
     }, { passive: true });
 
-    stage.addEventListener('touchend', () => {
-      const deltaX = touchEndX - touchStartX;
-      const deltaY = touchEndY - touchStartY;
+    swipeTarget.addEventListener('touchend', (e) => {
+      if (!e.changedTouches || !e.changedTouches[0]) return;
+      const diffX = e.changedTouches[0].clientX - startX;
+      const diffY = e.changedTouches[0].clientY - startY;
+      const elapsed = Date.now() - startTime;
 
-      // Only act if swiped horizontally >= 40px and horizontal intent was dominant
-      if (Math.abs(deltaX) >= 40 && Math.abs(deltaX) > Math.abs(deltaY)) {
-        if (deltaX < 0) {
-          // Swiped left -> Next Plan
-          updatePositions(currentPricingActiveIndex + 1);
+      // Ensure horizontal swipe intent
+      if (Math.abs(diffX) > Math.abs(diffY) && (Math.abs(diffX) > 35 || (Math.abs(diffX) > 20 && elapsed < 250))) {
+        if (diffX < 0) {
+          // Swipe Left -> next plan
+          updateDeckPositions(currentPricingActiveIndex + 1);
         } else {
-          // Swiped right -> Previous Plan
-          updatePositions(currentPricingActiveIndex - 1);
+          // Swipe Right -> previous plan
+          updateDeckPositions(currentPricingActiveIndex - 1);
         }
       }
     }, { passive: true });
   }
 
-  // Render initial position (Default: Medium Plan index 2)
-  updatePositions(currentPricingActiveIndex);
+  // Initial position sync
+  updateDeckPositions(currentPricingActiveIndex);
 }
 
 function initEnterpriseCard() {

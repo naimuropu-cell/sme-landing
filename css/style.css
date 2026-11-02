@@ -13469,12 +13469,47 @@ section {
    Straight Upright Spotlight Switcher + 100% Copyable Crystal Text
    ========================================================================== */
 
-.pricing-coverflow-wrapper {
+/* ==========================================================================
+   MOBILE-FIRST SINGLE-DISPLAY PRICING SLIDER DECK (APPLE / REVOLUT STYLE)
+   - 100% fits in 1 display screen height on both Mobile & Desktop PC
+   - Smooth 2D hardware-accelerated horizontal slide with left/right peeking cards
+   - Multi-input navigation: Touch swipe, pill bar, flanking card tap, chevrons, dots
+   - Modern Bento 2x2 capacity specs + top 5 high-impact highlights
+   - VIP emerald glow on popular card, 100% crisp copyable typography (no blur/rotation)
+   ========================================================================== */
+
+/* Section Outer Geometry: Compact Vertical Budget for Single-Display Fit */
+.pricing-section {
+  padding: 1.5rem 0 2rem 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.pricing-section .section-header {
+  margin-bottom: 0.75rem;
+}
+
+.pricing-section .section-title {
+  font-size: 1.95rem;
+  margin-bottom: 0.25rem;
+}
+
+.pricing-section .section-subtitle {
+  font-size: 0.88rem;
+  max-width: 680px;
+  margin: 0 auto;
+  line-height: 1.35;
+}
+
+.pricing-billing-switcher-wrap {
+  margin-bottom: 0.75rem;
+}
+
+.pricing-slider-deck-wrapper {
   position: relative;
   width: 100%;
   max-width: 1280px;
-  margin: 0 auto 3.5rem auto;
-  padding: 0 1rem;
+  margin: 0 auto;
   box-sizing: border-box;
 }
 
@@ -13483,27 +13518,29 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 0.35rem 0.55rem;
+  gap: 0.4rem;
+  padding: 0.28rem 0.45rem;
   background: rgba(16, 185, 129, 0.08);
   border: 1.5px solid rgba(16, 185, 129, 0.2);
   border-radius: 999px;
-  margin: 0 auto 2.25rem auto;
+  margin: 0 auto 0.95rem auto;
   width: fit-content;
   max-width: 100%;
   box-sizing: border-box;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 4px 16px rgba(16, 185, 129, 0.08);
+  z-index: 15;
+  position: relative;
 }
 
 .pricing-tier-pill {
   background: transparent;
   border: none;
   outline: none;
-  padding: 0.45rem 1.15rem;
+  padding: 0.38rem 1.05rem;
   border-radius: 999px;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
   color: var(--text-muted, #64748b);
   cursor: pointer;
@@ -13532,164 +13569,424 @@ section {
   line-height: 1;
 }
 
-/* Spotlight Stage: Straight 2D Alignment (Zero Blur / Zero Texture Distortion) */
-.pricing-coverflow-stage {
+/* ==========================================================================
+   SLIDER STAGE: The Focused Single-Display Stage
+   ========================================================================== */
+.pricing-slider-stage {
+  --deck-offset: 350px;
   position: relative;
   width: 100%;
-  height: 870px;
+  height: 465px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: 2.5rem 0 1.5rem 0;
   box-sizing: border-box;
+  touch-action: pan-y;
+  outline: none;
 }
 
-/* The Cards Track */
 .pricing-cards-track {
   position: relative;
   width: 100%;
   height: 100%;
 }
 
-/* Base Pricing Card inside Stage: Original Spacious Geometry */
-.pricing-coverflow-wrapper .pricing-card {
+/* ==========================================================================
+   THE PRICING SLIDE CARD: Compact Luxury Geometry (~440px height)
+   ========================================================================== */
+.pricing-slide-card {
   position: absolute !important;
   top: 50% !important;
   left: 50% !important;
-  width: 360px !important;
-  max-width: 90vw !important;
+  width: 345px !important;
+  max-width: 86vw !important;
+  height: 440px !important;
   margin: 0 !important;
   background: #ffffff;
-  border: 1.5px solid var(--border-light, #e2e8f0);
+  border: 1.5px solid rgba(226, 232, 240, 0.95);
   border-radius: 22px;
-  padding: 2.25rem 1.65rem;
+  padding: 1.3rem 1.35rem 1.1rem 1.35rem;
   box-sizing: border-box !important;
-  display: flex;
-  flex-direction: column;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
   transform-origin: center center;
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.4s ease,
-              box-shadow 0.4s ease,
-              border-color 0.4s ease !important;
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.38s ease,
+              box-shadow 0.38s ease,
+              border-color 0.28s ease !important;
   user-select: text !important;
   -webkit-user-select: text !important;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+  overflow: visible;
 }
 
-/* Popular Ribbon Badge */
-.pricing-coverflow-wrapper .popular-badge-ribbon {
-  z-index: 15;
-  white-space: nowrap;
-  user-select: none !important;
-}
-
-/* State 1: Active Front Card - Large (Boro), 100% Crisp, Copyable */
-.pricing-coverflow-wrapper .pricing-card.card-active {
+/* State 1: Active Centered Card (100% crisp, copyable, elevated) */
+.pricing-slide-card.card-active {
   transform: translate(-50%, -50%) scale(1.0) !important;
-  z-index: 12 !important;
+  z-index: 10 !important;
   opacity: 1 !important;
   cursor: default !important;
   pointer-events: auto !important;
+  box-shadow: 0 20px 45px -8px rgba(15, 23, 42, 0.12), 0 4px 12px rgba(15, 23, 42, 0.04) !important;
+  border-color: rgba(203, 213, 225, 1) !important;
+}
+
+/* Active Popular Card: Elevated Emerald VIP Treatment */
+.pricing-slide-card.card-active.is-popular {
   border: 2px solid #10b981 !important;
-  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.14),
-              0 0 35px -5px rgba(16, 185, 129, 0.22) !important;
+  background: linear-gradient(180deg, rgba(236, 253, 245, 0.55) 0%, #ffffff 28%) !important;
+  box-shadow: 0 22px 55px -10px rgba(16, 185, 129, 0.28), 0 0 0 1px rgba(16, 185, 129, 0.2) !important;
 }
 
-/* Enable free text highlight and copy on the active card */
-.pricing-coverflow-wrapper .pricing-card.card-active,
-.pricing-coverflow-wrapper .pricing-card.card-active * {
-  user-select: text !important;
-  -webkit-user-select: text !important;
-}
-
-.pricing-coverflow-wrapper .pricing-card.card-active .plan-name,
-.pricing-coverflow-wrapper .pricing-card.card-active .plan-tagline,
-.pricing-coverflow-wrapper .pricing-card.card-active .price-val,
-.pricing-coverflow-wrapper .pricing-card.card-active .price-period,
-.pricing-coverflow-wrapper .pricing-card.card-active .plan-setup-fee,
-.pricing-coverflow-wrapper .pricing-card.card-active .plan-annual-savings-note,
-.pricing-coverflow-wrapper .pricing-card.card-active .plan-billing-mode-note,
-.pricing-coverflow-wrapper .pricing-card.card-active .plan-capacity-box,
-.pricing-coverflow-wrapper .pricing-card.card-active .plan-features-list li {
-  cursor: text;
-}
-
-.pricing-coverflow-wrapper .pricing-card.card-active .btn,
-.pricing-coverflow-wrapper .pricing-card.card-active button {
-  cursor: pointer;
-  user-select: none !important;
-}
-
-/* State 2: Immediate Flanking Cards - Straight in Background, Smaller & Faded */
-.pricing-coverflow-wrapper .pricing-card.card-left-1 {
-  transform: translate(calc(-50% - 310px), -50%) scale(0.86) !important;
-  z-index: 7 !important;
-  opacity: 0.50 !important;
+/* State 2: Immediate Flanking Left / Right Cards (Peeking Preview) */
+.pricing-slide-card.card-left-1 {
+  transform: translate(calc(-50% - var(--deck-offset)), -50%) scale(0.88) !important;
+  z-index: 6 !important;
+  opacity: 0.55 !important;
   cursor: pointer !important;
-  border: 1.5px solid var(--border-light, #e2e8f0) !important;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.05) !important;
   user-select: none !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04) !important;
 }
 
-.pricing-coverflow-wrapper .pricing-card.card-right-1 {
-  transform: translate(calc(-50% + 310px), -50%) scale(0.86) !important;
-  z-index: 7 !important;
-  opacity: 0.50 !important;
+.pricing-slide-card.card-right-1 {
+  transform: translate(calc(-50% + var(--deck-offset)), -50%) scale(0.88) !important;
+  z-index: 6 !important;
+  opacity: 0.55 !important;
   cursor: pointer !important;
-  border: 1.5px solid var(--border-light, #e2e8f0) !important;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.05) !important;
   user-select: none !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04) !important;
 }
 
-.pricing-coverflow-wrapper .pricing-card.card-left-1:hover,
-.pricing-coverflow-wrapper .pricing-card.card-right-1:hover {
-  opacity: 0.75 !important;
-  border-color: rgba(16, 185, 129, 0.4) !important;
+.pricing-slide-card.card-left-1:hover,
+.pricing-slide-card.card-right-1:hover {
+  opacity: 0.82 !important;
+  border-color: rgba(16, 185, 129, 0.45) !important;
 }
 
-/* State 3: Far Outer Background Cards - Even Smaller & More Faded (Like Anzaar outer reels) */
-.pricing-coverflow-wrapper .pricing-card.card-left-2 {
-  transform: translate(calc(-50% - 560px), -50%) scale(0.72) !important;
-  z-index: 3 !important;
-  opacity: 0.20 !important;
+/* State 3: Far Outer Background Cards */
+.pricing-slide-card.card-left-2 {
+  transform: translate(calc(-50% - calc(var(--deck-offset) * 1.95)), -50%) scale(0.76) !important;
+  z-index: 2 !important;
+  opacity: 0.12 !important;
   cursor: pointer !important;
-  border: 1px solid var(--border-light, #e2e8f0) !important;
   user-select: none !important;
 }
 
-.pricing-coverflow-wrapper .pricing-card.card-right-2 {
-  transform: translate(calc(-50% + 560px), -50%) scale(0.72) !important;
-  z-index: 3 !important;
-  opacity: 0.20 !important;
+.pricing-slide-card.card-right-2 {
+  transform: translate(calc(-50% + calc(var(--deck-offset) * 1.95)), -50%) scale(0.76) !important;
+  z-index: 2 !important;
+  opacity: 0.12 !important;
   cursor: pointer !important;
-  border: 1px solid var(--border-light, #e2e8f0) !important;
   user-select: none !important;
 }
 
-/* Hidden Cards beyond visible range */
-.pricing-coverflow-wrapper .pricing-card.card-hidden {
+/* Hidden Cards */
+.pricing-slide-card.card-hidden {
   transform: translate(-50%, -50%) scale(0.6) !important;
   z-index: 0 !important;
   opacity: 0 !important;
   pointer-events: none !important;
 }
 
-/* Flanking Card Click Shield: clicking anywhere on a side card slides it into active view */
-.pricing-coverflow-wrapper .pricing-card:not(.card-active) * {
+/* Flanking Card Click Shield: tapping anywhere on a side card glides it into center view */
+.pricing-slide-card:not(.card-active) * {
   pointer-events: none;
 }
 
-/* Floating Navigation Chevrons */
-.pricing-stage-arrow {
+/* Popular Floating Ribbon Badge */
+.popular-badge-ribbon {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  padding: 0.28rem 0.9rem;
+  border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  z-index: 15;
+}
+
+.popular-badge-ribbon .pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 0 rgba(255, 255, 255, 0.7);
+  animation: badgePulse 1.8s infinite;
+}
+
+@keyframes badgePulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+  70% { box-shadow: 0 0 0 6px rgba(255, 255, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+}
+
+/* ==========================================================================
+   CARD INTERNAL TYPOGRAPHY & BENTO CAPACITY SPECS
+   ========================================================================== */
+.plan-header {
+  margin-bottom: 0.45rem;
+}
+
+.plan-name-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.18rem;
+}
+
+.plan-name {
+  font-size: 1.22rem;
+  font-weight: 800;
+  color: var(--text-dark, #0f172a);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.plan-category-pill {
+  font-size: 0.66rem;
+  font-weight: 700;
+  padding: 0.16rem 0.48rem;
+  border-radius: 6px;
+  background: rgba(16, 185, 129, 0.08);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  white-space: nowrap;
+}
+
+.plan-tagline {
+  font-size: 0.76rem;
+  color: var(--text-muted, #64748b);
+  margin: 0;
+  line-height: 1.22;
+}
+
+.plan-price-wrap {
+  margin-bottom: 0.45rem;
+  padding-bottom: 0.38rem;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.plan-monthly-price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.22rem;
+}
+
+.price-currency {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-dark, #0f172a);
+}
+
+.price-val {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--text-dark, #0f172a);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.is-popular .price-val {
+  color: #059669;
+}
+
+.price-period {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted, #64748b);
+}
+
+.plan-setup-fee {
+  font-size: 0.72rem;
+  color: var(--text-muted, #64748b);
+  margin-top: 0.12rem;
+  font-weight: 500;
+}
+
+.plan-annual-savings-note {
+  margin-top: 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #047857;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  padding: 0.16rem 0.45rem;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.plan-billing-mode-note {
+  margin-top: 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 0.16rem 0.45rem;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* 2x2 Bento Capacity Specs */
+.plan-capacity-bento {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.3rem;
+  margin-bottom: 0.45rem;
+}
+
+.bento-spec-item {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0.3rem 0.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  transition: all 0.2s ease;
+}
+
+.is-popular .bento-spec-item {
+  background: rgba(236, 253, 245, 0.5);
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+.bento-spec-label {
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.bento-spec-item svg,
+.bento-spec-label svg {
+  width: 12px !important;
+  height: 12px !important;
+  min-width: 12px !important;
+  min-height: 12px !important;
+  max-width: 12px !important;
+  max-height: 12px !important;
+  color: #10b981;
+  flex-shrink: 0;
+}
+
+.bento-spec-val {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--text-dark, #0f172a);
+}
+
+/* Core Highlights List */
+.plan-features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.65rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex-grow: 1;
+}
+
+.plan-features-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.74rem;
+  color: #334155;
+  line-height: 1.22;
+}
+
+.bento-check {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.12);
+  color: #059669;
+  font-size: 0.7rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.is-popular .bento-check {
+  background: #10b981;
+  color: #ffffff;
+}
+
+/* CTA Buttons */
+.btn-bento-cta {
+  width: 100%;
+  padding: 0.55rem 1rem;
+  border-radius: 12px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+
+.btn-secondary-bento {
+  background: #0f172a;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+}
+
+.btn-secondary-bento:hover {
+  background: #10b981;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.35);
+}
+
+.btn-primary-bento {
+  background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+}
+
+.btn-primary-bento:hover {
+  background: linear-gradient(135deg, #059669 0%, #065f46 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.45);
+}
+
+/* ==========================================================================
+   FLOATING CHEVRONS & PAGINATION DOTS
+   ========================================================================== */
+.pricing-deck-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.95);
   border: 1.5px solid rgba(16, 185, 129, 0.25);
@@ -13698,57 +13995,56 @@ section {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 25;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 20;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   outline: none;
   user-select: none;
 }
 
-.pricing-stage-arrow:hover {
+.pricing-deck-arrow:hover {
   background: #10b981;
   color: #ffffff;
   border-color: #10b981;
   transform: translateY(-50%) scale(1.08);
-  box-shadow: 0 12px 28px rgba(16, 185, 129, 0.35);
+  box-shadow: 0 8px 22px rgba(16, 185, 129, 0.35);
 }
 
-.pricing-stage-arrow:active {
-  transform: translateY(-50%) scale(0.96);
+.pricing-deck-arrow.arrow-prev {
+  left: max(12px, calc(50% - 540px));
 }
 
-.pricing-stage-arrow.arrow-prev {
-  left: 12px;
+.pricing-deck-arrow.arrow-next {
+  right: max(12px, calc(50% - 540px));
 }
 
-.pricing-stage-arrow.arrow-next {
-  right: 12px;
-}
-
-.pricing-stage-arrow.is-disabled {
+.pricing-deck-arrow:disabled,
+.pricing-deck-arrow.is-disabled {
   opacity: 0.25;
   cursor: not-allowed;
   pointer-events: none;
-  box-shadow: none;
 }
 
-/* Dot Indicators Track (Like Anzaar Reel Bottom Track) */
-.pricing-coverflow-dots {
+.pricing-slider-dots {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.55rem;
-  margin-top: 1.25rem;
-  user-select: none;
+  gap: 0.5rem;
+  margin: 0.95rem auto 0 auto;
+  z-index: 15;
+  position: relative;
 }
 
 .pricing-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(16, 185, 129, 0.25);
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.35);
+  border: none;
+  padding: 0;
   cursor: pointer;
-  transition: all 0.32s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
 }
 
 .pricing-dot:hover {
@@ -13756,175 +14052,208 @@ section {
 }
 
 .pricing-dot.active {
-  width: 32px;
-  border-radius: 999px;
-  background: #10b981;
-  box-shadow: 0 2px 10px rgba(16, 185, 129, 0.45);
+  width: 28px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
+}
+
+/* Guarantee Trust Strip (Below Slider Placement) */
+.pricing-trust-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin: 0.95rem auto 0 auto;
+}
+
+.trust-note-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.76rem;
+  color: var(--text-muted, #64748b);
+  font-weight: 500;
+}
+
+.trust-note-item svg {
+  color: #10b981;
+  flex-shrink: 0;
 }
 
 /* ==========================================================================
-   MOBILE & TABLET RESPONSIVENESS (Straight Background Cards + Crystal Front)
+   RESPONSIVE MEDIA QUERIES (MOBILE-FIRST 1-DISPLAY FIT)
    ========================================================================== */
-
-@media (max-width: 992px) {
-  .pricing-coverflow-stage {
-    height: 840px;
+@media (max-width: 1024px) {
+  .pricing-slider-stage {
+    --deck-offset: 290px;
+    height: 470px;
   }
-  .pricing-coverflow-wrapper .pricing-card.card-left-1 {
-    transform: translate(calc(-50% - 260px), -50%) scale(0.86) !important;
-  }
-  .pricing-coverflow-wrapper .pricing-card.card-right-1 {
-    transform: translate(calc(-50% + 260px), -50%) scale(0.86) !important;
-  }
-  .pricing-coverflow-wrapper .pricing-card.card-left-2 {
-    transform: translate(calc(-50% - 460px), -50%) scale(0.72) !important;
-  }
-  .pricing-coverflow-wrapper .pricing-card.card-right-2 {
-    transform: translate(calc(-50% + 460px), -50%) scale(0.72) !important;
+  .pricing-slide-card {
+    width: 320px !important;
+    height: 435px !important;
+    padding: 1.25rem 1.15rem;
   }
 }
 
 @media (max-width: 768px) {
-  .pricing-coverflow-wrapper {
-    padding: 0 0.25rem;
-    margin-bottom: 2.5rem;
+  .pricing-section {
+    padding: 1.15rem 0 1.15rem 0;
   }
-
-  .pricing-tier-pill-bar {
-    gap: 0.3rem;
-    padding: 0.25rem 0.35rem;
-    margin-bottom: 1rem;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+  .pricing-section .section-header {
+    margin-bottom: 0.4rem;
   }
-  .pricing-tier-pill-bar::-webkit-scrollbar {
+  .pricing-section .section-badge-pill {
     display: none;
   }
-
+  .pricing-section .section-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.1rem;
+  }
+  .pricing-section .section-subtitle {
+    display: none;
+  }
+  .pricing-billing-switcher-wrap {
+    margin-bottom: 0.4rem;
+  }
+  .pricing-switcher-pill {
+    padding: 0.2rem;
+  }
+  .billing-toggle-btn {
+    padding: 0.32rem 0.7rem;
+    font-size: 0.74rem;
+  }
+  .annual-discount-chip {
+    font-size: 0.65rem;
+    padding: 0.12rem 0.35rem;
+  }
+  .pricing-tier-pill-bar {
+    margin-bottom: 0.65rem;
+    padding: 0.22rem;
+    gap: 0.18rem;
+  }
   .pricing-tier-pill {
-    padding: 0.35rem 0.75rem;
-    font-size: 0.76rem;
+    padding: 0.32rem 0.62rem;
+    font-size: 0.72rem;
   }
-
-  .pricing-coverflow-stage {
-    height: 820px;
-    padding: 2.25rem 0 1rem 0;
+  .pricing-slider-stage {
+    --deck-offset: 78vw;
+    height: 440px;
   }
-
-  /* Exactly 1 row on mobile: card width takes ~82% of screen, adjacent peek in straight & faded */
-  .pricing-coverflow-wrapper .pricing-card {
-    width: 310px !important;
-    max-width: 84vw !important;
-    padding: 1.85rem 1.35rem !important;
-    border-radius: 20px !important;
+  .pricing-slide-card {
+    width: 82vw !important;
+    max-width: 320px !important;
+    height: 430px !important;
+    padding: 1.2rem 1.05rem 0.95rem 1.05rem !important;
   }
-
-  .pricing-coverflow-wrapper .pricing-card.card-active {
-    transform: translate(-50%, -50%) scale(1.0) !important;
-    box-shadow: 0 16px 45px -8px rgba(0, 0, 0, 0.16),
-                0 0 25px -4px rgba(16, 185, 129, 0.22) !important;
+  .pricing-deck-arrow {
+    width: 36px;
+    height: 36px;
   }
-
-  /* Straight in Background, smaller & faded */
-  .pricing-coverflow-wrapper .pricing-card.card-left-1 {
-    transform: translate(calc(-50% - 225px), -50%) scale(0.84) !important;
-    opacity: 0.45 !important;
-  }
-
-  .pricing-coverflow-wrapper .pricing-card.card-right-1 {
-    transform: translate(calc(-50% + 225px), -50%) scale(0.84) !important;
-    opacity: 0.45 !important;
-  }
-
-  .pricing-coverflow-wrapper .pricing-card.card-left-2 {
-    transform: translate(calc(-50% - 340px), -50%) scale(0.70) !important;
-    opacity: 0.15 !important;
-  }
-
-  .pricing-coverflow-wrapper .pricing-card.card-right-2 {
-    transform: translate(calc(-50% + 340px), -50%) scale(0.70) !important;
-    opacity: 0.15 !important;
-  }
-
-  .pricing-stage-arrow {
-    width: 38px;
-    height: 38px;
-  }
-  .pricing-stage-arrow.arrow-prev {
+  .pricing-deck-arrow.arrow-prev {
     left: 4px;
   }
-  .pricing-stage-arrow.arrow-next {
+  .pricing-deck-arrow.arrow-next {
     right: 4px;
+  }
+  .pricing-slider-dots {
+    margin-top: 0.75rem;
+  }
+  .pricing-trust-strip {
+    margin-top: 0.75rem;
+    gap: 0.35rem 0.75rem;
+  }
+  .trust-note-item {
+    font-size: 0.68rem;
   }
 }
 
-@media (max-width: 380px) {
-  .pricing-coverflow-stage {
-    height: 800px;
-    padding: 2rem 0 1rem 0;
+@media (max-width: 480px) {
+  .pricing-slider-stage {
+    --deck-offset: 78vw;
+    height: 435px;
   }
-
-  .pricing-coverflow-wrapper .pricing-card {
-    width: 290px !important;
-    max-width: 86vw !important;
-    padding: 1.65rem 1.15rem !important;
+  .pricing-slide-card {
+    width: 82vw !important;
+    max-width: 310px !important;
+    height: 425px !important;
+    padding: 1.15rem 0.95rem 0.9rem 0.95rem !important;
   }
-
-  .pricing-coverflow-wrapper .pricing-card.card-left-1 {
-    transform: translate(calc(-50% - 200px), -50%) scale(0.82) !important;
+  .plan-name {
+    font-size: 1.14rem;
   }
-
-  .pricing-coverflow-wrapper .pricing-card.card-right-1 {
-    transform: translate(calc(-50% + 200px), -50%) scale(0.82) !important;
+  .price-val {
+    font-size: 1.65rem;
+  }
+  .plan-capacity-bento {
+    gap: 0.24rem;
+  }
+  .bento-spec-item {
+    padding: 0.25rem 0.35rem;
+  }
+  .plan-features-list {
+    margin-bottom: 0.45rem;
+  }
+  .plan-features-list li {
+    font-size: 0.71rem;
+  }
+  .btn-bento-cta {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.8rem;
   }
 }
 
 /* Dark Theme Support */
-body.dark-theme .pricing-tier-pill-bar {
-  background: rgba(16, 185, 129, 0.12);
-  border-color: rgba(16, 185, 129, 0.28);
+body.dark-theme .pricing-slide-card {
+  background: #111827;
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
-body.dark-theme .pricing-tier-pill {
-  color: #94a3b8;
+body.dark-theme .pricing-slide-card.card-active.is-popular {
+  border-color: #10b981;
+  background: linear-gradient(180deg, rgba(16, 185, 129, 0.12) 0%, #111827 30%) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(16, 185, 129, 0.2) !important;
 }
 
-body.dark-theme .pricing-tier-pill:hover {
-  color: #f1f5f9;
+body.dark-theme .plan-name {
+  color: #f8fafc;
 }
 
-body.dark-theme .pricing-tier-pill.active {
-  color: #ffffff;
+body.dark-theme .price-currency,
+body.dark-theme .price-val {
+  color: #f8fafc;
 }
 
-body.dark-theme .pricing-coverflow-wrapper .pricing-card {
-  background: #111827 !important;
-  border-color: rgba(255, 255, 255, 0.08) !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
-}
-
-body.dark-theme .pricing-coverflow-wrapper .pricing-card.card-active {
-  border-color: #10b981 !important;
-  box-shadow: 0 25px 65px -10px rgba(0, 0, 0, 0.7),
-              0 0 40px -5px rgba(16, 185, 129, 0.35) !important;
-}
-
-body.dark-theme .pricing-stage-arrow {
-  background: rgba(17, 24, 39, 0.9);
-  border-color: rgba(16, 185, 129, 0.35);
+body.dark-theme .is-popular .price-val,
+body.dark-theme .is-popular .price-currency {
   color: #34d399;
 }
 
-body.dark-theme .pricing-stage-arrow:hover {
-  background: #10b981;
-  color: #ffffff;
+body.dark-theme .bento-spec-item {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
 }
 
+body.dark-theme .bento-spec-val {
+  color: #f8fafc;
+}
 
-/* ==========================================================================
-   UPGRADED CONCEPT B: 3D MICRO-SIMULATIONS, CARTOON MASCOTS & LUXURY STYLING
-   ========================================================================== */
+body.dark-theme .plan-features-list li {
+  color: #cbd5e1;
+}
+
+body.dark-theme .btn-secondary-bento {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f8fafc;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+body.dark-theme .pricing-deck-arrow {
+  background: #1e293b;
+  border-color: rgba(16, 185, 129, 0.35);
+  color: #34d399;
+}
 
 /* 1. Luxury Glow Quote Card */
 .luxury-glow-quote {

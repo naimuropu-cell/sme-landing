@@ -1258,27 +1258,11 @@
           </div>
         </div>
 
-        <!-- Guarantee Trust Note -->
-        <div class="pricing-trust-strip">
-          <div class="trust-note-item">
-            <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-            <span data-i18n="pricing.trust1">Zero Sales Commission</span>
-          </div>
-          <div class="trust-note-item">
-            <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-            <span data-i18n="pricing.trust2">Free Regular Upgrades &amp; Security</span>
-          </div>
-          <div class="trust-note-item">
-            <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-            <span data-i18n="pricing.trust3">Direct Dhaka Support (9 AM – 9 PM)</span>
-          </div>
-        </div>
-
-        <!-- 3D Magnified Coverflow Carousel (Anzaar 'Style in Motion' Pattern) -->
-        <div class="pricing-coverflow-wrapper" id="pricingCoverflowWrapper">
+        <!-- Mobile-First Single-Display Interactive Pricing Slider Deck -->
+        <div class="pricing-slider-deck-wrapper" id="pricingDeckWrapper">
           
           <!-- Quick Plan Switcher Pill Bar (Starter | Basic | ⭐ Medium | High) -->
-          <div class="pricing-tier-pill-bar" id="pricingTierPillBar" role="tablist">
+          <div class="pricing-tier-pill-bar" id="pricingTierPillBar" role="tablist" aria-label="Pricing Plan Switcher">
             <button type="button" class="pricing-tier-pill" data-plan-index="0" role="tab" aria-selected="false">
               <span>Starter</span>
             </button>
@@ -1294,30 +1278,46 @@
             </button>
           </div>
 
-          <!-- 3D Perspective Stage -->
-          <div class="pricing-coverflow-stage" id="pricingCoverflowStage">
-            <!-- Left Chevron Arrow -->
-            <button type="button" class="pricing-stage-arrow arrow-prev" id="pricingPrevBtn" aria-label="Previous Plan">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          <!-- Single-Display Slider Stage with Centered Deck & Left/Right Peeking Cards -->
+          <div class="pricing-slider-stage" id="pricingSliderStage" tabindex="0" role="region" aria-label="Pricing Card Deck Slider">
+            <!-- Left Arrow Chevron -->
+            <button type="button" class="pricing-deck-arrow arrow-prev" id="pricingPrevBtn" aria-label="Previous Plan">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
             </button>
 
-            <!-- Cards Track -->
+            <!-- Cards Deck Track: Holds 4 Cards with Smooth Hardware-Accelerated Physics -->
             <div class="pricing-cards-track" id="pricingCardsTrack">
               <!-- Dynamically populated from PRICING_DATA.packages via app.js -->
             </div>
 
-            <!-- Right Chevron Arrow -->
-            <button type="button" class="pricing-stage-arrow arrow-next" id="pricingNextBtn" aria-label="Next Plan">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            <!-- Right Arrow Chevron -->
+            <button type="button" class="pricing-deck-arrow arrow-next" id="pricingNextBtn" aria-label="Next Plan">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
             </button>
           </div>
 
-          <!-- Mobile / Tablet Dot Indicators -->
-          <div class="pricing-coverflow-dots" id="pricingCoverflowDots">
-            <span class="pricing-dot" data-index="0"></span>
-            <span class="pricing-dot" data-index="1"></span>
-            <span class="pricing-dot active" data-index="2"></span>
-            <span class="pricing-dot" data-index="3"></span>
+          <!-- Interactive Pagination Dots -->
+          <div class="pricing-slider-dots" id="pricingCoverflowDots">
+            <button type="button" class="pricing-dot" data-index="0" aria-label="Starter Plan"></button>
+            <button type="button" class="pricing-dot" data-index="1" aria-label="Basic Plan"></button>
+            <button type="button" class="pricing-dot active" data-index="2" aria-label="Medium Plan"></button>
+            <button type="button" class="pricing-dot" data-index="3" aria-label="High Plan"></button>
+          </div>
+
+          <!-- Guarantee Trust Note (Sleek below-slider placement for flawless 1-display viewport fit) -->
+          <div class="pricing-trust-strip">
+            <div class="trust-note-item">
+              <svg viewBox="0 0 20 20" fill="currentColor" width="14" height="14"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span data-i18n="pricing.trust1">Zero Sales Commission</span>
+            </div>
+            <div class="trust-note-item">
+              <svg viewBox="0 0 20 20" fill="currentColor" width="14" height="14"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span data-i18n="pricing.trust2">Free Upgrades &amp; Security</span>
+            </div>
+            <div class="trust-note-item">
+              <svg viewBox="0 0 20 20" fill="currentColor" width="14" height="14"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span data-i18n="pricing.trust3">Dhaka Support (9 AM – 9 PM)</span>
+            </div>
           </div>
 
         </div>
