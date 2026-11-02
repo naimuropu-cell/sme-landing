@@ -762,86 +762,106 @@ function initPricingCards() {
  * - Multi-input: Touch swipe, top pill bar, flanking card tap, chevron buttons, dots, keyboard
  * - Zero 3D distortion, 100% crisp typography, fits in 1 screen height
  */
-function setupPricingSliderDeck() {
+/**
+ * Global Deck Position Controller (Always Queries Live DOM Elements)
+ * Guarantees zero stale closure references across language switches and re-renders
+ */
+function updateDeckPositions(targetIdx) {
   const container = document.getElementById('pricingCardsTrack');
   if (!container) return;
 
-  const cards = Array.from(container.querySelectorAll('.pricing-slide-card'));
-  const totalCards = cards.length;
+  const currentCards = Array.from(container.querySelectorAll('.pricing-slide-card'));
+  const totalCards = currentCards.length;
   if (totalCards === 0) return;
 
+  currentPricingActiveIndex = Math.max(0, Math.min(totalCards - 1, targetIdx));
+
+  currentCards.forEach((card, idx) => {
+    // Clear inline drag transforms
+    card.style.transform = '';
+    card.style.transition = '';
+
+    const offset = idx - currentPricingActiveIndex;
+
+    card.classList.remove('card-active', 'card-left-1', 'card-right-1', 'card-left-2', 'card-right-2', 'card-hidden');
+
+    if (offset === 0) {
+      card.classList.add('card-active');
+      card.setAttribute('aria-hidden', 'false');
+      card.tabIndex = 0;
+    } else if (offset === -1) {
+      card.classList.add('card-left-1');
+      card.setAttribute('aria-hidden', 'true');
+      card.tabIndex = -1;
+    } else if (offset === 1) {
+      card.classList.add('card-right-1');
+      card.setAttribute('aria-hidden', 'true');
+      card.tabIndex = -1;
+    } else if (offset === -2) {
+      card.classList.add('card-left-2');
+      card.setAttribute('aria-hidden', 'true');
+      card.tabIndex = -1;
+    } else if (offset === 2) {
+      card.classList.add('card-right-2');
+      card.setAttribute('aria-hidden', 'true');
+      card.tabIndex = -1;
+    } else {
+      card.classList.add('card-hidden');
+      card.setAttribute('aria-hidden', 'true');
+      card.tabIndex = -1;
+    }
+  });
+
+  // Update Quick Plan Switcher Pills
   const pillBar = document.getElementById('pricingTierPillBar');
-  const pills = pillBar ? Array.from(pillBar.querySelectorAll('.pricing-tier-pill')) : [];
-  const dotsContainer = document.getElementById('pricingCoverflowDots');
-  const dots = dotsContainer ? Array.from(dotsContainer.querySelectorAll('.pricing-dot')) : [];
-  const prevBtn = document.getElementById('pricingPrevBtn');
-  const nextBtn = document.getElementById('pricingNextBtn');
-  const stage = document.getElementById('pricingSliderStage');
-  const wrapper = document.getElementById('pricingDeckWrapper');
-
-  function updateDeckPositions(targetIdx) {
-    // Clamp targetIdx
-    currentPricingActiveIndex = Math.max(0, Math.min(totalCards - 1, targetIdx));
-
-    cards.forEach((card, idx) => {
-      const offset = idx - currentPricingActiveIndex;
-
-      card.classList.remove('card-active', 'card-left-1', 'card-right-1', 'card-left-2', 'card-right-2', 'card-hidden');
-
-      if (offset === 0) {
-        card.classList.add('card-active');
-        card.setAttribute('aria-hidden', 'false');
-        card.tabIndex = 0;
-      } else if (offset === -1) {
-        card.classList.add('card-left-1');
-        card.setAttribute('aria-hidden', 'true');
-        card.tabIndex = -1;
-      } else if (offset === 1) {
-        card.classList.add('card-right-1');
-        card.setAttribute('aria-hidden', 'true');
-        card.tabIndex = -1;
-      } else if (offset === -2) {
-        card.classList.add('card-left-2');
-        card.setAttribute('aria-hidden', 'true');
-        card.tabIndex = -1;
-      } else if (offset === 2) {
-        card.classList.add('card-right-2');
-        card.setAttribute('aria-hidden', 'true');
-        card.tabIndex = -1;
-      } else {
-        card.classList.add('card-hidden');
-        card.setAttribute('aria-hidden', 'true');
-        card.tabIndex = -1;
-      }
-    });
-
-    // Update Pills
+  if (pillBar) {
+    const pills = Array.from(pillBar.querySelectorAll('.pricing-tier-pill'));
     pills.forEach((pill, idx) => {
       const isActive = idx === currentPricingActiveIndex;
       pill.classList.toggle('active', isActive);
       pill.setAttribute('aria-selected', isActive ? 'true' : 'false');
     });
+  }
 
-    // Update Dots
+  // Update Pagination Dots
+  const dotsContainer = document.getElementById('pricingCoverflowDots');
+  if (dotsContainer) {
+    const dots = Array.from(dotsContainer.querySelectorAll('.pricing-dot'));
     dots.forEach((dot, idx) => {
       dot.classList.toggle('active', idx === currentPricingActiveIndex);
     });
-
-    // Update Chevrons disabled states
-    if (prevBtn) {
-      const isFirst = currentPricingActiveIndex === 0;
-      prevBtn.disabled = isFirst;
-      prevBtn.classList.toggle('is-disabled', isFirst);
-    }
-    if (nextBtn) {
-      const isLast = currentPricingActiveIndex === totalCards - 1;
-      nextBtn.disabled = isLast;
-      nextBtn.classList.toggle('is-disabled', isLast);
-    }
   }
 
-  // 1. Click on flanking peek card to glide to center
-  cards.forEach((card, idx) => {
+  // Update Chevrons disabled states
+  const prevBtn = document.getElementById('pricingPrevBtn');
+  const nextBtn = document.getElementById('pricingNextBtn');
+  if (prevBtn) {
+    const isFirst = currentPricingActiveIndex === 0;
+    prevBtn.disabled = isFirst;
+    prevBtn.classList.toggle('is-disabled', isFirst);
+  }
+  if (nextBtn) {
+    const isLast = currentPricingActiveIndex === totalCards - 1;
+    nextBtn.disabled = isLast;
+    nextBtn.classList.toggle('is-disabled', isLast);
+  }
+}
+
+/**
+ * Mobile-First Single-Display Slider Deck Engine
+ * Re-binds newly generated card click handlers on every render.
+ * Attaches kinetic touch/pointer swipe listener once to stage/wrapper.
+ */
+function setupPricingSliderDeck() {
+  const container = document.getElementById('pricingCardsTrack');
+  if (!container) return;
+
+  const currentCards = Array.from(container.querySelectorAll('.pricing-slide-card'));
+  const totalCards = currentCards.length;
+  if (totalCards === 0) return;
+
+  // 1. Re-bind click on newly rendered cards (flanking card tap glides it to center)
+  currentCards.forEach((card, idx) => {
     card.onclick = (e) => {
       if (idx !== currentPricingActiveIndex) {
         e.preventDefault();
@@ -851,25 +871,53 @@ function setupPricingSliderDeck() {
     };
   });
 
-  // 2. Click on Quick Switcher Pills
-  pills.forEach((pill, idx) => {
-    pill.onclick = () => updateDeckPositions(idx);
-  });
+  // 2. Bind static controls once
+  const stage = document.getElementById('pricingSliderStage');
+  const wrapper = document.getElementById('pricingDeckWrapper');
+  const pillBar = document.getElementById('pricingTierPillBar');
+  const dotsContainer = document.getElementById('pricingCoverflowDots');
+  const prevBtn = document.getElementById('pricingPrevBtn');
+  const nextBtn = document.getElementById('pricingNextBtn');
 
-  // 3. Click on Pagination Dots
-  dots.forEach((dot, idx) => {
-    dot.onclick = () => updateDeckPositions(idx);
-  });
-
-  // 4. Click on Arrow Chevrons
-  if (prevBtn) {
-    prevBtn.onclick = () => updateDeckPositions(currentPricingActiveIndex - 1);
+  if (pillBar && !pillBar._hasPillClicks) {
+    pillBar._hasPillClicks = true;
+    const pills = Array.from(pillBar.querySelectorAll('.pricing-tier-pill'));
+    pills.forEach((pill, idx) => {
+      pill.onclick = (e) => {
+        e.preventDefault();
+        updateDeckPositions(idx);
+      };
+    });
   }
-  if (nextBtn) {
-    nextBtn.onclick = () => updateDeckPositions(currentPricingActiveIndex + 1);
+
+  if (dotsContainer && !dotsContainer._hasDotClicks) {
+    dotsContainer._hasDotClicks = true;
+    const dots = Array.from(dotsContainer.querySelectorAll('.pricing-dot'));
+    dots.forEach((dot, idx) => {
+      dot.onclick = (e) => {
+        e.preventDefault();
+        updateDeckPositions(idx);
+      };
+    });
   }
 
-  // 5. Keyboard Navigation (ArrowLeft / ArrowRight)
+  if (prevBtn && !prevBtn._hasPrevClick) {
+    prevBtn._hasPrevClick = true;
+    prevBtn.onclick = (e) => {
+      e.preventDefault();
+      updateDeckPositions(currentPricingActiveIndex - 1);
+    };
+  }
+
+  if (nextBtn && !nextBtn._hasNextClick) {
+    nextBtn._hasNextClick = true;
+    nextBtn.onclick = (e) => {
+      e.preventDefault();
+      updateDeckPositions(currentPricingActiveIndex + 1);
+    };
+  }
+
+  // Keyboard navigation
   if (stage && !stage._hasKeyNav) {
     stage._hasKeyNav = true;
     stage.addEventListener('keydown', (e) => {
@@ -881,42 +929,144 @@ function setupPricingSliderDeck() {
     });
   }
 
-  // 6. Mobile Touch Gesture Swiping (Smooth, Directional Lock)
+  // 3. Kinetic Touch & Finger Drag Engine (Native Mobile Feel with Real-time Card Tracking)
   const swipeTarget = stage || wrapper;
-  if (swipeTarget && !swipeTarget._hasTouchSwipe) {
-    swipeTarget._hasTouchSwipe = true;
+  if (swipeTarget && !swipeTarget._hasKineticSwipeEngine) {
+    swipeTarget._hasKineticSwipeEngine = true;
+
     let startX = 0;
     let startY = 0;
+    let currentX = 0;
+    let isTouching = false;
+    let isHorizontalSwipe = null;
     let startTime = 0;
 
-    swipeTarget.addEventListener('touchstart', (e) => {
-      if (e.touches && e.touches[0]) {
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY;
-        startTime = Date.now();
+    function getPoint(e) {
+      if (e.touches && e.touches.length > 0) {
+        return { x: e.touches[0].clientX, y: e.touches[0].clientY };
       }
-    }, { passive: true });
+      if (e.changedTouches && e.changedTouches.length > 0) {
+        return { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };
+      }
+      return { x: e.clientX, y: e.clientY };
+    }
 
-    swipeTarget.addEventListener('touchend', (e) => {
-      if (!e.changedTouches || !e.changedTouches[0]) return;
-      const diffX = e.changedTouches[0].clientX - startX;
-      const diffY = e.changedTouches[0].clientY - startY;
-      const elapsed = Date.now() - startTime;
+    function onTouchStart(e) {
+      if (e.target.closest('.open-plan-modal') || e.target.closest('button.btn-bento-cta')) {
+        return;
+      }
 
-      // Ensure horizontal swipe intent
-      if (Math.abs(diffX) > Math.abs(diffY) && (Math.abs(diffX) > 35 || (Math.abs(diffX) > 20 && elapsed < 250))) {
-        if (diffX < 0) {
-          // Swipe Left -> next plan
-          updateDeckPositions(currentPricingActiveIndex + 1);
+      const p = getPoint(e);
+      startX = p.x;
+      startY = p.y;
+      currentX = startX;
+      isTouching = true;
+      isHorizontalSwipe = null;
+      startTime = Date.now();
+    }
+
+    function onTouchMove(e) {
+      if (!isTouching) return;
+      const p = getPoint(e);
+      currentX = p.x;
+      const diffX = currentX - startX;
+      const diffY = p.y - startY;
+
+      // Lock direction after 6px
+      if (isHorizontalSwipe === null && (Math.abs(diffX) > 6 || Math.abs(diffY) > 6)) {
+        isHorizontalSwipe = Math.abs(diffX) > Math.abs(diffY);
+      }
+
+      if (isHorizontalSwipe) {
+        // Prevent vertical page scroll so finger can freely slide cards
+        if (e.cancelable) {
+          e.preventDefault();
+        }
+
+        const liveTrack = document.getElementById('pricingCardsTrack');
+        if (!liveTrack) return;
+        const liveCards = Array.from(liveTrack.querySelectorAll('.pricing-slide-card'));
+        const total = liveCards.length;
+
+        // Live visual drag tracking with elastic resistance at boundaries
+        let dragOffset = diffX;
+        if ((currentPricingActiveIndex === 0 && diffX > 0) || 
+            (currentPricingActiveIndex === total - 1 && diffX < 0)) {
+          dragOffset = diffX * 0.32; // elastic bounce
         } else {
-          // Swipe Right -> previous plan
-          updateDeckPositions(currentPricingActiveIndex - 1);
+          dragOffset = diffX * 0.85; // smooth 1:1 finger tracking
+        }
+
+        const activeCard = liveCards[currentPricingActiveIndex];
+        const leftCard = liveCards[currentPricingActiveIndex - 1];
+        const rightCard = liveCards[currentPricingActiveIndex + 1];
+
+        if (activeCard) {
+          activeCard.style.transition = 'none';
+          activeCard.style.transform = `translate(calc(-50% + ${dragOffset}px), -50%) scale(1.0)`;
+        }
+        if (leftCard) {
+          leftCard.style.transition = 'none';
+          leftCard.style.transform = `translate(calc(-50% - var(--deck-offset) + ${dragOffset}px), -50%) scale(0.88)`;
+        }
+        if (rightCard) {
+          rightCard.style.transition = 'none';
+          rightCard.style.transform = `translate(calc(-50% + var(--deck-offset) + ${dragOffset}px), -50%) scale(0.88)`;
         }
       }
-    }, { passive: true });
+    }
+
+    function onTouchEnd(e) {
+      if (!isTouching) return;
+      isTouching = false;
+
+      const diffX = currentX - startX;
+      const elapsed = Date.now() - startTime;
+
+      const liveTrack = document.getElementById('pricingCardsTrack');
+      if (liveTrack) {
+        const liveCards = liveTrack.querySelectorAll('.pricing-slide-card');
+        liveCards.forEach(c => {
+          c.style.transition = '';
+          c.style.transform = '';
+        });
+      }
+
+      if (isHorizontalSwipe) {
+        const isFlick = Math.abs(diffX) > 18 && elapsed < 260;
+        const isDragThreshold = Math.abs(diffX) > 35;
+
+        if (isDragThreshold || isFlick) {
+          if (diffX < 0) {
+            // Dragged finger left -> slide next plan into center
+            updateDeckPositions(currentPricingActiveIndex + 1);
+          } else {
+            // Dragged finger right -> slide prev plan into center
+            updateDeckPositions(currentPricingActiveIndex - 1);
+          }
+        } else {
+          // Snap back smoothly if drag wasn't past threshold
+          updateDeckPositions(currentPricingActiveIndex);
+        }
+      }
+
+      isHorizontalSwipe = null;
+    }
+
+    // Touch listeners (passive: false on touchmove is essential for preventDefault)
+    swipeTarget.addEventListener('touchstart', onTouchStart, { passive: true });
+    swipeTarget.addEventListener('touchmove', onTouchMove, { passive: false });
+    swipeTarget.addEventListener('touchend', onTouchEnd, { passive: true });
+    swipeTarget.addEventListener('touchcancel', onTouchEnd, { passive: true });
+
+    // Pointer events for pointer laptops and mouse drag
+    swipeTarget.addEventListener('pointerdown', onTouchStart);
+    swipeTarget.addEventListener('pointermove', onTouchMove);
+    swipeTarget.addEventListener('pointerup', onTouchEnd);
+    swipeTarget.addEventListener('pointercancel', onTouchEnd);
   }
 
-  // Initial position sync
+  // Initial render positioning
   updateDeckPositions(currentPricingActiveIndex);
 }
 

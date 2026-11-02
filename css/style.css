@@ -13472,7 +13472,8 @@ section {
 /* ==========================================================================
    MOBILE-FIRST SINGLE-DISPLAY PRICING SLIDER DECK (APPLE / REVOLUT STYLE)
    - 100% fits in 1 display screen height on both Mobile & Desktop PC
-   - Smooth 2D hardware-accelerated horizontal slide with left/right peeking cards
+   - Generous 32px breathing room between Quick Plan Pills and Card Ribbon Badge
+   - Kinetic Touch & Pointer Drag Swiping with live finger tracking & elastic physics
    - Multi-input navigation: Touch swipe, pill bar, flanking card tap, chevrons, dots
    - Modern Bento 2x2 capacity specs + top 5 high-impact highlights
    - VIP emerald glow on popular card, 100% crisp copyable typography (no blur/rotation)
@@ -13523,7 +13524,7 @@ section {
   background: rgba(16, 185, 129, 0.08);
   border: 1.5px solid rgba(16, 185, 129, 0.2);
   border-radius: 999px;
-  margin: 0 auto 0.95rem auto;
+  margin: 0 auto 1.85rem auto; /* Generous 30px breathing room above stage & ribbon */
   width: fit-content;
   max-width: 100%;
   box-sizing: border-box;
@@ -13549,6 +13550,8 @@ section {
   align-items: center;
   gap: 0.35rem;
   white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .pricing-tier-pill:hover {
@@ -13576,15 +13579,22 @@ section {
   --deck-offset: 350px;
   position: relative;
   width: 100%;
-  height: 465px;
+  height: 480px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: visible; /* Allows ribbon badge to breathe without clipping */
   box-sizing: border-box;
   touch-action: pan-y;
   outline: none;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+}
+
+.pricing-slider-stage:active {
+  cursor: grabbing;
 }
 
 .pricing-cards-track {
@@ -13594,7 +13604,7 @@ section {
 }
 
 /* ==========================================================================
-   THE PRICING SLIDE CARD: Compact Luxury Geometry (~440px height)
+   THE PRICING SLIDE CARD: Compact Luxury Geometry (~435px height)
    ========================================================================== */
 .pricing-slide-card {
   position: absolute !important;
@@ -13602,12 +13612,12 @@ section {
   left: 50% !important;
   width: 345px !important;
   max-width: 86vw !important;
-  height: 440px !important;
+  height: 435px !important;
   margin: 0 !important;
   background: #ffffff;
   border: 1.5px solid rgba(226, 232, 240, 0.95);
   border-radius: 22px;
-  padding: 1.3rem 1.35rem 1.1rem 1.35rem;
+  padding: 1.3rem 1.35rem 1.05rem 1.35rem;
   box-sizing: border-box !important;
   display: flex !important;
   flex-direction: column !important;
@@ -13617,21 +13627,26 @@ section {
               opacity 0.38s ease,
               box-shadow 0.38s ease,
               border-color 0.28s ease !important;
-  user-select: text !important;
-  -webkit-user-select: text !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  touch-action: pan-y;
   box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
   overflow: visible;
 }
 
-/* State 1: Active Centered Card (100% crisp, copyable, elevated) */
+/* State 1: Active Centered Card (Elevated, Crisp) */
 .pricing-slide-card.card-active {
   transform: translate(-50%, -50%) scale(1.0) !important;
   z-index: 10 !important;
   opacity: 1 !important;
-  cursor: default !important;
+  cursor: grab !important;
   pointer-events: auto !important;
   box-shadow: 0 20px 45px -8px rgba(15, 23, 42, 0.12), 0 4px 12px rgba(15, 23, 42, 0.04) !important;
   border-color: rgba(203, 213, 225, 1) !important;
+}
+
+.pricing-slide-card.card-active:active {
+  cursor: grabbing !important;
 }
 
 /* Active Popular Card: Elevated Emerald VIP Treatment */
@@ -13696,7 +13711,7 @@ section {
   pointer-events: none;
 }
 
-/* Popular Floating Ribbon Badge */
+/* Popular Floating Ribbon Badge: Floating Cleanly with Breathing Room */
 .popular-badge-ribbon {
   position: absolute;
   top: -14px;
@@ -13715,6 +13730,7 @@ section {
   align-items: center;
   gap: 0.4rem;
   z-index: 15;
+  pointer-events: none;
 }
 
 .popular-badge-ribbon .pulse-dot {
@@ -14030,7 +14046,7 @@ section {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  margin: 0.95rem auto 0 auto;
+  margin: 1.15rem auto 0 auto;
   z-index: 15;
   position: relative;
 }
@@ -14064,7 +14080,7 @@ section {
   justify-content: center;
   gap: 1.5rem;
   flex-wrap: wrap;
-  margin: 0.95rem auto 0 auto;
+  margin: 1.15rem auto 0 auto;
 }
 
 .trust-note-item {
@@ -14087,7 +14103,7 @@ section {
 @media (max-width: 1024px) {
   .pricing-slider-stage {
     --deck-offset: 290px;
-    height: 470px;
+    height: 480px;
   }
   .pricing-slide-card {
     width: 320px !important;
@@ -14114,7 +14130,7 @@ section {
     display: none;
   }
   .pricing-billing-switcher-wrap {
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.45rem;
   }
   .pricing-switcher-pill {
     padding: 0.2rem;
@@ -14127,8 +14143,9 @@ section {
     font-size: 0.65rem;
     padding: 0.12rem 0.35rem;
   }
+  /* Generous 32px breathing room above the stage so the ribbon badge never touches the pill bar */
   .pricing-tier-pill-bar {
-    margin-bottom: 0.65rem;
+    margin-bottom: 2rem !important;
     padding: 0.22rem;
     gap: 0.18rem;
   }
@@ -14138,13 +14155,17 @@ section {
   }
   .pricing-slider-stage {
     --deck-offset: 78vw;
-    height: 440px;
+    height: 460px;
+    overflow: visible !important;
   }
   .pricing-slide-card {
     width: 82vw !important;
     max-width: 320px !important;
     height: 430px !important;
-    padding: 1.2rem 1.05rem 0.95rem 1.05rem !important;
+    padding: 1.25rem 1.05rem 0.95rem 1.05rem !important;
+  }
+  .popular-badge-ribbon {
+    top: -14px !important;
   }
   .pricing-deck-arrow {
     width: 36px;
@@ -14157,10 +14178,10 @@ section {
     right: 4px;
   }
   .pricing-slider-dots {
-    margin-top: 0.75rem;
+    margin-top: 0.85rem;
   }
   .pricing-trust-strip {
-    margin-top: 0.75rem;
+    margin-top: 0.85rem;
     gap: 0.35rem 0.75rem;
   }
   .trust-note-item {
@@ -14169,15 +14190,23 @@ section {
 }
 
 @media (max-width: 480px) {
+  .pricing-tier-pill-bar {
+    margin-bottom: 2rem !important;
+  }
   .pricing-slider-stage {
     --deck-offset: 78vw;
-    height: 435px;
+    height: 455px;
   }
   .pricing-slide-card {
     width: 82vw !important;
     max-width: 310px !important;
     height: 425px !important;
-    padding: 1.15rem 0.95rem 0.9rem 0.95rem !important;
+    padding: 1.2rem 0.95rem 0.9rem 0.95rem !important;
+  }
+  .popular-badge-ribbon {
+    top: -14px !important;
+    font-size: 0.7rem;
+    padding: 0.25rem 0.8rem;
   }
   .plan-name {
     font-size: 1.14rem;
