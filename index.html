@@ -1555,9 +1555,52 @@
           </div>
         </div>
 
-        <!-- 4-Column Grid for Standard Packages -->
-        <div class="pricing-grid" id="pricingCardsGrid">
-          <!-- Dynamically populated from PRICING_DATA.packages via app.js -->
+        <!-- 3D Magnified Coverflow Carousel (Anzaar 'Style in Motion' Pattern) -->
+        <div class="pricing-coverflow-wrapper" id="pricingCoverflowWrapper">
+          
+          <!-- Quick Plan Switcher Pill Bar (Starter | Basic | ⭐ Medium | High) -->
+          <div class="pricing-tier-pill-bar" id="pricingTierPillBar" role="tablist">
+            <button type="button" class="pricing-tier-pill" data-plan-index="0" role="tab" aria-selected="false">
+              <span>Starter</span>
+            </button>
+            <button type="button" class="pricing-tier-pill" data-plan-index="1" role="tab" aria-selected="false">
+              <span>Basic</span>
+            </button>
+            <button type="button" class="pricing-tier-pill active" data-plan-index="2" role="tab" aria-selected="true">
+              <span class="pill-star">★</span>
+              <span>Medium (Popular)</span>
+            </button>
+            <button type="button" class="pricing-tier-pill" data-plan-index="3" role="tab" aria-selected="false">
+              <span>High</span>
+            </button>
+          </div>
+
+          <!-- 3D Perspective Stage -->
+          <div class="pricing-coverflow-stage" id="pricingCoverflowStage">
+            <!-- Left Chevron Arrow -->
+            <button type="button" class="pricing-stage-arrow arrow-prev" id="pricingPrevBtn" aria-label="Previous Plan">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+
+            <!-- Cards Track -->
+            <div class="pricing-cards-track" id="pricingCardsTrack">
+              <!-- Dynamically populated from PRICING_DATA.packages via app.js -->
+            </div>
+
+            <!-- Right Chevron Arrow -->
+            <button type="button" class="pricing-stage-arrow arrow-next" id="pricingNextBtn" aria-label="Next Plan">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
+
+          <!-- Mobile / Tablet Dot Indicators -->
+          <div class="pricing-coverflow-dots" id="pricingCoverflowDots">
+            <span class="pricing-dot" data-index="0"></span>
+            <span class="pricing-dot" data-index="1"></span>
+            <span class="pricing-dot active" data-index="2"></span>
+            <span class="pricing-dot" data-index="3"></span>
+          </div>
+
         </div>
 
         <!-- Package 5: Custom Enterprise Showcase -->

@@ -556,14 +556,29 @@ const BN_ENTERPRISE_META = {
 
 
 
+// 3D Magnified Pricing Coverflow State (Defaults to Medium = index 2)
+let currentPricingActiveIndex = 2;
+
 function initPricingCards() {
-  const container = document.getElementById('pricingCardsGrid');
+  const container = document.getElementById('pricingCardsTrack') || document.getElementById('pricingCardsGrid');
   if (!container || !window.PRICING_DATA) return;
 
   const isBn = STATE.currentLang === 'bn';
   const isAnnual = currentBillingCycle === 'annual';
 
-  const html = PRICING_DATA.packages.map(pkg => {
+  // Update Quick Plan Switcher Pill Bar labels for current language
+  const pillBar = document.getElementById('pricingTierPillBar');
+  if (pillBar) {
+    const pills = pillBar.querySelectorAll('.pricing-tier-pill');
+    if (pills.length >= 4) {
+      pills[0].innerHTML = `<span>${isBn ? 'স্টার্টার' : 'Starter'}</span>`;
+      pills[1].innerHTML = `<span>${isBn ? 'বেসিক' : 'Basic'}</span>`;
+      pills[2].innerHTML = `<span class="pill-star">★</span><span>${isBn ? 'মিডিয়াম (পপুলার)' : 'Medium (Popular)'}</span>`;
+      pills[3].innerHTML = `<span>${isBn ? 'হাই' : 'High'}</span>`;
+    }
+  }
+
+  const html = PRICING_DATA.packages.map((pkg, index) => {
     const isPopular = pkg.isPopular;
     const ribbonHtml = isPopular 
       ? `<div class="popular-badge-ribbon"><span>⭐</span> ${isBn ? 'সেরা পছন্দ (মোস্ট পপুলার)' : 'Most Popular Choice'}</div>` 
@@ -644,7 +659,6 @@ function initPricingCards() {
     `).join('');
 
     // Clear Price Calculation: Show FULL YEAR PAYMENT when Annual is selected
-    // (Never show divided monthly amounts like 400, 800, 1600 to prevent client misconception)
     const monthlyRate = Number(pkg.monthlyPrice);
     const yearlyRate = pkg.yearlyPrice || (monthlyRate * 10);
     
@@ -668,7 +682,7 @@ function initPricingCards() {
          </div>`;
 
     return `
-      <div class="pricing-card ${isPopular ? 'is-popular' : ''}" id="card-${pkg.id}">
+      <div class="pricing-card ${isPopular ? 'is-popular' : ''}" id="card-${pkg.id}" data-plan-index="${index}" role="group" aria-label="${displayName}">
         ${ribbonHtml}
 
         <div class="plan-header">
@@ -707,6 +721,9 @@ function initPricingCards() {
 
   container.innerHTML = html;
 
+  // Initialize and bind 3D Coverflow positioning
+  setupPricingCoverflow();
+
   // Bind monthly / annual switcher buttons
   const btnMonthly = document.getElementById('btnBillingMonthly');
   const btnAnnual = document.getElementById('btnBillingAnnual');
@@ -729,6 +746,202 @@ function initPricingCards() {
       }
     };
   }
+}
+
+/**
+ * 3D Magnified Coverflow Engine (Anzaar 'Style in Motion' Pattern)
+ * Displays 4 packages in 1 horizontal row with center card magnified.
+ * Left/Right flanking cards tilted in 3D perspective with peeking preview.
+ */
+function setupPricingCoverflow() {
+  const container = document.getElementById('pricingCardsTrack');
+  if (!container) return;
+
+  const cards = Array.from(container.querySelectorAll('.pricing-card'));
+  const totalCards = cards.length;
+  if (totalCards === 0) return;
+
+  const pillBar = document.getElementById('pricingTierPillBar');
+  const pills = pillBar ? Array.from(pillBar.querySelectorAll('.pricing-tier-pill')) : [];
+  const dotsContainer = document.getElementById('pricingCoverflowDots');
+  const dots = dotsContainer ? Array.from(dotsContainer.querySelectorAll('.pricing-dot')) : [];
+  const prevBtn = document.getElementById('pricingPrevBtn');
+  const nextBtn = document.getElementById('pricingNextBtn');
+  const stage = document.getElementById('pricingCoverflowStage');
+
+  function updatePositions(targetIdx) {
+    // Clamp targetIdx
+    currentPricingActiveIndex = Math.max(0, Math.min(totalCards - 1, targetIdx));
+
+    cards.forEach((card, idx) => {
+      const offset = idx - currentPricingActiveIndex;
+
+      card.classList.remove('card-active', 'card-left-1', 'card-right-1', 'card-left-2', 'card-right-2', 'card-hidden');
+
+      if (offset === 0) {
+        card.classList.add('card-active');
+        card.setAttribute('aria-hidden', 'false');
+        card.tabIndex = 0;
+      } else if (offset === -1) {
+        card.classList.add('card-left-1');
+        card.setAttribute('aria-hidden', 'true');
+        card.tabIndex = -1;
+      } else if (offset === 1) {
+        card.classList.add('card-right-1');
+        card.setAttribute('aria-hidden', 'true');
+        card.tabIndex = -1;
+      } else if (offset === -2) {
+        card.classList.add('card-left-2');
+        card.setAttribute('aria-hidden', 'true');
+        card.tabIndex = -1;
+      } else if (offset === 2) {
+        card.classList.add('card-right-2');
+        card.setAttribute('aria-hidden', 'true');
+        card.tabIndex = -1;
+      } else {
+        card.classList.add('card-hidden');
+        card.setAttribute('aria-hidden', 'true');
+        card.tabIndex = -1;
+      }
+    });
+
+    // Update Pills
+    pills.forEach((pill, idx) => {
+      if (idx === currentPricingActiveIndex) {
+        pill.classList.add('active');
+        pill.setAttribute('aria-selected', 'true');
+      } else {
+        pill.classList.remove('active');
+        pill.setAttribute('aria-selected', 'false');
+      }
+    });
+
+    // Update Dots
+    dots.forEach((dot, idx) => {
+      if (idx === currentPricingActiveIndex) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+    });
+
+    // Update Chevrons disabled states
+    if (prevBtn) {
+      if (currentPricingActiveIndex === 0) {
+        prevBtn.classList.add('is-disabled');
+        prevBtn.disabled = true;
+      } else {
+        prevBtn.classList.remove('is-disabled');
+        prevBtn.disabled = false;
+      }
+    }
+
+    if (nextBtn) {
+      if (currentPricingActiveIndex === totalCards - 1) {
+        nextBtn.classList.add('is-disabled');
+        nextBtn.disabled = true;
+      } else {
+        nextBtn.classList.remove('is-disabled');
+        nextBtn.disabled = false;
+      }
+    }
+  }
+
+  // Bind click on flanking cards to bring them to center
+  cards.forEach((card, idx) => {
+    card.onclick = (e) => {
+      if (idx !== currentPricingActiveIndex) {
+        e.preventDefault();
+        e.stopPropagation();
+        updatePositions(idx);
+      }
+    };
+  });
+
+  // Bind Pills click
+  pills.forEach((pill, idx) => {
+    pill.onclick = () => updatePositions(idx);
+  });
+
+  // Bind Dots click
+  dots.forEach((dot, idx) => {
+    dot.onclick = () => updatePositions(idx);
+  });
+
+  // Bind Chevron Arrows
+  if (prevBtn) {
+    prevBtn.onclick = () => updatePositions(currentPricingActiveIndex - 1);
+  }
+  if (nextBtn) {
+    nextBtn.onclick = () => updatePositions(currentPricingActiveIndex + 1);
+  }
+
+  // Keyboard navigation on stage
+  if (stage && !stage._hasKeyHandler) {
+    stage._hasKeyHandler = true;
+    stage.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        updatePositions(currentPricingActiveIndex - 1);
+      } else if (e.key === 'ArrowRight') {
+        updatePositions(currentPricingActiveIndex + 1);
+      }
+    });
+  }
+
+  // Mobile Touch Swipe Handling with Directional Lock
+  if (stage && !stage._hasTouchHandler) {
+    stage._hasTouchHandler = true;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchEndX = 0;
+    let touchEndY = 0;
+    let isHorizontalGesture = false;
+
+    stage.addEventListener('touchstart', (e) => {
+      if (!e.touches.length) return;
+      const touch = e.touches[0];
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+      touchEndX = touchStartX;
+      touchEndY = touchStartY;
+      isHorizontalGesture = false;
+    }, { passive: true });
+
+    stage.addEventListener('touchmove', (e) => {
+      if (!e.touches.length) return;
+      const touch = e.touches[0];
+      touchEndX = touch.clientX;
+      touchEndY = touch.clientY;
+
+      const deltaX = touchEndX - touchStartX;
+      const deltaY = touchEndY - touchStartY;
+
+      if (!isHorizontalGesture && Math.abs(deltaX) > 10) {
+        if (Math.abs(deltaX) > Math.abs(deltaY) * 1.2) {
+          isHorizontalGesture = true;
+        }
+      }
+    }, { passive: true });
+
+    stage.addEventListener('touchend', () => {
+      const deltaX = touchEndX - touchStartX;
+      const deltaY = touchEndY - touchStartY;
+
+      // Only act if swiped horizontally >= 40px and horizontal intent was dominant
+      if (Math.abs(deltaX) >= 40 && Math.abs(deltaX) > Math.abs(deltaY)) {
+        if (deltaX < 0) {
+          // Swiped left -> Next Plan
+          updatePositions(currentPricingActiveIndex + 1);
+        } else {
+          // Swiped right -> Previous Plan
+          updatePositions(currentPricingActiveIndex - 1);
+        }
+      }
+    }, { passive: true });
+  }
+
+  // Render initial position (Default: Medium Plan index 2)
+  updatePositions(currentPricingActiveIndex);
 }
 
 function initEnterpriseCard() {
