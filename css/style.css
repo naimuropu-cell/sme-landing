@@ -15006,6 +15006,14 @@ body.dark-theme .pricing-stage-arrow:hover {
   display: block;
 }
 
+.day-chapter-card.slide-left {
+  animation: chapterSlideLeft 0.48s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.day-chapter-card.slide-right {
+  animation: chapterSlideRight 0.48s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 @keyframes chapterFadeSlide {
   from {
     opacity: 0;
@@ -15014,6 +15022,28 @@ body.dark-theme .pricing-stage-arrow:hover {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes chapterSlideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(45px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes chapterSlideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-45px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
@@ -15625,3 +15655,207 @@ body.dark-theme .pricing-stage-arrow:hover {
   }
 }
 
+
+
+/* ==========================================================================
+   ANIMATED CARTOON CHARACTER VIDEO STAGES (60FPS PURE CSS/SVG)
+   Mailchimp & Duolingo style animated storytelling for Tanvir Bhai
+   ========================================================================== */
+
+.cartoon-stage-wrapper {
+  position: relative;
+  width: 100%;
+  height: 140px;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.4s ease;
+}
+
+.time-night .cartoon-stage-wrapper {
+  background: #090d16;
+  border-bottom-color: rgba(51, 65, 85, 0.8);
+}
+
+.cartoon-svg {
+  width: 100%;
+  height: 100%;
+  max-height: 140px;
+  display: block;
+}
+
+/* Character Hand Wave Animation */
+.anim-hand-wave {
+  animation: waveArm 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes waveArm {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(16deg); }
+}
+
+/* Shutter Opening Micro-Bounce */
+.anim-shutter-group {
+  animation: shutterRoll 4s ease-in-out infinite alternate;
+}
+
+@keyframes shutterRoll {
+  0%, 20% { transform: translateY(0); }
+  50%, 100% { transform: translateY(-8px); }
+}
+
+/* Delivery Cart Rolling Wheels */
+.anim-cart-wheels {
+  animation: cartJiggle 2s ease-in-out infinite alternate;
+}
+
+@keyframes cartJiggle {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(4px); }
+}
+
+/* Speech Bubble Floating Bounce */
+.anim-speech-bubble {
+  animation: floatBubble 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes floatBubble {
+  0% { transform: translate(180px, 8px); }
+  100% { transform: translate(180px, 5px); }
+}
+
+.noon-cartoon .anim-speech-bubble {
+  animation: floatBubbleNoon 2.5s ease-in-out infinite alternate;
+}
+@keyframes floatBubbleNoon {
+  0% { transform: translate(80px, 4px); }
+  100% { transform: translate(80px, 1px); }
+}
+
+.sunset-cartoon .anim-speech-bubble {
+  animation: floatBubbleSunset 2.5s ease-in-out infinite alternate;
+}
+@keyframes floatBubbleSunset {
+  0% { transform: translate(170px, 4px); }
+  100% { transform: translate(170px, 1px); }
+}
+
+.night-cartoon .anim-speech-bubble {
+  animation: floatBubbleNight 2.5s ease-in-out infinite alternate;
+}
+@keyframes floatBubbleNight {
+  0% { transform: translate(195px, 6px); }
+  100% { transform: translate(195px, 3px); }
+}
+
+/* Pulsing Laser Beam on Scanned Barcode */
+.anim-laser-line {
+  animation: laserPulseSweep 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes laserPulseSweep {
+  0% { opacity: 0.3; stroke-width: 1.5px; }
+  100% { opacity: 1; stroke-width: 3px; filter: drop-shadow(0 0 6px #ef4444); }
+}
+
+/* Contactless Payment Waves */
+.anim-pulse-ripple {
+  animation: rippleWave 1.6s ease-out infinite;
+  transform-origin: 42px 20px;
+}
+.anim-pulse-ripple-delay {
+  animation: rippleWave 1.6s ease-out infinite 0.6s;
+  transform-origin: 42px 20px;
+}
+
+@keyframes rippleWave {
+  0% { transform: scale(0.6); opacity: 0.9; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* Fluttering Paper Receipt */
+.anim-receipt-flutter {
+  animation: receiptFeed 2s ease-in-out infinite alternate;
+  transform-origin: center bottom;
+}
+
+@keyframes receiptFeed {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-4px) rotate(2deg); }
+}
+
+/* Scooter Riding Bounce */
+.anim-scooter-group {
+  animation: scooterChug 1.4s ease-in-out infinite alternate;
+}
+
+@keyframes scooterChug {
+  0% { transform: translate(140px, 26px); }
+  100% { transform: translate(140px, 24px); }
+}
+
+/* Scooter Wheel Spin */
+.anim-wheel-spin {
+  animation: spinWheel 1s linear infinite;
+}
+
+@keyframes spinWheel {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Road Dash Moving */
+.anim-road-dash {
+  animation: dashMove 0.8s linear infinite;
+}
+
+@keyframes dashMove {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-30px); }
+}
+
+/* Exhaust Smoke Puffs */
+.anim-smoke-1 {
+  animation: puffSmoke 1.2s ease-out infinite;
+}
+.anim-smoke-2 {
+  animation: puffSmoke 1.2s ease-out infinite 0.5s;
+}
+
+@keyframes puffSmoke {
+  0% { transform: translate(0, 0) scale(0.5); opacity: 0.8; }
+  100% { transform: translate(-14px, -6px) scale(1.4); opacity: 0; }
+}
+
+/* Curling Hot Tea Steam */
+.anim-tea-steam .steam-1 {
+  animation: steamCurl 2s ease-out infinite;
+}
+.anim-tea-steam .steam-2 {
+  animation: steamCurl 2s ease-out infinite 0.8s;
+}
+
+@keyframes steamCurl {
+  0% { transform: translateY(0); opacity: 0.2; }
+  50% { opacity: 0.8; }
+  100% { transform: translateY(-10px); opacity: 0; }
+}
+
+/* Phone Checkmark Pulse at Night */
+.anim-phone-pulse {
+  animation: pulseGreenGlow 1.8s ease-in-out infinite;
+}
+
+@keyframes pulseGreenGlow {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.35); opacity: 1; filter: drop-shadow(0 0 6px #34d399); }
+}
+
+@media (max-width: 480px) {
+  .cartoon-stage-wrapper {
+    height: 120px;
+  }
+}

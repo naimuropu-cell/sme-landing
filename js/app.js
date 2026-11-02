@@ -4767,6 +4767,7 @@ function initDayStoryShowcase() {
   ];
 
   let currentIndex = 0;
+  let lastIndex = 0;
   let autoplayTimer = null;
   let isPlaying = true;
 
@@ -4780,9 +4781,13 @@ function initDayStoryShowcase() {
     token.style.width = `${nodeRect.width}px`;
   }
 
-  function setPhase(index) {
+  function setPhase(index, userDirection) {
     if (index < 0) index = phases.length - 1;
     if (index >= phases.length) index = 0;
+    
+    // Determine swipe direction
+    const direction = userDirection || (index >= lastIndex ? 'slide-left' : 'slide-right');
+    lastIndex = index;
     currentIndex = index;
 
     const currentPhase = phases[currentIndex];
@@ -4805,39 +4810,46 @@ function initDayStoryShowcase() {
       if (active) updateScrubberToken(n);
     });
 
-    // Update Chapter Cards
+    // Update Chapter Cards with horizontal swipe animation
     cards.forEach((c) => {
       const match = c.getAttribute('data-chapter') === currentPhase.key;
-      c.classList.toggle('active', match);
+      c.classList.remove('slide-left', 'slide-right');
+      if (match) {
+        c.classList.add(direction);
+        c.classList.add('active');
+      } else {
+        c.classList.remove('active');
+      }
     });
   }
 
   // Click on Nodes
   nodes.forEach((node, idx) => {
     node.addEventListener('click', () => {
-      setPhase(idx);
+      const dir = idx >= currentIndex ? 'slide-left' : 'slide-right';
+      setPhase(idx, dir);
     });
   });
 
-  // Prev / Next
+  // Prev / Next Buttons
   if (btnPrev) {
     btnPrev.addEventListener('click', () => {
-      setPhase(currentIndex - 1);
+      setPhase(currentIndex - 1, 'slide-right');
     });
   }
 
   if (btnNext) {
     btnNext.addEventListener('click', () => {
-      setPhase(currentIndex + 1);
+      setPhase(currentIndex + 1, 'slide-left');
     });
   }
 
-  // Auto-play timer
+  // Auto-play timer (automatic swipe morning -> noon -> sunset -> night)
   function startAutoplay() {
     stopAutoplay();
     autoplayTimer = setInterval(() => {
-      setPhase(currentIndex + 1);
-    }, 6000);
+      setPhase(currentIndex + 1, 'slide-left');
+    }, 5000);
     isPlaying = true;
     if (playIcon) playIcon.textContent = '⏸️';
   }
@@ -4861,7 +4873,7 @@ function initDayStoryShowcase() {
     });
   }
 
-  // Pause on hover
+  // Pause on hover so user can inspect details
   container.addEventListener('mouseenter', () => {
     if (isPlaying && autoplayTimer) {
       clearInterval(autoplayTimer);
@@ -4871,16 +4883,46 @@ function initDayStoryShowcase() {
 
   container.addEventListener('mouseleave', () => {
     if (isPlaying && !autoplayTimer) {
-      autoplayTimer = setInterval(() => {
-        setPhase(currentIndex + 1);
-      }, 6000);
+      startAutoplay();
     }
   });
+
+  // Mobile Touch Swipe Gesture
+  const viewport = container.querySelector('.day-chapters-viewport');
+  if (viewport) {
+    let touchStartX = 0;
+    let touchStartY = 0;
+    viewport.addEventListener('touchstart', (e) => {
+      if (e.touches && e.touches[0]) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }
+    }, { passive: true });
+
+    viewport.addEventListener('touchend', (e) => {
+      if (!e.changedTouches || !e.changedTouches[0]) return;
+      const diffX = e.changedTouches[0].clientX - touchStartX;
+      const diffY = e.changedTouches[0].clientY - touchStartY;
+      // Only trigger if horizontal movement is dominant and > 40px
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+        if (diffX < 0) {
+          // Swipe left -> advance to next time
+          setPhase(currentIndex + 1, 'slide-left');
+        } else {
+          // Swipe right -> go back to previous time
+          setPhase(currentIndex - 1, 'slide-right');
+        }
+      }
+    }, { passive: true });
+  }
 
   // Initial position after render
   setTimeout(() => {
     setPhase(0);
   }, 100);
+
+  // Start auto-progress directly on initialization
+  startAutoplay();
 
   // Resize handler for token position
   window.addEventListener('resize', () => {
