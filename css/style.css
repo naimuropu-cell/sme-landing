@@ -105,6 +105,15 @@ body.lang-bn {
   font-family: var(--font-bengali);
 }
 
+body.lang-bn .sb-index-eyebrow,
+body.lang-bn .sb-card-cat,
+body.lang-bn .sb-item-cat,
+body.lang-bn .section-badge-pill,
+body.lang-bn .badge,
+body.lang-bn .sb-counter-pill {
+  letter-spacing: normal !important;
+}
+
 img, svg {
   display: block;
   max-width: 100%;
@@ -12775,7 +12784,7 @@ section {
 
 .storyboard-showcase-container {
   max-width: 1240px;
-  margin: 2.75rem auto 0 auto;
+  margin: 1.5rem auto 0 auto;
   padding: 0 1rem;
 }
 
