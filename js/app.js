@@ -3207,6 +3207,22 @@ function initStoryboardShowcase() {
       switchStoryboardModule(sbCurrentIndex + 1, 'next');
     }
   });
+
+  // 13. Direct Navigation Module Jumps (Header dropdown & Footer links)
+  document.querySelectorAll('[data-module-jump]').forEach(link => {
+    link.addEventListener('click', () => {
+      const targetIdx = parseInt(link.getAttribute('data-module-jump'), 10);
+      if (!isNaN(targetIdx) && targetIdx >= 0 && targetIdx < STORYBOARD_MODULES.length) {
+        // If filter is active, reset to 'all' to ensure item is visible
+        const allFilterBtn = container.querySelector('.sb-filter-btn[data-filter="all"]');
+        if (allFilterBtn && !allFilterBtn.classList.contains('active')) {
+          allFilterBtn.click();
+        }
+        const dir = targetIdx > sbCurrentIndex ? 'next' : 'prev';
+        switchStoryboardModule(targetIdx, dir);
+      }
+    });
+  });
 }
 
 

@@ -98,7 +98,7 @@
         <ul class="nav-links-list" id="siteNavLinks">
           <!-- Features with Dropdown -->
           <li class="nav-item has-dropdown">
-            <a href="#features" class="nav-link-trigger" data-i18n="nav.features">
+            <a href="#modules" class="nav-link-trigger" data-i18n="nav.features">
               Features
               <svg class="nav-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
                 <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -106,35 +106,35 @@
             </a>
             <div class="nav-dropdown-menu nav-dropdown-megamenu">
               <div class="dropdown-megamenu-grid">
-                <a href="#features" class="dropdown-item-card">
+                <a href="#modules" data-module-jump="0" class="dropdown-item-card">
                   <span class="item-icon-box">⚡</span>
                   <div>
                     <div class="item-title" data-i18n="nav.modPos">Smart Offline POS</div>
                     <div class="item-sub" data-i18n="nav.modPosSub">Barcode billing, thermal print & offline sync</div>
                   </div>
                 </a>
-                <a href="#features" class="dropdown-item-card">
+                <a href="#modules" data-module-jump="1" class="dropdown-item-card">
                   <span class="item-icon-box">📦</span>
                   <div>
                     <div class="item-title" data-i18n="nav.modStock">Multi-Warehouse Stock</div>
                     <div class="item-sub" data-i18n="nav.modStockSub">Batch, serial & multi-outlet inventory</div>
                   </div>
                 </a>
-                <a href="#features" class="dropdown-item-card">
+                <a href="#modules" data-module-jump="2" class="dropdown-item-card">
                   <span class="item-icon-box">📊</span>
                   <div>
                     <div class="item-title" data-i18n="nav.modAcct">Double-Entry Accounting</div>
                     <div class="item-sub" data-i18n="nav.modAcctSub">Auto balance sheet, P&L & tax invoices</div>
                   </div>
                 </a>
-                <a href="#features" class="dropdown-item-card">
+                <a href="#modules" data-module-jump="4" class="dropdown-item-card">
                   <span class="item-icon-box">🚚</span>
                   <div>
                     <div class="item-title" data-i18n="nav.modCourier">Logistics & Courier Hub</div>
                     <div class="item-sub" data-i18n="nav.modCourierSub">Pathao, Steadfast & bKash automation</div>
                   </div>
                 </a>
-                <a href="#features" class="dropdown-item-card">
+                <a href="#modules" data-module-jump="7" class="dropdown-item-card">
                   <span class="item-icon-box">🤖</span>
                   <div>
                     <div class="item-title" data-i18n="nav.modAi">Bengali AI Advisor</div>
@@ -1230,287 +1230,6 @@
 
           </div>
 
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-alt compact-spotlight-section" id="features">
-      <div class="container">
-        <!-- Section Header -->
-        <div class="section-header text-center">
-          <div class="section-badge-pill" data-i18n="split.headerBadge">Core Enterprise Engines</div>
-          <h2 class="section-title" data-i18n="split.headerTitle">Engineered for Flawless Retail &amp; Multi-Branch Operations</h2>
-          <p class="section-subtitle" data-i18n="split.headerSubtitle">
-            Explore the 5 core engines inside YES SME that eliminate operational chaos, manual errors, and revenue leakage.
-          </p>
-        </div>
-
-        <!-- Compact Interactive Spotlight Console (~520px height) -->
-        <div class="spotlight-console-card">
-          <!-- Left Column: 5 Interactive Stepper Buttons -->
-          <div class="spotlight-stepper-col" role="tablist">
-            <!-- Stepper 1 -->
-            <button type="button" class="spotlight-step-btn active" data-spotlight-target="stage-pos" role="tab" aria-selected="true">
-              <div class="step-progress-indicator"></div>
-              <div class="step-icon-wrap bg-icon-green">⚡</div>
-              <div class="step-text-meta">
-                <div class="step-title-row">
-                  <strong data-i18n="split1.badge">Offline POS Resilience</strong>
-                  <span class="step-tag-pill">0.3s Scan</span>
-                </div>
-                <p data-i18n="split1.short">Keep billing non-stop when shopping mall Wi-Fi drops with instant local cache.</p>
-              </div>
-            </button>
-
-            <!-- Stepper 2 -->
-            <button type="button" class="spotlight-step-btn" data-spotlight-target="stage-stock" role="tab" aria-selected="false">
-              <div class="step-progress-indicator"></div>
-              <div class="step-icon-wrap bg-icon-orange">🏬</div>
-              <div class="step-text-meta">
-                <div class="step-title-row">
-                  <strong data-i18n="split2.badge">Multi-Store ERP</strong>
-                  <span class="step-tag-pill">Live Sync</span>
-                </div>
-                <p data-i18n="split2.short">One central inventory view across outlets, central godown &amp; challans.</p>
-              </div>
-            </button>
-
-            <!-- Stepper 3 -->
-            <button type="button" class="spotlight-step-btn" data-spotlight-target="stage-accounts" role="tab" aria-selected="false">
-              <div class="step-progress-indicator"></div>
-              <div class="step-icon-wrap bg-icon-blue">📊</div>
-              <div class="step-text-meta">
-                <div class="step-title-row">
-                  <strong data-i18n="split3.badge">Double-Entry Accounting</strong>
-                  <span class="step-tag-pill">Auto Ledger</span>
-                </div>
-                <p data-i18n="split3.short">Automatic journal postings from counter sales to P&amp;L and NBR Mushak 6.3.</p>
-              </div>
-            </button>
-
-            <!-- Stepper 4 -->
-            <button type="button" class="spotlight-step-btn" data-spotlight-target="stage-courier" role="tab" aria-selected="false">
-              <div class="step-progress-indicator"></div>
-              <div class="step-icon-wrap bg-icon-rose">🚚</div>
-              <div class="step-text-meta">
-                <div class="step-title-row">
-                  <strong data-i18n="split4.badge">Nationwide Logistics</strong>
-                  <span class="step-tag-pill">1-Click Booking</span>
-                </div>
-                <p data-i18n="split4.short">1-Click Pathao, Steadfast &amp; REDX parcel booking with COD auto-audit.</p>
-              </div>
-            </button>
-
-            <!-- Stepper 5 -->
-            <button type="button" class="spotlight-step-btn" data-spotlight-target="stage-ai" role="tab" aria-selected="false">
-              <div class="step-progress-indicator"></div>
-              <div class="step-icon-wrap bg-icon-purple">🤖</div>
-              <div class="step-text-meta">
-                <div class="step-title-row">
-                  <strong data-i18n="split5.badge">AI Copilot Advisor</strong>
-                  <span class="step-tag-pill">Bangla AI</span>
-                </div>
-                <p data-i18n="split5.short">Ask in plain conversational Bengali to get real-time profit and restock answers.</p>
-              </div>
-            </button>
-          </div>
-
-          <!-- Right Column: Living Stage Display -->
-          <div class="spotlight-stage-col">
-            
-            <!-- Stage 1: Offline POS -->
-            <div class="spotlight-stage-pane active" id="stage-pos">
-              <div class="stage-card-window">
-                <div class="stage-window-topbar">
-                  <div class="stage-window-dots">
-                    <span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span>
-                    <strong style="margin-left: 0.5rem; font-size: 0.8rem; color: var(--text-title);">POS Counter #01 · Banani</strong>
-                  </div>
-                  <span class="offline-ready-badge">● ZERO DOWNTIME OFFLINE</span>
-                </div>
-                
-                <div class="stage-window-body">
-                  <div class="stage-highlight-banner">
-                    <h4 data-i18n="split1.title">Keep Billing Non-Stop Even When Shopping Mall Wi-Fi Drops</h4>
-                    <p data-i18n="split1.desc">In Bangladesh, internet drops and Wi-Fi freezes cost retailers lakhs in abandoned carts. YES SME runs on dual-engine local IndexedDB caching so your cashiers never stop printing bills.</p>
-                  </div>
-
-                  <!-- Mini Interactive UI Mockup -->
-                  <div class="stage-mini-mockup">
-                    <div class="mini-pos-row">
-                      <span>Premium Oxford Shirt [SKU: SHT-BLU-42]</span>
-                      <strong><span class="currency-taka">&#2547;</span>1,850</strong>
-                    </div>
-                    <div class="mini-pos-row">
-                      <span>Slim Fit Raw Denim [SKU: DNM-IND-32]</span>
-                      <strong><span class="currency-taka">&#2547;</span>1,950</strong>
-                    </div>
-                    <div class="mini-pos-total-row">
-                      <span>Grand Total (VAT &amp; Discount):</span>
-                      <strong style="color: var(--green-700);"><span class="currency-taka">&#2547;</span>3,488.75</strong>
-                    </div>
-                  </div>
-
-                  <!-- 4 Punchy Metric Pills -->
-                  <div class="stage-bullets-grid">
-                    <div class="stage-bullet"><span class="check-icon">✓</span> <span data-i18n="split1.bullet1">Sub-second 80mm thermal receipt printing</span></div>
-                    <div class="stage-bullet"><span class="check-icon">✓</span> <span data-i18n="split1.bullet2">Silent background cloud sync in 0.2s</span></div>
-                    <div class="stage-bullet"><span class="check-icon">✓</span> <span data-i18n="split1.bullet3">Offline customer ledger &amp; shift cash balance</span></div>
-                    <div class="stage-bullet"><span class="check-icon">✓</span> <span data-i18n="split1.bullet4">Barcode scanner &amp; cash drawer plug-and-play</span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Stage 2: Multi-Warehouse Stock -->
-            <div class="spotlight-stage-pane" id="stage-stock">
-              <div class="stage-card-window">
-                <div class="stage-window-topbar">
-                  <div class="stage-window-dots">
-                    <span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span>
-                    <strong style="margin-left: 0.5rem; font-size: 0.8rem; color: var(--text-title);">Inter-Branch Stock Ledger</strong>
-                  </div>
-                  <span class="badge-live-sync">🔄 LIVE RECONCILIATION</span>
-                </div>
-                
-                <div class="stage-window-body">
-                  <div class="stage-highlight-banner">
-                    <h4 data-i18n="split2.title">One Central Inventory View Across All Outlets &amp; Godowns</h4>
-                    <p data-i18n="split2.desc">Never lose track of stock between your central godown and retail showrooms. Transfer stock with official challans and track batch expiry dates effortlessly.</p>
-                  </div>
-
-                  <div class="stage-mini-mockup">
-                    <div class="stock-dist-row">
-                      <span>Banani Showroom: <strong>14 pcs</strong></span>
-                      <span>Uttara Hub: <strong>85 pcs</strong></span>
-                      <span>Chittagong Depot: <strong>22 pcs</strong></span>
-                    </div>
-                    <div class="challan-status-strip">
-                      <span>📦 Challan #TR-8821: 10 pcs in transit to Banani Outlet</span>
-                      <strong style="color: var(--green-700);">Gate Pass Ready</strong>
-                    </div>
-                  </div>
-
-                  <div class="stage-bullets-grid">
-                    <div class="stage-bullet"><span class="check-icon">✓</span> <span data-i18n="split2.bullet1">1-Click inter-branch transfer challan with gate pass</span></div>
-                    <div class="stage-bullet"><span class="check-icon">✓</span> <span data-i18n="split2.bullet2">Real-time stock reservation prevents overselling</span></div>
-                    <div class="stage-bullet"><span class="check-icon">✓</span> <span data-i18n="split2.bullet3">Batch number, serial &amp; expiry tracking</span></div>
-                    <div class="stage-bullet"><span class="check-icon">✓</span> <span data-i18n="split2.bullet4">Automated low-stock alerts sent to warehouse manager</span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Stage 3: Double-Entry Accounts -->
-            <div class="spotlight-stage-pane" id="stage-accounts">
-              <div class="stage-card-window">
-                <div class="stage-window-topbar">
-                  <div class="stage-window-dots">
-                    <span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span>
-                    <strong style="margin-left: 0.5rem; font-size: 0.8rem; color: var(--text-title);">General Ledger &amp; P&amp;L</strong>
-                  </div>
-                  <span class="badge-nbr-vat">🛡️ NBR MUSHAK 6.3 READY</span>
-                </div>
-                
-                <div class="stage-window-body">
-                  <div class="stage-highlight-banner">
-                    <h4 data-i18n="split3.title">Automated Bookkeeping from Checkout Counter to Balance Sheet</h4>
-                    <p data-i18n="split3.desc">Stop hiring extra data-entry operators. Every sales invoice, purchase bill, expense voucher, and courier COD settlement automatically posts to the general ledger in real time.</p>
-                  </div>
-
-                  <div class="stage-mini-mockup">
-                    <div class="accounts-kpi-row">
-                      <div class="acc-kpi"><span>Petty Cash:</span> <strong><span class="currency-taka">&#2547;</span>48,500</strong></div>
-                      <div class="acc-kpi"><span>BRAC Bank A/C:</span> <strong><span class="currency-taka">&#2547;</span>1,280,450</strong></div>
-                      <div class="acc-kpi"><span>Today's Net Profit:</span> <strong style="color: var(--green-700);">+<span class="currency-taka">&#2547;</span>74,500</strong></div>
-                    </div>
-                  </div>
-
-                  <div class="stage-bullets-grid">
-                    <div class="stage-bullet"><span class="check-icon">✓</span> <span data-i18n="split3.bullet1">Automated sales &amp; purchase journal voucher postings</span></div>
-                    <div class="stage-bullet"><span class="check-icon">✓</span> <span data-i18n="split3.bullet2">Real-time Profit &amp; Loss (P&amp;L) and Balance Sheet</span></div>
-                    <div class="stage-bullet"><span class="check-icon">✓</span> <span data-i18n="split3.bullet3">Daily cash counter reconciliation against shift closures</span></div>
-                    <div class="stage-bullet"><span class="check-icon">✓</span> <span data-i18n="split3.bullet4">NBR Mushak 6.3 approved legal tax invoice print</span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Stage 4: Logistics & Courier -->
-            <div class="spotlight-stage-pane" id="stage-courier">
-              <div class="stage-card-window">
-                <div class="stage-window-topbar">
-                  <div class="stage-window-dots">
-                    <span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span>
-                    <strong style="margin-left: 0.5rem; font-size: 0.8rem; color: var(--text-title);">Courier &amp; MFS Dispatch Hub</strong>
-                  </div>
-                  <span class="badge-courier-sync">🚚 1-CLICK API SYNC</span>
-                </div>
-                
-                <div class="stage-window-body">
-                  <div class="stage-highlight-banner">
-                    <h4 data-i18n="split4.title">1-Click Courier Parcel Booking with Pathao, Steadfast &amp; REDX</h4>
-                    <p data-i18n="split4.desc">Eliminate manual copy-pasting of delivery addresses into courier portals. Book parcels with one click, print thermal consignment labels, and auto-audit COD disbursements.</p>
-                  </div>
-
-                  <div class="stage-mini-mockup">
-                    <div class="courier-strip-row">
-                      <div class="c-badge pathao">Pathao: <strong>12 Shipped (Cons: PTH-89218)</strong></div>
-                      <div class="c-badge steadfast">Steadfast: <strong>24 Dispatched (Live COD)</strong></div>
-                    </div>
-                    <div class="bkash-recon-line">
-                      <span>bKash Merchant Pay: <strong style="color: #059669;"><span class="currency-taka">&#2547;</span>89,200 Settled</strong></span>
-                      <span>Zero manual TrxID checking</span>
-                    </div>
-                  </div>
-
-                  <div class="stage-bullets-grid">
-                    <div class="stage-bullet"><span class="check-icon">✓</span> <span data-i18n="split4.bullet1">Direct API integration with Pathao, Steadfast &amp; REDX</span></div>
-                    <div class="stage-bullet"><span class="check-icon">✓</span> <span data-i18n="split4.bullet2">Bulk consignment generation and 4x6 thermal shipping labels</span></div>
-                    <div class="stage-bullet"><span class="check-icon">✓</span> <span data-i18n="split4.bullet3">Automatic COD remittance reconciliation into bank ledger</span></div>
-                    <div class="stage-bullet"><span class="check-icon">✓</span> <span data-i18n="split4.bullet4">Automated customer SMS tracking link upon dispatch</span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Stage 5: AI Copilot -->
-            <div class="spotlight-stage-pane" id="stage-ai">
-              <div class="stage-card-window">
-                <div class="stage-window-topbar">
-                  <div class="stage-window-dots">
-                    <span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span>
-                    <strong style="margin-left: 0.5rem; font-size: 0.8rem; color: var(--text-title);">YES SME Copilot AI Advisor</strong>
-                  </div>
-                  <span class="badge-ai-online">🤖 BANGLA &amp; ENGLISH LIVE</span>
-                </div>
-                
-                <div class="stage-window-body">
-                  <div class="stage-highlight-banner">
-                    <h4 data-i18n="split5.title">Ask Business Questions in Natural Bengali — Get Instant Profit Answers</h4>
-                    <p data-i18n="split5.desc">You don't need complex Excel sheets. Simply ask YES SME Copilot in everyday Bengali to analyze your top-selling products, dead stock, and supplier dues.</p>
-                  </div>
-
-                  <div class="stage-mini-mockup">
-                    <div class="mini-chat-bubble user">
-                      👤 "গত সপ্তাহের চেয়ে আজকের মোট বিক্রি কেমন এবং কোন আইটেমে লাভ বেশি?"
-                    </div>
-                    <div class="mini-chat-bubble bot">
-                      🤖 <strong>YES SME AI:</strong> "আজকের মোট বিক্রি <strong><span class="currency-taka">&#2547;</span>২,৪৩,৬৯০</strong> (+১৮.৪%)। সর্বোচ্চ মুনাফা হয়েছে <strong>'Premium Oxford Formal Shirt'</strong>-এ (৪৩% মার্জিন)।"
-                    </div>
-                  </div>
-
-                  <div class="stage-bullets-grid">
-                    <div class="stage-bullet"><span class="check-icon">✓</span> <span data-i18n="split5.bullet1">Natural Bengali &amp; English conversational chat queries</span></div>
-                    <div class="stage-bullet"><span class="check-icon">✓</span> <span data-i18n="split5.bullet2">Instant daily sales summaries and gross margin analysis</span></div>
-                    <div class="stage-bullet"><span class="check-icon">✓</span> <span data-i18n="split5.bullet3">Predictive dead-stock alerts and smart reorder suggestions</span></div>
-                    <div class="stage-bullet"><span class="check-icon">✓</span> <span data-i18n="split5.bullet4">Real-time Meta ad spend vs. revenue return tracking</span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
         </div>
       </div>
     </section>
@@ -3021,13 +2740,13 @@
         <div class="footer-links-col">
           <h4 class="footer-col-title" data-i18n="footer.colModules">Core ERP Modules</h4>
           <ul class="footer-links-list">
-            <li><a href="#features" data-i18n="footer.linkPos">Smart Offline POS Billing</a></li>
-            <li><a href="#features" data-i18n="footer.linkStock">Multi-Warehouse Inventory</a></li>
-            <li><a href="#features" data-i18n="footer.linkAcct">Double-Entry Accounting</a></li>
-            <li><a href="#features" data-i18n="footer.linkVat">NBR Mushak 6.3 VAT &amp; Tax</a></li>
-            <li><a href="#features" data-i18n="footer.linkEcom">E-Commerce Web Store</a></li>
-            <li><a href="#features" data-i18n="footer.linkCourier">Courier Logistics (Pathao, Steadfast)</a></li>
-            <li><a href="#features" data-i18n="footer.linkAi">Bengali AI Business Copilot</a></li>
+            <li><a href="#modules" data-module-jump="0" data-i18n="footer.linkPos">Smart Offline POS Billing</a></li>
+            <li><a href="#modules" data-module-jump="1" data-i18n="footer.linkStock">Multi-Warehouse Inventory</a></li>
+            <li><a href="#modules" data-module-jump="2" data-i18n="footer.linkAcct">Double-Entry Accounting</a></li>
+            <li><a href="#modules" data-module-jump="3" data-i18n="footer.linkVat">NBR Mushak 6.3 VAT &amp; Tax</a></li>
+            <li><a href="#modules" data-module-jump="10" data-i18n="footer.linkEcom">E-Commerce Web Store</a></li>
+            <li><a href="#modules" data-module-jump="4" data-i18n="footer.linkCourier">Courier Logistics (Pathao, Steadfast)</a></li>
+            <li><a href="#modules" data-module-jump="7" data-i18n="footer.linkAi">Bengali AI Business Copilot</a></li>
           </ul>
         </div>
 
