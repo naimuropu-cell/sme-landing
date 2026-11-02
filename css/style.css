@@ -13920,3 +13920,834 @@ body.dark-theme .pricing-stage-arrow:hover {
   background: #10b981;
   color: #ffffff;
 }
+
+
+/* ==========================================================================
+   UPGRADED CONCEPT B: 3D MICRO-SIMULATIONS, CARTOON MASCOTS & LUXURY STYLING
+   ========================================================================== */
+
+/* 1. Luxury Glow Quote Card */
+.luxury-glow-quote {
+  background: rgba(15, 23, 42, 0.8) !important;
+  border: 1px solid rgba(16, 185, 129, 0.35) !important;
+  box-shadow: 0 8px 32px rgba(16, 185, 129, 0.12), inset 0 0 16px rgba(16, 185, 129, 0.05);
+  backdrop-filter: blur(14px);
+  position: relative;
+  overflow: hidden;
+}
+
+.luxury-glow-quote p {
+  color: #e2e8f0 !important;
+  font-weight: 500;
+}
+
+.quote-sparkle-halo {
+  font-size: 1.25rem;
+  display: inline-block;
+  animation: sparkleHalo 3s ease-in-out infinite alternate;
+}
+
+@keyframes sparkleHalo {
+  0% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 2px #34d399); }
+  100% { transform: scale(1.25) rotate(15deg); filter: drop-shadow(0 0 10px #10b981); }
+}
+
+.hint-arrow-anim {
+  display: inline-block;
+  color: #10b981;
+  font-weight: 800;
+  animation: hintArrowBounce 1.5s ease-in-out infinite;
+}
+
+@keyframes hintArrowBounce {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(4px); }
+}
+
+/* 2. Mascot Header Banners & Avatars */
+.mascot-banner-chaos {
+  background: linear-gradient(90deg, rgba(30, 21, 19, 0.95) 0%, rgba(20, 13, 12, 0.85) 100%) !important;
+  border-bottom: 1px solid rgba(239, 68, 68, 0.25) !important;
+}
+
+.mascot-banner-cloud {
+  background: linear-gradient(90deg, rgba(6, 78, 59, 0.85) 0%, rgba(11, 26, 39, 0.95) 100%) !important;
+  border-bottom: 1px solid rgba(16, 185, 129, 0.3) !important;
+}
+
+.mascot-profile-cluster {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.mascot-avatar-frame {
+  width: 58px;
+  height: 58px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  overflow: visible;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.mascot-avatar-frame:hover {
+  transform: scale(1.1) translateY(-2px);
+}
+
+.avatar-chaos {
+  background: radial-gradient(circle, #2d1815 0%, #150a09 100%);
+  border: 2px solid #ef4444;
+  box-shadow: 0 0 18px rgba(239, 68, 68, 0.45);
+}
+
+.avatar-cloud {
+  background: radial-gradient(circle, #064e3b 0%, #03281f 100%);
+  border: 2px solid #10b981;
+  box-shadow: 0 0 18px rgba(16, 185, 129, 0.55);
+}
+
+.mascot-svg-char {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  display: block;
+}
+
+.mascot-quote-sub {
+  font-size: 0.82rem;
+  font-style: italic;
+  margin-top: 0.3rem;
+  line-height: 1.35;
+}
+
+.avatar-chaos + div .mascot-quote-sub {
+  color: #fca5a5;
+}
+
+.avatar-cloud + div .mascot-quote-sub {
+  color: #6ee7b7;
+}
+
+/* Animations for Cartoon Mascots */
+.anim-sweat-drop {
+  animation: sweatDropAnim 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes sweatDropAnim {
+  0% { transform: translateY(-3px); opacity: 0; }
+  30% { transform: translateY(0); opacity: 1; }
+  80% { transform: translateY(8px); opacity: 0.8; }
+  100% { transform: translateY(14px); opacity: 0; }
+}
+
+.anim-coffee-cup .steam-1 {
+  animation: steamRiseAnim 2.2s ease-in-out infinite;
+}
+
+.anim-coffee-cup .steam-2 {
+  animation: steamRiseAnim 2.2s ease-in-out 0.4s infinite;
+}
+
+.anim-coffee-cup .steam-3 {
+  animation: steamRiseAnim 2.2s ease-in-out 0.8s infinite;
+}
+
+@keyframes steamRiseAnim {
+  0% { transform: translateY(0) scaleX(1); opacity: 0.2; }
+  50% { transform: translateY(-4px) scaleX(1.3); opacity: 0.9; }
+  100% { transform: translateY(-9px) scaleX(0.7); opacity: 0; }
+}
+
+/* 3. Micro-Simulation Display Boxes */
+.sim-display-box {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  margin: 0.25rem 0 0.5rem 0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+/* --- Chaos Simulations --- */
+.sim-chaos-memo {
+  border-color: rgba(239, 68, 68, 0.25);
+  background: linear-gradient(135deg, rgba(60, 20, 16, 0.5) 0%, rgba(20, 10, 8, 0.7) 100%);
+}
+
+.sim-crumpled-receipt {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.receipt-header-scrawl {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: #fca5a5;
+  font-weight: 700;
+}
+
+.scrawl-delay {
+  color: #ef4444;
+  font-size: 0.75rem;
+  background: rgba(239, 68, 68, 0.2);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+}
+
+.scrawl-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.scrawl-line {
+  height: 3px;
+  background: rgba(252, 165, 165, 0.3);
+  border-radius: 2px;
+}
+.scrawl-line.line-1 { width: 75%; }
+.scrawl-line.line-2 { width: 55%; }
+.scrawl-line.line-strike {
+  width: 90%;
+  background: #ef4444;
+  text-decoration: line-through;
+  position: relative;
+}
+
+.receipt-footer-error {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: #f87171;
+}
+
+.stamp-lost {
+  background: #ef4444;
+  color: #ffffff;
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  font-weight: 800;
+  font-size: 0.68rem;
+}
+
+/* Chaos SMS Stack */
+.sim-chaos-sms {
+  border-color: rgba(239, 68, 68, 0.25);
+}
+
+.sim-sms-stack {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.sms-bubble {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.75rem;
+  color: #fca5a5;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.anim-pulse-warn {
+  animation: pulseWarnBg 2s infinite ease-in-out;
+}
+
+@keyframes pulseWarnBg {
+  0%, 100% { background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.4); }
+  50% { background: rgba(239, 68, 68, 0.25); border-color: rgba(239, 68, 68, 0.8); }
+}
+
+.sim-leakage-badge {
+  font-size: 0.72rem;
+  color: #f87171;
+  font-weight: 700;
+  margin-top: 0.25rem;
+}
+
+/* Chaos Courier */
+.sim-courier-error-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.courier-scrawl-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.76rem;
+  color: #fca5a5;
+  font-weight: 700;
+}
+
+.tag-manual-slow {
+  background: rgba(239, 68, 68, 0.25);
+  color: #fca5a5;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+}
+
+.courier-error-line {
+  font-size: 0.73rem;
+  color: #e2e8f0;
+}
+
+.courier-warning-tag {
+  font-size: 0.72rem;
+  color: #f87171;
+  font-weight: 600;
+}
+
+/* Chaos Excel */
+.sim-broken-sheet {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.excel-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr;
+  font-size: 0.74rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+.header-row {
+  background: rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  font-weight: 700;
+}
+
+.error-row {
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+}
+
+.excel-error-text {
+  color: #ef4444;
+  font-weight: 800;
+}
+
+.anim-glitch-cell {
+  animation: glitchError 1.8s infinite;
+}
+
+@keyframes glitchError {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.excel-panic-note {
+  font-size: 0.7rem;
+  color: #f87171;
+}
+
+/* --- Cloud Simulations --- */
+.sim-cloud-pos {
+  border-color: rgba(16, 185, 129, 0.3);
+  background: linear-gradient(135deg, rgba(6, 78, 59, 0.35) 0%, rgba(11, 26, 39, 0.5) 100%);
+}
+
+.sim-barcode-scanner-area {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.sim-barcode-graphic {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 38px;
+  background: #ffffff;
+  padding: 4px 8px;
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.b-bar {
+  width: 2px;
+  height: 100%;
+  background: #0f172a;
+}
+.b-bar.wide { width: 4px; }
+.b-bar.thin { width: 1px; }
+
+/* Animated Red Laser Beam */
+.sim-laser-beam {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #ef4444;
+  box-shadow: 0 0 10px #ef4444, 0 0 20px #f87171;
+  animation: laserSweepAnim 1.6s ease-in-out infinite alternate;
+}
+
+@keyframes laserSweepAnim {
+  0% { top: 10%; }
+  100% { top: 85%; }
+}
+
+.sim-thermal-slip {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 8px;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.75rem;
+}
+
+.slip-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+
+.slip-brand { color: #34d399; }
+.slip-badge {
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.15);
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.68rem;
+}
+
+.slip-items {
+  display: flex;
+  justify-content: space-between;
+  color: #e2e8f0;
+  font-size: 0.72rem;
+}
+.slip-price { color: #6ee7b7; font-weight: 700; }
+
+/* Cloud QR Simulation */
+.sim-cloud-qr {
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.sim-qr-interactive-wrap {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.sim-mini-qr {
+  width: 44px;
+  height: 44px;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.anim-radar-pulse::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border: 2px solid #10b981;
+  border-radius: 12px;
+  animation: radarPulseAnim 2s infinite ease-out;
+}
+
+@keyframes radarPulseAnim {
+  0% { transform: scale(0.9); opacity: 1; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+
+.qr-pattern-grid {
+  width: 100%;
+  height: 100%;
+  background: #0f172a;
+  border-radius: 4px;
+  position: relative;
+}
+
+.qr-finder {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 2px solid #ffffff;
+}
+.qr-finder.tl { top: 2px; left: 2px; }
+.qr-finder.tr { top: 2px; right: 2px; }
+.qr-finder.bl { bottom: 2px; left: 2px; }
+
+.sim-payment-verified-pill {
+  flex: 1;
+}
+
+.verified-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.2rem;
+}
+
+.bkash-text {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #e2136e;
+}
+
+.live-check-icon {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #34d399;
+  background: rgba(16, 185, 129, 0.15);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+}
+
+.verified-amount {
+  font-size: 0.74rem;
+  color: #e2e8f0;
+}
+
+/* Cloud Courier */
+.sim-courier-run-track {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.sim-van-container {
+  display: flex;
+  align-items: center;
+  font-size: 1.6rem;
+  position: relative;
+  flex-shrink: 0;
+  animation: vanDriveAnim 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes vanDriveAnim {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(6px); }
+}
+
+.van-speed-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-left: 2px;
+}
+
+.van-speed-lines span {
+  width: 8px;
+  height: 2px;
+  background: #34d399;
+  border-radius: 1px;
+}
+
+.sim-courier-pill {
+  flex: 1;
+}
+
+.courier-name-tag {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #38bdf8;
+}
+
+.courier-status-live {
+  font-size: 0.73rem;
+  color: #6ee7b7;
+}
+
+/* Cloud PnL */
+.sim-sparkline-wrap {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.sim-live-chart {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.sparkline-svg {
+  width: 60px;
+  height: 24px;
+  overflow: visible;
+}
+
+.anim-draw-chart {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 0;
+  animation: drawChartAnim 4s ease-in-out infinite alternate;
+}
+
+@keyframes drawChartAnim {
+  0% { stroke-dashoffset: 80; }
+  100% { stroke-dashoffset: 0; }
+}
+
+.chart-pulse-dot {
+  animation: pulseDot 1.5s infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 2px #34d399); }
+  50% { transform: scale(1.4); filter: drop-shadow(0 0 8px #10b981); }
+}
+
+.chart-label {
+  font-size: 0.74rem;
+  color: #6ee7b7;
+  font-weight: 700;
+}
+
+.sim-nbr-seal {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.seal-icon { font-size: 0.85rem; }
+.seal-text {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #fcd34d;
+}
+
+/* 4. Cyber Laser Handle */
+.cyber-laser-handle .laser-line {
+  background: linear-gradient(to bottom, rgba(6, 182, 212, 0.2) 0%, #10b981 30%, #06b6d4 70%, rgba(16, 185, 129, 0.2) 100%) !important;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.9), 0 0 32px rgba(6, 182, 212, 0.6) !important;
+  width: 3px !important;
+}
+
+.neon-thumb {
+  width: 44px !important;
+  height: 44px !important;
+  background: radial-gradient(circle, #0B1120 0%, #03141f 100%) !important;
+  border: 2px solid #34d399 !important;
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.8), 0 8px 30px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* 5. Luxury Frosted Glass KPIs */
+.luxury-glass-kpis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin: 2rem 0 1.5rem 0;
+}
+
+.glass-kpi-card {
+  background: rgba(15, 23, 42, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 18px !important;
+  padding: 1.4rem 1.15rem !important;
+  backdrop-filter: blur(16px) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.glass-kpi-card:hover {
+  transform: translateY(-5px) !important;
+  border-color: rgba(16, 185, 129, 0.4) !important;
+  box-shadow: 0 16px 40px rgba(16, 185, 129, 0.15) !important;
+}
+
+.kpi-trend-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  margin-bottom: 0.5rem;
+}
+
+.badge-green { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.35); }
+.badge-emerald { background: rgba(5, 150, 105, 0.18); color: #6ee7b7; border: 1px solid rgba(5, 150, 105, 0.35); }
+.badge-cyan { background: rgba(6, 182, 212, 0.18); color: #38bdf8; border: 1px solid rgba(6, 182, 212, 0.35); }
+.badge-purple { background: rgba(168, 85, 247, 0.18); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.35); }
+
+.glass-kpi-card .kpi-value {
+  color: #ffffff;
+  font-size: 2.1rem !important;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.glass-kpi-card .kpi-label {
+  color: #94a3b8 !important;
+  font-size: 0.84rem !important;
+}
+
+/* 6. Luxury Cyber CTA Banner */
+.luxury-cyber-banner {
+  background: radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.2) 0%, rgba(6, 182, 212, 0.1) 50%, #0B1120 100%) !important;
+  border: 1px solid rgba(16, 185, 129, 0.35) !important;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+.cta-live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(16, 185, 129, 0.16);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  color: #6ee7b7;
+  font-weight: 700;
+  margin-bottom: 0.65rem;
+}
+
+.live-dot-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  animation: pulseBeacon 1.8s infinite;
+}
+
+.luxury-cyber-banner .transform-cta-title {
+  color: #ffffff !important;
+}
+
+.luxury-cyber-banner .transform-cta-desc {
+  color: #cbd5e1 !important;
+}
+
+.shimmer-cta {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-cta::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shimmerSweep 3s infinite;
+}
+
+@keyframes shimmerSweep {
+  0% { left: -100%; }
+  35%, 100% { left: 150%; }
+}
+
+
+/* Contrast & Mobile Enhancements for Concept B */
+.luxury-cyber-banner {
+  background: linear-gradient(135deg, #09131e 0%, #064e3b 55%, #021a1f 100%) !important;
+  border: 1px solid rgba(16, 185, 129, 0.4) !important;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45) !important;
+}
+
+.luxury-cyber-banner .transform-cta-title {
+  color: #ffffff !important;
+  font-size: 1.25rem !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.01em;
+}
+
+.luxury-cyber-banner .transform-cta-desc {
+  color: #cbd5e1 !important;
+  font-size: 0.92rem !important;
+}
+
+/* Mobile Split Experience (<= 768px) */
+@media (max-width: 768px) {
+  .transform-stage-container {
+    min-height: 600px;
+  }
+
+  .transform-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+    padding: 1rem;
+  }
+
+  .transform-dim-card {
+    padding: 1rem;
+    min-width: 290px;
+  }
+
+  .sim-display-box {
+    padding: 0.6rem 0.8rem;
+  }
+
+  .mascot-profile-cluster {
+    gap: 0.75rem;
+  }
+
+  .mascot-avatar-frame {
+    width: 48px;
+    height: 48px;
+  }
+
+  .mascot-quote-sub {
+    font-size: 0.76rem;
+  }
+
+  /* Make sure split handle is prominent on mobile */
+  .cyber-laser-handle .neon-thumb {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .cyber-laser-handle .neon-thumb::after {
+    content: '↔';
+    font-size: 0.7rem;
+    font-weight: 900;
+    color: #10b981;
+    position: absolute;
+    bottom: -16px;
+    background: rgba(11, 17, 32, 0.9);
+    padding: 1px 6px;
+    border-radius: 999px;
+    border: 1px solid #10b981;
+  }
+}

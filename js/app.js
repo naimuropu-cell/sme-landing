@@ -4457,6 +4457,87 @@ function initRampInteractiveStage() {
    Interactive Dual-World Drag Handle & Pill Switcher
    ========================================================================== */
 function initTransformationSlider() {
+
+  // Odometer Counter Animation for KPI Stat Cards (Bilingual Support)
+  function initTransformKpiCounters() {
+    const kpiElements = document.querySelectorAll('.glass-kpi-card .kpi-value[data-counter-target]');
+    if (!kpiElements.length) return;
+
+    let hasRun = false;
+
+    function toBn(numStr) {
+      const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+      return String(numStr).replace(/[0-9]/g, d => bnDigits[d]);
+    }
+
+    function animateValue(el) {
+      const target = parseInt(el.getAttribute('data-counter-target'), 10);
+      const isBn = (document.documentElement.lang === 'bn') || (typeof currentLanguage !== 'undefined' && currentLanguage === 'bn');
+      if (isNaN(target)) return;
+
+      const duration = 1600; // ms
+      const startTime = performance.now();
+
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        const current = Math.floor(ease * target);
+
+        // Formatted number
+        let formatted = target >= 1000 ? current.toLocaleString('en-US') : String(current);
+        if (isBn) formatted = toBn(formatted);
+
+        // Suffix & Prefix depending on language
+        let displaySuffix = '';
+        let displayPrefix = '';
+
+        if (target === 18) {
+          displaySuffix = isBn ? '+ ঘণ্টা' : '+ Hours';
+        } else if (target === 24500) {
+          displayPrefix = '৳';
+          displaySuffix = '+';
+        } else if (target === 7) {
+          displaySuffix = isBn ? ' গুণ দ্রুত' : 'x Faster';
+        } else if (target === 100) {
+          displaySuffix = isBn ? '% অটো' : '% Auto';
+        }
+
+        el.textContent = displayPrefix + formatted + displaySuffix;
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        }
+      }
+      requestAnimationFrame(update);
+    }
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !hasRun) {
+            hasRun = true;
+            kpiElements.forEach(animateValue);
+          }
+        });
+      }, { threshold: 0.2 });
+
+      const kpiBar = document.querySelector('.luxury-glass-kpis');
+      if (kpiBar) observer.observe(kpiBar);
+    }
+
+    // Connect pill button clicks for instant smooth transitions
+    const btnOld = document.getElementById('btnModeOld');
+    const btnSplit = document.getElementById('btnModeSplit');
+    const btnNew = document.getElementById('btnModeNew');
+
+    if (btnOld) btnOld.addEventListener('click', () => setSplit(0, true));
+    if (btnSplit) btnSplit.addEventListener('click', () => setSplit(50, true));
+    if (btnNew) btnNew.addEventListener('click', () => setSplit(100, true));
+  }
+
+  initTransformKpiCounters();
+
   const stage = document.getElementById('transformStage');
   const handle = document.getElementById('transformSplitHandle');
   const layerCloud = document.getElementById('layerCloud');
