@@ -1101,11 +1101,11 @@ const PRICING_DATA = {
       },
       "en": {
         "q": "Do you provide staff onboarding training and on-site support in Dhaka?",
-        "a": "Yes! Our engineering and onboarding team is physically based at Nikunja 2, Khilkhet, Dhaka. Having successfully onboarded <strong>200+ growing retail, pharmacy, fashion, and wholesale businesses across Bangladesh</strong>, we provide comprehensive hands-on staff training, POS hardware configuration, and 6-days-a-week priority assistance via direct hotline (01955345331) and dedicated VIP WhatsApp groups."
+        "a": "Yes, absolutely! We conduct <strong>regular live online training classes scheduled at your team's convenience, and we continue these training sessions until your entire team has fully learned and mastered the software</strong> (at no extra charge). Furthermore, our dedicated engineering and onboarding team is physically based at Nikunja 2, Khilkhet, Dhaka. Having successfully onboarded <strong>200+ growing retail, pharmacy, fashion, and wholesale businesses across Bangladesh</strong>, we provide hands-on staff training, POS printer and barcode setup, 6-days-a-week priority telephone assistance via direct hotline (01955345331), and instant VIP WhatsApp group support."
       },
       "bn": {
         "q": "আমাদের সেলস টিমকে কি প্রশিক্ষণ দেওয়া হবে এবং ঢাকার অফিস থেকে কীভাবে সহায়তা পাব?",
-        "a": "হ্যাঁ! আমাদের নিজস্ব ইঞ্জিনিয়ারিং ও অনবোর্ডিং টিম ঢাকার নিকুঞ্জ ২-এ অবস্থিত। ইতোমধ্যে <strong>দেশব্যাপী ২০০+ সফল রিটেল, ফার্মেসি, ফ্যাশন ও হোলসেল ব্যবসায়ে</strong> সফলভাবে সিস্টেম চালু করার অভিজ্ঞতা নিয়ে আমরা আপনার সেলস ও অ্যাকাউন্টস টিমকে সরাসরি হাতে-কলমে প্রশিক্ষণ প্রদান করি, পিওএস প্রিন্টার ও বারকোড সেটআপ করে দিই এবং সপ্তাহে ৬ দিন সরাসরি ফোন হটলাইন (০১৯৫৫৩৪৫৩৩১) ও ডেডিকেটেড ভিআইপি হোয়াটসঅ্যাপ গ্রুপে সার্বক্ষণিক সহায়তা প্রদান করি।"
+        "a": "হ্যাঁ, অবশ্যই! আমরা আপনার ও আপনার টিমের সুবিধাজনক সময় অনুযায়ী <strong>অনলাইনে নিয়মিত লাইভ ট্রেনিং ক্লাস করাই এবং যতদিন না আপনারা সফটওয়্যারটি সম্পূর্ণভাবে শিখে নিচ্ছেন, ততদিন পর্যন্ত এই ক্লাস ও সাপোর্ট অব্যাহত থাকে</strong> (কোনো বাড়তি চার্জ ছাড়াই)। এছাড়া আমাদের নিজস্ব ইঞ্জিনিয়ারিং ও অনবোর্ডিং টিম ঢাকার নিকুঞ্জ ২-এ অবস্থিত। ইতোমধ্যে <strong>দেশব্যাপী ২০০+ সফল রিটেল, ফার্মেসি, ফ্যাশন ও হোলসেল ব্যবসায়ে</strong> সফলভাবে সিস্টেম চালু করার অভিজ্ঞতা নিয়ে আমরা আপনার সেলস ও অ্যাকাউন্টস টিমকে সরাসরি হাতে-কলমে প্রশিক্ষণ প্রদান করি, পিওএস প্রিন্টার ও বারকোড সেটআপ করে দিই এবং সপ্তাহে ৬ দিন সরাসরি ফোন হটলাইন (০১৯৫৫৩৪৫৩৩১) ও ডেডিকেটেড ভিআইপি হোয়াটসঅ্যাপ গ্রুপে সার্বক্ষণিক সহায়তা প্রদান করি।"
       }
     }
   ]
