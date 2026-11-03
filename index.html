@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -2206,61 +2206,49 @@
         </div>
 
 <!-- Section Sub-Header for Plan Comparison -->
-          <div class="section-header text-center" style="margin-top: 1.5rem; margin-bottom: 2rem;">
+          <div class="section-header text-center" id="comparisonSubHeader" style="margin-top: 2rem; margin-bottom: 1.75rem;">
+            <div class="section-badge-pill" data-i18n="comparison.badge">Core Decision Matrix · 32 Key Features</div>
             <h3 class="section-title" style="font-size: 1.85rem;" data-i18n="comparison.title">Detailed Feature-by-Feature Comparison</h3>
             <p class="section-subtitle" data-i18n="comparison.subtitle">
-              Compare core differences across packages at a glance, or click to explore the complete 12-module feature matrix.
+              Compare the 7 decisive differences across packages at a glance, or expand to view the full 32-feature matrix.
             </p>
           </div>
 
-        <!-- Interactive Animated Trigger Button -->
-        <div class="comparison-cta-box text-center">
-          <button type="button" class="btn btn-lg btn-primary btn-expand-comparison" id="btnToggleFullComparison" aria-expanded="false" aria-controls="comparisonFullDrawer">
-            <span class="btn-toggle-icon">📋</span>
-            <span class="btn-toggle-text" data-i18n="comparison.btnViewFull">Click to View Full 12-Module Comparison (71 Features)</span>
-            <svg class="btn-toggle-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" width="20" height="20">
-              <path d="M5 7.5L10 12.5L15 7.5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
+        <!-- Progressive Disclosure Comparison Container -->
+        <div class="comparison-progressive-wrap is-clamped" id="comparisonProgressiveWrap">
           
-          <div class="comparison-pill-badges">
-            <span class="comp-badge-item">⚡ 100% Offline POS</span>
-            <span class="comp-badge-item">🚚 3 Couriers &amp; Auto-COD</span>
-            <span class="comp-badge-item">📊 NBR Mushak 6.3</span>
-            <span class="comp-badge-item">🤖 Bangla AI Copilot</span>
-          </div>
-        </div>
-
-        <!-- Collapsible Full Comparison Drawer (Initially Collapsed) -->
-        <div class="comparison-full-drawer is-collapsed" id="comparisonFullDrawer">
-          <!-- Toolbar: Search & View Options -->
+          <!-- Modern Feature Toolbar & Search -->
           <div class="comparison-toolbar">
             <div class="comparison-search-box">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="18" height="18">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="18" height="18" aria-hidden="true">
                 <circle cx="9" cy="9" r="6" stroke-width="1.8"/>
                 <path d="M13.5 13.5L17.5 17.5" stroke-width="1.8" stroke-linecap="round"/>
               </svg>
               <input type="text" id="tableSearchInput" placeholder="Filter features (e.g. barcode, mobile app, offline, courier, vat)..." aria-label="Search features">
             </div>
 
+            <div class="comparison-toolbar-pills">
+              <span class="comp-badge-item">⚡ 100% Offline POS</span>
+              <span class="comp-badge-item">🚚 3 Couriers &amp; Auto-COD</span>
+              <span class="comp-badge-item">📊 NBR Mushak 6.3</span>
+              <span class="comp-badge-item">📱 Android &amp; iOS Apps</span>
+            </div>
+
             <div style="display: flex; align-items: center; gap: 0.75rem;">
               <span id="searchResultCount" style="display: none; font-size: 0.8125rem; font-weight: 700; color: var(--green-700);"></span>
-              <button type="button" class="toolbar-btn" id="toggleAllCategoriesBtn" data-i18n="comparison.expandAll">
-                Expand All
-              </button>
             </div>
           </div>
 
           <!-- Mobile Horizontal Scroll Hint -->
           <div class="mobile-scroll-hint">
-            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="16" height="16">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="16" height="16" aria-hidden="true">
               <path d="M7 16l-4-4m0 0l4-4m-4 4h14m-4-8l4 4m0 0l-4 4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
             <span data-i18n="comparison.swipeHint">Swipe horizontally to compare all 4 plans</span>
           </div>
 
-          <!-- Comparison Table -->
-          <div class="table-wrapper">
+          <!-- Comparison Table Wrapper with Gradient Fade -->
+          <div class="table-wrapper comparison-table-wrapper" id="comparisonTableWrapper">
             <div class="table-scroll">
               <table class="comparison-table" id="comparisonTable">
                 <thead>
@@ -2298,14 +2286,22 @@
                 </tbody>
               </table>
             </div>
+            
+            <!-- Soft Gradient Fade Overlay for Clamped Preview Mode -->
+            <div class="comparison-fade-overlay" id="comparisonFadeOverlay" aria-hidden="true"></div>
           </div>
 
-          <!-- Drawer Bottom Collapse Action Button -->
-          <div class="drawer-bottom-collapse-wrap text-center">
-            <button type="button" class="btn btn-secondary btn-sm" id="btnCollapseComparisonBottom">
-              <span class="btn-collapse-text" data-i18n="comparison.btnCollapse">▲ Collapse Comparison List</span>
+          <!-- Progressive Disclosure Action Button Area -->
+          <div class="comparison-progressive-actions text-center">
+            <button type="button" class="btn btn-lg btn-see-more-comparison" id="btnSeeMoreComparison" aria-expanded="false" aria-controls="comparisonTableWrapper">
+              <span class="see-more-icon">📋</span>
+              <span class="see-more-text" data-i18n="comparison.btnSeeMore">সম্পূর্ণ ৩২টি ফিচারের তালিকা দেখুন (আরও ২৫টি ফিচার) ▾</span>
             </button>
+            <p class="comparison-reassurance-note" data-i18n="comparison.reassuranceNote">
+              ⚡ প্রতিটি উচ্চতর প্যাকেজে পূর্ববর্তী প্যাকেজের সমস্ত সুবিধা স্বয়ংক্রিয়ভাবে অন্তর্ভুক্ত
+            </p>
           </div>
+
         </div>
       </div>
     </section>

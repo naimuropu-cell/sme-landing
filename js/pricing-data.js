@@ -160,741 +160,332 @@ const PRICING_DATA = {
   },
   "comparisonCategories": [
     {
-      "id": "product_ecommerce",
-      "title": "Product & E-commerce",
-      "icon": "shopping-bag",
+      "id": "core_limits",
+      "title": "Core Capacity & Limits",
+      "icon": "layers",
       "features": [
         {
-          "name": "Product Capacity",
-          "tooltip": "Total number of active products allowed in the catalog.",
+          "name": "Branch & Outlet Limit",
+          "nameBn": "শাখা ও আউটলেট সংখ্যা",
+          "tooltip": "Number of separate store locations or billing counters supported.",
+          "starter": "1 Outlet",
+          "basic": "1 Outlet",
+          "medium": "3 Outlets",
+          "high": "Unlimited"
+        },
+        {
+          "name": "Product SKU Capacity",
+          "nameBn": "প্রোডাক্ট সংখ্যা ধারণক্ষমতা",
+          "tooltip": "Total number of active products and variant items allowed in catalog.",
           "starter": "200 Products",
-          "basic": "250 Products",
-          "medium": "350 Products",
-          "high": "Unlimited",
-          "nameBn": "প্রোডাক্ট সংখ্যা ধারণক্ষমতা"
+          "basic": "2,000 Products",
+          "medium": "5,000 Products",
+          "high": "Unlimited"
         },
         {
-          "name": "Product Variants (Size, Color, Weight)",
-          "tooltip": "Manage variant-level SKU, barcodes, pricing, and stock.",
-          "starter": true,
-          "basic": true,
-          "medium": true,
-          "high": true,
-          "nameBn": "প্রোডাক্ট ভ্যারিয়েন্ট (সাইজ, রঙ, ওজন)"
+          "name": "Admin & Staff Accounts",
+          "nameBn": "ইউজার লগইন ও স্টাফ এক্সেস",
+          "tooltip": "Number of active user logins with role-based access control.",
+          "starter": "1 User",
+          "basic": "3 Users",
+          "medium": "10 Users",
+          "high": "Unlimited"
         },
         {
-          "name": "Automatic Barcode Generation & Printing",
-          "tooltip": "Generate Code-128 / EAN barcodes and print thermal sticker labels.",
-          "starter": false,
-          "basic": true,
-          "medium": true,
-          "high": true,
-          "nameBn": "স্বয়ংক্রিয় বারকোড তৈরি ও স্টিকার প্রিন্টিং"
-        },
-        {
-          "name": "Bulk Excel / CSV Product Import & Export",
-          "tooltip": "Upload hundreds of items at once with batch price update.",
-          "starter": false,
-          "basic": true,
-          "medium": true,
-          "high": true,
-          "nameBn": "একসাথে এক্সেল / সিএসভি দিয়ে প্রোডাক্ট ইমপোর্ট-এক্সপোর্ট"
-        },
-        {
-          "name": "Integrated E-commerce Web Storefront",
-          "tooltip": "Full responsive online shop directly connected to your ERP inventory.",
-          "starter": false,
-          "basic": true,
-          "medium": true,
-          "high": true,
-          "nameBn": "কানেক্টেড ফ্রি ই-কমার্স অনলাইন শপ"
-        },
-        {
-          "name": "E-commerce Website Themes & Custom Branding",
-          "tooltip": "Custom logo, hero banners, brand colors, and promotional sections.",
-          "starter": false,
-          "basic": false,
-          "medium": true,
-          "high": true,
-          "nameBn": "ওয়েবসাইট থিম কাস্টমাইজেশন ও ব্র্যান্ডিং"
-        },
-        {
-          "name": "Customer Reviews, Wishlist & Order Tracking",
-          "tooltip": "Engage online buyers with live delivery status and reviews.",
-          "starter": false,
-          "basic": false,
-          "medium": true,
-          "high": true,
-          "nameBn": "কাস্টমার রিভিউ, উইশলিস্ট ও লাইভ অর্ডার ট্র্যাকিং"
+          "name": "Dedicated Cloud Infrastructure",
+          "nameBn": "ক্লাউড হোস্টিং ও সিকিউরিটি",
+          "tooltip": "High-performance enterprise cloud hosting with high-availability SSD.",
+          "starter": "Shared Cloud",
+          "basic": "High-Speed SSD",
+          "medium": "AWS Cloud",
+          "high": "AWS Dedicated Enterprise"
         }
       ]
     },
     {
-      "id": "pos_sales",
-      "title": "POS & Sales Operations",
-      "icon": "terminal",
+      "id": "pos_billing",
+      "title": "POS & Counter Operations",
+      "icon": "shopping-cart",
       "features": [
         {
-          "name": "Mobile POS (mPOS) with Phone Camera Barcode Scanner",
-          "nameBn": "মোবাইল পিওএস (mPOS) ও স্মার্টফোন ক্যামেরা বারকোড স্ক্যানার",
-          "description": "Operate a complete POS terminal straight from your Android/iOS smartphone without buying a computer or hardware scanner.",
-          "descriptionBn": "কোনো কম্পিউটার বা দামি স্ক্যানার ছাড়াই সাধারণ স্মার্টফোন থেকে সম্পূর্ণ পিওএস বিলিং ও ক্যামেরা দিয়ে বারকোড স্ক্যানিং।",
-          "values": {
-            "starter": true,
-            "basic": true,
-            "medium": true,
-            "high": true
-          },
+          "name": "100% Offline POS Billing & Auto-Sync",
+          "nameBn": "১০০% অফলাইন বিলিং ও অটো ক্লাউড সিঙ্ক",
+          "tooltip": "Continue fast billing without internet; syncs automatically once back online.",
+          "starter": true,
+          "basic": true,
+          "medium": true,
+          "high": true
+        },
+        {
+          "name": "Barcode Scanner & Sticker Printing",
+          "nameBn": "বারকোড স্ক্যানার ও রসিদ প্রিন্টিং",
+          "tooltip": "Support for laser barcode scanners and thermal roll receipt printers.",
           "starter": false,
           "basic": true,
           "medium": true,
           "high": true
         },
         {
-          "name": "Smart POS Billing System",
-          "tooltip": "Quick barcode scanning, search by SKU/name, touchscreen cart.",
+          "name": "Split Payment & Dynamic bKash/Nagad QR",
+          "nameBn": "স্প্লিট পেমেন্ট ও বিকাশ/নগদ কিউআর",
+          "tooltip": "Accept partial cash + digital MFS with dynamic QR code generation.",
           "starter": false,
           "basic": true,
           "medium": true,
-          "high": true,
-          "nameBn": "স্মার্ট পিওএস ক্যাশ কাউন্টার বিলিং"
+          "high": true
         },
         {
-          "name": "Thermal Receipt (58mm/80mm) & A4 Invoices",
-          "tooltip": "Print on standard thermal roll printers or full A4 vouchers.",
+          "name": "Hold Invoice & Multi-Customer Carts",
+          "nameBn": "বিল হোল্ড ও একসাথে একাধিক কাস্টমার হ্যান্ডলিং",
+          "tooltip": "Temporarily hold ongoing receipts to clear queue lines rapidly.",
           "starter": false,
           "basic": true,
           "medium": true,
-          "high": true,
-          "nameBn": "থার্মাল রসিদ (৫৮/৮০ মিমি) ও এ৪ চালান প্রিন্ট"
+          "high": true
         },
         {
-          "name": "Offline POS with Automatic Sync",
-          "tooltip": "Record sales without internet connectivity; automatically synchronizes when connection returns.",
-          "starter": false,
-          "basic": true,
-          "medium": true,
-          "high": true,
-          "nameBn": "ইন্টারনেট ছাড়া অফলাইন ক্যাশ মেমো ও অটো সিঙ্ক"
-        },
-        {
-          "name": "Multiple Payment Split (Cash, bKash, Nagad, Card, Due)",
-          "tooltip": "Accept split payments on a single invoice (e.g. 50% Cash + 50% bKash).",
-          "starter": "Basic Cash/Due",
-          "basic": true,
-          "medium": true,
-          "high": true,
-          "nameBn": "মাল্টিপল স্প্লিট পেমেন্ট (নগদ, বিকাশ, নগদ, কার্ড ও বাকি)"
-        },
-        {
-          "name": "Sales Return & Exchange Management",
-          "tooltip": "Effortlessly process customer returns, refunds, or replacement items.",
-          "starter": false,
-          "basic": true,
-          "medium": true,
-          "high": true,
-          "nameBn": "বিক্রিত পণ্য ফেরত ও সহজ এক্সচেঞ্জ ম্যানেজমেন্ট"
-        },
-        {
-          "name": "Hold & Resume Invoices / Draft Sales",
-          "tooltip": "Save pending carts during peak counter rushes and retrieve anytime.",
-          "starter": false,
-          "basic": true,
-          "medium": true,
-          "high": true,
-          "nameBn": "চলমান বিল হোল্ড ও ড্রাফট চালান রিকভারি"
-        },
-        {
-          "name": "Cashier Shift & Cash Register Closing",
-          "tooltip": "Track opening cash, expected cash vs actual cash, shortage reports.",
-          "starter": false,
-          "basic": true,
-          "medium": true,
-          "high": true,
-          "nameBn": "ক্যাশিয়ার শিফট ক্লোজিং ও ক্যাশ ড্রয়ার অডিট"
-        },
-        {
-          "name": "Installment (কিস্তি) Sales Tracking",
-          "tooltip": "Scheduled installment due dates, down-payment, and payment reminders.",
+          "name": "Exchange, Return & Credit Note System",
+          "nameBn": "পণ্য ফেরত ও কাস্টমার ক্রেডিট নোট",
+          "tooltip": "Process product returns, issue store credit notes, and auto-adjust inventory.",
           "starter": false,
           "basic": false,
           "medium": true,
-          "high": true,
-          "nameBn": "কিস্তি (EMI) বিক্রয় ও পেমেন্ট শিডিউল ট্র্যাকিং"
+          "high": true
+        },
+        {
+          "name": "Cashier Shift Register & Closing Audit",
+          "nameBn": "ক্যাশিয়ার শিফট ক্লোজিং ও ক্যাশ অডিট",
+          "tooltip": "Track counter cash opening balance, shift handover, and prevent till discrepancies.",
+          "starter": false,
+          "basic": false,
+          "medium": true,
+          "high": true
         }
       ]
     },
     {
-      "id": "inventory_warehousing",
-      "title": "Inventory & Warehousing",
-      "icon": "archive",
+      "id": "inventory_branch",
+      "title": "Inventory & Multi-Branch Management",
+      "icon": "package",
       "features": [
         {
-          "name": "Real-time Stock Tracking",
-          "tooltip": "Stock balance updates immediately after each sale, purchase, or return.",
+          "name": "Product Variants (Size, Color, Weight, Batch)",
+          "nameBn": "প্রোডাক্ট ভ্যারিয়েন্ট (সাইজ, রঙ, ওজন)",
+          "tooltip": "Manage multi-attribute SKU items with separate prices and barcodes.",
           "starter": true,
           "basic": true,
           "medium": true,
-          "high": true,
-          "nameBn": "রিয়েল-টাইম লাইভ ইনভেন্টরি স্টক ট্র্যাকিং"
+          "high": true
         },
         {
-          "name": "Low-Stock & Out-of-Stock Alerts",
-          "tooltip": "Automated notifications when inventory drops below reorder thresholds.",
+          "name": "Low Stock & Auto Reorder Alerts",
+          "nameBn": "লো স্টক ও পুনরায় ক্রয়ের অ্যালার্ট",
+          "tooltip": "Automated warning notifications when items reach critical stock minimums.",
           "starter": true,
           "basic": true,
           "medium": true,
-          "high": true,
-          "nameBn": "স্টক শেষ হওয়ার আগেই স্বয়ংক্রিয় সতর্কতা (Low Stock)"
+          "high": true
         },
         {
-          "name": "Stock Adjustment & Opening Balance",
-          "tooltip": "Manually adjust stock counts or set initial inventory balances.",
-          "starter": true,
+          "name": "Inter-Branch Stock Transfer & Challan",
+          "nameBn": "শাখা থেকে শাখায় পণ্য ট্রান্সফার ও চালান",
+          "tooltip": "Generate digital transfer challans between warehouses and branch outlets.",
+          "starter": false,
+          "basic": false,
+          "medium": true,
+          "high": true
+        },
+        {
+          "name": "Centralized Real-Time Stock View",
+          "nameBn": "সকল শাখার লাইভ স্টক মনিটরিং",
+          "tooltip": "View live inventory counts across all retail counters simultaneously.",
+          "starter": false,
+          "basic": false,
+          "medium": true,
+          "high": true
+        },
+        {
+          "name": "Supplier Purchase & Weighted Average Costing",
+          "nameBn": "সাপ্লায়ার ক্রয় ও গড় রেট হিসাব",
+          "tooltip": "Manage supplier invoices, purchase orders, and dynamic cost calculation.",
+          "starter": false,
           "basic": true,
           "medium": true,
-          "high": true,
-          "nameBn": "স্টক সমন্বয় ও প্রারম্ভিক স্টক ব্যালেন্স এন্ট্রি"
+          "high": true
         },
         {
-          "name": "Multi-Warehouse Management",
-          "tooltip": "Manage separate physical warehouses with dedicated stock levels.",
+          "name": "Damage, Loss & Stock Audit Log",
+          "nameBn": "নষ্ট বা হারিয়ে যাওয়া পণ্যের অ্যাডজাস্টমেন্ট",
+          "tooltip": "Track damaged goods, expiries, and inventory write-offs with audit logs.",
           "starter": false,
-          "basic": false,
+          "basic": true,
           "medium": true,
-          "high": true,
-          "nameBn": "একাধিক কেন্দ্রীয় গুদাম ও গোডাউন পরিচালনা"
-        },
-        {
-          "name": "Inter-Warehouse Stock Transfer & In-Transit Tracking",
-          "tooltip": "Dispatch and receive stock across godowns with approval workflows.",
-          "starter": false,
-          "basic": false,
-          "medium": true,
-          "high": true,
-          "nameBn": "শাখা থেকে শাখায় স্টক স্থানান্তর চালান ও গেট পাস"
-        },
-        {
-          "name": "Batch, Lot & Expiry Date Tracking",
-          "tooltip": "Essential for medicine, cosmetics, and perishable packaged foods.",
-          "starter": false,
-          "basic": false,
-          "medium": "To Be Confirmed",
-          "high": true,
-          "nameBn": "ব্যাচ নম্বর, লট ও মেয়াদোত্তীর্ণ তারিখ ট্র্যাকিং"
-        },
-        {
-          "name": "Serial Number & Warranty Management",
-          "tooltip": "Track unique serial numbers for electronics and track warranty periods.",
-          "starter": false,
-          "basic": false,
-          "medium": true,
-          "high": true,
-          "nameBn": "সিরিয়াল নম্বর / আইএমইআই ও অফিসিয়াল ওয়ারেন্টি সনদ"
-        },
-        {
-          "name": "Dead Stock & Slow-Moving Stock Analysis",
-          "tooltip": "Identify non-performing inventory to prevent locked capital.",
-          "starter": false,
-          "basic": false,
-          "medium": true,
-          "high": true,
-          "nameBn": "অবিক্রিত ও ধীরগতির পণ্য বিশ্লেষণ (Dead Stock)"
+          "high": true
         }
       ]
     },
     {
-      "id": "purchasing_suppliers",
-      "title": "Purchasing & Suppliers",
+      "id": "ecommerce_courier",
+      "title": "Logistics & E-Commerce Integration",
       "icon": "truck",
       "features": [
         {
-          "name": "Supplier Profiles & Contact Database",
-          "tooltip": "Maintain complete vendor details and opening balances.",
-          "starter": true,
+          "name": "Connected Free E-Commerce Web Storefront",
+          "nameBn": "কানেক্টেড ফ্রি অনলাইন শপ ও ক্যাটালগ",
+          "tooltip": "Instant online ordering website directly synced with your shop inventory.",
+          "starter": false,
           "basic": true,
           "medium": true,
-          "high": true,
-          "nameBn": "সরবরাহকারী প্রোফাইল ও মহাজন কন্টাক্ট ডিরেক্টরি"
+          "high": true
         },
         {
-          "name": "Purchase Orders & Goods Receiving Notes (GRN)",
-          "tooltip": "Formal PO creation, partial and full receiving against orders.",
-          "starter": true,
-          "basic": true,
-          "medium": true,
-          "high": true,
-          "nameBn": "ক্রয়াদেশ (PO) ও পণ্য গ্রহণ চালান (GRN)"
+          "name": "1-Click Courier Integration (Pathao, Steadfast, RedX)",
+          "nameBn": "১-ক্লিক পাঠাও ও স্টিডফাস্ট এপিআই",
+          "tooltip": "Book parcels directly into couriers without manual address copy-pasting.",
+          "starter": false,
+          "basic": "1 Courier",
+          "medium": "3 Couriers",
+          "high": "All Couriers"
         },
         {
-          "name": "Supplier Payable & Due Ledger",
-          "tooltip": "Track outstanding supplier invoices, advance payments, and payment vouchers.",
-          "starter": true,
-          "basic": true,
+          "name": "Bulk Waybill & Sticker Label Printing",
+          "nameBn": "একসাথে শত শত পার্সেল বুকিং ও লেবেল প্রিন্ট",
+          "tooltip": "Print 100+ parcel stickers and consignment slips in 30 seconds.",
+          "starter": false,
+          "basic": false,
           "medium": true,
-          "high": true,
-          "nameBn": "মহাজন বাকি খাতা ও প্রদেয় বিলের হিসাব"
+          "high": true
         },
         {
-          "name": "Purchase Return & Cancellation Workflow",
-          "tooltip": "Process damaged goods returns and debit notes to suppliers.",
-          "starter": true,
-          "basic": true,
+          "name": "Automated Customer Tracking SMS",
+          "nameBn": "কাস্টমার অটোমেটিক এসএমএস ট্র্যাকিং",
+          "tooltip": "Send automated branded SMS updates with courier tracking links upon dispatch.",
+          "starter": false,
+          "basic": false,
           "medium": true,
-          "high": true,
-          "nameBn": "ক্রয়কৃত পণ্য ফেরত ও মহাজন ক্রেডিট নোট"
+          "high": true
         },
         {
-          "name": "Purchase Cost History & Price Fluctuations",
-          "tooltip": "Monitor vendor price adjustments and automatic product cost updates.",
-          "starter": true,
-          "basic": true,
+          "name": "Courier Fraud & Return Risk Preventer",
+          "nameBn": "কুরিয়ার ফ্রড ও রিটার্ন ঝুঁকি প্রিভেন্টর",
+          "tooltip": "Identify fake buyers and fraudulent numbers based on return history.",
+          "starter": false,
+          "basic": false,
           "medium": true,
-          "high": true,
-          "nameBn": "পণ্য ক্রয়ের পূর্ব ইতিহাস ও বাজারদর যাচাই"
+          "high": true
         }
       ]
     },
     {
-      "id": "accounting_finance",
-      "title": "Accounting & Finance",
-      "icon": "dollar-sign",
+      "id": "accounts_tax",
+      "title": "Accounts, Bakir Khata & NBR VAT",
+      "icon": "file-text",
       "features": [
         {
-          "name": "Cash Book & Daily Expense Tracker",
-          "tooltip": "Record daily operational expenses and petty cash movements.",
-          "starter": "Basic Notes",
+          "name": "Customer Due Ledger / Bakir Khata & Reminder SMS",
+          "nameBn": "বাকি খাতা ও অটো তাগাদা এসএমএস",
+          "tooltip": "Complete customer receivables ledger with 1-click due reminder SMS.",
+          "starter": "Basic Cash/Due",
           "basic": true,
           "medium": true,
-          "high": true,
-          "nameBn": "দৈনিক ক্যাশবুক ও দোকান খরচের হিসাব"
+          "high": true
         },
         {
-          "name": "Bank Accounts & MFS (bKash/Nagad) Ledger",
-          "tooltip": "Manage multiple bank and mobile money accounts in one view.",
-          "starter": true,
-          "basic": true,
-          "medium": true,
-          "high": true,
-          "nameBn": "ব্যাংক হিসাব ও বিকাশ/নগদ মার্চেন্ট লেজার"
-        },
-        {
-          "name": "Full Double-Entry Accounting Engine",
-          "tooltip": "Chart of accounts, general ledger, journal vouchers, and contra entries.",
+          "name": "Automated Daily Profit & Loss Statement",
+          "nameBn": "প্রতিদিনের নিট লাভ ও লোকসান স্টেটমেন্ট",
+          "tooltip": "Live calculated profit after deducting COGS and operating expenses.",
           "starter": false,
-          "basic": false,
-          "medium": true,
-          "high": true,
-          "nameBn": "পূর্ণাঙ্গ ডাবল-এন্ট্রি একাউন্টিং ও জার্নাল ভাউচার"
+          "basic": "Standard",
+          "medium": "Advanced Real-Time",
+          "high": "Full Enterprise ERP"
         },
         {
-          "name": "Automated Financial Statements (P&L, Balance Sheet, Cash Flow)",
-          "tooltip": "Generate real-time Profit & Loss and Balance Sheets without manual bookkeeping.",
-          "starter": false,
-          "basic": "Standard Summary",
-          "medium": true,
-          "high": true,
-          "nameBn": "স্বয়ংক্রিয় লাভ-ক্ষতি (P&L), ব্যালেন্স শিট ও ক্যাশ-ফ্লো"
-        },
-        {
-          "name": "Bangladesh VAT Configuration & Mushak Reports",
-          "tooltip": "NBR-aligned VAT calculations, sales/purchase VAT ledgers, and audit files.",
+          "name": "NBR Mushak 6.3 Automated VAT Invoice",
+          "nameBn": "এনবিআর অনুমোদিত মূসক ৬.৩ ভ্যাট চালান",
+          "tooltip": "Government-compliant Mushak 6.3 tax challans generated automatically.",
           "starter": "Simple VAT %",
-          "basic": true,
+          "basic": "Simple VAT %",
           "medium": true,
-          "high": true,
-          "nameBn": "বাংলাদেশ মূসক ভ্যাট ও অফিসিয়াল মূসক ৬.৩ চালান"
+          "high": true
         },
         {
-          "name": "Fixed Assets & Depreciation Tracking",
-          "tooltip": "Record company assets, schedules, and asset write-offs.",
+          "name": "Multi-Bank, MFS & Cash Drawer Audit",
+          "nameBn": "ব্যাংক, বিকাশ ও ক্যাশ রিকনসিলিয়েশন",
+          "tooltip": "Track separate balances for cash counters, bKash merchant, and bank accounts.",
           "starter": false,
-          "basic": false,
+          "basic": true,
           "medium": true,
-          "high": true,
-          "nameBn": "স্থায়ী সম্পদ ও বার্ষিক অবচয় (Depreciation) হিসাব"
+          "high": true
+        },
+        {
+          "name": "Daily Operating Expenses & Petty Cash Log",
+          "nameBn": "দোকানের ভাড়া, বিল ও বিবিধ খরচ হিসাব",
+          "tooltip": "Log rent, electricity, tea, staff meals, and miscellaneous shop expenses.",
+          "starter": false,
+          "basic": true,
+          "medium": true,
+          "high": true
         }
       ]
     },
     {
-      "id": "courier_logistics",
-      "title": "Courier & Logistics",
-      "icon": "send",
-      "features": [
-        {
-          "name": "Direct Pathao Courier Booking & API",
-          "tooltip": "Book parcels directly from the order list and print consignment labels. Basic plan includes choice of 1 courier (Pathao or Steadfast).",
-          "starter": false,
-          "basic": "1 Courier (Pathao/Steadfast)",
-          "medium": true,
-          "high": true,
-          "nameBn": "পাঠাও কুরিয়ার সরাসরি ১-ক্লিক পার্সেল বুকিং"
-        },
-        {
-          "name": "Steadfast Courier Booking & API",
-          "tooltip": "Direct API booking, pickup requests, and automated parcel status sync. Basic plan includes choice of 1 courier (Pathao or Steadfast).",
-          "starter": false,
-          "basic": "1 Courier (Pathao/Steadfast)",
-          "medium": true,
-          "high": true,
-          "nameBn": "স্টিডফাস্ট কুরিয়ার অটো বুকিং ও এপিআই সিঙ্ক"
-        },
-        {
-          "name": "REDX & Multi-Courier Simultaneous Dispatch",
-          "tooltip": "Dispatch through multiple delivery partners concurrently across different branches or zones.",
-          "starter": false,
-          "basic": false,
-          "medium": true,
-          "high": true,
-          "nameBn": "রেডএক্স ও অন্যান্য কুরিয়ারে একসাথে বুকিং"
-        },
-        {
-          "name": "Courier COD Collection & Settlement Reconciliation",
-          "tooltip": "Reconcile received cash-on-delivery against courier remittance statements.",
-          "starter": false,
-          "basic": true,
-          "medium": true,
-          "high": true,
-          "nameBn": "কুরিয়ার সিওডি (COD) কালেকশন ও ব্যাংক টাকা মিল"
-        },
-        {
-          "name": "Automated Shipping Label & Invoice Generation",
-          "tooltip": "Bulk thermal label printing with barcoded consignment numbers.",
-          "starter": false,
-          "basic": false,
-          "medium": true,
-          "high": true,
-          "nameBn": "স্বয়ংক্রিয় থার্মাল শিপিং স্টিকার ও প্যাকিং স্লিপ"
-        },
-        {
-          "name": "Courier Fraud / Delivery Risk Assessment",
-          "tooltip": "Analyze customer return rate history before accepting orders to minimize delivery failure costs.",
-          "starter": false,
-          "basic": true,
-          "medium": true,
-          "high": true,
-          "nameBn": "কুরিয়ার রিটার্ন ও ফ্রড রিস্ক প্রিডিকশন"
-        }
-      ]
-    },
-    {
-      "id": "crm_loyalty",
-      "title": "CRM & Customer Loyalty",
-      "icon": "heart",
-      "features": [
-        {
-          "name": "Customer Profiles & Purchase History",
-          "tooltip": "Maintain complete customer records, addresses, and order records.",
-          "starter": true,
-          "basic": true,
-          "medium": true,
-          "high": true,
-          "nameBn": "গ্রাহক প্রোফাইল ও পূর্ববর্তী ক্রয়ের সম্পূর্ণ হিস্ট্রি"
-        },
-        {
-          "name": "Customer Due Tracking & Credit Limit Alerts",
-          "tooltip": "Set maximum credit caps and monitor overdue receivable aging.",
-          "starter": "Basic Due",
-          "basic": true,
-          "medium": true,
-          "high": true,
-          "nameBn": "গ্রাহক বাকি খাতা ও স্বয়ংক্রিয় ক্রেডিট লিমিট লক"
-        },
-        {
-          "name": "Due Reminder SMS Notification",
-          "tooltip": "Send automated SMS reminders for pending customer balances.",
-          "starter": true,
-          "basic": true,
-          "medium": true,
-          "high": true,
-          "nameBn": "বাকি টাকার তাগাদায় স্বয়ংক্রিয় বাংলা এসএমএস"
-        },
-        {
-          "name": "Digital Loyalty Card & QR Code Membership",
-          "tooltip": "Customer membership cards with unique QR/barcode for scan-to-identify.",
-          "starter": false,
-          "basic": false,
-          "medium": true,
-          "high": true,
-          "nameBn": "ডিজিটাল লয়ালটি কার্ড ও কিউআর কোড মেম্বারশিপ"
-        },
-        {
-          "name": "Loyalty Points Engine & Tiered Membership",
-          "tooltip": "Reward points per ৳100 spent; Silver, Gold, Platinum VIP tiers.",
-          "starter": false,
-          "basic": false,
-          "medium": true,
-          "high": true,
-          "nameBn": "লয়ালটি পয়েন্ট আর্নিং, রিডিম ও ভিআইপি স্তর"
-        },
-        {
-          "name": "Customer Segmentation (Retail, Wholesale, VIP)",
-          "tooltip": "Group customers for personalized marketing and custom price tiers.",
-          "starter": false,
-          "basic": true,
-          "medium": true,
-          "high": true,
-          "nameBn": "গ্রাহক ক্যাটাগরি (খুচরা, পাইকারি, ভিআইপি বা কর্পোরেট)"
-        }
-      ]
-    },
-    {
-      "id": "mobile_applications",
-      "title": "Mobile Applications",
+      "id": "mobile_ai_support",
+      "title": "Mobile Apps, AI & Enterprise Support",
       "icon": "smartphone",
       "features": [
         {
-          "name": "Mobile-Responsive Admin Web Panel",
-          "tooltip": "Optimized dashboard accessible on any mobile or tablet browser.",
-          "starter": true,
-          "basic": true,
-          "medium": true,
-          "high": true,
-          "nameBn": "মোবাইল-ফ্রেন্ডলি রেসপনসিভ অ্যাডমিন প্যানেল"
+          "name": "Owner's Live Mobile App (Android & iOS)",
+          "nameBn": "মালিকের ডেডিকেটেড রিয়েল-টাইম মোবাইল অ্যাপ",
+          "tooltip": "Live sales, stock, and profit dashboards on owner's smartphone anywhere.",
+          "starter": "Mobile Web",
+          "basic": "Android Only",
+          "medium": "Android & iOS",
+          "high": "Android, iOS & iPad POS"
         },
         {
-          "name": "Dedicated Mobile Apps (Android & iOS)",
-          "tooltip": "Dedicated branded native/hybrid mobile apps published on Play Store & App Store.",
+          "name": "Bangla AI Business Intelligence Copilot",
+          "nameBn": "বাংলা এআই বিজনেস অ্যাসিস্ট্যান্ট ও সেলস প্রেডিকশন",
+          "tooltip": "Ask questions in conversational Bengali to uncover sales trends and stock insights.",
           "starter": false,
           "basic": false,
           "medium": true,
-          "high": true,
-          "nameBn": "কাস্টম ব্র্যান্ডেড মোবাইল অ্যাপস (Android ও iOS)"
+          "high": true
         },
         {
-          "name": "PWA (Progressive Web App) Installable Support",
-          "tooltip": "Install app icon on desktop and phone home screens directly from browser.",
-          "starter": true,
+          "name": "Role-Based Permission & Anti-Theft Audit Trail",
+          "nameBn": "স্টাফ রোল পারমিশন ও ফ্রড রোধে অডিট লগ",
+          "tooltip": "Lock sensitive screens, discounts, and audit every bill edit/delete history.",
+          "starter": false,
+          "basic": "Standard",
+          "medium": "Granular Roles",
+          "high": "Enterprise Complete"
+        },
+        {
+          "name": "Automated Daily Cloud Backup & 99.98% Uptime",
+          "nameBn": "স্বয়ংক্রিয় ক্লাউড ব্যাকআপ ও ৯৯.৯৮% আপটাইম",
+          "tooltip": "Continuous encrypted database snapshots ensuring zero data loss.",
+          "starter": "Weekly",
+          "basic": "Daily",
+          "medium": "Hourly Real-Time",
+          "high": "Continuous Multi-Region"
+        },
+        {
+          "name": "Priority 24/7 WhatsApp & Dedicated Support",
+          "nameBn": "২৪/৭ হোয়াটসঅ্যাপ ও ডেডিকেটেড ম্যানেজার",
+          "tooltip": "Instant human phone and remote AnyDesk support whenever you need help.",
+          "starter": "Office Hours",
+          "basic": "Standard",
+          "medium": "Priority 24/7",
+          "high": "Dedicated Key Account Manager"
+        },
+        {
+          "name": "Custom Invoice Designer (English & Bangla)",
+          "nameBn": "কাস্টমাইজড ইনভয়েস ডিজাইন (বাংলা ও ইংরেজি)",
+          "tooltip": "Personalize receipts with your shop logo, terms, and custom Bengali typography.",
+          "starter": "Standard Slip",
           "basic": true,
           "medium": true,
-          "high": true,
-          "nameBn": "ইনস্টলযোগ্য প্রগ্রেসিভ ওয়েব অ্যাপ (PWA) সমর্থন"
-        }
-      ]
-    },
-    {
-      "id": "hr_payroll",
-      "title": "HR, Employees & Payroll",
-      "icon": "users",
-      "features": [
-        {
-          "name": "Employee Profiles & Role Assignments",
-          "tooltip": "Designate cashiers, managers, and salesmen to specific branches.",
-          "starter": false,
-          "basic": true,
-          "medium": true,
-          "high": true,
-          "nameBn": "কর্মচারী প্রোফাইল ও দায়িত্বভিত্তিক রোল পারমিশন"
-        },
-        {
-          "name": "Employee-wise Sales Performance Tracking",
-          "tooltip": "Track which salesperson generated each invoice, volume, and gross profit.",
-          "starter": false,
-          "basic": true,
-          "medium": true,
-          "high": true,
-          "nameBn": "কর্মীবান্ধব সেলস টার্গেট ও বিক্রয় পারফরম্যান্স"
-        },
-        {
-          "name": "Sales Targets, Leaderboards & Commissions",
-          "tooltip": "Define individual or branch sales targets and percentage commissions.",
-          "starter": false,
-          "basic": false,
-          "medium": true,
-          "high": true,
-          "nameBn": "বিক্রয় কমিশন ও লিডারবোর্ড হিসাব"
-        },
-        {
-          "name": "Automated Monthly Payroll & Salary Sheets",
-          "tooltip": "Calculate base pay, overtime, commissions, bonus, and deductions.",
-          "starter": false,
-          "basic": false,
-          "medium": "To Be Confirmed",
-          "high": true,
-          "nameBn": "স্বয়ংক্রিয় মাসিক বেতন শিট ও পে-স্লিপ তৈরি"
-        },
-        {
-          "name": "Attendance & Leave Management Calendar",
-          "tooltip": "Check-in/out logging, paid/unpaid leaves, and holiday calendars.",
-          "starter": false,
-          "basic": false,
-          "medium": false,
-          "high": true,
-          "nameBn": "দৈনিক বায়োমেট্রিক হাজিরা ও ছুটির ক্যালেন্ডার"
-        }
-      ]
-    },
-    {
-      "id": "ai_automation",
-      "title": "AI & Business Intelligence",
-      "icon": "cpu",
-      "features": [
-        {
-          "name": "AI-Powered Sales Reporting",
-          "tooltip": "Smart sales analytics and instant summary generation.",
-          "starter": true,
-          "basic": true,
-          "medium": true,
-          "high": true,
-          "nameBn": "এআই চালিত দৈনিক বিক্রয় অ্যানালিটিক্স"
-        },
-        {
-          "name": "Bilingual AI Business Assistant (Bangla & English)",
-          "tooltip": "Ask questions in conversational Bangla (আজ কত টাকার বিক্রি হয়েছে?) and get live data.",
-          "starter": false,
-          "basic": false,
-          "medium": true,
-          "high": true,
-          "nameBn": "বাংলা ও ইংরেজিতে দ্বৈতভাষিক এআই কোপাইলট"
-        },
-        {
-          "name": "AI Stock & Reorder Recommendations",
-          "tooltip": "AI detects fast/slow-moving goods and predicts reorder requirements.",
-          "starter": false,
-          "basic": false,
-          "medium": true,
-          "high": true,
-          "nameBn": "এআই স্টক ও পণ্য কেনার ভবিষ্যৎ পূর্বাভাস"
-        },
-        {
-          "name": "AI Shopping Assistant Bot for E-commerce Store",
-          "tooltip": "Interactive conversational bot on your web store to assist customers and close sales.",
-          "starter": false,
-          "basic": true,
-          "medium": true,
-          "high": true,
-          "nameBn": "ই-কমার্স ওয়েবসাইটের জন্য এআই শপিং চ্যাটবট"
-        },
-        {
-          "name": "Meta Ads (Facebook/Instagram) Automation & AI Copy",
-          "tooltip": "Automated ad campaign creation, AI headlines, copy variations, and competitor ad library research.",
-          "starter": false,
-          "basic": false,
-          "medium": false,
-          "high": true,
-          "nameBn": "মেটা ও ফেসবুক বিজ্ঞাপনের অটোমেশন এবং এআই কপি"
-        }
-      ]
-    },
-    {
-      "id": "multi_branch",
-      "title": "Multi-Branch Management",
-      "icon": "layers",
-      "features": [
-        {
-          "name": "Single Outlet / Store Management",
-          "tooltip": "Manage a single shop location or online-only outlet.",
-          "starter": true,
-          "basic": true,
-          "medium": true,
-          "high": true,
-          "nameBn": "একক আউটলেট / শোরুম সম্পূর্ণ পরিচালনা"
-        },
-        {
-          "name": "Multi-Branch Outlets & Branch Managers",
-          "tooltip": "Add multiple physical outlets with dedicated branch manager permissions.",
-          "starter": "1 store",
-          "basic": "1 store",
-          "medium": "2 Branches",
-          "high": "5 Branches",
-          "nameBn": "একাধিক শাখা আউটলেট ও ব্রাঞ্চ ম্যানেজার একাউন্ট"
-        },
-        {
-          "name": "Centralized Product Catalog & Pricing",
-          "tooltip": "Control products globally or allow branch-specific price tiers.",
-          "starter": false,
-          "basic": false,
-          "medium": true,
-          "high": true,
-          "nameBn": "কেন্দ্রীয় মাস্টার প্রোডাক্ট ক্যাটালগ ও প্রাইজ কন্ট্রোল"
-        },
-        {
-          "name": "Head Office Master Dashboard & Branch P&L Comparison",
-          "tooltip": "Compare revenue, expenses, and profits across all branches side-by-side.",
-          "starter": false,
-          "basic": false,
-          "medium": true,
-          "high": true,
-          "nameBn": "হেড অফিস ড্যাশবোর্ড ও সকল শাখার লাভ-ক্ষতি তুলনা"
-        }
-      ]
-    },
-    {
-      "id": "security_reporting",
-      "title": "Security, Roles & Advanced Reporting",
-      "icon": "shield",
-      "features": [
-        {
-          "name": "Admin User Limit",
-          "tooltip": "Number of staff accounts with administrative access.",
-          "starter": "To Be Confirmed",
-          "basic": "Up to 5 Users",
-          "medium": "Up to 10 Users",
-          "high": "Unlimited Users",
-          "nameBn": "ইউজার একাউন্ট সংখ্যা সীমা"
-        },
-        {
-          "name": "Hosting Infrastructure",
-          "tooltip": "High-performance deployment server architecture (Shared, VPS, or AWS Cloud).",
-          "starter": "Shared",
-          "basic": "VPS",
-          "medium": "AWS",
-          "high": "AWS",
-          "nameBn": "হোস্টিং ও ক্লাউড সার্ভার ইনফ্রাস্ট্রাকচার"
-        },
-        {
-          "name": "Cloud Storage Capacity",
-          "tooltip": "Dedicated cloud storage for catalog images, databases, and invoices.",
-          "starter": "1 GB",
-          "basic": "2 GB",
-          "medium": "4 GB",
-          "high": "10 GB",
-          "nameBn": "ক্লাউড স্টোরেজ ধারণক্ষমতা"
-        },
-        {
-          "name": "Monthly Web Traffic",
-          "tooltip": "E-commerce and admin web traffic bandwidth.",
-          "starter": false,
-          "basic": "Up to 5,000 visits",
-          "medium": "Up to 10,000 visits",
-          "high": "Unlimited (Fair-use)",
-          "nameBn": "মাসিক ওয়েবসাইট ট্রাফিক ভিজিটর সীমা"
-        },
-        {
-          "name": "Granular Role-Based Permissions (RBAC)",
-          "tooltip": "Restrict cashier from seeing purchase costs, delete permissions, or financial reports.",
-          "starter": "Standard",
-          "basic": true,
-          "medium": true,
-          "high": true,
-          "nameBn": "ভূমিকাভিত্তিক নিরাপত্তা অনুমতি (RBAC পারমিশন)"
-        },
-        {
-          "name": "Complete Audit Trail & User Activity Logs",
-          "tooltip": "Track who created, modified, or canceled any invoice or transaction.",
-          "starter": false,
-          "basic": false,
-          "medium": true,
-          "high": true,
-          "nameBn": "কর্মীদের কাজের সম্পূর্ণ অডিট ট্রেইল ও লগ হিস্ট্রি"
-        },
-        {
-          "name": "Automated Daily Cloud Backups",
-          "tooltip": "Nightly automated encrypted backups to protect business records.",
-          "starter": true,
-          "basic": true,
-          "medium": true,
-          "high": true,
-          "nameBn": "প্রতিদিনের ক্লাউড ব্যাকআপ ও আজীবন ডেটা নিরাপত্তা"
-        },
-        {
-          "name": "Export to PDF, Excel & CSV",
-          "tooltip": "Download financial and inventory reports in formatted spreadsheets and PDFs.",
-          "starter": "PDF Only",
-          "basic": true,
-          "medium": true,
-          "high": true,
-          "nameBn": "পিডিএফ, এক্সেল ও সিএসভি ফরম্যাটে রিপোর্ট ডাউনলোড"
+          "high": true
         }
       ]
     }

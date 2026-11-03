@@ -1123,21 +1123,15 @@ function initEnterpriseCard() {
 }
 
 /**
- * 6. COMPARISON MATRIX TABLE (12 Modules · 71 Features)
+ * 6. COMPARISON MATRIX TABLE (6 Pillars · 32 Decisive Features)
  */
 const BN_CAT_TITLES = {
-  product_ecommerce: "১. প্রোডাক্ট ও ই-কমার্স প্ল্যাটফর্ম",
-  pos_sales: "২. স্মার্ট পিওএস কাউন্টার ও অফলাইন সেলস",
-  inventory_warehousing: "৩. ইনভেন্টরি ও মাল্টি-ওয়্যারহাউজ ম্যানেজমেন্ট",
-  purchasing_suppliers: "৪. সাপ্লায়ার ও পারচেজ অপারেশনস",
-  accounting_finance: "৫. ডাবল-এন্ট্রি একাউন্টিং ও ফাইন্যান্স",
-  courier_logistics: "৬. কুরিয়ার লজিস্টিকস ও অটো-সিওডি (পাঠাও, স্টিডফাস্ট, রেডএক্স)",
-  crm_loyalty: "৭. সিআরএম ও কাস্টমার লয়ালটি",
-  mobile_applications: "৮. ডেডিকেটেড মোবাইল অ্যাপস (Android ও iOS)",
-  hr_payroll: "৯. এইচআর, কর্মকর্তা ও পেরোল",
-  ai_automation: "১০. এআই বিজনেস ইন্টেলিজেন্স ও অটোমেশন",
-  multi_branch: "১১. মাল্টি-ব্রাঞ্চ সেন্ট্রালাইজড ম্যানেজমেন্ট",
-  security_reporting: "১২. সিকিউরিটি, রোলস ও অ্যাডভান্সড রিপোর্টিং"
+  core_limits: "১. মূল ক্যাপাসিটি ও কোটা",
+  pos_billing: "২. পিওএস ও কাউন্টার সেলস",
+  inventory_branch: "৩. ইনভেন্টরি ও মাল্টি-ব্রাঞ্চ",
+  ecommerce_courier: "৪. কুরিয়ার ও অনলাইন শপ",
+  accounts_tax: "৫. বাকি খাতা, লাভ-ক্ষতি ও ভ্যাট",
+  mobile_ai_support: "৬. মোবাইল অ্যাপস, এআই ও সাপোর্ট"
 };
 
 function initComparisonTable() {
@@ -1147,18 +1141,20 @@ function initComparisonTable() {
   const isBn = STATE.currentLang === 'bn';
   const plans = ['starter', 'basic', 'medium', 'high'];
   let rowsHtml = '';
+  let globalRowIdx = 0;
 
   PRICING_DATA.comparisonCategories.forEach((cat, catIdx) => {
     const rawTitle = cat.title || cat.name || `Module ${catIdx + 1}`;
     const displayCatTitle = isBn && BN_CAT_TITLES[cat.id] ? BN_CAT_TITLES[cat.id] : rawTitle;
 
-    // Category Header Row (Collapsible Accordion)
+    // Category Header Row
+    const isCollapsibleCat = catIdx > 0;
     rowsHtml += `
-      <tr class="category-header-row" data-cat-idx="${catIdx}">
+      <tr class="category-header-row ${isCollapsibleCat ? 'cat-header-collapsible' : ''}" data-cat-idx="${catIdx}">
         <td colspan="5">
           <div class="cat-toggle-wrap">
-            <span>${displayCatTitle} (${cat.features.length})</span>
-            <svg class="cat-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" width="18" height="18">
+            <span class="cat-title-text">${displayCatTitle} (${cat.features.length})</span>
+            <svg class="cat-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" width="18" height="18" aria-hidden="true">
               <path d="M5 7.5L10 12.5L15 7.5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
@@ -1168,13 +1164,17 @@ function initComparisonTable() {
 
     // Feature Rows
     cat.features.forEach((feat) => {
+      globalRowIdx++;
+      const isHeroRow = globalRowIdx <= 7;
+      const rowCollapsibleClass = isHeroRow ? 'feature-row-hero' : 'feature-row-collapsible';
+
       const planCells = plans.map(p => {
         const val = feat[p];
         const isPopularCol = p === 'medium';
         if (val === true) {
-          return `<td class="td-plan-val ${isPopularCol ? 'td-plan-popular' : ''}"><span class="val-check-circle">✓</span></td>`;
+          return `<td class="td-plan-val ${isPopularCol ? 'td-plan-popular' : ''}"><span class="val-check-circle" title="Included">✓</span></td>`;
         } else if (val === false || val === undefined) {
-          return `<td class="td-plan-val ${isPopularCol ? 'td-plan-popular' : ''}"><span class="val-cross-dash">—</span></td>`;
+          return `<td class="td-plan-val ${isPopularCol ? 'td-plan-popular' : ''}"><span class="val-cross-dash" title="Not Included">—</span></td>`;
         } else {
           let displayVal = val;
           if (isBn && typeof val === 'string') {
@@ -1183,21 +1183,39 @@ function initComparisonTable() {
               .replace(/Unlimited/g, 'আনলিমিটেড')
               .replace(/Products/g, 'প্রোডাক্ট')
               .replace(/Branches/g, 'আউটলেট')
-              .replace(/1 store/g, '১টি শোরুম')
-              .replace(/Shared/g, 'শেয়ার্ড হোস্টিং')
-              .replace(/Up to 5 Users/g, 'সর্বোচ্চ ৫ ইউজার')
-              .replace(/Up to 10 Users/g, 'সর্বোচ্চ ১০ ইউজার')
-              .replace(/Up to 5,000 visits/g, 'সর্বোচ্চ ৫,০০০ ভিজিট')
-              .replace(/Up to 10,000 visits/g, 'সর্বোচ্চ ১০,০০০ ভিজিট')
-              .replace(/To Be Confirmed/g, 'আলোচনা সাপেক্ষে')
+              .replace(/Outlets/g, 'আউটলেট')
+              .replace(/Outlet/g, 'আউটলেট')
+              .replace(/Users/g, 'ইউজার')
+              .replace(/User/g, 'ইউজার')
+              .replace(/Shared Cloud/g, 'শেয়ার্ড ক্লাউড')
+              .replace(/High-Speed SSD/g, 'হাই-স্পিড SSD')
+              .replace(/AWS Cloud/g, 'AWS ক্লাউড')
+              .replace(/AWS Dedicated Enterprise/g, 'ডেডিকেটেড ক্লাউড')
+              .replace(/1 Courier/g, '১টি কুরিয়ার')
+              .replace(/3 Couriers/g, '৩টি কুরিয়ার')
+              .replace(/All Couriers/g, 'সকল কুরিয়ার')
               .replace(/Basic Cash\/Due/g, 'নগদ ও বাকি')
-              .replace(/Basic Notes/g, 'সাধারণ খসড়া')
-              .replace(/Standard Summary/g, 'স্ট্যান্ডার্ড সামারি')
+              .replace(/Standard/g, 'স্ট্যান্ডার্ড')
+              .replace(/Advanced Real-Time/g, 'অ্যাডভান্সড রিয়েল-টাইম')
+              .replace(/Full Enterprise ERP/g, 'ফুল এন্টারপ্রাইজ ERP')
               .replace(/Simple VAT %/g, 'সাধারণ ভ্যাট %')
-              .replace(/PDF Only/g, 'শুধুমাত্র PDF')
-              .replace(/1 Courier \(Pathao\/Steadfast\)/g, '১টি কুরিয়ার (পাঠাও/স্টিডফাস্ট)')
+              .replace(/Mobile Web/g, 'মোবাইল ওয়েব')
+              .replace(/Android Only/g, 'অ্যান্ড্রয়েড অ্যাপ')
+              .replace(/Android & iOS/g, 'Android ও iOS অ্যাপ')
+              .replace(/Android, iOS & iPad POS/g, 'Android, iOS ও iPad POS')
+              .replace(/Granular Roles/g, 'বিস্তারিত রোল এক্সেস')
+              .replace(/Enterprise Complete/g, 'সম্পূর্ণ এন্টারপ্রাইজ')
+              .replace(/Weekly/g, 'সাপ্তাহিক')
+              .replace(/Daily/g, 'দৈনিক ক্লাউড')
+              .replace(/Hourly Real-Time/g, 'প্রতি ঘণ্টার রিয়েল-টাইম')
+              .replace(/Continuous Multi-Region/g, 'মাল্টি-রিজিয়ন অবিচ্ছিন্ন')
+              .replace(/Office Hours/g, 'অফিস সময়')
+              .replace(/Priority 24\/7/g, '২৪/৭ প্রায়োরিটি')
+              .replace(/Dedicated Key Account Manager/g, 'ডেডিকেটেড একাউন্ট ম্যানেজার')
+              .replace(/Standard Slip/g, 'স্ট্যান্ডার্ড মেমো')
               .replace(/\b0\b/g, '০').replace(/\b1\b/g, '১').replace(/\b2\b/g, '২').replace(/\b3\b/g, '৩')
-              .replace(/\b4\b/g, '৪').replace(/\b5\b/g, '৫');
+              .replace(/\b4\b/g, '৪').replace(/\b5\b/g, '৫').replace(/\b7\b/g, '৭').replace(/\b10\b/g, '১০')
+              .replace(/\b200\b/g, '২০০').replace(/\b2,000\b/g, '২,০০০').replace(/\b5,000\b/g, '৫,০০০');
           }
           return `<td class="td-plan-val ${isPopularCol ? 'td-plan-popular' : ''}"><span class="val-text-pill">${displayVal}</span></td>`;
         }
@@ -1207,8 +1225,11 @@ function initComparisonTable() {
       const searchKeywords = `${feat.name.toLowerCase()} ${feat.nameBn ? feat.nameBn.toLowerCase() : ''}`;
 
       rowsHtml += `
-        <tr class="feature-row" data-cat-idx="${catIdx}" data-feature-name="${searchKeywords}">
-          <td class="col-feature-title">${featureTitle}</td>
+        <tr class="feature-row ${rowCollapsibleClass}" data-cat-idx="${catIdx}" data-row-num="${globalRowIdx}" data-feature-name="${searchKeywords}">
+          <td class="col-feature-title">
+            <span class="feat-title-text">${featureTitle}</span>
+            ${isHeroRow ? `<span class="hero-feat-tag" title="${isBn ? 'মূল ডিসিশন ফিচার' : 'Decisive factor'}">${isBn ? 'মূল' : 'Core'}</span>` : ''}
+          </td>
           ${planCells}
         </tr>
       `;
@@ -1217,109 +1238,77 @@ function initComparisonTable() {
 
   tbody.innerHTML = rowsHtml;
 
-  // Category collapse / expand toggles
+  // Category collapse / expand toggles when full table is viewed
   if (typeof tbody.querySelectorAll === 'function') {
     tbody.querySelectorAll('.category-header-row').forEach(headerRow => {
       headerRow.addEventListener('click', () => {
         const catIdx = headerRow.getAttribute('data-cat-idx');
         const isCollapsed = headerRow.classList.toggle('is-collapsed');
         tbody.querySelectorAll(`.feature-row[data-cat-idx="${catIdx}"]`).forEach(row => {
-          row.classList.toggle('is-hidden', isCollapsed);
+          row.classList.toggle('is-category-collapsed', isCollapsed);
         });
       });
     });
   }
-
-  // Toggle All Categories button
-  const toggleAllBtn = document.getElementById('toggleAllCategoriesBtn');
-  if (toggleAllBtn) {
-    let allExpanded = true;
-    toggleAllBtn.onclick = () => {
-      allExpanded = !allExpanded;
-      const isCurrentBn = STATE.currentLang === 'bn';
-      toggleAllBtn.textContent = allExpanded 
-        ? (isCurrentBn ? 'সবগুলো বন্ধ করুন' : 'Collapse All') 
-        : (isCurrentBn ? 'সবগুলো ক্যাটাগরি খুলুন' : 'Expand All');
-
-      if (typeof tbody.querySelectorAll === 'function') {
-        tbody.querySelectorAll('.category-header-row').forEach(h => {
-          h.classList.toggle('is-collapsed', !allExpanded);
-        });
-        tbody.querySelectorAll('.feature-row').forEach(r => {
-          r.classList.toggle('is-hidden', !allExpanded);
-        });
-      }
-    };
-  }
 }
 
 /**
- * 7. COMPARISON DRAWER (Option A: Compact -> Expand Full Matrix)
+ * 7. PROGRESSIVE COMPARISON CONTROLLER (First 7 Rows Visible -> See More 32 Features)
  */
 function updateComparisonDrawerLanguage(lang) {
-  const toggleBtn = document.getElementById('btnToggleFullComparison');
-  const drawer = document.getElementById('comparisonFullDrawer');
-  if (!toggleBtn || !drawer || !drawer.classList || typeof drawer.classList.contains !== 'function') return;
+  const progressiveWrap = document.getElementById('comparisonProgressiveWrap');
+  const seeMoreBtn = document.getElementById('btnSeeMoreComparison');
+  if (!seeMoreBtn) return;
 
-  const isCurrentOpen = drawer.classList.contains('is-open');
-  const labelSpan = toggleBtn.querySelector('.btn-toggle-text');
+  const isExpanded = progressiveWrap && !progressiveWrap.classList.contains('is-clamped');
+  const labelSpan = seeMoreBtn.querySelector('.see-more-text');
   if (labelSpan) {
     if (lang === 'bn') {
-      labelSpan.textContent = isCurrentOpen 
-        ? 'তুলনামূলক তালিকা সংক্ষেপ করুন ▴' 
-        : 'সম্পূর্ণ ১২টি মডিউলের বিস্তারিত তুলনা দেখুন (৭১টি ফিচার)';
+      labelSpan.textContent = isExpanded 
+        ? '▲ সংক্ষেপ করুন (শীর্ষ ৭টি ফিচার)' 
+        : 'সম্পূর্ণ ৩২টি ফিচারের তালিকা দেখুন (আরও ২৫টি ফিচার) ▾';
     } else {
-      labelSpan.textContent = isCurrentOpen 
-        ? 'Collapse Comparison List ▴' 
-        : 'Click to View Full 12-Module Comparison (71 Features)';
+      labelSpan.textContent = isExpanded 
+        ? '▲ Show Less (Top 7 Core Features)' 
+        : 'View All 32 Features (25+ More Features) ▾';
     }
   }
 }
 
 function initComparisonDrawer() {
-  const toggleBtn = document.getElementById('btnToggleFullComparison');
-  const drawer = document.getElementById('comparisonFullDrawer');
-  const bottomCollapseBtn = document.getElementById('btnCollapseComparisonBottom');
+  const progressiveWrap = document.getElementById('comparisonProgressiveWrap');
+  const seeMoreBtn = document.getElementById('btnSeeMoreComparison');
+  if (!seeMoreBtn || !progressiveWrap) return;
 
-  if (!toggleBtn || !drawer) return;
-
-  function setDrawerOpen(open) {
+  function setExpanded(expanded, smoothScroll = false) {
     const isBn = STATE.currentLang === 'bn';
-    drawer.classList.toggle('is-open', open);
-    toggleBtn.classList.toggle('is-open', open);
-    toggleBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    progressiveWrap.classList.toggle('is-clamped', !expanded);
+    seeMoreBtn.classList.toggle('is-expanded', expanded);
+    seeMoreBtn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
 
-    const labelSpan = toggleBtn.querySelector('.btn-toggle-text');
+    const labelSpan = seeMoreBtn.querySelector('.see-more-text');
     if (labelSpan) {
       if (isBn) {
-        labelSpan.textContent = open 
-          ? 'তুলনামূলক তালিকা সংক্ষেপ করুন ▴' 
-          : 'সম্পূর্ণ ১২টি মডিউলের বিস্তারিত তুলনা দেখুন (৭১টি ফিচার)';
+        labelSpan.textContent = expanded 
+          ? '▲ সংক্ষেপ করুন (শীর্ষ ৭টি ফিচার)' 
+          : 'সম্পূর্ণ ৩২টি ফিচারের তালিকা দেখুন (আরও ২৫টি ফিচার) ▾';
       } else {
-        labelSpan.textContent = open 
-          ? 'Collapse Comparison List ▴' 
-          : 'Click to View Full 12-Module Comparison (71 Features)';
+        labelSpan.textContent = expanded 
+          ? '▲ Show Less (Top 7 Core Features)' 
+          : 'View All 32 Features (25+ More Features) ▾';
       }
+    }
+
+    if (!expanded && smoothScroll) {
+      const targetHeader = document.getElementById('comparisonSubHeader') || progressiveWrap;
+      targetHeader.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
 
-  toggleBtn.addEventListener('click', () => {
-    const isOpen = drawer.classList.contains('is-open');
-    setDrawerOpen(!isOpen);
-    if (!isOpen) {
-      initComparisonTable();
-    }
+  seeMoreBtn.addEventListener('click', () => {
+    const isCurrentlyClamped = progressiveWrap.classList.contains('is-clamped');
+    setExpanded(isCurrentlyClamped, !isCurrentlyClamped);
   });
-
-  if (bottomCollapseBtn) {
-    bottomCollapseBtn.addEventListener('click', () => {
-      setDrawerOpen(false);
-      const compSection = document.getElementById('comparison');
-      if (compSection) {
-        compSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  }
 }
 
 /**
@@ -1335,15 +1324,34 @@ function initTableSearch() {
     const rows = document.querySelectorAll('.feature-row');
     const catHeaders = document.querySelectorAll('.category-header-row');
     const isBn = STATE.currentLang === 'bn';
+    const progressiveWrap = document.getElementById('comparisonProgressiveWrap');
+    const seeMoreBtn = document.getElementById('btnSeeMoreComparison');
 
     if (!term) {
-      rows.forEach(r => r.classList.remove('is-hidden'));
+      rows.forEach(r => {
+        r.classList.remove('is-search-hidden');
+      });
       catHeaders.forEach(h => {
-        h.classList.remove('is-hidden');
+        h.classList.remove('is-search-hidden');
         h.classList.remove('is-collapsed');
       });
       if (countSpan) countSpan.style.display = 'none';
       return;
+    }
+
+    // Auto-expand table when user searches so matches in all categories are visible
+    if (progressiveWrap && progressiveWrap.classList.contains('is-clamped')) {
+      progressiveWrap.classList.remove('is-clamped');
+      if (seeMoreBtn) {
+        seeMoreBtn.classList.add('is-expanded');
+        seeMoreBtn.setAttribute('aria-expanded', 'true');
+        const labelSpan = seeMoreBtn.querySelector('.see-more-text');
+        if (labelSpan) {
+          labelSpan.textContent = isBn 
+            ? '▲ সংক্ষেপ করুন (শীর্ষ ৭টি ফিচার)' 
+            : '▲ Show Less (Top 7 Core Features)';
+        }
+      }
     }
 
     let matchCount = 0;
@@ -1352,21 +1360,21 @@ function initTableSearch() {
     rows.forEach(r => {
       const name = r.getAttribute('data-feature-name') || '';
       if (name.includes(term)) {
-        r.classList.remove('is-hidden');
+        r.classList.remove('is-search-hidden');
         matchingCategories.add(r.getAttribute('data-cat-idx'));
         matchCount++;
       } else {
-        r.classList.add('is-hidden');
+        r.classList.add('is-search-hidden');
       }
     });
 
     catHeaders.forEach(h => {
       const catIdx = h.getAttribute('data-cat-idx');
       if (matchingCategories.has(catIdx)) {
-        h.classList.remove('is-hidden');
+        h.classList.remove('is-search-hidden');
         h.classList.remove('is-collapsed');
       } else {
-        h.classList.add('is-hidden');
+        h.classList.add('is-search-hidden');
       }
     });
 
