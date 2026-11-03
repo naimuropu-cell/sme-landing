@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -987,9 +987,19 @@
               <div class="storyboard-deck-wrapper" id="sbDeckWrapper">
                 
                 <!-- Background Layer 2 (Deepest Card) -->
-                <div class="sb-ghost-card ghost-card-2" aria-hidden="true"></div>
+                <div class="sb-ghost-card ghost-card-2" id="sbGhostCard2" aria-hidden="true">
+                  <div class="ghost-card-edge-tag">
+                    <span class="ghost-edge-num" id="sbGhost2Num">/ 03</span>
+                    <span class="ghost-edge-title" id="sbGhost2Title">Barcode &amp; Label Designer</span>
+                  </div>
+                </div>
                 <!-- Background Layer 1 (Middle Card) -->
-                <div class="sb-ghost-card ghost-card-1" aria-hidden="true"></div>
+                <div class="sb-ghost-card ghost-card-1" id="sbGhostCard1" aria-hidden="true">
+                  <div class="ghost-card-edge-tag">
+                    <span class="ghost-edge-num" id="sbGhost1Num">/ 02</span>
+                    <span class="ghost-edge-title" id="sbGhost1Title">Multi-Warehouse Inventory</span>
+                  </div>
+                </div>
 
                 <!-- Active Foreground Interactive Card -->
                 <div class="sb-active-card" id="sbActiveCard">
@@ -1000,7 +1010,10 @@
                       <span class="sb-card-tag" id="sbCardTag" data-i18n="matrix.m1Tag">⚡ 0.3s Checkout</span>
                       <span class="sb-card-cat" id="sbCardCat">POS &amp; INVENTORY</span>
                     </div>
-                    <span class="sb-card-plan" id="sbCardPlan" data-i18n="matrix.m1Plan">✓ Basic+ (৳1,000/mo)</span>
+                    <div class="sb-header-meta">
+                      <span class="sb-card-plan" id="sbCardPlan" data-i18n="matrix.m1Plan">✓ Basic+ (৳1,000/mo)</span>
+                      <span class="sb-story-num" id="sbStoryNum">/ 01</span>
+                    </div>
                   </div>
 
                   <!-- Dynamic UI Simulation Micro-Screen -->

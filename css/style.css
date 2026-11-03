@@ -12887,49 +12887,100 @@ section {
 .storyboard-deck-wrapper {
   position: relative;
   width: 100%;
-  min-height: 520px;
-  perspective: 1200px;
+  min-height: 540px;
+  perspective: 1400px;
+  transform-style: preserve-3d;
 }
 
-/* Layered Ghost Cards Behind Active */
+/* Layered Ghost Cards Behind Active (Slider Revolution 3D Stack) */
 .sb-ghost-card {
   position: absolute;
   inset: 0;
   background: #ffffff;
   border-radius: 28px;
   pointer-events: none;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.42s ease,
+              box-shadow 0.42s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1.15rem 1.6rem;
 }
 
 .sb-ghost-card.ghost-card-2 {
   border: 1.5px solid #e2e8f0;
-  transform: scale(0.92) translateX(-28px) rotate(-2deg);
-  opacity: 0.35;
+  transform: translate3d(0, -26px, -60px) scale(0.92) rotate(-1.5deg);
+  opacity: 0.5;
   z-index: 1;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
 }
 
 .sb-ghost-card.ghost-card-1 {
   border: 1.5px solid #cbd5e1;
-  transform: scale(0.96) translateX(-14px) rotate(-1deg);
-  opacity: 0.65;
+  transform: translate3d(0, -13px, -30px) scale(0.96) rotate(1.2deg);
+  opacity: 0.82;
   z-index: 2;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+}
+
+/* Ghost Card Edge Label (Peeking from behind in the stack) */
+.ghost-card-edge-tag {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  opacity: 0.75;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #64748b;
+  border-bottom: 1px dashed rgba(148, 163, 184, 0.3);
+  padding-bottom: 0.4rem;
+}
+
+.ghost-edge-num {
+  font-weight: 800;
+  color: #059669;
+  letter-spacing: 0.04em;
+}
+
+.ghost-edge-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 75%;
+}
+
+/* Dynamic State during Peel-Down Transition */
+.storyboard-deck-wrapper.is-peeling .sb-ghost-card.ghost-card-1 {
+  transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  opacity: 1;
+  box-shadow: 0 25px 60px -10px rgba(15, 23, 42, 0.14);
+}
+
+.storyboard-deck-wrapper.is-peeling .sb-ghost-card.ghost-card-2 {
+  transform: translate3d(0, -13px, -30px) scale(0.96) rotate(1.2deg);
+  opacity: 0.82;
 }
 
 /* Active Interactive Card */
 .sb-active-card {
   position: relative;
-  z-index: 5;
+  z-index: 10;
   background: #ffffff;
   border: 1.5px solid #e2e8f0;
   border-radius: 28px;
   padding: 1.85rem;
-  box-shadow: 0 25px 65px -12px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.02);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 25px 65px -12px rgba(15, 23, 42, 0.13), 0 0 0 1px rgba(0, 0, 0, 0.02);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.35s ease,
+              box-shadow 0.35s ease,
+              filter 0.35s ease;
   user-select: none;
   cursor: grab;
   touch-action: pan-y;
+  will-change: transform, opacity;
 }
 
 .sb-active-card:active {
@@ -12937,26 +12988,79 @@ section {
 }
 
 .sb-active-card.is-swiping {
-  transition: none;
+  transition: none !important;
 }
 
-.sb-active-card.anim-slide-out-left {
-  transform: translateX(-120%) rotate(-8deg);
-  opacity: 0;
+/* Slider Revolution Signature: Peel-Down Transition */
+.sb-active-card.anim-peel-down {
+  transform: translate3d(0, 118%, 0) rotate(-5.5deg) scale(0.92) !important;
+  opacity: 0 !important;
+  filter: blur(1.5px);
+  box-shadow: 0 35px 70px rgba(15, 23, 42, 0.22);
+  transition: transform 0.46s cubic-bezier(0.32, 0, 0.67, 0),
+              opacity 0.35s ease,
+              filter 0.35s ease !important;
 }
 
-.sb-active-card.anim-slide-out-right {
-  transform: translateX(120%) rotate(8deg);
-  opacity: 0;
+/* Snap In from Deck (Ghost 1 elevates to active) */
+.sb-active-card.anim-deck-snap-in {
+  animation: deckCardSnapIn 0.48s cubic-bezier(0.18, 0.95, 0.3, 1.05) forwards;
 }
 
-.sb-active-card.anim-slide-in {
-  animation: cardSnapIn 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+@keyframes deckCardSnapIn {
+  0% {
+    transform: translate3d(0, -13px, -30px) scale(0.96) rotate(1.2deg);
+    opacity: 0.82;
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+    opacity: 1;
+  }
 }
 
-@keyframes cardSnapIn {
-  0% { transform: scale(0.94) translateY(20px); opacity: 0; }
-  100% { transform: scale(1) translateY(0); opacity: 1; }
+/* Reverse Peel (Previous Module) */
+.sb-active-card.anim-peel-up-out {
+  transform: translate3d(0, -20px, -40px) scale(0.95) rotate(2deg) !important;
+  opacity: 0.5 !important;
+  transition: all 0.38s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.sb-active-card.anim-deck-pop-bottom {
+  animation: deckPopFromBottom 0.48s cubic-bezier(0.18, 0.95, 0.3, 1.05) forwards;
+}
+
+@keyframes deckPopFromBottom {
+  0% {
+    transform: translate3d(0, 115%, 0) rotate(-6deg) scale(0.92);
+    opacity: 0;
+    filter: blur(2px);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+/* Card Header Meta & Story Number */
+.sb-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.sb-story-num {
+  font-family: var(--font-display, inherit);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #047857;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  letter-spacing: -0.02em;
+  display: inline-flex;
+  align-items: center;
 }
 
 /* Card Header */
@@ -16215,5 +16319,111 @@ body.dark-theme .pricing-deck-arrow {
 @media (max-width: 480px) {
   .cartoon-stage-wrapper {
     height: 120px;
+  }
+}
+
+/* ==========================================================================
+   1. MOBILE DISPLAY JITTER & SCROLL ANCHORING DEFENSE
+   Isolates animated components so offscreen typing never shakes mobile viewport
+   ========================================================================== */
+html {
+  overflow-anchor: auto;
+}
+
+body {
+  overflow-anchor: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Isolate dynamic animated widgets so their internal DOM mutations cannot affect document scroll */
+.hero-chatbot-stage,
+.chatbot-app-window,
+.chat-messages-stage,
+.day-story-stage,
+.storyboard-deck-wrapper {
+  overflow-anchor: none !important;
+  contain: layout style;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.chatbot-aura-wrap {
+  overflow: hidden !important;
+  contain: paint !important;
+  pointer-events: none !important;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+@media (max-width: 768px) {
+  .hero-chatbot-stage {
+    overflow: hidden !important;
+    contain: layout paint !important;
+  }
+  .chatbot-aura-wrap {
+    width: 380px !important;
+    height: 380px !important;
+    max-width: 92vw !important;
+    max-height: 92vw !important;
+  }
+}
+
+/* ==========================================================================
+   2. MODERN SCROLL REVEAL (ENTRANCE) ANIMATIONS
+   Cards and sections animate smoothly upwards into view as user scrolls down
+   ========================================================================== */
+.reveal-on-scroll {
+  opacity: 0 !important;
+  transform: translate3d(0, 42px, 0) !important;
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) !important;
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.reveal-completed {
+  opacity: 1;
+}
+
+/* Staggered cascading upward delays for card grids */
+.benchmarks-bento-grid > .benchmark-bento-card:nth-child(1) { transition-delay: 0.05s !important; }
+.benchmarks-bento-grid > .benchmark-bento-card:nth-child(2) { transition-delay: 0.16s !important; }
+.benchmarks-bento-grid > .benchmark-bento-card:nth-child(3) { transition-delay: 0.27s !important; }
+.benchmarks-bento-grid > .benchmark-bento-card:nth-child(4) { transition-delay: 0.38s !important; }
+
+.why-stats-row > .why-stat-card:nth-child(1) { transition-delay: 0.04s !important; }
+.why-stats-row > .why-stat-card:nth-child(2) { transition-delay: 0.12s !important; }
+.why-stats-row > .why-stat-card:nth-child(3) { transition-delay: 0.20s !important; }
+.why-stats-row > .why-stat-card:nth-child(4) { transition-delay: 0.28s !important; }
+
+.why-bento-grid > .why-bento-card:nth-child(1) { transition-delay: 0.05s !important; }
+.why-bento-grid > .why-bento-card:nth-child(2) { transition-delay: 0.16s !important; }
+.why-bento-grid > .why-bento-card:nth-child(3) { transition-delay: 0.27s !important; }
+.why-bento-grid > .why-bento-card:nth-child(4) { transition-delay: 0.38s !important; }
+
+.stories-track > .story-card:nth-child(1) { transition-delay: 0.06s !important; }
+.stories-track > .story-card:nth-child(2) { transition-delay: 0.18s !important; }
+.stories-track > .story-card:nth-child(3) { transition-delay: 0.30s !important; }
+
+.storyboard-layout-grid > .storyboard-stage-col { transition-delay: 0.06s !important; }
+.storyboard-layout-grid > .storyboard-index-col { transition-delay: 0.18s !important; }
+
+.sb-items-list > .sb-item:nth-child(1) { transition-delay: 0.04s !important; }
+.sb-items-list > .sb-item:nth-child(2) { transition-delay: 0.10s !important; }
+.sb-items-list > .sb-item:nth-child(3) { transition-delay: 0.16s !important; }
+.sb-items-list > .sb-item:nth-child(4) { transition-delay: 0.22s !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }

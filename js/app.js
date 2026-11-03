@@ -2292,11 +2292,9 @@ function updateHeroChatbotLanguage(lang) {
 
 let sbCurrentIndex = 0;
 let sbIsAnimating = false;
-const SB_AUTOPLAY_DURATION = 4800; // 4.8 seconds per workflow card
-let sbElapsedMs = 0;
-let sbRafId = null;
-let sbIsHovered = false;
-let sbIsInViewport = false;
+const SB_AUTOPLAY_DURATION = 4600; // 4.6 seconds per workflow card
+let sbAutoPlayTimer = null;
+let sbIsUserInteracting = false;
 let sbActiveFilter = 'all';
 
 function getNextFilteredIndex(direction = 'next') {
@@ -2313,98 +2311,54 @@ function getNextFilteredIndex(direction = 'next') {
   return (sbCurrentIndex + 1) % total;
 }
 
-function updateStoryboardProgressBar(progress) {
-  const activeItem = document.querySelector('.sb-item.active');
-  if (!activeItem) return;
-  const bar = activeItem.querySelector('.sb-item-progress-bar');
-  if (bar) {
-    bar.style.width = (progress * 100) + '%';
-  }
-}
-
 function resetAllStoryboardProgressBars() {
   const bars = document.querySelectorAll('.sb-item-progress-bar');
-  bars.forEach(b => b.style.width = '0%');
+  bars.forEach(b => {
+    b.style.transition = 'none';
+    b.style.width = '0%';
+  });
 }
 
 function startStoryboardAutoPlay() {
   stopStoryboardAutoPlay();
   resetAllStoryboardProgressBars();
-  sbElapsedMs = 0;
 
-  if (sbIsHovered || !sbIsInViewport) return;
+  if (sbIsUserInteracting) return;
 
-  let lastTime = performance.now();
-
-  function loop(now) {
-    if (sbIsHovered || !sbIsInViewport) return;
-
-    const delta = now - lastTime;
-    lastTime = now;
-    sbElapsedMs += delta;
-
-    const progress = Math.min(sbElapsedMs / SB_AUTOPLAY_DURATION, 1);
-    updateStoryboardProgressBar(progress);
-
-    if (progress >= 1) {
-      sbElapsedMs = 0;
-      resetAllStoryboardProgressBars();
-      const nextIdx = getNextFilteredIndex('next');
-      switchStoryboardModule(nextIdx, 'next', false); // false = auto-triggered
-    } else {
-      sbRafId = requestAnimationFrame(loop);
+  // Animate progress bar on the currently active storyboard item
+  const activeItem = document.querySelector('.sb-item[data-index="' + sbCurrentIndex + '"]') || document.querySelector('.sb-item.active');
+  if (activeItem) {
+    const bar = activeItem.querySelector('.sb-item-progress-bar');
+    if (bar) {
+      bar.style.transition = 'none';
+      bar.style.width = '0%';
+      void bar.offsetWidth; // Force CSS reflow
+      bar.style.transition = 'width ' + SB_AUTOPLAY_DURATION + 'ms linear';
+      bar.style.width = '100%';
     }
   }
 
-  sbRafId = requestAnimationFrame((now) => {
-    lastTime = now;
-    sbRafId = requestAnimationFrame(loop);
-  });
+  sbAutoPlayTimer = setTimeout(() => {
+    resetAllStoryboardProgressBars();
+    const nextIdx = getNextFilteredIndex('next');
+    switchStoryboardModule(nextIdx, 'next', false); // false = auto-triggered
+  }, SB_AUTOPLAY_DURATION);
 }
 
 function stopStoryboardAutoPlay() {
-  if (sbRafId) {
-    cancelAnimationFrame(sbRafId);
-    sbRafId = null;
+  if (sbAutoPlayTimer) {
+    clearTimeout(sbAutoPlayTimer);
+    sbAutoPlayTimer = null;
   }
+  resetAllStoryboardProgressBars();
 }
 
 function pauseStoryboardAutoPlay() {
-  sbIsHovered = true;
   stopStoryboardAutoPlay();
 }
 
 function resumeStoryboardAutoPlay() {
-  sbIsHovered = false;
-  if (!sbIsInViewport) return;
-
-  stopStoryboardAutoPlay();
-  let lastTime = performance.now();
-
-  function loop(now) {
-    if (sbIsHovered || !sbIsInViewport) return;
-
-    const delta = now - lastTime;
-    lastTime = now;
-    sbElapsedMs += delta;
-
-    const progress = Math.min(sbElapsedMs / SB_AUTOPLAY_DURATION, 1);
-    updateStoryboardProgressBar(progress);
-
-    if (progress >= 1) {
-      sbElapsedMs = 0;
-      resetAllStoryboardProgressBars();
-      const nextIdx = getNextFilteredIndex('next');
-      switchStoryboardModule(nextIdx, 'next', false);
-    } else {
-      sbRafId = requestAnimationFrame(loop);
-    }
-  }
-
-  sbRafId = requestAnimationFrame((now) => {
-    lastTime = now;
-    sbRafId = requestAnimationFrame(loop);
-  });
+  startStoryboardAutoPlay();
 }
 
 const STORYBOARD_MODULES = [
@@ -2980,6 +2934,32 @@ function renderActiveStoryboardCard(index) {
     planEl.textContent = (dict && dict[mod.planKey]) || mod.planFallback;
   }
 
+  // Story Number (/ 01, / 02 ...)
+  const storyNumEl = document.getElementById('sbStoryNum');
+  if (storyNumEl) {
+    storyNumEl.textContent = '/ ' + mod.number;
+  }
+
+  // Update Ghost Card Edge Labels
+  const nextIdx1 = (index + 1) % STORYBOARD_MODULES.length;
+  const nextIdx2 = (index + 2) % STORYBOARD_MODULES.length;
+  const mod1 = STORYBOARD_MODULES[nextIdx1];
+  const mod2 = STORYBOARD_MODULES[nextIdx2];
+
+  const ghost1Num = document.getElementById('sbGhost1Num');
+  const ghost1Title = document.getElementById('sbGhost1Title');
+  if (ghost1Num && mod1) ghost1Num.textContent = '/ ' + mod1.number;
+  if (ghost1Title && mod1) {
+    ghost1Title.textContent = (dict && dict[mod1.titleKey]) || mod1.titleFallback;
+  }
+
+  const ghost2Num = document.getElementById('sbGhost2Num');
+  const ghost2Title = document.getElementById('sbGhost2Title');
+  if (ghost2Num && mod2) ghost2Num.textContent = '/ ' + mod2.number;
+  if (ghost2Title && mod2) {
+    ghost2Title.textContent = (dict && dict[mod2.titleKey]) || mod2.titleFallback;
+  }
+
   // Title & Desc
   const titleEl = document.getElementById('sbCardTitle');
   if (titleEl) {
@@ -3028,7 +3008,17 @@ function renderActiveStoryboardCard(index) {
     const isActive = i === index;
     item.classList.toggle('active', isActive);
     if (isActive) {
-      item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      const list = document.getElementById('sbItemsList');
+      if (list) {
+        const listRect = list.getBoundingClientRect();
+        const itemRect = item.getBoundingClientRect();
+        if (itemRect.top < listRect.top || itemRect.bottom > listRect.bottom) {
+          list.scrollTo({
+            top: list.scrollTop + (itemRect.top - listRect.top) - (list.clientHeight / 2 - item.clientHeight / 2),
+            behavior: 'smooth'
+          });
+        }
+      }
     }
   });
 }
@@ -3040,24 +3030,44 @@ function switchStoryboardModule(newIndex, direction = 'next', isManual = true) {
 
   sbIsAnimating = true;
   const card = document.getElementById('sbActiveCard');
+  const deckWrapper = document.getElementById('sbDeckWrapper');
 
   if (card) {
-    const outClass = direction === 'next' ? 'anim-slide-out-left' : 'anim-slide-out-right';
-    card.classList.add(outClass);
-
-    setTimeout(() => {
-      sbCurrentIndex = newIndex;
-      renderActiveStoryboardCard(sbCurrentIndex);
-      card.classList.remove(outClass);
-      card.classList.add('anim-slide-in');
+    if (direction === 'next') {
+      // Signature Slider Revolution Peel-Down Animation
+      card.classList.add('anim-peel-down');
+      if (deckWrapper) deckWrapper.classList.add('is-peeling');
 
       setTimeout(() => {
-        card.classList.remove('anim-slide-in');
-        sbIsAnimating = false;
-        // Start or restart auto-play timer after transition completes
-        startStoryboardAutoPlay();
-      }, 420);
-    }, 180);
+        sbCurrentIndex = newIndex;
+        renderActiveStoryboardCard(sbCurrentIndex);
+        card.classList.remove('anim-peel-down');
+        if (deckWrapper) deckWrapper.classList.remove('is-peeling');
+        card.classList.add('anim-deck-snap-in');
+
+        setTimeout(() => {
+          card.classList.remove('anim-deck-snap-in');
+          sbIsAnimating = false;
+          startStoryboardAutoPlay();
+        }, 480);
+      }, 240);
+    } else {
+      // Reverse Peel-Up from Bottom
+      card.classList.add('anim-peel-up-out');
+
+      setTimeout(() => {
+        sbCurrentIndex = newIndex;
+        renderActiveStoryboardCard(sbCurrentIndex);
+        card.classList.remove('anim-peel-up-out');
+        card.classList.add('anim-deck-pop-bottom');
+
+        setTimeout(() => {
+          card.classList.remove('anim-deck-pop-bottom');
+          sbIsAnimating = false;
+          startStoryboardAutoPlay();
+        }, 480);
+      }, 200);
+    }
   } else {
     sbCurrentIndex = newIndex;
     renderActiveStoryboardCard(sbCurrentIndex);
@@ -3129,7 +3139,8 @@ function initStoryboardShowcase() {
   // 5. Category Filter Buttons
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      const filter = btn.getAttribute('data-filter');
+      const filter = btn.getAttribute('data-filter') || 'all';
+      sbActiveFilter = filter;
       filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
@@ -3147,42 +3158,53 @@ function initStoryboardShowcase() {
       const curMod = STORYBOARD_MODULES[sbCurrentIndex];
       if (filter !== 'all' && curMod && curMod.category !== filter && firstMatch !== -1) {
         switchStoryboardModule(firstMatch, 'next');
+      } else {
+        startStoryboardAutoPlay();
       }
     });
   });
 
-  // 6. Touch-Swipe & Mouse Drag Mechanics (Non-intrusive to vertical scrolling)
+  // 6. Tactile Touch-Swipe & Mouse Drag Mechanics (Slider Revolution Peel-Down + Horizontal)
   if (card && deckWrapper) {
     let startX = 0;
     let startY = 0;
     let currentX = 0;
+    let currentY = 0;
     let isDragging = false;
-    let isHorizontalGesture = false;
     let gestureDecided = false;
+    let gestureType = null; // 'down', 'horizontal', 'up'
 
     const onPointerDown = (e) => {
       if (sbIsAnimating) return;
-      if (e.target.closest('button, a')) return;
+      if (e.target.closest('button, a, input, select')) return;
 
       isDragging = true;
+      sbIsUserInteracting = true;
+      stopStoryboardAutoPlay();
       gestureDecided = false;
-      isHorizontalGesture = false;
+      gestureType = null;
       startX = e.clientX;
       startY = e.clientY;
       currentX = startX;
+      currentY = startY;
     };
 
     const onPointerMove = (e) => {
       if (!isDragging) return;
       currentX = e.clientX;
+      currentY = e.clientY;
       const diffX = currentX - startX;
-      const diffY = e.clientY - startY;
+      const diffY = currentY - startY;
 
       if (!gestureDecided) {
         if (Math.abs(diffX) > 8 || Math.abs(diffY) > 8) {
           gestureDecided = true;
-          if (Math.abs(diffX) > Math.abs(diffY)) {
-            isHorizontalGesture = true;
+          // Downward drag or swipe
+          if (diffY > 10 || Math.abs(diffX) > Math.abs(diffY)) {
+            gestureType = (diffY > 10 && diffY > Math.abs(diffX) * 0.7) ? 'down' : 'horizontal';
+            card.classList.add('is-swiping');
+          } else if (diffY < -15) {
+            gestureType = 'up';
             card.classList.add('is-swiping');
           } else {
             isDragging = false;
@@ -3191,29 +3213,44 @@ function initStoryboardShowcase() {
         }
       }
 
-      if (isHorizontalGesture) {
+      if (gestureType) {
         if (e.cancelable) e.preventDefault();
-        const rot = diffX * 0.035;
-        card.style.transform = `translateX(${diffX}px) rotate(${rot}deg)`;
+        if (gestureType === 'down' || (gestureType === 'horizontal' && diffY > 0)) {
+          // Dynamic peel physics: tilting and dropping down
+          const rot = (diffX * 0.02) - (diffY * 0.025);
+          const pullDown = Math.max(0, diffY);
+          const scale = Math.max(0.92, 1 - (pullDown * 0.0005));
+          card.style.transform = `translate3d(${diffX * 0.3}px, ${pullDown}px, 0) rotate(${rot}deg) scale(${scale})`;
+          card.style.opacity = Math.max(0.45, 1 - (pullDown / 360));
+        } else {
+          // Horizontal glide
+          const rot = diffX * 0.035;
+          card.style.transform = `translate3d(${diffX}px, 0, 0) rotate(${rot}deg)`;
+        }
       }
     };
 
     const onPointerEnd = (e) => {
       if (!isDragging) return;
       isDragging = false;
+      sbIsUserInteracting = false;
       card.classList.remove('is-swiping');
 
-      if (isHorizontalGesture) {
+      if (gestureType) {
         const diffX = currentX - startX;
+        const diffY = currentY - startY;
         card.style.transform = '';
+        card.style.opacity = '';
 
-        if (diffX < -55) {
+        if (diffY > 45 || diffX < -50) {
+          // Swiped down or swiped left -> peel down to next module
           switchStoryboardModule(sbCurrentIndex + 1, 'next');
-        } else if (diffX > 55) {
+        } else if (diffY < -45 || diffX > 50) {
+          // Swiped up or swiped right -> prev module
           switchStoryboardModule(sbCurrentIndex - 1, 'prev');
         }
       }
-      isHorizontalGesture = false;
+      gestureType = null;
       gestureDecided = false;
     };
 
@@ -3278,48 +3315,45 @@ function initStoryboardShowcase() {
     }
   });
 
-  // 9. Pause Auto-Play on Hover (Desktop)
-  container.addEventListener('mouseenter', () => {
-    pauseStoryboardAutoPlay();
-  });
-
-  container.addEventListener('mouseleave', () => {
-    resumeStoryboardAutoPlay();
-  });
-
-  // 10. Pause on Mobile Touch & Resume on End
+  // 9. Only pause when user is actively dragging or swiping the card
   if (card) {
     card.addEventListener('pointerdown', () => {
+      sbIsUserInteracting = true;
       pauseStoryboardAutoPlay();
     }, { passive: true });
 
     window.addEventListener('pointerup', () => {
-      if (!container.matches(':hover')) {
+      if (sbIsUserInteracting) {
+        sbIsUserInteracting = false;
         resumeStoryboardAutoPlay();
       }
     }, { passive: true });
+
+    window.addEventListener('pointercancel', () => {
+      sbIsUserInteracting = false;
+      resumeStoryboardAutoPlay();
+    }, { passive: true });
   }
 
-  // 11. Intersection Observer (Only run when visible in viewport)
+  // 10. Intersection Observer (Automatically runs auto-play when section is in view)
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        sbIsInViewport = entry.isIntersecting;
-        if (sbIsInViewport) {
-          if (!sbIsHovered) {
-            startStoryboardAutoPlay();
-          }
+        if (entry.isIntersecting) {
+          startStoryboardAutoPlay();
         } else {
           stopStoryboardAutoPlay();
         }
       });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.05 });
 
     observer.observe(container);
   } else {
-    sbIsInViewport = true;
     startStoryboardAutoPlay();
   }
+
+  // 11. Start auto-play immediately upon initialization
+  startStoryboardAutoPlay();
 
   // 12. Keyboard Arrow Navigation Support
   window.addEventListener('keydown', (e) => {
@@ -4817,7 +4851,8 @@ function initApp() {
     { name: 'TestimonialsSlider', fn: initTestimonialsSlider },
     { name: 'FaqAccordion', fn: initFaqAccordion },
     { name: 'ContactModal', fn: initContactModal },
-    { name: 'OfficeVisitModal', fn: initOfficeVisitModal }
+    { name: 'OfficeVisitModal', fn: initOfficeVisitModal },
+    { name: 'ScrollReveal', fn: initScrollReveal }
   ];
 
   tasks.forEach(t => {
@@ -4829,6 +4864,13 @@ function initApp() {
       console.warn('[YES SME] Init warning in ' + t.name + ':', err);
     }
   });
+
+  // Re-run scroll reveal after dynamic cards and templates mount
+  setTimeout(() => {
+    if (typeof initScrollReveal === 'function') {
+      initScrollReveal();
+    }
+  }, 100);
 
   // Footer Back To Top Button
   const footerBackToTopBtn = document.getElementById('footerBackToTopBtn');
@@ -5054,6 +5096,87 @@ function initDayStoryShowcase() {
   window.addEventListener('resize', () => {
     if (nodes[currentIndex]) {
       updateScrubberToken(nodes[currentIndex]);
+    }
+  });
+}
+
+/* ==========================================================================
+   SCROLL REVEAL ENTRANCE ANIMATION CONTROLLER
+   Smoothly reveals cards and headers from bottom to top as you scroll down
+   ========================================================================== */
+let globalScrollRevealObserver = null;
+
+function initScrollReveal() {
+  const revealSelectors = [
+    '.section-header',
+    '.integrations-header',
+    '.benchmark-bento-card',
+    '.storyboard-filter-bar',
+    '.storyboard-stage-col',
+    '.storyboard-index-col',
+    '.pricing-billing-switcher-wrap',
+    '.pricing-tier-pill-bar',
+    '.pricing-slider-stage',
+    '.pricing-trust-strip',
+    '.enterprise-showcase-box',
+    '.comparison-legend-wrap',
+    '.comparison-table-wrapper',
+    '.day-story-stage',
+    '.testimonials-trust-bar',
+    '.stories-filter-bar',
+    '.testimonials-slider-container',
+    '.story-card',
+    '.why-stat-card',
+    '.why-bento-card',
+    '.faq-controls-wrap',
+    '.faq-container-box',
+    '.faq-bottom-help-strip',
+    '.mobile-pos-banner'
+  ];
+
+  const elements = document.querySelectorAll(revealSelectors.join(', '));
+  if (!elements.length) return;
+
+  const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+
+  if (!globalScrollRevealObserver && ('IntersectionObserver' in window)) {
+    globalScrollRevealObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          el.classList.add('is-revealed');
+          obs.unobserve(el);
+          setTimeout(() => {
+            el.classList.remove('reveal-on-scroll');
+            el.classList.add('reveal-completed');
+          }, 950);
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: '0px 0px -25px 0px',
+      threshold: 0.05
+    });
+  }
+
+  elements.forEach(el => {
+    // If element has already completed its entrance animation or is marked revealed, keep it visible
+    if (el.classList.contains('reveal-completed') || el.classList.contains('is-revealed')) {
+      return;
+    }
+
+    const rect = el.getBoundingClientRect();
+    // Elements already in or near viewport on initial page load: show immediately
+    if (rect.top < windowHeight * 0.90 && rect.bottom > 0) {
+      el.classList.add('reveal-completed');
+    } else {
+      // Elements below viewport: set up smooth upward transition
+      el.classList.add('reveal-on-scroll');
+      if (globalScrollRevealObserver) {
+        globalScrollRevealObserver.observe(el);
+      } else {
+        el.classList.add('is-revealed');
+      }
     }
   });
 }
