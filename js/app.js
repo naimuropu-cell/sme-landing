@@ -4991,11 +4991,28 @@ function initDayStoryShowcase() {
     });
   }
 
-  // Click on Nodes
+  const DAY_STORY_INTERVAL = 4800; // 4.8 seconds
+
+  function resetAutoplayTimer() {
+    if (autoplayTimer) {
+      clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+    if (isPlaying) {
+      autoplayTimer = setInterval(() => {
+        setPhase(currentIndex + 1, 'slide-left');
+      }, DAY_STORY_INTERVAL);
+    }
+  }
+
+  // Click on Nodes (Whichever time node is clicked, restart the countdown so it always swipes after the interval)
   nodes.forEach((node, idx) => {
     node.addEventListener('click', () => {
       const dir = idx >= currentIndex ? 'slide-left' : 'slide-right';
       setPhase(idx, dir);
+      if (isPlaying) {
+        resetAutoplayTimer();
+      }
     });
   });
 
@@ -5003,31 +5020,34 @@ function initDayStoryShowcase() {
   if (btnPrev) {
     btnPrev.addEventListener('click', () => {
       setPhase(currentIndex - 1, 'slide-right');
+      if (isPlaying) {
+        resetAutoplayTimer();
+      }
     });
   }
 
   if (btnNext) {
     btnNext.addEventListener('click', () => {
       setPhase(currentIndex + 1, 'slide-left');
+      if (isPlaying) {
+        resetAutoplayTimer();
+      }
     });
   }
 
   // Auto-play timer (automatic swipe morning -> noon -> sunset -> night)
   function startAutoplay() {
-    stopAutoplay();
-    autoplayTimer = setInterval(() => {
-      setPhase(currentIndex + 1, 'slide-left');
-    }, 5000);
     isPlaying = true;
     if (playIcon) playIcon.textContent = '⏸️';
+    resetAutoplayTimer();
   }
 
   function stopAutoplay() {
+    isPlaying = false;
     if (autoplayTimer) {
       clearInterval(autoplayTimer);
       autoplayTimer = null;
     }
-    isPlaying = false;
     if (playIcon) playIcon.textContent = '▶️';
   }
 
@@ -5041,19 +5061,24 @@ function initDayStoryShowcase() {
     });
   }
 
-  // Pause on hover so user can inspect details
-  container.addEventListener('mouseenter', () => {
-    if (isPlaying && autoplayTimer) {
-      clearInterval(autoplayTimer);
-      autoplayTimer = null;
-    }
-  });
-
-  container.addEventListener('mouseleave', () => {
-    if (isPlaying && !autoplayTimer) {
-      startAutoplay();
-    }
-  });
+  // Viewport Observer: Pause when scrolled off screen, resume when in screen
+  if ('IntersectionObserver' in window) {
+    const storyObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (isPlaying && !autoplayTimer) {
+            resetAutoplayTimer();
+          }
+        } else {
+          if (autoplayTimer) {
+            clearInterval(autoplayTimer);
+            autoplayTimer = null;
+          }
+        }
+      });
+    }, { threshold: 0.08 });
+    storyObserver.observe(container);
+  }
 
   // Mobile Touch Swipe Gesture
   const viewport = container.querySelector('.day-chapters-viewport');
@@ -5079,6 +5104,9 @@ function initDayStoryShowcase() {
         } else {
           // Swipe right -> go back to previous time
           setPhase(currentIndex - 1, 'slide-right');
+        }
+        if (isPlaying) {
+          resetAutoplayTimer();
         }
       }
     }, { passive: true });
