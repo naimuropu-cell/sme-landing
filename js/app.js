@@ -538,20 +538,77 @@ const BN_PACKAGE_META = {
 };
 
 const BN_ENTERPRISE_META = {
-  badge: "কাস্টম এন্টারপ্রাইজ",
+  badge: "কাস্টম এন্টারপ্রাইজ আর্কিটেকচার",
   name: "লার্জ স্কেল রিটেল ও ডিস্ট্রিবিউশন হাব",
   tagline: "আনলিমিটেড আউটলেট, ডেডিকেটেড এডব্লিউএস ক্লাউড ক্লাস্টার এবং কাস্টমাইজড ইআরপি আর্কিটেকচার প্রয়োজন এমন ব্র্যান্ডের জন্য।",
   priceDisplay: "কাস্টম প্রাইসিং",
-  setupFeeDisplay: "প্রয়োজন ও আউটলেট অনুযায়ী আলোচনা সাপেক্ষে",
+  setupFeeDisplay: "আউটলেট ও কাস্টমাইজেশন অনুযায়ী আলোচনা সাপেক্ষে",
   ctaText: "এন্টারপ্রাইজ সেলসের সাথে কথা বলুন",
-  highlights: [
-    "আনলিমিটেড ব্রাঞ্চ ও সেন্ট্রাল ওয়্যারহাউজ হাব",
-    "ডেডিকেটেড ক্লাউড ইনস্ট্যান্স (AWS / DigitalOcean)",
-    "এনবিআর মূসক ৬.৩ এর সকল কাস্টম ভ্যাট শিডিউল",
-    "কাস্টম এপিআই ইন্টিগ্রেশন (সাপ্লাই চেইন ও ইআরপি)",
-    "ডেডিকেটেড অ্যাকাউন্ট ম্যানেজার ও অন-সাইট ট্রেইনিং",
-    "২৪/৭ প্রায়োরিটি ফোন সাপোর্ট ও ৯৯.৯৯% এসএলএ গ্যারান্টি"
-  ]
+  bentoTiles: [
+    {
+      icon: "☁️",
+      title: "ডেডিকেটেড ক্লাউড ইনস্ট্যান্স",
+      desc: "নিজস্ব সুরক্ষিত AWS ক্লাস্টার ও জিরো শেয়ার্ড ল্যাগ"
+    },
+    {
+      icon: "🏛️",
+      title: "পূর্ণাঙ্গ এনবিআর মূসক ৬.৩",
+      desc: "কর্পোরেট অডিটের উপযোগী কাস্টম ভ্যাট শিডিউল"
+    },
+    {
+      icon: "👔",
+      title: "অন-সাইট হ্যান্ডস-অন ট্রেইনিং",
+      desc: "নিকুঞ্জ-২ এর এক্সপার্ট ইঞ্জিনিয়ারদের সরাসরি অনবোর্ডিং"
+    },
+    {
+      icon: "🛡️",
+      title: "১০০% ফ্রি ডাটা মাইগ্রেশন",
+      desc: "ট্যালি/এক্সেল থেকে সম্পূর্ণ ফ্রিতে নিরাপদ ডাটা ট্রান্সফার"
+    }
+  ],
+  checklist: [
+    "আনলিমিটেড আউটলেট ও সেন্ট্রাল ওয়্যারহাউজ হাব",
+    "কাস্টম এপিআই ইন্টিগ্রেশন (ইআরপি ও সাপ্লাই চেইন)",
+    "ডেডিকেটেড কী-অ্যাকাউন্ট এক্সিকিউটিভ ও ২৪/৭ এসএলএ"
+  ],
+  hotline: "ভিআইপি হটলাইন: ০১৯৫৫-৩৪৫৩৩১"
+};
+
+const EN_ENTERPRISE_META = {
+  badge: "Custom Enterprise Architecture",
+  name: "Large Scale Retail & Distribution Hub",
+  tagline: "For brands requiring unlimited branches, dedicated AWS private clusters, and custom ERP integration workflows.",
+  priceDisplay: "Custom Pricing",
+  setupFeeDisplay: "Scope-based deployment & migration",
+  ctaText: "Speak with Enterprise Sales",
+  bentoTiles: [
+    {
+      icon: "☁️",
+      title: "Dedicated Cloud Instance",
+      desc: "Isolated private AWS cluster with zero shared latency"
+    },
+    {
+      icon: "🏛️",
+      title: "Full NBR Mushak 6.3 VAT",
+      desc: "Custom compliance tax schedules ready for corporate audit"
+    },
+    {
+      icon: "👔",
+      title: "On-Site Hands-On Training",
+      desc: "Direct in-person staff onboarding from our Dhaka engineers"
+    },
+    {
+      icon: "🛡️",
+      title: "100% Free Data Migration",
+      desc: "Seamless, zero data-loss transfer from legacy Tally or Excel"
+    }
+  ],
+  checklist: [
+    "Unlimited Outlets & Central Warehouse Hub",
+    "Tailored Custom APIs & Legacy ERP Sync",
+    "Dedicated Key Account Manager & 24/7 SLA"
+  ],
+  hotline: "Direct VIP Desk: +880 1955-345331"
 };
 
 
@@ -668,15 +725,21 @@ function initPricingCards() {
     const yearlyRate = pkg.yearlyPrice || (monthlyRate * 10);
     
     const displayAmount = isAnnual ? yearlyRate : monthlyRate;
-    const formattedDisplayPrice = displayAmount.toLocaleString('en-US');
-    const formattedSetup = Number(pkg.setupFee).toLocaleString('en-US');
+    const formattedDisplayPrice = isBn
+      ? toBanglaDigits(displayAmount.toLocaleString('en-IN'))
+      : displayAmount.toLocaleString('en-US');
+    const formattedSetup = isBn
+      ? toBanglaDigits(Number(pkg.setupFee).toLocaleString('en-IN'))
+      : Number(pkg.setupFee).toLocaleString('en-US');
     
     const periodLabel = isAnnual 
       ? (isBn ? '/বছর' : '/year') 
       : (isBn ? '/মাস' : '/mo');
 
     const savingsAmount = (monthlyRate * 12) - yearlyRate;
-    const formattedSavings = savingsAmount.toLocaleString('en-US');
+    const formattedSavings = isBn
+      ? toBanglaDigits(savingsAmount.toLocaleString('en-IN'))
+      : savingsAmount.toLocaleString('en-US');
 
     const billingNoteHtml = isAnnual
       ? `<div class="plan-annual-savings-note">
@@ -1072,51 +1135,59 @@ function setupPricingSliderDeck() {
 
 function initEnterpriseCard() {
   const container = document.getElementById('enterpriseShowcase');
-  if (!container || !window.PRICING_DATA) return;
+  if (!container) return;
 
-  const ent = PRICING_DATA.customEnterprise;
   const isBn = STATE.currentLang === 'bn';
-  const bnEnt = isBn ? BN_ENTERPRISE_META : null;
+  const meta = isBn ? BN_ENTERPRISE_META : EN_ENTERPRISE_META;
 
-  const badgeText = bnEnt ? bnEnt.badge : ent.badge;
-  const nameText = bnEnt ? bnEnt.name : ent.name;
-  const taglineText = bnEnt ? bnEnt.tagline : ent.tagline;
-  const priceTitle = bnEnt ? bnEnt.priceDisplay : ent.priceDisplay;
-  const priceSub = bnEnt ? bnEnt.setupFeeDisplay : ent.setupFeeDisplay;
-  const ctaText = bnEnt ? bnEnt.ctaText : 'Schedule Enterprise Consultation';
-  const highlights = bnEnt ? bnEnt.highlights : ent.highlights;
+  const bentoTilesHtml = meta.bentoTiles.map(t => `
+    <div class="ent-bento-card">
+      <div class="ent-bento-icon-wrap">${t.icon}</div>
+      <div class="ent-bento-content">
+        <h4 class="ent-bento-title">${t.title}</h4>
+        <p class="ent-bento-desc">${t.desc}</p>
+      </div>
+    </div>
+  `).join('');
 
-  const highlightsHtml = highlights.map(h => `
-    <li>
-      <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
-        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-      </svg>
-      <span>${h}</span>
-    </li>
+  const checklistHtml = meta.checklist.map(item => `
+    <li><span class="chk-emerald">✓</span> <span>${item}</span></li>
   `).join('');
 
   container.innerHTML = `
     <div class="enterprise-showcase-box">
+      <div class="enterprise-cyber-grid" aria-hidden="true"></div>
+
       <div class="enterprise-left">
         <div class="enterprise-badge-pill">
-          ${badgeText}
+          <span class="enterprise-pulse-dot"></span>
+          <span>${meta.badge}</span>
         </div>
-        <h3>${nameText}</h3>
-        <p>${taglineText}</p>
-        <ul class="enterprise-features-grid">
-          ${highlightsHtml}
-        </ul>
+        <h3>${meta.name}</h3>
+        <p class="enterprise-tagline">${meta.tagline}</p>
+        <div class="enterprise-bento-grid">
+          ${bentoTilesHtml}
+        </div>
       </div>
 
       <div class="enterprise-right">
-        <div class="enterprise-price-title">${priceTitle}</div>
-        <div class="enterprise-price-sub">${priceSub}</div>
-        <button type="button" class="btn btn-lg btn-white btn-block open-plan-modal" data-plan-id="custom">
-          <span>${ctaText}</span>
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" width="14" height="14">
-            <path d="M3.33 8h9.34m-4-4l4 4-4 4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <div class="enterprise-price-title">${meta.priceDisplay}</div>
+        <div class="enterprise-price-sub">${meta.setupFeeDisplay}</div>
+        <ul class="enterprise-quick-checklist">
+          ${checklistHtml}
+        </ul>
+        <button type="button" class="btn-enterprise-cta open-plan-modal" data-plan-id="custom">
+          <span>${meta.ctaText}</span>
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" width="16" height="16">
+            <path d="M3.33 8h9.34m-4-4l4 4-4 4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
+        <div class="enterprise-direct-line">
+          <a href="tel:01955345331" class="enterprise-phone-link">
+            <span class="phone-pulse-icon">📞</span>
+            <span>${meta.hotline}</span>
+          </a>
+        </div>
       </div>
     </div>
   `;
@@ -1180,7 +1251,26 @@ function initComparisonTable() {
           if (isBn && typeof val === 'string') {
             displayVal = val
               .replace(/Unlimited Users/g, 'আনলিমিটেড ইউজার')
+              .replace(/Unlimited Products/g, 'আনলিমিটেড প্রোডাক্ট')
               .replace(/Unlimited/g, 'আনলিমিটেড')
+              .replace(/1 Outlet/g, '১টি আউটলেট')
+              .replace(/2 Outlets/g, '২টি আউটলেট')
+              .replace(/3 Outlets/g, '৩টি আউটলেট')
+              .replace(/5 Outlets/g, '৫টি আউটলেট')
+              .replace(/1 User/g, '১ জন ইউজার')
+              .replace(/2 Users/g, '২ জন ইউজার')
+              .replace(/3 Users/g, '৩ জন ইউজার')
+              .replace(/5 Users/g, '৫ জন ইউজার')
+              .replace(/10 Users/g, '১০ জন ইউজার')
+              .replace(/1 Courier/g, '১টি কুরিয়ার')
+              .replace(/2 Couriers/g, '২টি কুরিয়ার')
+              .replace(/3 Couriers/g, '৩টি কুরিয়ার')
+              .replace(/All Couriers/g, 'সকল কুরিয়ার')
+              .replace(/200 Products/g, '২০০টি প্রোডাক্ট')
+              .replace(/250 Products/g, '২৫০টি প্রোডাক্ট')
+              .replace(/350 Products/g, '৩৫০টি প্রোডাক্ট')
+              .replace(/2,000 Products/g, '২,০০০টি প্রোডাক্ট')
+              .replace(/5,000 Products/g, '৫,০০০টি প্রোডাক্ট')
               .replace(/Products/g, 'প্রোডাক্ট')
               .replace(/Branches/g, 'আউটলেট')
               .replace(/Outlets/g, 'আউটলেট')
@@ -1191,9 +1281,6 @@ function initComparisonTable() {
               .replace(/High-Speed SSD/g, 'হাই-স্পিড SSD')
               .replace(/AWS Cloud/g, 'AWS ক্লাউড')
               .replace(/AWS Dedicated Enterprise/g, 'ডেডিকেটেড ক্লাউড')
-              .replace(/1 Courier/g, '১টি কুরিয়ার')
-              .replace(/3 Couriers/g, '৩টি কুরিয়ার')
-              .replace(/All Couriers/g, 'সকল কুরিয়ার')
               .replace(/Basic Cash\/Due/g, 'নগদ ও বাকি')
               .replace(/Standard/g, 'স্ট্যান্ডার্ড')
               .replace(/Advanced Real-Time/g, 'অ্যাডভান্সড রিয়েল-টাইম')
@@ -1388,22 +1475,85 @@ function initTableSearch() {
 }
 
 /**
- * 8. FAQ ACCORDION CONTROLLER (Category-Filtered, Live Search & Bilingual Accordion)
+ * 8. FAQ ACCORDION CONTROLLER (Split-Screen Tabbed Hub with Live Search & Bilingual Accordion)
  */
+const FAQ_CATEGORIES_META = {
+  all: {
+    en: { title: "All Questions", badge: "Overview" },
+    bn: { title: "সকল প্রশ্নোত্তর", badge: "সারসংক্ষেপ" }
+  },
+  pricing: {
+    en: { title: "Pricing & Plans", badge: "Transparent Licensing" },
+    bn: { title: "মূল্য ও লাইসেন্স", badge: "স্বচ্ছ সাবস্ক্রিপশন" }
+  },
+  hardware: {
+    en: { title: "Offline POS & Hardware", badge: "Hardware & Devices" },
+    bn: { title: "অফলাইন POS ও হার্ডওয়্যার", badge: "ডিভাইস ও টেক" }
+  },
+  security: {
+    en: { title: "Security & Cloud Backup", badge: "Enterprise Protection" },
+    bn: { title: "নিরাপত্তা ও ক্লাউড ব্যাকআপ", badge: "ব্যাংক-মানের সুরক্ষা" }
+  },
+  setup: {
+    en: { title: "Setup & Staff Training", badge: "Dedicated Onboarding" },
+    bn: { title: "সেটআপ ও স্টাফ ট্রেনিং", badge: "নিকুঞ্জ-২ অনবোর্ডিং" }
+  }
+};
+
 let FAQ_STATE = {
   activeCategory: 'all',
   searchQuery: '',
   openFaqId: 'faq-1'
 };
 
+function formatFaqNumberLang(num, isBn) {
+  if (!isBn) return String(num);
+  const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+  return String(num).replace(/[0-9]/g, d => bnDigits[d]);
+}
+
+function updateFaqCategoryCounters() {
+  if (!window.PRICING_DATA || !window.PRICING_DATA.faqs) return;
+  const isBn = typeof STATE !== 'undefined' && STATE.currentLang === 'bn';
+  const counts = { all: window.PRICING_DATA.faqs.length, pricing: 0, hardware: 0, security: 0, setup: 0 };
+  
+  window.PRICING_DATA.faqs.forEach(f => {
+    if (counts[f.category] !== undefined) counts[f.category]++;
+  });
+
+  const countAll = document.getElementById('faqCountAll');
+  const countPricing = document.getElementById('faqCountPricing');
+  const countHardware = document.getElementById('faqCountHardware');
+  const countSecurity = document.getElementById('faqCountSecurity');
+  const countSetup = document.getElementById('faqCountSetup');
+
+  if (countAll) countAll.textContent = formatFaqNumberLang(counts.all, isBn);
+  if (countPricing) countPricing.textContent = formatFaqNumberLang(counts.pricing, isBn);
+  if (countHardware) countHardware.textContent = formatFaqNumberLang(counts.hardware, isBn);
+  if (countSecurity) countSecurity.textContent = formatFaqNumberLang(counts.security, isBn);
+  if (countSetup) countSetup.textContent = formatFaqNumberLang(counts.setup, isBn);
+}
+
 function renderFaqs() {
   const container = document.getElementById('faqContainer');
   const emptyState = document.getElementById('faqEmptyState');
   if (!container || !window.PRICING_DATA || !window.PRICING_DATA.faqs) return;
 
-  const currentLang = (typeof STATE !== 'undefined' && STATE.currentLang === 'bn') ? 'bn' : 'en';
+  const isBn = (typeof STATE !== 'undefined' && STATE.currentLang === 'bn');
+  const currentLang = isBn ? 'bn' : 'en';
   const query = FAQ_STATE.searchQuery.trim().toLowerCase();
   const category = FAQ_STATE.activeCategory;
+
+  // Update dynamic count numbers on category tabs
+  updateFaqCategoryCounters();
+
+  // Update active state on tab buttons
+  document.querySelectorAll('.faq-cat-nav-btn').forEach(btn => {
+    const filter = btn.getAttribute('data-filter');
+    const isActive = filter === category;
+    btn.classList.toggle('active', isActive);
+    btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+  });
 
   // Filter items
   const filtered = window.PRICING_DATA.faqs.filter(faq => {
@@ -1417,6 +1567,29 @@ function renderFaqs() {
     return true;
   });
 
+  // Update Right Area Header (Category Title & Count)
+  const titleEl = document.getElementById('faqActiveCatTitle');
+  const badgeEl = document.getElementById('faqActiveCatBadge');
+  const countEl = document.getElementById('faqActiveCatCount');
+
+  if (titleEl && badgeEl && countEl) {
+    if (query) {
+      badgeEl.textContent = isBn ? 'অনুসন্ধানের ফলাফল' : 'Search Results';
+      titleEl.textContent = isBn ? `"${FAQ_STATE.searchQuery}" সম্পর্কিত প্রশ্ন` : `Questions matching "${FAQ_STATE.searchQuery}"`;
+      countEl.textContent = isBn 
+        ? `${formatFaqNumberLang(filtered.length, true)}টি ফলাফল`
+        : `${filtered.length} found`;
+    } else {
+      const meta = FAQ_CATEGORIES_META[category] || FAQ_CATEGORIES_META.all;
+      const langMeta = meta[currentLang] || meta.en;
+      badgeEl.textContent = langMeta.badge;
+      titleEl.textContent = langMeta.title;
+      countEl.textContent = isBn 
+        ? `${formatFaqNumberLang(filtered.length, true)}টি প্রশ্ন` 
+        : `${filtered.length} questions`;
+    }
+  }
+
   if (filtered.length === 0) {
     container.innerHTML = '';
     if (emptyState) emptyState.style.display = 'block';
@@ -1424,6 +1597,11 @@ function renderFaqs() {
   }
 
   if (emptyState) emptyState.style.display = 'none';
+
+  // Ensure an open FAQ ID exists in filtered results, or default to first
+  if (!FAQ_STATE.openFaqId || !filtered.some(f => f.id === FAQ_STATE.openFaqId)) {
+    FAQ_STATE.openFaqId = filtered[0].id;
+  }
 
   const highlightText = (text, q) => {
     if (!q) return text;
@@ -1496,12 +1674,29 @@ function initFaqAccordion() {
 
   renderFaqs();
 
-  const filterBtns = document.querySelectorAll('.faq-filter-btn');
-  filterBtns.forEach(btn => {
+  // Category navigation tabs
+  const catNavBtns = document.querySelectorAll('.faq-cat-nav-btn');
+  catNavBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      FAQ_STATE.activeCategory = btn.getAttribute('data-filter') || 'all';
+      const targetFilter = btn.getAttribute('data-filter') || 'all';
+      if (FAQ_STATE.activeCategory === targetFilter && !FAQ_STATE.searchQuery) return;
+      
+      FAQ_STATE.activeCategory = targetFilter;
+      
+      const searchInput = document.getElementById('faqSearchInput');
+      const clearBtn = document.getElementById('faqSearchClearBtn');
+      if (searchInput && FAQ_STATE.searchQuery) {
+        searchInput.value = '';
+        FAQ_STATE.searchQuery = '';
+        if (clearBtn) clearBtn.style.display = 'none';
+      }
+
+      // Default open the first question of this category
+      const catFiltered = window.PRICING_DATA.faqs.filter(f => targetFilter === 'all' || f.category === targetFilter);
+      if (catFiltered.length > 0) {
+        FAQ_STATE.openFaqId = catFiltered[0].id;
+      }
+
       renderFaqs();
     });
   });

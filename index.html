@@ -7,10 +7,10 @@
   <meta name="description" content="All-in-one Cloud ERP, Smart Offline POS, Accounting, Multi-Warehouse Inventory, and E-commerce platform built for Bangladeshi retail, wholesale, and brands. Transparent packages from BDT 5,000/year (or BDT 500/month).">
   <meta name="keywords" content="ERP Bangladesh, POS Software Bangladesh, E-commerce ERP, Inventory Software Dhaka, Accounting Software BDT, bKash POS, Pathao Courier ERP">
 
-  <!-- Google Fonts: Plus Jakarta Sans & Hind Siliguri -->
+  <!-- Google Fonts: Plus Jakarta Sans, Noto Sans Bengali & Hind Siliguri -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
@@ -212,7 +212,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="#faqs" class="nav-link" data-i18n="nav.faq">FAQs</a>
+            <a href="#faq" class="nav-link" data-i18n="nav.faq">FAQs</a>
           </li>
 
           <!-- Mobile Only Action Cluster -->
@@ -2936,9 +2936,10 @@
     </section>
 
     <!-- ======================================================================
-         FREQUENTLY ASKED QUESTIONS
+         FREQUENTLY ASKED QUESTIONS (Split-Screen Tabbed Hub)
          ====================================================================== -->
     <section class="section faq-section" id="faq">
+      <div id="faqs" class="faq-anchor-target" aria-hidden="true"></div>
       <div class="container">
         <!-- Section Header -->
         <div class="section-header text-center">
@@ -2949,72 +2950,105 @@
           </p>
         </div>
 
-        <!-- FAQ Search & Filter Controls -->
-        <div class="faq-controls-wrap">
-          <!-- Live Search Bar -->
-          <div class="faq-search-box">
-            <svg class="search-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" width="18" height="18" aria-hidden="true">
-              <path d="M9 17A8 8 0 109 1a8 8 0 000 16zM18 18l-4.35-4.35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <input type="text" id="faqSearchInput" class="faq-search-input" placeholder="Search questions (e.g. printer, offline, backup)..." data-i18n="faq.searchPlaceholder" aria-label="Search FAQs">
-            <button type="button" id="faqSearchClearBtn" class="faq-search-clear" aria-label="Clear search" style="display: none;">✕</button>
-          </div>
-
-          <!-- Category Filter Pills -->
-          <div class="faq-filter-pills" role="tablist" aria-label="FAQ categories">
-            <button type="button" class="faq-filter-btn active" data-filter="all" data-i18n="faq.filterAll">All Questions (10)</button>
-            <button type="button" class="faq-filter-btn" data-filter="pricing" data-i18n="faq.filterPricing">Pricing &amp; Plans</button>
-            <button type="button" class="faq-filter-btn" data-filter="hardware" data-i18n="faq.filterHardware">Offline POS &amp; Hardware</button>
-            <button type="button" class="faq-filter-btn" data-filter="security" data-i18n="faq.filterSecurity">Security &amp; Backup</button>
-            <button type="button" class="faq-filter-btn" data-filter="setup" data-i18n="faq.filterSetup">Setup &amp; Migration</button>
-          </div>
-        </div>
-
-        <!-- FAQ Accordion Container -->
-        <div class="faq-container-box" id="faqContainer">
-          <!-- Dynamically populated and bilingual rendered via initFaqAccordion() -->
-        </div>
-
-        <!-- Empty State (Hidden by default, shown when search has no match) -->
-        <div class="faq-empty-state" id="faqEmptyState" style="display: none;">
-          <div class="empty-icon">🔍</div>
-          <h4 class="empty-title" data-i18n="faq.noResultsTitle">No matching questions found</h4>
-          <p class="empty-desc" data-i18n="faq.noResultsDesc">
-            Have a specific question not covered here? Call our Dhaka hotline or chat with our software specialists on WhatsApp.
-          </p>
-          <div class="empty-actions">
-            <a href="tel:01955345331" class="btn btn-sm btn-primary">
-              <span>📞 01955345331</span>
-            </a>
-            <a href="https://wa.me/8801955345331" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-primary">
-              <span>💬 WhatsApp Chat</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- Quick-Contact Bottom Help Strip -->
-        <div class="faq-bottom-help-strip">
-          <div class="help-strip-info">
-            <div class="help-bubble-icon">💬</div>
-            <div>
-              <h4 class="help-strip-title" data-i18n="faq.stillHelpTitle">Still have questions about YES SME?</h4>
-              <p class="help-strip-desc" data-i18n="faq.stillHelpDesc">Our senior software consultants at Nikunja 2, Dhaka are ready to assist you right now.</p>
+        <!-- Split-Screen Tabbed Hub -->
+        <div class="faq-split-hub">
+          <!-- Left Navigation Sidebar -->
+          <aside class="faq-sidebar">
+            <!-- Live Search Bar -->
+            <div class="faq-search-box">
+              <svg class="search-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" width="18" height="18" aria-hidden="true">
+                <path d="M9 17A8 8 0 109 1a8 8 0 000 16zM18 18l-4.35-4.35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <input type="text" id="faqSearchInput" class="faq-search-input" placeholder="Search questions (e.g. printer, offline, backup)..." data-i18n="faq.searchPlaceholder" aria-label="Search FAQs">
+              <button type="button" id="faqSearchClearBtn" class="faq-search-clear" aria-label="Clear search" style="display: none;">✕</button>
             </div>
-          </div>
-          <div class="help-strip-actions">
-            <a href="tel:01955345331" class="btn btn-md btn-primary">
-              <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
-                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
-              </svg>
-              <span data-i18n="faq.callBtn">Call Hotline: 01955345331</span>
-            </a>
-            <a href="https://wa.me/8801955345331" target="_blank" rel="noopener noreferrer" class="btn btn-md btn-outline-primary">
-              <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
-                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.074-1.107-.061-.555-.182-1.348-.564-2.279-1.393-.972-.865-1.579-1.89-1.782-2.234-.203-.344-.022-.53.151-.703.156-.156.348-.405.522-.608.174-.203.232-.347.348-.579.116-.232.058-.435-.029-.609-.087-.174-.783-1.884-1.073-2.58-.282-.676-.569-.584-.783-.595-.203-.01-.435-.013-.667-.013-.232 0-.609.087-.928.435-.319.348-1.218 1.189-1.218 2.9 0 1.71 1.246 3.363 1.42 3.595.174.232 2.454 3.748 5.945 5.255.83.359 1.478.574 1.984.735.834.265 1.593.228 2.193.138.669-.1 2.059-.841 2.349-1.653.29-.812.29-1.508.203-1.653-.087-.145-.319-.232-.667-.406z"/>
-              </svg>
-              <span data-i18n="faq.waBtn">WhatsApp Chat</span>
-            </a>
-          </div>
+
+            <!-- Vertical Category Tabs -->
+            <div class="faq-category-nav" role="tablist" aria-label="FAQ categories">
+              <button type="button" class="faq-cat-nav-btn active" data-filter="all" role="tab" aria-selected="true">
+                <span class="faq-cat-nav-icon">✨</span>
+                <span class="faq-cat-nav-label" data-i18n="faq.filterAll">All Questions</span>
+                <span class="faq-cat-count" id="faqCountAll">11</span>
+              </button>
+              <button type="button" class="faq-cat-nav-btn" data-filter="pricing" role="tab" aria-selected="false">
+                <span class="faq-cat-nav-icon">💰</span>
+                <span class="faq-cat-nav-label" data-i18n="faq.filterPricing">Pricing &amp; Plans</span>
+                <span class="faq-cat-count" id="faqCountPricing">3</span>
+              </button>
+              <button type="button" class="faq-cat-nav-btn" data-filter="hardware" role="tab" aria-selected="false">
+                <span class="faq-cat-nav-icon">🖨️</span>
+                <span class="faq-cat-nav-label" data-i18n="faq.filterHardware">Offline POS &amp; Hardware</span>
+                <span class="faq-cat-count" id="faqCountHardware">4</span>
+              </button>
+              <button type="button" class="faq-cat-nav-btn" data-filter="security" role="tab" aria-selected="false">
+                <span class="faq-cat-nav-icon">🔒</span>
+                <span class="faq-cat-nav-label" data-i18n="faq.filterSecurity">Security &amp; Backup</span>
+                <span class="faq-cat-count" id="faqCountSecurity">2</span>
+              </button>
+              <button type="button" class="faq-cat-nav-btn" data-filter="setup" role="tab" aria-selected="false">
+                <span class="faq-cat-nav-icon">🚀</span>
+                <span class="faq-cat-nav-label" data-i18n="faq.filterSetup">Setup &amp; Training</span>
+                <span class="faq-cat-count" id="faqCountSetup">2</span>
+              </button>
+            </div>
+
+            <!-- Integrated Direct VIP Help Pod -->
+            <div class="faq-sidebar-support">
+              <div class="faq-support-status-line">
+                <span class="faq-pulse-dot"></span>
+                <span class="faq-support-status-text" data-i18n="faq.statusOnline">Nikunja-2 Team Online</span>
+              </div>
+              <p class="faq-support-title" data-i18n="faq.stillHelpTitle">Still have questions?</p>
+              <div class="faq-support-actions">
+                <a href="tel:01955345331" class="faq-support-btn faq-btn-call">
+                  <svg viewBox="0 0 20 20" fill="currentColor" width="14" height="14">
+                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                  </svg>
+                  <span data-i18n="faq.callBtn">01955345331</span>
+                </a>
+                <a href="https://wa.me/8801955345331" target="_blank" rel="noopener noreferrer" class="faq-support-btn faq-btn-wa">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+                    <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.074-1.107-.061-.555-.182-1.348-.564-2.279-1.393-.972-.865-1.579-1.89-1.782-2.234-.203-.344-.022-.53.151-.703.156-.156.348-.405.522-.608.174-.203.232-.347.348-.579.116-.232.058-.435-.029-.609-.087-.174-.783-1.884-1.073-2.58-.282-.676-.569-.584-.783-.595-.203-.01-.435-.013-.667-.013-.232 0-.609.087-.928.435-.319.348-1.218 1.189-1.218 2.9 0 1.71 1.246 3.363 1.42 3.595.174.232 2.454 3.748 5.945 5.255.83.359 1.478.574 1.984.735.834.265 1.593.228 2.193.138.669-.1 2.059-.841 2.349-1.653.29-.812.29-1.508.203-1.653-.087-.145-.319-.232-.667-.406z"/>
+                  </svg>
+                  <span data-i18n="faq.waBtn">WhatsApp</span>
+                </a>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Right Content Area -->
+          <main class="faq-content-area">
+            <!-- Active Category Header Bar -->
+            <div class="faq-content-header">
+              <div class="faq-active-cat-meta">
+                <span class="faq-active-cat-badge" id="faqActiveCatBadge">Overview</span>
+                <h3 class="faq-active-cat-title" id="faqActiveCatTitle">All Questions</h3>
+              </div>
+              <span class="faq-count-pill" id="faqActiveCatCount">11 questions</span>
+            </div>
+
+            <!-- FAQ Accordion Container -->
+            <div class="faq-container-box" id="faqContainer">
+              <!-- Dynamically populated and bilingual rendered via initFaqAccordion() -->
+            </div>
+
+            <!-- Empty State (Hidden by default, shown when search has no match) -->
+            <div class="faq-empty-state" id="faqEmptyState" style="display: none;">
+              <div class="empty-icon">🔍</div>
+              <h4 class="empty-title" data-i18n="faq.noResultsTitle">No matching questions found</h4>
+              <p class="empty-desc" data-i18n="faq.noResultsDesc">
+                Have a specific question not covered here? Call our Dhaka hotline or chat with our software specialists on WhatsApp.
+              </p>
+              <div class="empty-actions">
+                <a href="tel:01955345331" class="btn btn-sm btn-primary">
+                  <span>📞 01955345331</span>
+                </a>
+                <a href="https://wa.me/8801955345331" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-primary">
+                  <span>💬 WhatsApp Chat</span>
+                </a>
+              </div>
+            </div>
+          </main>
         </div>
 
       </div>
