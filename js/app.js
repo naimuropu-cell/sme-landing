@@ -113,8 +113,13 @@ function setLanguage(lang) {
 
   // Update button labels
   const labelSpan = document.getElementById('langToggleLabel');
+  const toggleBtn = document.getElementById('langToggleBtn');
   if (labelSpan) {
-    labelSpan.textContent = lang === 'en' ? 'বাংলায় দেখুন' : 'View in English';
+    labelSpan.textContent = lang === 'en' ? 'বাংলা' : 'English';
+  }
+  if (toggleBtn) {
+    toggleBtn.setAttribute('title', lang === 'en' ? 'বাংলায় দেখুন' : 'View in English');
+    toggleBtn.setAttribute('aria-label', lang === 'en' ? 'Switch to Bengali' : 'Switch to English');
   }
 
   const mobileLabelSpan = document.getElementById('mobileLangToggleLabel');
@@ -322,8 +327,8 @@ function initAdvisor() {
       priceHtml = isBn ? '<span class="currency-taka">&#2547;</span>৩,০০০' : '<span class="currency-taka">&#2547;</span>3,000';
       setupText = isBn ? 'এককালীন সেটআপ ফি: ৳১৫,০০০' : 'One-time setup fee: ৳15,000';
       descText = isBn
-        ? '৫টি ব্রাঞ্চ, কেন্দ্রীয় ওয়্যারহাউজ ও এনবিআর মূসক ৬.৩ চালানের সম্পূর্ণ এন্টারপ্রাইজ অটোমেশন।'
-        : 'Ideal for 5 outlets with centralized multi-warehouse stock management, FIFO batch expiry hub, and NBR VAT 6.3.';
+        ? '৫টি ব্রাঞ্চ, কেন্দ্রীয় ওয়্যারহাউজ ও স্বয়ংক্রিয় বাকি খাতার সম্পূর্ণ এন্টারপ্রাইজ অটোমেশন।'
+        : 'Ideal for 5 outlets with centralized multi-warehouse stock management, FIFO batch expiry hub, and automated customer ledger.';
       popularFlag = isBn ? 'এন্টারপ্রাইজ চেইন' : 'Enterprise Chain';
     } else if (outlets >= 2) {
       planId = 'medium';
@@ -486,7 +491,7 @@ const BN_PACKAGE_META = {
       "সেলস রিটার্ন ও এক্সচেঞ্জ প্রসেসিং",
       "স্বয়ংক্রিয় বারকোড ও থার্মাল লেবেল প্রিন্টিং",
       "ক্যাশ বুক, ব্যাংক বুক ও পেটি ক্যাশ খাতা",
-      "দৈনিক খরচ ট্র্যাকিং ও এনবিআর মূসক ৬.৩ হিসাব"
+      "দৈনিক খরচ ট্র্যাকিং ও কাস্টমার বাকি খাতা হিসাব"
     ]
   },
   medium: {
@@ -551,9 +556,9 @@ const BN_ENTERPRISE_META = {
       desc: "নিজস্ব সুরক্ষিত AWS ক্লাস্টার ও জিরো শেয়ার্ড ল্যাগ"
     },
     {
-      icon: "🏛️",
-      title: "পূর্ণাঙ্গ এনবিআর মূসক ৬.৩",
-      desc: "কর্পোরেট অডিটের উপযোগী কাস্টম ভ্যাট শিডিউল"
+      icon: "📒",
+      title: "ডিজিটাল কাস্টমার বাকি খাতা",
+      desc: "বকেয়া তাগাদা এসএমএস ও অটোমেটিক লেনদেন লেজার"
     },
     {
       icon: "👔",
@@ -588,9 +593,9 @@ const EN_ENTERPRISE_META = {
       desc: "Isolated private AWS cluster with zero shared latency"
     },
     {
-      icon: "🏛️",
-      title: "Full NBR Mushak 6.3 VAT",
-      desc: "Custom compliance tax schedules ready for corporate audit"
+      icon: "📒",
+      title: "Digital Customer Due Ledger",
+      desc: "Automated SMS payment reminders & customer credit ledger"
     },
     {
       icon: "👔",
@@ -1201,7 +1206,7 @@ const BN_CAT_TITLES = {
   pos_billing: "২. পিওএস ও কাউন্টার সেলস",
   inventory_branch: "৩. ইনভেন্টরি ও মাল্টি-ব্রাঞ্চ",
   ecommerce_courier: "৪. কুরিয়ার ও অনলাইন শপ",
-  accounts_tax: "৫. বাকি খাতা, লাভ-ক্ষতি ও ভ্যাট",
+  accounts_tax: "৫. বাকি খাতা, লাভ-ক্ষতি ও লেজার",
   mobile_ai_support: "৬. মোবাইল অ্যাপস, এআই ও সাপোর্ট"
 };
 
@@ -1285,7 +1290,7 @@ function initComparisonTable() {
               .replace(/Standard/g, 'স্ট্যান্ডার্ড')
               .replace(/Advanced Real-Time/g, 'অ্যাডভান্সড রিয়েল-টাইম')
               .replace(/Full Enterprise ERP/g, 'ফুল এন্টারপ্রাইজ ERP')
-              .replace(/Simple VAT %/g, 'সাধারণ ভ্যাট %')
+              .replace(/Simple VAT %/g, 'কাস্টমার লেজার')
               .replace(/Mobile Web/g, 'মোবাইল ওয়েব')
               .replace(/Android Only/g, 'অ্যান্ড্রয়েড অ্যাপ')
               .replace(/Android & iOS/g, 'Android ও iOS অ্যাপ')
@@ -2495,7 +2500,7 @@ function updateHeroChatbotLanguage(lang) {
 
 let sbCurrentIndex = 0;
 let sbIsAnimating = false;
-const SB_AUTOPLAY_DURATION = 4600; // 4.6 seconds per workflow card
+const SB_AUTOPLAY_DURATION = 10000; // 10 seconds per workflow story card
 let sbAutoPlayTimer = null;
 let sbIsUserInteracting = false;
 let sbActiveFilter = 'all';
@@ -2514,35 +2519,20 @@ function getNextFilteredIndex(direction = 'next') {
   return (sbCurrentIndex + 1) % total;
 }
 
-function resetAllStoryboardProgressBars() {
-  const bars = document.querySelectorAll('.sb-item-progress-bar');
-  bars.forEach(b => {
-    b.style.transition = 'none';
-    b.style.width = '0%';
-  });
-}
-
 function startStoryboardAutoPlay() {
   stopStoryboardAutoPlay();
-  resetAllStoryboardProgressBars();
-
   if (sbIsUserInteracting) return;
 
-  // Animate progress bar on the currently active storyboard item
-  const activeItem = document.querySelector('.sb-item[data-index="' + sbCurrentIndex + '"]') || document.querySelector('.sb-item.active');
-  if (activeItem) {
-    const bar = activeItem.querySelector('.sb-item-progress-bar');
-    if (bar) {
-      bar.style.transition = 'none';
-      bar.style.width = '0%';
-      void bar.offsetWidth; // Force CSS reflow
-      bar.style.transition = 'width ' + SB_AUTOPLAY_DURATION + 'ms linear';
-      bar.style.width = '100%';
-    }
+  const timerBar = document.getElementById('sbTimerProgress');
+  if (timerBar) {
+    timerBar.style.transition = 'none';
+    timerBar.style.width = '0%';
+    void timerBar.offsetWidth; // Force CSS reflow
+    timerBar.style.transition = 'width ' + SB_AUTOPLAY_DURATION + 'ms linear';
+    timerBar.style.width = '100%';
   }
 
   sbAutoPlayTimer = setTimeout(() => {
-    resetAllStoryboardProgressBars();
     const nextIdx = getNextFilteredIndex('next');
     switchStoryboardModule(nextIdx, 'next', false); // false = auto-triggered
   }, SB_AUTOPLAY_DURATION);
@@ -2553,11 +2543,24 @@ function stopStoryboardAutoPlay() {
     clearTimeout(sbAutoPlayTimer);
     sbAutoPlayTimer = null;
   }
-  resetAllStoryboardProgressBars();
+  const timerBar = document.getElementById('sbTimerProgress');
+  if (timerBar) {
+    timerBar.style.transition = 'none';
+    timerBar.style.width = '0%';
+  }
 }
 
 function pauseStoryboardAutoPlay() {
-  stopStoryboardAutoPlay();
+  if (sbAutoPlayTimer) {
+    clearTimeout(sbAutoPlayTimer);
+    sbAutoPlayTimer = null;
+  }
+  const timerBar = document.getElementById('sbTimerProgress');
+  if (timerBar) {
+    const computedWidth = window.getComputedStyle(timerBar).width;
+    timerBar.style.transition = 'none';
+    timerBar.style.width = computedWidth;
+  }
 }
 
 function resumeStoryboardAutoPlay() {
@@ -2764,8 +2767,8 @@ const STORYBOARD_MODULES = [
     index: 4,
     number: '05',
     category: 'accounts-tax',
-    catLabelEn: 'ACCOUNTS & TAX',
-    catLabelBn: 'হিসাব ও কর ব্যবস্থাপনা',
+    catLabelEn: 'ACCOUNTS & DUE LEDGER',
+    catLabelBn: 'হিসাব ও বাকি খাতা',
     tagKey: 'matrix.m5Tag',
     tagFallback: '📊 Audit-Ready Ledgers',
     planKey: 'matrix.m5Plan',
@@ -2811,8 +2814,8 @@ const STORYBOARD_MODULES = [
     index: 5,
     number: '06',
     category: 'accounts-tax',
-    catLabelEn: 'ACCOUNTS & TAX',
-    catLabelBn: 'হিসাব ও কর ব্যবস্থাপনা',
+    catLabelEn: 'ACCOUNTS & DUE LEDGER',
+    catLabelBn: 'হিসাব ও বাকি খাতা',
     tagKey: 'matrix.m6Tag',
     tagFallback: '🤝 Payables & Dues',
     planKey: 'matrix.m6Plan',
@@ -2855,41 +2858,46 @@ const STORYBOARD_MODULES = [
     index: 6,
     number: '07',
     category: 'accounts-tax',
-    catLabelEn: 'ACCOUNTS & TAX',
-    catLabelBn: 'হিসাব ও কর ব্যবস্থাপনা',
+    catLabelEn: 'ACCOUNTS & DUE LEDGER',
+    catLabelBn: 'হিসাব ও বাকি খাতা',
     tagKey: 'matrix.m7Tag',
-    tagFallback: '🏛️ 100% Tax Compliant',
+    tagFallback: '📒 Auto Due Reminder',
     planKey: 'matrix.m7Plan',
     planFallback: '✓ Basic+ (৳1,000/mo)',
     titleKey: 'matrix.m7Title',
-    titleFallback: 'NBR VAT & Mushak 6.3',
+    titleFallback: 'Digital Due & Customer Ledger',
     descKey: 'matrix.m7Desc',
-    descFallback: 'Auto-generate official Mushak 6.3 tax challans, 9.1 return summaries, and monthly VAT ledgers.',
+    descFallback: 'Track customer credit balances, payment history, and auto-dispatch SMS payment reminders with 1-click ledger statements.',
     bullets: [
-      { key: 'matrix.m7B1', text: '1-Click Mushak 6.3 tax invoice print' },
-      { key: 'matrix.m7B2', text: 'Monthly Mushak 9.1 return summaries' },
-      { key: 'matrix.m7B3', text: 'NBR-compliant purchase register 6.1' },
-      { key: 'matrix.m7B4', text: 'Exportable audit reports for tax officers' }
+      { key: 'matrix.m7B1', text: '1-Click customer ledger statement (PDF/Print)' },
+      { key: 'matrix.m7B2', text: 'Automated SMS due reminders with bKash pay link' },
+      { key: 'matrix.m7B3', text: 'Customer credit limits & overdue risk alerts' },
+      { key: 'matrix.m7B4', text: 'Cash, bKash & Bank repayment history reconciliation' }
     ],
     renderMockup: () => `
       <div style="display:flex; flex-direction:column; justify-content:space-between; height:100%; border:1px solid rgba(16,185,129,0.3); border-radius:10px; padding:10px; background:rgba(6,78,59,0.15);">
-        <div style="text-align:center; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:5px;">
-          <div style="font-size:0.68rem; color:#a7f3d0; font-weight:700;">গণপ্রজাতন্ত্রী বাংলাদেশ সরকার - জাতীয় রাজস্ব বোর্ড</div>
-          <div style="font-size:0.88rem; font-weight:900; color:#ffffff;">কর চালানপত্র (মূসক-৬.৩)</div>
-        </div>
-        <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:#cbd5e1;">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:5px;">
           <div>
-            <div>চালান নং: <strong>BD-VAT-2026-0881</strong></div>
-            <div>নিবন্ধন / BIN: <strong>002918273-0101</strong></div>
+            <div style="font-size:0.68rem; color:#a7f3d0; font-weight:700;">গ্রাহক খতিয়ান ও বাকি হিসাব</div>
+            <div style="font-size:0.88rem; font-weight:900; color:#ffffff;">হাজী মো: রফিকুল ইসলাম</div>
           </div>
           <div style="text-align:right;">
-            <div style="color:#34d399; font-weight:800; font-size:0.9rem;">ভ্যাট হার: ৭.৫%</div>
-            <div style="color:#6ee7b7; font-size:0.68rem;">NBR VERIFIED SEAL ✓</div>
+            <span style="display:inline-block; font-size:0.65rem; background:rgba(239,68,68,0.2); color:#fca5a5; border:1px solid rgba(239,68,68,0.4); padding:2px 6px; border-radius:4px; font-weight:700;">বকেয়া পাওনা</span>
           </div>
         </div>
-        <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:#a7f3d0; border-top:1px dashed rgba(255,255,255,0.15); padding-top:4px;">
-          <span>মূসক ৯.১ মাসিক রিটার্ন রেডি</span>
-          <span>আইনসম্মত ও অডিট-প্রুফ</span>
+        <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.75rem; color:#cbd5e1; margin:4px 0;">
+          <div>
+            <div>মোবাইল: <strong>০১৭১১-৮৮৯৯০০</strong></div>
+            <div>ক্রেডিট লিমিট: <strong>৳১৫,০০০</strong></div>
+          </div>
+          <div style="text-align:right;">
+            <div style="color:#f87171; font-weight:900; font-size:1.05rem;">৳৮,৫০০</div>
+            <div style="color:#6ee7b7; font-size:0.65rem;">সর্বশেষ পরিশোধ: ৩ দিন আগে</div>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.72rem; color:#a7f3d0; border-top:1px dashed rgba(255,255,255,0.15); padding-top:4px;">
+          <span style="display:inline-flex; align-items:center; gap:4px; color:#34d399; font-weight:700;">📩 এসএমএস তাগাদা পাঠানো হয়েছে</span>
+          <span style="background:#059669; color:#fff; font-size:0.65rem; font-weight:700; padding:2px 7px; border-radius:4px;">লেজার ডাউনলোড ↓</span>
         </div>
       </div>
     `
@@ -2898,8 +2906,8 @@ const STORYBOARD_MODULES = [
     index: 7,
     number: '08',
     category: 'accounts-tax',
-    catLabelEn: 'ACCOUNTS & TAX',
-    catLabelBn: 'হিসাব ও কর ব্যবস্থাপনা',
+    catLabelEn: 'ACCOUNTS & DUE LEDGER',
+    catLabelBn: 'হিসাব ও বাকি খাতা',
     tagKey: 'matrix.m8Tag',
     tagFallback: '👥 Staff & Commissions',
     planKey: 'matrix.m8Plan',
@@ -3143,27 +3151,7 @@ function renderActiveStoryboardCard(index) {
     storyNumEl.textContent = '/ ' + mod.number;
   }
 
-  // Update Ghost Card Edge Labels
-  const nextIdx1 = (index + 1) % STORYBOARD_MODULES.length;
-  const nextIdx2 = (index + 2) % STORYBOARD_MODULES.length;
-  const mod1 = STORYBOARD_MODULES[nextIdx1];
-  const mod2 = STORYBOARD_MODULES[nextIdx2];
-
-  const ghost1Num = document.getElementById('sbGhost1Num');
-  const ghost1Title = document.getElementById('sbGhost1Title');
-  if (ghost1Num && mod1) ghost1Num.textContent = '/ ' + mod1.number;
-  if (ghost1Title && mod1) {
-    ghost1Title.textContent = (dict && dict[mod1.titleKey]) || mod1.titleFallback;
-  }
-
-  const ghost2Num = document.getElementById('sbGhost2Num');
-  const ghost2Title = document.getElementById('sbGhost2Title');
-  if (ghost2Num && mod2) ghost2Num.textContent = '/ ' + mod2.number;
-  if (ghost2Title && mod2) {
-    ghost2Title.textContent = (dict && dict[mod2.titleKey]) || mod2.titleFallback;
-  }
-
-  // Title & Desc
+  // Prominent Feature Title in Top Section of Story Card
   const titleEl = document.getElementById('sbCardTitle');
   if (titleEl) {
     titleEl.setAttribute('data-i18n', mod.titleKey);
@@ -3199,30 +3187,34 @@ function renderActiveStoryboardCard(index) {
     }).join('');
   }
 
+  // Update Left Peeking Card ("side diye ektu ber kore diba")
+  const prevIdx = getNextFilteredIndex('prev');
+  const prevMod = STORYBOARD_MODULES[prevIdx];
+  if (prevMod) {
+    const prevNumEl = document.getElementById('sbPeekPrevNum');
+    const prevCatEl = document.getElementById('sbPeekPrevCat');
+    const prevTitleEl = document.getElementById('sbPeekPrevTitle');
+    if (prevNumEl) prevNumEl.textContent = '/ ' + prevMod.number;
+    if (prevCatEl) prevCatEl.textContent = lang === 'bn' ? prevMod.catLabelBn : prevMod.catLabelEn;
+    if (prevTitleEl) prevTitleEl.textContent = (dict && dict[prevMod.titleKey]) || prevMod.titleFallback;
+  }
+
+  // Update Right Peeking Card ("side diye ektu ber kore diba")
+  const nextIdx = getNextFilteredIndex('next');
+  const nextMod = STORYBOARD_MODULES[nextIdx];
+  if (nextMod) {
+    const nextNumEl = document.getElementById('sbPeekNextNum');
+    const nextCatEl = document.getElementById('sbPeekNextCat');
+    const nextTitleEl = document.getElementById('sbPeekNextTitle');
+    if (nextNumEl) nextNumEl.textContent = '/ ' + nextMod.number;
+    if (nextCatEl) nextCatEl.textContent = lang === 'bn' ? nextMod.catLabelBn : nextMod.catLabelEn;
+    if (nextTitleEl) nextTitleEl.textContent = (dict && dict[nextMod.titleKey]) || nextMod.titleFallback;
+  }
+
   // Navigation Dots
   const dots = document.querySelectorAll('.sb-nav-dot');
   dots.forEach((dot, i) => {
     dot.classList.toggle('active', i === index);
-  });
-
-  // Storyboard Index Items
-  const items = document.querySelectorAll('.sb-item');
-  items.forEach((item, i) => {
-    const isActive = i === index;
-    item.classList.toggle('active', isActive);
-    if (isActive) {
-      const list = document.getElementById('sbItemsList');
-      if (list) {
-        const listRect = list.getBoundingClientRect();
-        const itemRect = item.getBoundingClientRect();
-        if (itemRect.top < listRect.top || itemRect.bottom > listRect.bottom) {
-          list.scrollTo({
-            top: list.scrollTop + (itemRect.top - listRect.top) - (list.clientHeight / 2 - item.clientHeight / 2),
-            behavior: 'smooth'
-          });
-        }
-      }
-    }
   });
 }
 
@@ -3233,43 +3225,36 @@ function switchStoryboardModule(newIndex, direction = 'next', isManual = true) {
 
   sbIsAnimating = true;
   const card = document.getElementById('sbActiveCard');
-  const deckWrapper = document.getElementById('sbDeckWrapper');
 
   if (card) {
     if (direction === 'next') {
-      // Signature Slider Revolution Peel-Down Animation
-      card.classList.add('anim-peel-down');
-      if (deckWrapper) deckWrapper.classList.add('is-peeling');
-
+      card.classList.add('anim-slide-left');
       setTimeout(() => {
         sbCurrentIndex = newIndex;
         renderActiveStoryboardCard(sbCurrentIndex);
-        card.classList.remove('anim-peel-down');
-        if (deckWrapper) deckWrapper.classList.remove('is-peeling');
-        card.classList.add('anim-deck-snap-in');
+        card.classList.remove('anim-slide-left');
+        card.classList.add('anim-enter-right');
 
         setTimeout(() => {
-          card.classList.remove('anim-deck-snap-in');
+          card.classList.remove('anim-enter-right');
           sbIsAnimating = false;
           startStoryboardAutoPlay();
-        }, 480);
-      }, 240);
+        }, 380);
+      }, 220);
     } else {
-      // Reverse Peel-Up from Bottom
-      card.classList.add('anim-peel-up-out');
-
+      card.classList.add('anim-slide-right');
       setTimeout(() => {
         sbCurrentIndex = newIndex;
         renderActiveStoryboardCard(sbCurrentIndex);
-        card.classList.remove('anim-peel-up-out');
-        card.classList.add('anim-deck-pop-bottom');
+        card.classList.remove('anim-slide-right');
+        card.classList.add('anim-enter-left');
 
         setTimeout(() => {
-          card.classList.remove('anim-deck-pop-bottom');
+          card.classList.remove('anim-enter-left');
           sbIsAnimating = false;
           startStoryboardAutoPlay();
-        }, 480);
-      }, 200);
+        }, 380);
+      }, 220);
     }
   } else {
     sbCurrentIndex = newIndex;
@@ -3288,14 +3273,13 @@ function initStoryboardShowcase() {
   if (!container) return;
 
   const card = document.getElementById('sbActiveCard');
-  const deckWrapper = document.getElementById('sbDeckWrapper');
+  const stage = document.getElementById('sbPeekingStage');
   const prevBtn = document.getElementById('sbPrevBtn');
   const nextBtn = document.getElementById('sbNextBtn');
   const dotsTrack = document.getElementById('sbDotsTrack');
   const filterBtns = document.querySelectorAll('.sb-filter-btn');
-  const items = document.querySelectorAll('.sb-item');
-  const drawerToggle = document.getElementById('sbMobileDrawerToggle');
-  const indexCol = document.getElementById('sbIndexCol');
+  const peekPrev = document.getElementById('sbPeekPrevCard');
+  const peekNext = document.getElementById('sbPeekNextCard');
 
   // 1. Generate Navigation Dots
   if (dotsTrack) {
@@ -3320,26 +3304,33 @@ function initStoryboardShowcase() {
   if (prevBtn) {
     prevBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      switchStoryboardModule(sbCurrentIndex - 1, 'prev');
+      switchStoryboardModule(getNextFilteredIndex('prev'), 'prev');
     });
   }
 
   if (nextBtn) {
     nextBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      switchStoryboardModule(sbCurrentIndex + 1, 'next');
+      switchStoryboardModule(getNextFilteredIndex('next'), 'next');
     });
   }
 
-  // 4. Storyboard Index Clicks
-  items.forEach((item, idx) => {
-    item.addEventListener('click', () => {
-      const dir = idx > sbCurrentIndex ? 'next' : 'prev';
-      switchStoryboardModule(idx, dir);
+  // 4. Peeking Cards Click Handlers
+  if (peekPrev) {
+    peekPrev.addEventListener('click', (e) => {
+      e.preventDefault();
+      switchStoryboardModule(getNextFilteredIndex('prev'), 'prev');
     });
-  });
+  }
 
-  // 5. Category Filter Buttons
+  if (peekNext) {
+    peekNext.addEventListener('click', (e) => {
+      e.preventDefault();
+      switchStoryboardModule(getNextFilteredIndex('next'), 'next');
+    });
+  }
+
+  // 5. Category Filter Buttons with Distinct Color Switch
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const filter = btn.getAttribute('data-filter') || 'all';
@@ -3347,198 +3338,126 @@ function initStoryboardShowcase() {
       filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
+      // Find first module in this category
       let firstMatch = -1;
-      items.forEach((item, i) => {
-        const cat = item.getAttribute('data-cat');
-        const matches = filter === 'all' || cat === filter;
-        item.style.display = matches ? 'flex' : 'none';
-        if (matches && firstMatch === -1) {
+      STORYBOARD_MODULES.forEach((m, i) => {
+        if ((filter === 'all' || m.category === filter) && firstMatch === -1) {
           firstMatch = i;
         }
       });
 
-      // Jump to first module if current module is not in filter
       const curMod = STORYBOARD_MODULES[sbCurrentIndex];
       if (filter !== 'all' && curMod && curMod.category !== filter && firstMatch !== -1) {
         switchStoryboardModule(firstMatch, 'next');
       } else {
+        renderActiveStoryboardCard(sbCurrentIndex);
         startStoryboardAutoPlay();
       }
     });
   });
 
-  // 6. Tactile Touch-Swipe & Mouse Drag Mechanics (Slider Revolution Peel-Down + Horizontal)
-  if (card && deckWrapper) {
+  // 6. Kinetic Touch & Mouse Drag Mechanics (Finger swipe on mobile, mouse drag on PC)
+  const swipeTarget = card || stage;
+  if (swipeTarget) {
     let startX = 0;
     let startY = 0;
     let currentX = 0;
-    let currentY = 0;
     let isDragging = false;
-    let gestureDecided = false;
-    let gestureType = null; // 'down', 'horizontal', 'up'
+    let hasMoved = false;
 
-    const onPointerDown = (e) => {
+    const onStart = (e) => {
       if (sbIsAnimating) return;
       if (e.target.closest('button, a, input, select')) return;
 
       isDragging = true;
+      hasMoved = false;
       sbIsUserInteracting = true;
       stopStoryboardAutoPlay();
-      gestureDecided = false;
-      gestureType = null;
-      startX = e.clientX;
-      startY = e.clientY;
+
+      const point = e.touches ? e.touches[0] : e;
+      startX = point.clientX;
+      startY = point.clientY;
       currentX = startX;
-      currentY = startY;
     };
 
-    const onPointerMove = (e) => {
+    const onMove = (e) => {
       if (!isDragging) return;
-      currentX = e.clientX;
-      currentY = e.clientY;
+      const point = e.touches ? e.touches[0] : e;
+      currentX = point.clientX;
       const diffX = currentX - startX;
-      const diffY = currentY - startY;
+      const diffY = point.clientY - startY;
 
-      if (!gestureDecided) {
-        if (Math.abs(diffX) > 8 || Math.abs(diffY) > 8) {
-          gestureDecided = true;
-          // Downward drag or swipe
-          if (diffY > 10 || Math.abs(diffX) > Math.abs(diffY)) {
-            gestureType = (diffY > 10 && diffY > Math.abs(diffX) * 0.7) ? 'down' : 'horizontal';
-            card.classList.add('is-swiping');
-          } else if (diffY < -15) {
-            gestureType = 'up';
-            card.classList.add('is-swiping');
-          } else {
-            isDragging = false;
-            return;
-          }
+      // Check if horizontal intent
+      if (!hasMoved) {
+        if (Math.abs(diffX) > 8 && Math.abs(diffX) > Math.abs(diffY)) {
+          hasMoved = true;
+          if (card) card.classList.add('is-swiping');
+        } else if (Math.abs(diffY) > 12) {
+          // Vertical scrolling allowed
+          isDragging = false;
+          return;
         }
       }
 
-      if (gestureType) {
+      if (hasMoved && card) {
         if (e.cancelable) e.preventDefault();
-        if (gestureType === 'down' || (gestureType === 'horizontal' && diffY > 0)) {
-          // Dynamic peel physics: tilting and dropping down
-          const rot = (diffX * 0.02) - (diffY * 0.025);
-          const pullDown = Math.max(0, diffY);
-          const scale = Math.max(0.92, 1 - (pullDown * 0.0005));
-          card.style.transform = `translate3d(${diffX * 0.3}px, ${pullDown}px, 0) rotate(${rot}deg) scale(${scale})`;
-          card.style.opacity = Math.max(0.45, 1 - (pullDown / 360));
-        } else {
-          // Horizontal glide
-          const rot = diffX * 0.035;
-          card.style.transform = `translate3d(${diffX}px, 0, 0) rotate(${rot}deg)`;
-        }
+        const rot = diffX * 0.025;
+        card.style.transform = `translate3d(${diffX}px, 0, 0) rotate(${rot}deg)`;
       }
     };
 
-    const onPointerEnd = (e) => {
+    const onEnd = (e) => {
       if (!isDragging) return;
       isDragging = false;
       sbIsUserInteracting = false;
-      card.classList.remove('is-swiping');
 
-      if (gestureType) {
-        const diffX = currentX - startX;
-        const diffY = currentY - startY;
+      if (card) {
+        card.classList.remove('is-swiping');
         card.style.transform = '';
-        card.style.opacity = '';
-
-        if (diffY > 45 || diffX < -50) {
-          // Swiped down or swiped left -> peel down to next module
-          switchStoryboardModule(sbCurrentIndex + 1, 'next');
-        } else if (diffY < -45 || diffX > 50) {
-          // Swiped up or swiped right -> prev module
-          switchStoryboardModule(sbCurrentIndex - 1, 'prev');
-        }
       }
-      gestureType = null;
-      gestureDecided = false;
+
+      if (hasMoved) {
+        const diffX = currentX - startX;
+        if (diffX < -45) {
+          // Swiped Left -> Next Module
+          switchStoryboardModule(getNextFilteredIndex('next'), 'next');
+        } else if (diffX > 45) {
+          // Swiped Right -> Prev Module
+          switchStoryboardModule(getNextFilteredIndex('prev'), 'prev');
+        } else {
+          startStoryboardAutoPlay();
+        }
+      } else {
+        startStoryboardAutoPlay();
+      }
+      hasMoved = false;
     };
 
-    card.addEventListener('pointerdown', onPointerDown, { passive: true });
-    window.addEventListener('pointermove', onPointerMove, { passive: false });
-    window.addEventListener('pointerup', onPointerEnd, { passive: true });
-    window.addEventListener('pointercancel', onPointerEnd, { passive: true });
+    // Pointer & Touch Listeners
+    swipeTarget.addEventListener('pointerdown', onStart, { passive: true });
+    window.addEventListener('pointermove', onMove, { passive: false });
+    window.addEventListener('pointerup', onEnd, { passive: true });
+    window.addEventListener('pointercancel', onEnd, { passive: true });
+
+    // Touch fallback
+    swipeTarget.addEventListener('touchstart', onStart, { passive: true });
+    window.addEventListener('touchmove', onMove, { passive: false });
+    window.addEventListener('touchend', onEnd, { passive: true });
   }
 
-  // 7. Mobile Drawer Sheet Toggle
-  if (drawerToggle && indexCol) {
-    let backdrop = document.getElementById('sbDrawerBackdrop');
-
-    function closeDrawer() {
-      indexCol.classList.remove('is-drawer-open');
-      drawerToggle.setAttribute('aria-expanded', 'false');
-      if (backdrop) backdrop.style.display = 'none';
-      document.body.style.overflow = '';
-    }
-
-    function openDrawer() {
-      indexCol.classList.add('is-drawer-open');
-      drawerToggle.setAttribute('aria-expanded', 'true');
-      if (!backdrop) {
-        backdrop = document.createElement('div');
-        backdrop.id = 'sbDrawerBackdrop';
-        backdrop.style.position = 'fixed';
-        backdrop.style.inset = '0';
-        backdrop.style.background = 'rgba(15, 23, 42, 0.6)';
-        backdrop.style.zIndex = '9998';
-        backdrop.style.backdropFilter = 'blur(3px)';
-        backdrop.addEventListener('click', closeDrawer);
-        document.body.appendChild(backdrop);
-      }
-      backdrop.style.display = 'block';
-      document.body.style.overflow = 'hidden';
-    }
-
-    drawerToggle.addEventListener('click', (e) => {
-      e.preventDefault();
-      const isOpen = indexCol.classList.contains('is-drawer-open');
-      if (isOpen) closeDrawer();
-      else openDrawer();
-    });
-
-    items.forEach(item => {
-      item.addEventListener('click', () => {
-        if (window.innerWidth <= 992) {
-          closeDrawer();
-        }
-      });
-    });
-  }
-
-  // 8. Ensure all storyboard items have progress tracks
-  items.forEach(item => {
-    if (!item.querySelector('.sb-item-progress-track')) {
-      const track = document.createElement('div');
-      track.className = 'sb-item-progress-track';
-      track.innerHTML = '<div class="sb-item-progress-bar"></div>';
-      item.appendChild(track);
-    }
-  });
-
-  // 9. Only pause when user is actively dragging or swiping the card
-  if (card) {
-    card.addEventListener('pointerdown', () => {
-      sbIsUserInteracting = true;
+  // 7. Hover Pause & Resume for Desktop Reading Comfort
+  if (stage) {
+    stage.addEventListener('mouseenter', () => {
       pauseStoryboardAutoPlay();
-    }, { passive: true });
-
-    window.addEventListener('pointerup', () => {
-      if (sbIsUserInteracting) {
-        sbIsUserInteracting = false;
+    });
+    stage.addEventListener('mouseleave', () => {
+      if (!sbIsUserInteracting) {
         resumeStoryboardAutoPlay();
       }
-    }, { passive: true });
-
-    window.addEventListener('pointercancel', () => {
-      sbIsUserInteracting = false;
-      resumeStoryboardAutoPlay();
-    }, { passive: true });
+    });
   }
 
-  // 10. Intersection Observer (Automatically runs auto-play when section is in view)
+  // 8. Intersection Observer (Runs 10s auto-play when section is visible)
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -3548,35 +3467,31 @@ function initStoryboardShowcase() {
           stopStoryboardAutoPlay();
         }
       });
-    }, { threshold: 0.05 });
+    }, { threshold: 0.1 });
 
     observer.observe(container);
   } else {
     startStoryboardAutoPlay();
   }
 
-  // 11. Start auto-play immediately upon initialization
-  startStoryboardAutoPlay();
-
-  // 12. Keyboard Arrow Navigation Support
+  // 9. Keyboard Arrow Navigation Support
   window.addEventListener('keydown', (e) => {
     const rect = container.getBoundingClientRect();
     const inView = rect.top < window.innerHeight && rect.bottom > 0;
     if (!inView) return;
 
     if (e.key === 'ArrowLeft') {
-      switchStoryboardModule(sbCurrentIndex - 1, 'prev');
+      switchStoryboardModule(getNextFilteredIndex('prev'), 'prev');
     } else if (e.key === 'ArrowRight') {
-      switchStoryboardModule(sbCurrentIndex + 1, 'next');
+      switchStoryboardModule(getNextFilteredIndex('next'), 'next');
     }
   });
 
-  // 13. Direct Navigation Module Jumps (Header dropdown & Footer links)
+  // 10. Direct Navigation Module Jumps (Header dropdown & Footer links)
   document.querySelectorAll('[data-module-jump]').forEach(link => {
     link.addEventListener('click', () => {
       const targetIdx = parseInt(link.getAttribute('data-module-jump'), 10);
       if (!isNaN(targetIdx) && targetIdx >= 0 && targetIdx < STORYBOARD_MODULES.length) {
-        // If filter is active, reset to 'all' to ensure item is visible
         const allFilterBtn = container.querySelector('.sb-filter-btn[data-filter="all"]');
         if (allFilterBtn && !allFilterBtn.classList.contains('active')) {
           allFilterBtn.click();
@@ -3637,7 +3552,7 @@ function initPosInteractiveSandbox() {
 
     const discount = subtotal * 0.10; // 10% invoice discount
     const taxable = subtotal - discount;
-    const vat = taxable * 0.05; // 5% Mushak 6.3 VAT
+    const vat = 0; // 0% tax / direct settlement
     const grandTotal = taxable + vat;
 
     // Update summary in POS view
@@ -4728,14 +4643,14 @@ function initRampInteractiveStage() {
     });
   }
 
-  // Stage 3: NBR Mushak Download
-  const btnMushak = document.getElementById('btnSimMushak');
-  if (btnMushak) {
-    btnMushak.addEventListener('click', (e) => {
+  // Stage 3: Customer Due Ledger Download
+  const btnDueLedger = document.getElementById('btnSimLedger');
+  if (btnDueLedger) {
+    btnDueLedger.addEventListener('click', (e) => {
       e.stopPropagation();
-      btnMushak.textContent = '✓ Mushak 6.3 PDF Generated!';
+      btnDueLedger.textContent = '✓ Due Statement PDF Generated!';
       setTimeout(() => {
-        btnMushak.innerHTML = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download Mushak 6.3 Invoice';
+        btnDueLedger.innerHTML = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download Customer Ledger';
       }, 3000);
     });
   }
