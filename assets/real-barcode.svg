@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 153.5 50.0" width="100%" height="100%" style="display:block; margin:0 auto; background:#ffffff;">
+  <!-- Real GS1 EAN-13 Retail Barcode: 8941120019232 -->
+  <defs>
+    <style>
+      .b-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, monospace; font-weight: 700; fill: #0f172a; }
+    </style>
+  </defs>
+  <rect x="18.00" y="3" width="1.30" height="38" fill="#0f172a" />
+  <rect x="20.60" y="3" width="1.30" height="38" fill="#0f172a" />
+  <rect x="25.80" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="28.40" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="29.70" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="33.60" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="34.90" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="36.20" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="38.80" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="42.70" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="44.00" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="47.90" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="50.50" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="51.80" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="55.70" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="57.00" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="60.90" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="62.20" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="64.80" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="66.10" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="71.30" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="72.60" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="75.20" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="77.80" y="3" width="1.30" height="38" fill="#0f172a" />
+  <rect x="80.40" y="3" width="1.30" height="38" fill="#0f172a" />
+  <rect x="83.00" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="84.30" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="85.60" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="89.50" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="92.10" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="93.40" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="97.30" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="98.60" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="101.20" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="102.50" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="103.80" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="106.40" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="110.30" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="111.60" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="114.20" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="115.50" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="119.40" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="125.90" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="128.50" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="129.80" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="132.40" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="133.70" y="3" width="1.30" height="32" fill="#0f172a" />
+  <rect x="137.60" y="3" width="1.30" height="38" fill="#0f172a" />
+  <rect x="140.20" y="3" width="1.30" height="38" fill="#0f172a" />
+  <text x="9.5" y="38.0" class="b-text" font-size="10" text-anchor="middle">8</text>
+  <text x="49.2" y="45.5" class="b-text" font-size="8.8" letter-spacing="1.1" text-anchor="middle">941120</text>
+  <text x="110.3" y="45.5" class="b-text" font-size="8.8" letter-spacing="1.1" text-anchor="middle">019232</text>
+</svg>

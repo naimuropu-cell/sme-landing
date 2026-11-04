@@ -2697,14 +2697,13 @@ const STORYBOARD_MODULES = [
     ],
     renderMockup: () => `
       <div style="display:flex; align-items:center; justify-content:center; height:100%; gap:18px;">
-        <div style="background:#ffffff; color:#0f172a; padding:10px 14px; border-radius:8px; width:180px; box-shadow:0 8px 20px rgba(0,0,0,0.4); text-align:center; font-family:sans-serif;">
-          <div style="font-size:0.7rem; font-weight:900; letter-spacing:0.05em; color:#059669;">YES FASHION BD</div>
-          <div style="font-size:0.75rem; font-weight:800; margin:2px 0;">Men's Slim Chino</div>
-          <div style="font-family:monospace; letter-spacing:3px; font-size:0.85rem; font-weight:900; margin:4px 0; background:#f1f5f9; padding:2px; border-radius:4px;">
-            |||| || ||||| | ||
+        <div style="background:#ffffff; color:#0f172a; padding:10px 12px; border-radius:8px; width:184px; box-shadow:0 8px 24px rgba(0,0,0,0.45); text-align:center; font-family:sans-serif; border:1px solid #e2e8f0;">
+          <div style="font-size:0.72rem; font-weight:900; letter-spacing:0.06em; color:#059669; text-transform:uppercase;">YES FASHION BD</div>
+          <div style="font-size:0.78rem; font-weight:800; color:#0f172a; margin:2px 0 4px 0;">Men's Slim Chino</div>
+          <div style="margin:4px auto; background:#ffffff; padding:0; display:flex; justify-content:center;">
+            <img src="assets/real-barcode.svg" alt="Real Retail Barcode EAN-13" style="width:100%; max-width:154px; height:auto; display:block; margin:0 auto;" />
           </div>
-          <div style="font-size:0.65rem; color:#64748b; font-family:monospace;">89411200192</div>
-          <div style="font-size:0.88rem; font-weight:900; color:#0f172a; margin-top:2px;">MRP: ৳1,850</div>
+          <div style="font-size:0.9rem; font-weight:900; color:#0f172a; margin-top:3px; letter-spacing:-0.01em;">MRP: ৳1,850</div>
         </div>
         <div style="font-size:0.78rem; color:#94a3b8; display:flex; flex-direction:column; gap:6px;">
           <div style="color:#10b981; font-weight:700;">✓ 50x30mm Preset</div>
