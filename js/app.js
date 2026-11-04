@@ -1961,9 +1961,20 @@ function initMobileNav() {
     document.body.classList.toggle('mobile-menu-active', isOpen);
   });
 
-  // Close mobile nav when clicking any link
+  // Handle links inside mobile nav
   navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
+    link.addEventListener('click', (e) => {
+      // If it's a dropdown toggle trigger on mobile, toggle accordion instead of closing drawer
+      if (link.classList.contains('nav-link-trigger') && window.innerWidth <= 992) {
+        e.preventDefault();
+        const parentItem = link.closest('.nav-item');
+        if (parentItem) {
+          parentItem.classList.toggle('is-dropdown-expanded');
+        }
+        return;
+      }
+
+      // Leaf links and navigation anchors close the mobile drawer
       navLinks.classList.remove('is-open', 'is-mobile-open');
       toggleBtn.classList.remove('is-active');
       toggleBtn.setAttribute('aria-expanded', 'false');
